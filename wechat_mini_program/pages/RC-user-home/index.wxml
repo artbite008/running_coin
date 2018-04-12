@@ -1,0 +1,37 @@
+<!--index.wxml-->
+<view class="container bg-primary">
+  <view class="userinfo card user-card-decorator">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <view class="userinfo-nickname-block">
+        <text class="userinfo-nickname decorator">Speed</text>
+        <text class="userinfo-nickname decorator">Last Week Champion</text>
+      </view>
+    </block>
+  </view>
+  <view class="people-list card bg-light">
+    <view class="people-list-item divider" wx:for="{{users}}" wx:for-item="user">
+      <block>
+        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      </block>
+      <block>
+        <view class="userinfo-nickname-block">
+          <text space="true" class="userinfo-nickname decorator">target: {{user.target}} KM</text>
+          <text class="userinfo-nickname decorator">current: {{user.current}} KM</text>
+          <view style='width: {{user.current / user.target * 100}}%;' class="bg-{{user.color}} progress"></view>
+        </view>
+      </block>
+      <block>
+      <view class='vote-area'>
+        <view class='vote-icon-align'>
+          <icon type="success" size="25" color="{{progressBarColorSets.sucess}}"/>
+        </view>
+        <view class='vote-icon-align'>
+          <icon type="cancel" size="25" color="{{progressBarColorSets.error}}"/>
+        </view>
+      </view>
+      </block>
+    </view>
+  </view>
+</view>
