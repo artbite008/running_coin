@@ -1,88 +1,60 @@
-//index.js
-//获取应用实例
-const app = getApp()
+import {users as mockUsers} from '../mock/RC-user.mock';
+import {progressBarColorSets as _progressBarColorSets} from '../mock/RC-progressBar.mock';
+import {achievements} from '../mock/RC-user.mock';
 
-const _progressBarColorSets = {
-  error: '#ff5151',
-  success: '#71c63e',
-  info: "#006efc",
-  warn: "#ffd80d"
-}
-
-const _users = [
-  {
-    target: "10",
-    current: "5",
-    thumbUp: 8,
-    thumbDown: 8,
-    color: 'warning'
-  },
-  {
-    target: "10",
-    current: "3",
-    thumbUp: 8,
-    thumbDown: 8,
-    color: 'error'
-  },
-  {
-    target: "10",
-    current: "8",
-    thumbUp: 8,
-    thumbDown: 8,
-    color: 'info'
-  },
-  {
-    target: "13",
-    current: "5",
-    thumbUp: 8,
-    thumbDown: 8,
-    color: 'warning'
-  },
-  {
-    target: "10",
-    current: "3",
-    thumbUp: 8,
-    thumbDown: 8,
-    color: 'warning'
-  },
-  {
-    target: "10",
-    current: "10",
-    thumbUp: 8,
-    thumbDown: 8,
-    color: 'success'
-  },
-  {
-    target: "10",
-    current: "9",
-    thumbUp: 8,
-    thumbDown: 8,
-    color: 'success'
-  }
-  ,
-  {
-    target: "10",
-    current: "7",
-    thumbUp: 8,
-    thumbDown: 8,
-    color: 'primary'
-  }
-];
+const app = getApp();
 
 Page({
   data: {
-    motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    users: _users,
-    progressBarColorSets: _progressBarColorSets
+    users: mockUsers,
+    progressBarColorSets: _progressBarColorSets,
+    showBackdrop: 'none',
+    dialogEvent: '',
+    markAchievement: 0,
+    achievements: achievements
   },
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
       url: '../logs/logs'
     })
+  },
+  goToMyProfile: function() {
+    wx.navigateTo({
+      url: '../RC-user-profile/index'
+    })
+  },
+  goToReport: function() {
+    wx.navigateTo({
+      url: '../RC-user-report/index'
+    })
+  },
+  goToVote: function(e) {
+    this.setData({
+      dialogEvent: 'vote'
+    });
+    this.backdropMgt();
+  },
+  mark: function() {
+    this.setData({
+      dialogEvent: 'mark'
+    });
+    this.backdropMgt();
+  },
+  backdropMgt: function() {
+    let _showBackdrop = this.data.showBackdrop;
+    if (_showBackdrop == 'none') {
+      this.setData({
+        showBackdrop: 'block'
+      });
+    } else {
+      this.setData({
+        showBackdrop: 'none'
+      });
+    }
   },
   onLoad: function () {
     if (app.globalData.userInfo) {
@@ -103,7 +75,8 @@ Page({
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
         success: res => {
-          app.globalData.userInfo = res.userInfo
+          app.globalData.userInfo = res.userInfo;
+          console.debug(res.userInfo);
           this.setData({
             userInfo: res.userInfo,
             hasUserInfo: true
@@ -118,6 +91,12 @@ Page({
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
+    })
+  },
+  bindChange: function (e) {
+    const val = e.detail.value
+    this.setData({
+      markAchievement: achievements[val[0]]
     })
   }
 })

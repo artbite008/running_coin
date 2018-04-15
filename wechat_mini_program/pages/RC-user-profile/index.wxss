@@ -1,1 +1,180 @@
-/* pages/RC-user-profile/index.wxss */
+.user-avatar-placeholder-container {
+  width: 100%;
+  height: 30px;
+  z-index: 1;
+}
+
+.userinfo-avatar {
+  width: 200rpx;
+  height: 200rpx;
+  margin: 30rpx 20rpx 20rpx 20rpx;
+  border-radius: 50%;
+  border: 5px solid #ffd80d;
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+                0 6px 10px 0 rgba(0, 0, 0, 0.14),
+                0 1px 18px 0 rgba(0, 0, 0, 0.12);
+}
+
+.userinfo-avatar.avatar-float {
+  position: absolute;
+  top: -14px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+}
+
+.nickname-container {
+  padding: 90px 0 20px 0;
+  width: 100%;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nickname-container .nickname {
+  height: 100%;
+}
+
+.userinfo {
+  min-height: 80px;
+  display: flex;
+  flex-direction: row;
+  align-items: top;
+  font-weight: 500;
+  font-size: 16px;
+  color: #fff;
+  overflow-wrap: break-word;
+}
+
+.userinfo .section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button.retarget {
+  height: 30px;
+  margin: 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #c9002c;
+  background-color: #ffe7ec;
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+                0 6px 10px 0 rgba(0, 0, 0, 0.14),
+                0 1px 18px 0 rgba(0, 0, 0, 0.12);
+}
+
+button.retarget image {
+  margin-top: 5px;
+}
+
+.record-range-container {
+  margin-top: 30px;
+  font-size: 14px;
+  color: #767676;
+  font-weight: 500;
+}
+
+.my-record-list {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.my-record-list .my-record-list-item {
+  padding-left: 30px;
+  color: #767676;
+  font-size: 15px;
+  font-weight: 600;
+  height: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.my-record-list .my-record-list-item .section-date {
+  display: flex;
+  flex-direction: column;
+  align-items: top;
+  width: 50%;
+}
+
+.my-record-list .my-record-list-item .section-distance {
+  display: flex;
+  flex-direction: column;
+  align-items: top;
+  width: 20%;
+}
+
+.my-record-list .my-record-list-item .section-vote {
+  display: flex;
+  flex-direction: row;
+  align-items: top;
+  width: 30%;
+}
+
+.fab image.edit-icon {
+  margin-top: 7px;
+  height: 30px;
+}
+
+.planning-container {
+  color: #767676;
+  height: 200px;
+  width: 80%;
+  position: absolute;
+  margin: auto;
+  padding: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.planning-slogan {
+  color: #767676;
+  position: absolute;
+  left: 40px;
+  right: 40px;
+  top: 180px;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.like-dislike-button {
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  z-index: 1;
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+                0 6px 10px 0 rgba(0, 0, 0, 0.14),
+                0 1px 18px 0 rgba(0, 0, 0, 0.12);
+}
+
+.like-dislike-button.save {
+  position: fixed;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 80px;
+}
+
+.like-dislike-button image {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  height: 40px;
+  width: 40px;
+}

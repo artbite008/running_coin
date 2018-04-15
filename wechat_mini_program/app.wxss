@@ -1,6 +1,5 @@
-/**app.wxss**/
-
 .container {
+  font-weight: 600;
   margin: 0;
   height: 100%;
   display: flex;
@@ -11,10 +10,108 @@
   box-sizing: border-box;
 }
 
+.backdrop {
+  z-index: 2;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #fff;
+}
+
+.backdrop-front-content icon {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.backdrop-front-content {
+  z-index: 3;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.card {
+  width: 90%;
+  padding: 0 5px 0 5px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12);
+}
+
+.card.sub {
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+}
+
 .bg-primary {
   background-color: #006efc;
 }
 
+.bg-light-primary {
+  background-color: #4295ff;
+}
+
 .bg-light {
   background-color: #fff;
+}
+
+.progress {
+  height: 8px;
+  border-radius: 3px;
+}
+
+.bg-error {
+  background-color: #ff5151;
+}
+
+.bg-success {
+  background-color: #71c63e;
+  color: #fff;
+}
+
+.bg-info {
+  background-color: #006efc;
+  color: #fff;
+}
+
+.bg-warning {
+  background-color: #ffd80d;
+}
+
+.fab {
+  display: inline-block;
+  padding: 10px 0 0 0;
+  position: fixed;
+  height: 65px;
+  width:65px;
+  right: 10px;
+  bottom: 30px;
+  border-radius: 50%;
+  z-index: 1;
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12); 
+}
+
+.fab image {
+  height: 50px;
+  width: 50px;
+}
+
+.divider {
+  border-color: rgba(0, 0, 0, 0.12);
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+
+image.small-icon {
+  height: 20px;
+  width: 20px;
 }
