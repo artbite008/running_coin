@@ -30,7 +30,7 @@
 
 ## Table#5 Target_Distance
 
-| TargetDistanceId      | UserId  | CreateTime | TargetDistance | Status      |
+| TargetDistanceId      | UserId  | CreationTime | TargetDistance | Status      |
 | --------------------- | ------- | ---------- | -------------- | ----------- |
 | int(16)               | int(16) | TIMESTAMP  | float(3,1)     | varchar(32) |
 | Primary Key(Sequence) | Unique  |            |                |             |
