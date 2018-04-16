@@ -26,6 +26,7 @@ CREATE TABLE `User_Info` (
 CREATE TABLE `Running_Record` (
   `RuningRecordId` int(11) NOT NULL AUTO_INCREMENT,
   `UserId` int(11) NOT NULL,
+  `GroupId` int(11) NOT NULL,
   `Distance` float(3,1) NOT NULL,
   `CreationTime` datetime NOT NULL,
   `LastVotedTime` datetime DEFAULT NULL,
@@ -37,13 +38,16 @@ CREATE TABLE `Running_Record` (
   `Evidence` blob,
   PRIMARY KEY (`RuningRecordId`),
   KEY `UserId_idx` (`UserId`),
-  CONSTRAINT `UserId` FOREIGN KEY (`UserId`) REFERENCES `User_Info` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `GroupId_idx` (`GroupId`),
+  CONSTRAINT `UserId` FOREIGN KEY (`UserId`) REFERENCES `User_Info` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `GroupId` FOREIGN KEY (`GroupId`) REFERENCES `User_Group` (`GroupId`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `Vote_Record` (
   `VoteRecordId` int(11) NOT NULL AUTO_INCREMENT,
   `VoteUserId` int(11) NOT NULL,
+  `GroupId` int(11) NOT NULL,
   `RuningRecordId` int(11) NOT NULL,
   `VotedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `CanceledTime` timestamp NULL DEFAULT NULL,
@@ -53,6 +57,21 @@ CREATE TABLE `Vote_Record` (
   PRIMARY KEY (`VoteRecordId`),
   KEY `VoteUserId_idx` (`VoteUserId`),
   KEY `RuningRecordId_idx` (`RuningRecordId`),
+  KEY `GroupId_idx` (`GroupId`),
+  CONSTRAINT `GroupId` FOREIGN KEY (`GroupId`) REFERENCES `User_Group` (`GroupId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `RuningRecordId` FOREIGN KEY (`RuningRecordId`) REFERENCES `Running_Record` (`RuningRecordId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `VoteUserId` FOREIGN KEY (`VoteUserId`) REFERENCES `User_Info` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Target_Distance` (
+  `TargetDistanceId` int(11) NOT NULL AUTO_INCREMENT,
+  `UserId` int(11) NOT NULL,
+  `GroupId` int(11) NOT NULL,
+  `CreationTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `TargetDistance` float(3,1) NOT NULL,
+  PRIMARY KEY (`TargetDistanceId`),
+  KEY `UserId_idx` (`UserId`),
+  KEY `GroupId_idx` (`GroupId`),
+  CONSTRAINT `GroupId` FOREIGN KEY (`GroupId`) REFERENCES `User_Group` (`GroupId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `UserId` FOREIGN KEY (`UserId`) REFERENCES `User_Info` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
