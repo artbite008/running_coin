@@ -16,14 +16,14 @@
 
 ## Table#3 Running_Record
 
-| RuningRecordId        | UserId      | Distance   | CreationTime | LastVotedTime | Status                            | Score  | SettledTime | EarnedCoins | Comments     | Evidence |
-| --------------------- | ----------- | ---------- | ------------ | ------------- | --------------------------------- | ------ | ----------- | ----------- | ------------ | -------- |
-| int(16)               | int(16)     | float(3,1) | TIMESTAMP    | TIMESTAMP     | varchar(32)                       | int(4) | TIMESTAMP   | int(16)     | varchar(256) | blob     |
-| Primary Key(Sequence) | Foreign Key |            |              |               | Submitted/Expired/Rejected/Passed |        |             |             |              |          |
+| RuningRecordId        | UserId      | GroupId     | CreationTime | LastVotedTime | Status                            | Score  | SettledTime | EarnedCoins | Comments     | Evidence | Distance   |
+| --------------------- | ----------- | ----------- | ------------ | ------------- | --------------------------------- | ------ | ----------- | ----------- | ------------ | -------- | ---------- |
+| int(16)               | int(16)     | int(16)     | TIMESTAMP    | TIMESTAMP     | varchar(32)                       | int(4) | TIMESTAMP   | int(16)     | varchar(256) | blob     | float(3,1) |
+| Primary Key(Sequence) | Foreign Key | Foreign Key |              |               | Submitted/Expired/Rejected/Passed |        |             |             |              |          |            |
 
 ## Table#4 Vote_Record
 
-| VoteRecordId          | VoteUserId  | RuningRecordId | VotedTime | CanceledTime | Status         | Score  | Comments    |
-| --------------------- | ----------- | -------------- | --------- | ------------ | -------------- | ------ | ----------- |
-| int(16)               | int(16)     | int(16)        | TIMESTAMP | TIMESTAMP    | varchar(32)    | int(4) | varchar(32) |
-| Primary Key(Sequence) | Foreign Key | Foreign Key    |           |              | Voted/Canceled | 1 / -1 |             |
+| VoteRecordId          | VoteUserId  | RuningRecordId | GroupId     | CanceledTime | Status         | Score  | Comments    | VotedTime |
+| --------------------- | ----------- | -------------- | ----------- | ------------ | -------------- | ------ | ----------- | --------- |
+| int(16)               | int(16)     | int(16)        | int(16)     | TIMESTAMP    | varchar(32)    | int(4) | varchar(32) | TIMESTAMP |
+| Primary Key(Sequence) | Foreign Key | Foreign Key    | Foreign Key |              | Voted/Canceled | 1 / -1 |             |           |
