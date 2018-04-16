@@ -1,9 +1,8 @@
-<view hidden ="{{showBackdrop != 'none'}}">
+<view hidden="{{showBackdrop}}">
 <view class="container">
   <view class="card userinfo user-card-decorator" bindtap='goToMyProfile'>
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
-      bind to your wechat
-    </button>
+    <block wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo">
+    </block>
     <block wx:else>
       <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
       <view class="userinfo-nickname-block">
@@ -62,7 +61,7 @@
   <image src='./imgs/run.svg'></image>
 </button>
 </view>
-<view style='display: {{showBackdrop}}'>
+<view hidden ="{{!showBackdrop}}">
   <view class='backdrop'></view>
   <view class='backdrop-front-content'>
     <block wx:if="{{dialogEvent === 'vote'}}">

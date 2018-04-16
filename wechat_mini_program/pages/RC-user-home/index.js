@@ -11,15 +11,21 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     users: mockUsers,
     progressBarColorSets: _progressBarColorSets,
-    showBackdrop: 'none',
+    showBackdrop: false,
     dialogEvent: '',
     markAchievement: 0,
-    achievements: achievements
+    achievements: achievements,
+    register: wx.getStorageSync('register')
   },
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
       url: '../logs/logs'
+    })
+  },
+  goToGuard: function() {
+    wx.redirectTo({
+      url: '../RC-user-guard/index'
     })
   },
   goToMyProfile: function() {
@@ -46,17 +52,20 @@ Page({
   },
   backdropMgt: function() {
     let _showBackdrop = this.data.showBackdrop;
-    if (_showBackdrop == 'none') {
-      this.setData({
-        showBackdrop: 'block'
-      });
-    } else {
-      this.setData({
-        showBackdrop: 'none'
-      });
-    }
+    this.setData({
+      showBackdrop: !_showBackdrop
+    });
   },
   onLoad: function () {
+    const registerFlagFromStorage = wx.getStorageSync('register');
+    if (registerFlagFromStorage !== 'true') {
+      this.goToGuard();
+      return;
+    } else {
+      this.setData({
+        register: registerFlagFromStorage
+      });
+    }
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -70,23 +79,30 @@ Page({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
+      };
       wx.getUserInfo({
         success: res => {
           app.globalData.userInfo = res.userInfo;
-          console.debug(res.userInfo);
           this.setData({
             userInfo: res.userInfo,
             hasUserInfo: true
           })
         }
-      })
+      });
+    } else {
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo;
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+        }
+      });
     }
   },
   getUserInfo: function(e) {
-    console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
