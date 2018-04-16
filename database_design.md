@@ -32,5 +32,5 @@
 
 | TargetDistanceId      | UserId  | CreationTime | GroupId | TargetDistance      |
 | --------------------- | ------- | ---------- | -------------- | ----------- |
-| int(16)               | int(16) | TIMESTAMP  | Foreign Key    | float(3,1) |
-| Primary Key(Sequence) | Foreign Key  |            |                |             |
+| int(16)               | int(16) | TIMESTAMP  |    int(16) | float(3,1) |
+| Primary Key(Sequence) | Foreign Key  |            |     Foreign Key           |             |
