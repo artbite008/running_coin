@@ -145,7 +145,7 @@ button.retarget image {
   position: absolute;
   left: 40px;
   right: 40px;
-  top: 180px;
+  top: 15%;
   font-weight: 700;
   font-size: 16px;
 }

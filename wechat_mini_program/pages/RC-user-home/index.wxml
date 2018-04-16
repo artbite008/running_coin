@@ -1,4 +1,5 @@
-<view class="container" wx:if="{{showBackdrop == 'none'}}">
+<view hidden ="{{showBackdrop != 'none'}}">
+<view class="container">
   <view class="card userinfo user-card-decorator" bindtap='goToMyProfile'>
     <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
       bind to your wechat
@@ -60,11 +61,12 @@
 <button class='fab bg-info running-icon' bindtap='mark'>
   <image src='./imgs/run.svg'></image>
 </button>
+</view>
 <view style='display: {{showBackdrop}}'>
   <view class='backdrop'></view>
   <view class='backdrop-front-content'>
     <block wx:if="{{dialogEvent === 'vote'}}">
-      <text class='voting-slogan'>double tap thumb up or thumb down to vote for your mates, with love !</text>
+      <text class='voting-slogan'>Double Tap Thumb Up Or Thumb Down To Vote For Your Mates, With Love !</text>
       <icon type="cancel" size="40" color="red" bindtap='backdropMgt' />
       <view class="card voting-container bg-warning">
         <button class='like-dislike-button'>
@@ -76,7 +78,7 @@
       </view>
     </block>
     <block wx:if="{{dialogEvent === 'mark'}}">
-      <text class='voting-slogan'>typing your newest achievement, based on the fact !</text>
+      <text class='voting-slogan'>Type In Your Newest Achievement, Based On The Fact !</text>
       <icon type="cancel" size="40" color="red" bindtap='backdropMgt' />
       <view class="card marking-container bg-light">
         <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px; border-radius: 10px;" value="{{value}}" bindchange="bindChange">

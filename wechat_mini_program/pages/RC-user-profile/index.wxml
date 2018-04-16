@@ -1,4 +1,5 @@
-<view class="container" wx:if="{{showBackdrop == 'none'}}">
+<view hidden ="{{showBackdrop != 'none'}}">
+<view class="container" >
   <view class='user-avatar-placeholder-container'>
     <image class="userinfo-avatar avatar-float" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
   </view>
@@ -54,12 +55,13 @@
 <button class='fab bg-error' bindtap='goToPlan'>
   <image class='edit-icon' src='./imgs/edit.svg'></image>
 </button>
+</view>
 <view style='display: {{showBackdrop}}'>
   <view class='backdrop'></view>
   <view class='backdrop-front-content'>
     <icon type="cancel" size="40" color="red" bindtap='backdropMgt' />
     <block wx:if="{{dialogEvent === 'plan'}}">
-      <text class='planning-slogan'>Choose Your Plan, Based On Your Fact ! Click Yellow Button To save.</text>
+      <text class='planning-slogan'>Choose Your Plan, Based On Your Fact ! Click Yellow Button To Save.</text>
       <view class="card planning-container bg-light">
         <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px; border-radius: 10px;" value="{{value}}" bindchange="bindChange">
           <picker-view-column>
