@@ -27,3 +27,10 @@
 | --------------------- | ----------- | -------------- | ----------- | ------------ | -------------- | ------ | ----------- | --------- |
 | int(16)               | int(16)     | int(16)        | int(16)     | TIMESTAMP    | varchar(32)    | int(4) | varchar(32) | TIMESTAMP |
 | Primary Key(Sequence) | Foreign Key | Foreign Key    | Foreign Key |              | Voted/Canceled | 1 / -1 |             |           |
+
+## Table#5 Target_Distance
+
+| TargetDistanceId      | UserId  | CreateTime | TargetDistance | Status      |
+| --------------------- | ------- | ---------- | -------------- | ----------- |
+| int(16)               | int(16) | TIMESTAMP  | float(3,1)     | varchar(32) |
+| Primary Key(Sequence) | Unique  |            |                |             |
