@@ -1,6 +1,7 @@
 import {users as mockUsers} from '../mock/RC-user.mock';
 import {progressBarColorSets as _progressBarColorSets} from '../mock/RC-progressBar.mock';
 import {achievements} from '../mock/RC-user.mock';
+import {UserService} from '../service/index';
 
 const app = getApp();
 
@@ -16,12 +17,6 @@ Page({
     markAchievement: 0,
     achievements: achievements,
     register: wx.getStorageSync('register')
-  },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
   },
   goToGuard: function() {
     wx.redirectTo({

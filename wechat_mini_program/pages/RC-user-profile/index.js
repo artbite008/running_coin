@@ -132,7 +132,7 @@ Page({
   bindChange: function (e) {
     const val = e.detail.value
     this.setData({
-      plan: plan[val[0]]
+      plan: plans[val[0]]
     })
   }
 })

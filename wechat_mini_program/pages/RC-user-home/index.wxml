@@ -33,7 +33,7 @@
         <view class="peopleInfo-nickname-block">
           <text class="peopleInfo-nickname">{{user.nickName}}</text>
           <text class="peopleInfo-nickname">Coins: {{user.coins}} </text>
-          <text class="peopleInfo-nickname">Plan/Current: 10/9</text>
+          <text class="peopleInfo-nickname">Goal/Current: 10/9</text>
           <view style='width: {{user.current / user.target * 100}}%;' class="bg-{{user.color}} progress">
           </view>
         </view>
@@ -58,7 +58,7 @@
 
 
 <button class='fab bg-info running-icon' bindtap='mark'>
-  <image src='./imgs/run.svg'></image>
+  <image src='../imgs/run.svg'></image>
 </button>
 </view>
 <view hidden ="{{!showBackdrop}}">
@@ -77,13 +77,13 @@
       </view>
     </block>
     <block wx:if="{{dialogEvent === 'mark'}}">
-      <text class='voting-slogan'>Type In Your Newest Achievement, Based On The Fact !</text>
+      <text class='voting-slogan'>Type In My Newest Achievement !</text>
       <icon type="cancel" size="40" color="red" bindtap='backdropMgt' />
       <view class="card marking-container bg-light">
         <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px; border-radius: 10px;" value="{{value}}" bindchange="bindChange">
           <picker-view-column>
             <view wx:for="{{achievements}}" style="line-height: 50px; padding-left: 20px;">
-              You Were Running {{item}} km
+              I Just Run {{item}} km
             </view>
           </picker-view-column>
         </picker-view>
