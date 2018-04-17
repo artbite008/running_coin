@@ -1,18 +1,27 @@
 # Running Coin Database Desgin
 
-## Table#1 User_Group
+## Table#0 Group
 
 | GroupId               | GroupName    | MetaData      |
 | --------------------- | ------------ | ------------- |
 | int(16)               | varchar(256) | varchar(2000) |
 | Primary Key(Sequence) | Unique       |               |
 
-## Table#2 User_Info
+## Table#1 User_Info
 
 | UserId                | GroupId     | UserName     | Status          | Role         | Coins      | Icon | TotalDistance | MetaData      |
 | --------------------- | ----------- | ------------ | --------------- | ------------ | ---------- | ---- | ------------- | ------------- |
 | int(16)               | int(16)     | varchar(256) | varchar(32)     | varchar(32)  | int(16)    | blob | float(9,1)    | varchar(2000) |
 | Primary Key(Sequence) | Foreign Key |              | Active/Inactive | Admin/Member | Default  0 |      |               |               |
+
+## Table#2 User_Group
+
+| UserGroupId               | GroupId    | UserId      |
+| --------------------- | ------------ | ------------- |
+| int(16)               |int(16)       | int(16)       |
+| Primary Key(Sequence) | Foreign Key  |Foreign Key    |
+
+
 
 ## Table#3 Running_Record
 
