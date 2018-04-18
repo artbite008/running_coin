@@ -12,5 +12,4 @@ public class RunningclubApplicationTests {
 	@Test
 	public void contextLoads() {
 	}
-
 }

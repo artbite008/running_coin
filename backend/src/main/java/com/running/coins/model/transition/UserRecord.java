@@ -2,13 +2,25 @@ package com.running.coins.model.transition;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class UserRecord {
-    private String userName;
-    private String coins;
-    private String currentDistance;
-    private String planDistance;
-    private String likes;
-    private String dislikes;
+    private Integer runningRecordId;
+    private Integer userId;
+    private Integer groupId;
+    private String nickName;
+    private Double coins;
+    private Float current;
+    private Float target;
+    private Integer likes;
+    private Integer dislikes;
     private String date;
+    private Float latestRecord;
+    private List<Integer> achievements;
+    private Integer allAchievements;
+    private Integer allLikes;
+    private Integer allDislikes;
+    private Boolean voted;
+    private String color;
 }

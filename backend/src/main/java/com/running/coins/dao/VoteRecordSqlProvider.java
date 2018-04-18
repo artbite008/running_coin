@@ -17,6 +17,10 @@ public class VoteRecordSqlProvider {
             sql.VALUES("VoteUserId", "#{voteUserId,jdbcType=INTEGER}");
         }
         
+        if (record.getGroupId() != null) {
+            sql.VALUES("GroupId", "#{groupId,jdbcType=INTEGER}");
+        }
+        
         if (record.getRuningRecordId() != null) {
             sql.VALUES("RuningRecordId", "#{runingRecordId,jdbcType=INTEGER}");
         }
@@ -25,12 +29,12 @@ public class VoteRecordSqlProvider {
             sql.VALUES("VotedTime", "#{votedTime,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getCanceledTime() != null) {
-            sql.VALUES("CanceledTime", "#{canceledTime,jdbcType=TIMESTAMP}");
+        if (record.getUpdatedTime() != null) {
+            sql.VALUES("UpdatedTime", "#{updatedTime,jdbcType=TIMESTAMP}");
         }
         
         if (record.getStatus() != null) {
-            sql.VALUES("Status", "#{status,jdbcType=VARCHAR}");
+            sql.VALUES("Status", "#{status,jdbcType=INTEGER}");
         }
         
         if (record.getScore() != null) {
@@ -52,6 +56,10 @@ public class VoteRecordSqlProvider {
             sql.SET("VoteUserId = #{voteUserId,jdbcType=INTEGER}");
         }
         
+        if (record.getGroupId() != null) {
+            sql.SET("GroupId = #{groupId,jdbcType=INTEGER}");
+        }
+        
         if (record.getRuningRecordId() != null) {
             sql.SET("RuningRecordId = #{runingRecordId,jdbcType=INTEGER}");
         }
@@ -60,12 +68,12 @@ public class VoteRecordSqlProvider {
             sql.SET("VotedTime = #{votedTime,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getCanceledTime() != null) {
-            sql.SET("CanceledTime = #{canceledTime,jdbcType=TIMESTAMP}");
+        if (record.getUpdatedTime() != null) {
+            sql.SET("UpdatedTime = #{updatedTime,jdbcType=TIMESTAMP}");
         }
         
         if (record.getStatus() != null) {
-            sql.SET("Status = #{status,jdbcType=VARCHAR}");
+            sql.SET("Status = #{status,jdbcType=INTEGER}");
         }
         
         if (record.getScore() != null) {

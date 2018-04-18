@@ -7,18 +7,18 @@ public class UserGroupSqlProvider {
 
     public String insertSelective(UserGroup record) {
         SQL sql = new SQL();
-        sql.INSERT_INTO("User_Group");
+        sql.INSERT_INTO("UserGroup");
+        
+        if (record.getUserGroupId() != null) {
+            sql.VALUES("UserGroupId", "#{userGroupId,jdbcType=INTEGER}");
+        }
+        
+        if (record.getUserId() != null) {
+            sql.VALUES("UserId", "#{userId,jdbcType=INTEGER}");
+        }
         
         if (record.getGroupId() != null) {
             sql.VALUES("GroupId", "#{groupId,jdbcType=INTEGER}");
-        }
-        
-        if (record.getGroupName() != null) {
-            sql.VALUES("GroupName", "#{groupName,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getMetaData() != null) {
-            sql.VALUES("MetaData", "#{metaData,jdbcType=VARCHAR}");
         }
         
         return sql.toString();
@@ -26,17 +26,17 @@ public class UserGroupSqlProvider {
 
     public String updateByPrimaryKeySelective(UserGroup record) {
         SQL sql = new SQL();
-        sql.UPDATE("User_Group");
+        sql.UPDATE("UserGroup");
         
-        if (record.getGroupName() != null) {
-            sql.SET("GroupName = #{groupName,jdbcType=VARCHAR}");
+        if (record.getUserId() != null) {
+            sql.SET("UserId = #{userId,jdbcType=INTEGER}");
         }
         
-        if (record.getMetaData() != null) {
-            sql.SET("MetaData = #{metaData,jdbcType=VARCHAR}");
+        if (record.getGroupId() != null) {
+            sql.SET("GroupId = #{groupId,jdbcType=INTEGER}");
         }
         
-        sql.WHERE("GroupId = #{groupId,jdbcType=INTEGER}");
+        sql.WHERE("UserGroupId = #{userGroupId,jdbcType=INTEGER}");
         
         return sql.toString();
     }
