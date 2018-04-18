@@ -13,10 +13,6 @@ public class UserInfoSqlProvider {
             sql.VALUES("UserId", "#{userId,jdbcType=INTEGER}");
         }
         
-        if (record.getGroupId() != null) {
-            sql.VALUES("GroupId", "#{groupId,jdbcType=INTEGER}");
-        }
-        
         if (record.getUserName() != null) {
             sql.VALUES("UserName", "#{userName,jdbcType=VARCHAR}");
         }
@@ -51,11 +47,7 @@ public class UserInfoSqlProvider {
     public String updateByPrimaryKeySelective(UserInfo record) {
         SQL sql = new SQL();
         sql.UPDATE("User_Info");
-        
-        if (record.getGroupId() != null) {
-            sql.SET("GroupId = #{groupId,jdbcType=INTEGER}");
-        }
-        
+
         if (record.getUserName() != null) {
             sql.SET("UserName = #{userName,jdbcType=VARCHAR}");
         }
