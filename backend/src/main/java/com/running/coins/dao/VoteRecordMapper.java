@@ -12,6 +12,8 @@ import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface VoteRecordMapper {
     @Delete({
@@ -77,8 +79,7 @@ public interface VoteRecordMapper {
             "VoteRecordId, VoteUserId, GroupId, RuningRecordId, VotedTime, UpdatedTime, ",
             "Status, Score, Comments",
             "from Vote_Record",
-            "where VoteUserId = #{voteUserId,jdbcType=INTEGER}",
-            "and RuningRecordId = #{runningRecordId,jdbcType=INTEGER}"
+            "where RuningRecordId = #{runningRecordId,jdbcType=INTEGER}"
     })
     @Results({
             @Result(column="VoteRecordId", property="voteRecordId", jdbcType=JdbcType.INTEGER, id=true),
@@ -91,5 +92,5 @@ public interface VoteRecordMapper {
             @Result(column="Score", property="score", jdbcType=JdbcType.INTEGER),
             @Result(column="Comments", property="comments", jdbcType=JdbcType.VARCHAR)
     })
-    VoteRecord selectByVoteUserIdAndRuningRecordId(Integer voteUserId, Integer runningRecordId);
+    List<VoteRecord> selectByVoteUserIdAndRuningRecordId(Integer runningRecordId);
 }

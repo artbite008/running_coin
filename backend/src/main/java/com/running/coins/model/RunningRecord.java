@@ -5,7 +5,11 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class RunningRecord extends RunningRecordKey {
+public class RunningRecord {
+    private Integer runingRecordId;
+
+    private Integer userGroupId;
+
     private Float distance;
 
     private Date creationTime;
@@ -23,6 +27,5 @@ public class RunningRecord extends RunningRecordKey {
     private String comments;
 
     private String evidence;
-
 
 }

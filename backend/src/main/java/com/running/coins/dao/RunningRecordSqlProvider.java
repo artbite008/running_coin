@@ -13,12 +13,8 @@ public class RunningRecordSqlProvider {
             sql.VALUES("RuningRecordId", "#{runingRecordId,jdbcType=INTEGER}");
         }
         
-        if (record.getUserId() != null) {
-            sql.VALUES("UserId", "#{userId,jdbcType=INTEGER}");
-        }
-        
-        if (record.getGroupId() != null) {
-            sql.VALUES("GroupId", "#{groupId,jdbcType=INTEGER}");
+        if (record.getUserGroupId() != null) {
+            sql.VALUES("UserGroupId", "#{userGroupId,jdbcType=INTEGER}");
         }
         
         if (record.getDistance() != null) {
@@ -46,7 +42,7 @@ public class RunningRecordSqlProvider {
         }
         
         if (record.getEarnedCoins() != null) {
-            sql.VALUES("EarnedCoins", "#{earnedCoins,jdbcType=INTEGER}");
+            sql.VALUES("EarnedCoins", "#{earnedCoins,jdbcType=DOUBLE}");
         }
         
         if (record.getComments() != null) {
@@ -63,6 +59,10 @@ public class RunningRecordSqlProvider {
     public String updateByPrimaryKeySelective(RunningRecord record) {
         SQL sql = new SQL();
         sql.UPDATE("Running_Record");
+        
+        if (record.getUserGroupId() != null) {
+            sql.SET("UserGroupId = #{userGroupId,jdbcType=INTEGER}");
+        }
         
         if (record.getDistance() != null) {
             sql.SET("Distance = #{distance,jdbcType=REAL}");
@@ -89,7 +89,7 @@ public class RunningRecordSqlProvider {
         }
         
         if (record.getEarnedCoins() != null) {
-            sql.SET("EarnedCoins = #{earnedCoins,jdbcType=INTEGER}");
+            sql.SET("EarnedCoins = #{earnedCoins,jdbcType=DOUBLE}");
         }
         
         if (record.getComments() != null) {
@@ -101,8 +101,6 @@ public class RunningRecordSqlProvider {
         }
         
         sql.WHERE("RuningRecordId = #{runingRecordId,jdbcType=INTEGER}");
-        sql.WHERE("UserId = #{userId,jdbcType=INTEGER}");
-        sql.WHERE("GroupId = #{groupId,jdbcType=INTEGER}");
         
         return sql.toString();
     }

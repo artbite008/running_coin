@@ -11,15 +11,16 @@ public class UserRecord {
     private Integer groupId;
     private String nickName;
     private Double coins;
-    private String current;
-    private String target;
-    private String likes;
-    private String dislikes;
+    private Float current;
+    private Float target;
+    private Integer likes;
+    private Integer dislikes;
     private String date;
-    private String latestRecord;
+    private Float latestRecord;
     private List<Integer> achievements;
     private Integer allAchievements;
     private Integer allLikes;
     private Integer allDislikes;
-    private boolean voted;
+    private Boolean voted;
+    private String color;
 }
