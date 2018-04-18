@@ -1,33 +1,33 @@
 package com.running.coins.controller;
 
+import com.running.coins.model.request.UserJoinRequest;
+import com.running.coins.model.request.UserListRequest;
+import com.running.coins.model.response.ResponseMessage;
+import com.running.coins.service.FrontServices;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/front")
 public class FrontController {
 
-    @PostMapping("/list/users")
-    public String listUsers(@RequestParam String userId, @RequestParam String groupId) {
+    @Autowired
+    FrontServices frontServices;
+
+    @GetMapping("/user/details/{id}")
+    public String getUserInfo() {
         return null;
     }
 
-    @PostMapping("/submit/distance")
-    public String submitDistance(@RequestParam String userId, @RequestParam String distance) {
-        return null;
+    @ApiOperation(value = "This is a api invoked immediately when a user authorizes RunningCoins", notes = "Join the Running Club, will return an unique Id for this user")
+    @ApiImplicitParam(name = "userJoinRequest", value = "Request body of user join", required = true, dataType = "UserJoinRequest")
+    @PostMapping("/user/join")
+    public ResponseMessage userJoin(@RequestBody UserJoinRequest userJoinRequest) {
+        ResponseMessage responseMessage =frontServices.userJoin(userJoinRequest);
+        return responseMessage;
     }
 
-    @PostMapping("/vote")
-    public String vote(@RequestParam String userId, @RequestParam String voteStatus) {
-        return null;
-    }
-
-    @PostMapping("/submit/target")
-    public String submitTarget(@RequestParam String userId, @RequestParam String targetDisdance) {
-        return null;
-    }
-
-    @GetMapping("/user/{id}")
-    public String getUserInfo(@PathVariable("id") String userId) {
-        return null;
-    }
 
 }

@@ -17,6 +17,10 @@ public class RunningRecordSqlProvider {
             sql.VALUES("UserId", "#{userId,jdbcType=INTEGER}");
         }
         
+        if (record.getGroupId() != null) {
+            sql.VALUES("GroupId", "#{groupId,jdbcType=INTEGER}");
+        }
+        
         if (record.getDistance() != null) {
             sql.VALUES("Distance", "#{distance,jdbcType=REAL}");
         }
@@ -60,10 +64,6 @@ public class RunningRecordSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("Running_Record");
         
-        if (record.getUserId() != null) {
-            sql.SET("UserId = #{userId,jdbcType=INTEGER}");
-        }
-        
         if (record.getDistance() != null) {
             sql.SET("Distance = #{distance,jdbcType=REAL}");
         }
@@ -101,6 +101,8 @@ public class RunningRecordSqlProvider {
         }
         
         sql.WHERE("RuningRecordId = #{runingRecordId,jdbcType=INTEGER}");
+        sql.WHERE("UserId = #{userId,jdbcType=INTEGER}");
+        sql.WHERE("GroupId = #{groupId,jdbcType=INTEGER}");
         
         return sql.toString();
     }

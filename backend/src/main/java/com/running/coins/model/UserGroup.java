@@ -1,11 +1,27 @@
 package com.running.coins.model;
 
 public class UserGroup {
+    private Integer userGroupId;
+
+    private Integer userId;
+
     private Integer groupId;
 
-    private String groupName;
+    public Integer getUserGroupId() {
+        return userGroupId;
+    }
 
-    private String metaData;
+    public void setUserGroupId(Integer userGroupId) {
+        this.userGroupId = userGroupId;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public Integer getGroupId() {
         return groupId;
@@ -13,21 +29,5 @@ public class UserGroup {
 
     public void setGroupId(Integer groupId) {
         this.groupId = groupId;
-    }
-
-    public String getGroupName() {
-        return groupName;
-    }
-
-    public void setGroupName(String groupName) {
-        this.groupName = groupName == null ? null : groupName.trim();
-    }
-
-    public String getMetaData() {
-        return metaData;
-    }
-
-    public void setMetaData(String metaData) {
-        this.metaData = metaData == null ? null : metaData.trim();
     }
 }

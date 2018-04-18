@@ -1,6 +1,7 @@
 package com.running.coins.dao;
 
 import com.running.coins.model.RunningRecord;
+import com.running.coins.model.RunningRecordKey;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
@@ -10,25 +11,29 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface RunningRecordMapper {
     @Delete({
         "delete from Running_Record",
-        "where RuningRecordId = #{runingRecordId,jdbcType=INTEGER}"
+        "where RuningRecordId = #{runingRecordId,jdbcType=INTEGER}",
+          "and UserId = #{userId,jdbcType=INTEGER}",
+          "and GroupId = #{groupId,jdbcType=INTEGER}"
     })
-    int deleteByPrimaryKey(Integer runingRecordId);
+    int deleteByPrimaryKey(RunningRecordKey key);
 
     @Insert({
         "insert into Running_Record (RuningRecordId, UserId, ",
-        "Distance, CreationTime, ",
-        "LastVotedTime, Status, ",
-        "Score, SettledTime, ",
+        "GroupId, Distance, ",
+        "CreationTime, LastVotedTime, ",
+        "Status, Score, SettledTime, ",
         "EarnedCoins, Comments, ",
         "Evidence)",
         "values (#{runingRecordId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, ",
-        "#{distance,jdbcType=REAL}, #{creationTime,jdbcType=TIMESTAMP}, ",
-        "#{lastVotedTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, ",
-        "#{score,jdbcType=INTEGER}, #{settledTime,jdbcType=TIMESTAMP}, ",
+        "#{groupId,jdbcType=INTEGER}, #{distance,jdbcType=REAL}, ",
+        "#{creationTime,jdbcType=TIMESTAMP}, #{lastVotedTime,jdbcType=TIMESTAMP}, ",
+        "#{status,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, #{settledTime,jdbcType=TIMESTAMP}, ",
         "#{earnedCoins,jdbcType=INTEGER}, #{comments,jdbcType=VARCHAR}, ",
         "#{evidence,jdbcType=LONGVARBINARY})"
     })
@@ -39,14 +44,17 @@ public interface RunningRecordMapper {
 
     @Select({
         "select",
-        "RuningRecordId, UserId, Distance, CreationTime, LastVotedTime, Status, Score, ",
-        "SettledTime, EarnedCoins, Comments, Evidence",
+        "RuningRecordId, UserId, GroupId, Distance, CreationTime, LastVotedTime, Status, ",
+        "Score, SettledTime, EarnedCoins, Comments, Evidence",
         "from Running_Record",
-        "where RuningRecordId = #{runingRecordId,jdbcType=INTEGER}"
+        "where RuningRecordId = #{runingRecordId,jdbcType=INTEGER}",
+          "and UserId = #{userId,jdbcType=INTEGER}",
+          "and GroupId = #{groupId,jdbcType=INTEGER}"
     })
     @Results({
         @Result(column="RuningRecordId", property="runingRecordId", jdbcType=JdbcType.INTEGER, id=true),
-        @Result(column="UserId", property="userId", jdbcType=JdbcType.INTEGER),
+        @Result(column="UserId", property="userId", jdbcType=JdbcType.INTEGER, id=true),
+        @Result(column="GroupId", property="groupId", jdbcType=JdbcType.INTEGER, id=true),
         @Result(column="Distance", property="distance", jdbcType=JdbcType.REAL),
         @Result(column="CreationTime", property="creationTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="LastVotedTime", property="lastVotedTime", jdbcType=JdbcType.TIMESTAMP),
@@ -57,15 +65,14 @@ public interface RunningRecordMapper {
         @Result(column="Comments", property="comments", jdbcType=JdbcType.VARCHAR),
         @Result(column="Evidence", property="evidence", jdbcType=JdbcType.LONGVARBINARY)
     })
-    RunningRecord selectByPrimaryKey(Integer runingRecordId);
+    RunningRecord selectByPrimaryKey(RunningRecordKey key);
 
     @UpdateProvider(type=RunningRecordSqlProvider.class, method="updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(RunningRecord record);
 
     @Update({
         "update Running_Record",
-        "set UserId = #{userId,jdbcType=INTEGER},",
-          "Distance = #{distance,jdbcType=REAL},",
+        "set Distance = #{distance,jdbcType=REAL},",
           "CreationTime = #{creationTime,jdbcType=TIMESTAMP},",
           "LastVotedTime = #{lastVotedTime,jdbcType=TIMESTAMP},",
           "Status = #{status,jdbcType=VARCHAR},",
@@ -74,14 +81,15 @@ public interface RunningRecordMapper {
           "EarnedCoins = #{earnedCoins,jdbcType=INTEGER},",
           "Comments = #{comments,jdbcType=VARCHAR},",
           "Evidence = #{evidence,jdbcType=LONGVARBINARY}",
-        "where RuningRecordId = #{runingRecordId,jdbcType=INTEGER}"
+        "where RuningRecordId = #{runingRecordId,jdbcType=INTEGER}",
+          "and UserId = #{userId,jdbcType=INTEGER}",
+          "and GroupId = #{groupId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKeyWithBLOBs(RunningRecord record);
 
     @Update({
         "update Running_Record",
-        "set UserId = #{userId,jdbcType=INTEGER},",
-          "Distance = #{distance,jdbcType=REAL},",
+        "set Distance = #{distance,jdbcType=REAL},",
           "CreationTime = #{creationTime,jdbcType=TIMESTAMP},",
           "LastVotedTime = #{lastVotedTime,jdbcType=TIMESTAMP},",
           "Status = #{status,jdbcType=VARCHAR},",
@@ -89,7 +97,9 @@ public interface RunningRecordMapper {
           "SettledTime = #{settledTime,jdbcType=TIMESTAMP},",
           "EarnedCoins = #{earnedCoins,jdbcType=INTEGER},",
           "Comments = #{comments,jdbcType=VARCHAR}",
-        "where RuningRecordId = #{runingRecordId,jdbcType=INTEGER}"
+        "where RuningRecordId = #{runingRecordId,jdbcType=INTEGER}",
+          "and UserId = #{userId,jdbcType=INTEGER}",
+          "and GroupId = #{groupId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(RunningRecord record);
 }
