@@ -79,6 +79,27 @@ public interface VoteRecordMapper {
             "VoteRecordId, VoteUserId, GroupId, RuningRecordId, VotedTime, UpdatedTime, ",
             "Status, Score, Comments",
             "from Vote_Record",
+            "where RuningRecordId = #{runningRecordId,jdbcType=INTEGER}",
+            "and VoteUserId = #{voteUserId,jdbcType=INTEGER}"
+    })
+    @Results({
+            @Result(column="VoteRecordId", property="voteRecordId", jdbcType=JdbcType.INTEGER, id=true),
+            @Result(column="VoteUserId", property="voteUserId", jdbcType=JdbcType.INTEGER),
+            @Result(column="GroupId", property="groupId", jdbcType=JdbcType.INTEGER),
+            @Result(column="RuningRecordId", property="runingRecordId", jdbcType=JdbcType.INTEGER),
+            @Result(column="VotedTime", property="votedTime", jdbcType=JdbcType.TIMESTAMP),
+            @Result(column="UpdatedTime", property="updatedTime", jdbcType=JdbcType.TIMESTAMP),
+            @Result(column="Status", property="status", jdbcType=JdbcType.INTEGER),
+            @Result(column="Score", property="score", jdbcType=JdbcType.INTEGER),
+            @Result(column="Comments", property="comments", jdbcType=JdbcType.VARCHAR)
+    })
+    VoteRecord selectByVoteUserIdAndRuningRecordId(Integer runningRecordId, Integer voteUserId);
+
+    @Select({
+            "select",
+            "VoteRecordId, VoteUserId, GroupId, RuningRecordId, VotedTime, UpdatedTime, ",
+            "Status, Score, Comments",
+            "from Vote_Record",
             "where RuningRecordId = #{runningRecordId,jdbcType=INTEGER}"
     })
     @Results({
@@ -92,5 +113,5 @@ public interface VoteRecordMapper {
             @Result(column="Score", property="score", jdbcType=JdbcType.INTEGER),
             @Result(column="Comments", property="comments", jdbcType=JdbcType.VARCHAR)
     })
-    List<VoteRecord> selectByVoteUserIdAndRuningRecordId(Integer runningRecordId);
+    List<VoteRecord> selectByRuningRecordId(Integer runningRecordId);
 }

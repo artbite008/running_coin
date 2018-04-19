@@ -105,7 +105,8 @@ public interface RunningRecordMapper {
             "from Running_Record",
             "where UserGroupId = #{userGroupId,jdbcType=INTEGER}",
             "and CreationTime >= #{start,jdbcType=DATE}",
-            "and CreationTime <= #{end,jdbcType=DATE}"
+            "and CreationTime <= #{end,jdbcType=DATE}",
+            "ORDER BY CreationTime ASC"
     })
     @Results({
             @Result(column="RuningRecordId", property="runingRecordId", jdbcType=JdbcType.INTEGER, id=true),

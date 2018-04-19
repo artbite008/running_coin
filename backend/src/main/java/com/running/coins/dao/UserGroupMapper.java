@@ -59,6 +59,20 @@ public interface UserGroupMapper {
     })
     List<UserGroup> selectByGroupId(Integer groupId);
 
+    @Select({
+            "select",
+            "UserGroupId, UserId, GroupId",
+            "from UserGroup",
+            "where GroupId = #{groupId,jdbcType=INTEGER}",
+            "and UserId = #{userId,jdbcType=INTEGER}"
+    })
+    @Results({
+            @Result(column="UserGroupId", property="userGroupId", jdbcType=JdbcType.INTEGER, id=true),
+            @Result(column="GroupId", property="groupId", jdbcType=JdbcType.INTEGER),
+            @Result(column="UserId", property="userId", jdbcType=JdbcType.INTEGER)
+    })
+    UserGroup selectByGroupIdAndUserId(Integer groupId, Integer userId);
+
     @UpdateProvider(type=UserGroupSqlProvider.class, method="updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(UserGroup record);
 
