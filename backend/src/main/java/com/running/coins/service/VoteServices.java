@@ -3,6 +3,7 @@ package com.running.coins.service;
 import com.running.coins.common.util.ResultUtils;
 import com.running.coins.common.enums.VoteStatus;
 import com.running.coins.common.util.DateUtils;
+import com.running.coins.dao.RunningRecordMapper;
 import com.running.coins.dao.VoteRecordMapper;
 import com.running.coins.model.VoteRecord;
 import com.running.coins.model.request.VoteRequest;
@@ -21,6 +22,8 @@ public class VoteServices {
 
     @Autowired
     VoteRecordMapper voteRecordMapper;
+    @Autowired
+    RunningRecordMapper runningRecordMapper;
 
     public ResponseMessage vote(VoteRequest voteRequest) {
         VoteRecord voteRecord = voteRecordMapper.
@@ -30,7 +33,9 @@ public class VoteServices {
             voteRecord = new VoteRecord();
             SetVoteRecord(voteRequest, voteRecord);
         } else {
-
+            setMutableField(voteRequest, voteRecord);
+            voteRecord.setUpdatedTime(DateUtils.parse(new Date()));
+            voteRecordMapper.updateByPrimaryKey(voteRecord);
         }
         return ResultUtils.success();
     }
@@ -43,10 +48,6 @@ public class VoteServices {
             setMutableField(voteRequest, voteRecord);
             voteRecord.setVotedTime(DateUtils.parse(new Date()));
             voteRecordMapper.insert(voteRecord);
-        } else {
-            setMutableField(voteRequest, voteRecord);
-            voteRecord.setUpdatedTime(DateUtils.parse(new Date()));
-            voteRecordMapper.updateByPrimaryKey(voteRecord);
         }
     }
 

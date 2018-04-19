@@ -1,15 +1,26 @@
 package com.running.coins.service;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.running.coins.common.enums.ResultEnum;
 import com.running.coins.common.enums.RunningProgress;
 import com.running.coins.common.enums.VoteStatus;
+import com.running.coins.common.enums.WeekDays;
+import com.running.coins.common.util.DateUtils;
+import com.running.coins.common.util.ResultUtils;
 import com.running.coins.common.util.ThisLocalizedWeek;
 import com.running.coins.dao.*;
 import com.running.coins.model.*;
+import com.running.coins.model.request.CurrentUserWeeklyReportRequest;
 import com.running.coins.model.request.UserJoinRequest;
+import com.running.coins.model.request.WeeklyReportRequest;
+import com.running.coins.model.response.CurrentUserWeeklyReportResponse;
 import com.running.coins.model.response.ResponseMessage;
 import com.running.coins.model.response.UserJoinResponse;
+import com.running.coins.model.response.WeeklyReportResponse;
 import com.running.coins.model.transition.UserRecord;
+import io.swagger.models.auth.In;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,15 +28,22 @@ import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
 import java.time.temporal.WeekFields;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 @Service
 public class FrontServices {
 
     private final static Logger logger = LoggerFactory.getLogger(FrontServices.class);
+
+    ImmutableMap<String, Integer> immutableDaysMap = ImmutableMap.<String, Integer>builder()
+            .put("MON", 0)
+            .put("TUE", 1)
+            .put("WED", 2)
+            .put("THU", 3)
+            .put("FRI", 4)
+            .put("SAT", 5)
+            .put("SUN", 6)
+            .build();
 
     @Autowired
     UserInfoMapper userInfoMapper;
@@ -72,6 +90,83 @@ public class FrontServices {
         return responseMessage;
     }
 
+    public ResponseMessage currentUserWeekly(CurrentUserWeeklyReportRequest currentUserWeeklyReportRequest) {
+        CurrentUserWeeklyReportResponse currentUserWeeklyReportResponse = new CurrentUserWeeklyReportResponse();
+        UserGroup userGroup = userGroupMapper.selectByGroupIdAndUserId(currentUserWeeklyReportRequest.getGroupId(), currentUserWeeklyReportRequest.getUserId());
+        ThisLocalizedWeek thisLocalizedWeek = new ThisLocalizedWeek(Locale.CHINA);
+        Date start = thisLocalizedWeek.getFirstDay();
+        Date end = thisLocalizedWeek.getLastDay();
+        List<RunningRecord> runningRecords = runningRecordMapper.selectByUserGroupIdAndTimeRange(
+                userGroup.getUserGroupId(),
+                DateUtils.parse(start),
+                DateUtils.parse(end));
+        String rangeOfTime = DateUtils.parseForFrontEnd1(start) + "" + DateUtils.parseForFrontEnd1(end);
+        currentUserWeeklyReportResponse.setTimeRange(rangeOfTime);
+        List<UserRecord> currentUserWeeklyReportList = new LinkedList<>();
+        for (RunningRecord runningRecord : runningRecords) {
+            UserRecord userRecord = new UserRecord();
+            userRecord.setRunningRecordId(runningRecord.getRuningRecordId());
+            userRecord.setDate(DateUtils.parseForFrontEnd(runningRecord.getCreationTime()) + "");
+            userRecord.setDistance(runningRecord.getDistance());
+            List<VoteRecord> voteRecords = voteRecordMapper.selectByRuningRecordId(runningRecord.getRuningRecordId());
+            int likes = 0;
+            int dislikes = 0;
+            for (VoteRecord voteRecord : voteRecords) {
+                if (voteRecord.getStatus().equals(VoteStatus.LIKE.getCode())) {
+                    likes++;
+                } else if (voteRecord.equals(VoteStatus.DISLIKE.getCode())) {
+                    dislikes++;
+                }
+            }
+            userRecord.setLikes(likes);
+            userRecord.setDislikes(dislikes);
+            currentUserWeeklyReportList.add(userRecord);
+        }
+        currentUserWeeklyReportResponse.setUserRecords(currentUserWeeklyReportList);
+        return ResultUtils.success(currentUserWeeklyReportResponse);
+    }
+
+    public ResponseMessage everyOneWeekly(WeeklyReportRequest weeklyReportRequest) {
+        WeeklyReportResponse weeklyReportResponse = new WeeklyReportResponse();
+        List<UserRecord> userRecords = Lists.newLinkedList();
+        Float allAchievements = 0f;
+        int allLikes = 0;
+        int allDislikes = 0;
+        List<Integer> achievements = new ArrayList<>(Collections.nCopies(7, 0));
+        List<UserGroup> userGroups = userGroupMapper.selectByGroupId(weeklyReportRequest.getGroupId());
+        ThisLocalizedWeek thisLocalizedWeek = new ThisLocalizedWeek(Locale.CHINA);
+        for (UserGroup userGroup : userGroups) {
+            UserRecord userRecord = new UserRecord();
+            Date start = thisLocalizedWeek.getFirstDay();
+            Date end = thisLocalizedWeek.getLastDay();
+            List<RunningRecord> runningRecords = runningRecordMapper.selectByUserGroupIdAndTimeRange(
+                    userGroup.getUserGroupId(),
+                    DateUtils.parse(start),
+                    DateUtils.parse(end));
+            for (RunningRecord runningRecord : runningRecords) {
+                allAchievements += runningRecord.getDistance();
+                List<VoteRecord> voteRecords = voteRecordMapper.selectByRuningRecordId(runningRecord.getRuningRecordId());
+                for (VoteRecord voteRecord : voteRecords) {
+                    if (voteRecord.getStatus().equals(VoteStatus.LIKE.getCode())) {
+                        allLikes++;
+                    } else if (voteRecord.equals(VoteStatus.DISLIKE.getCode())) {
+                        allDislikes++;
+                    }
+                }
+                String createDate = DateUtils.parseForFrontEnd1(runningRecord.getCreationTime()) + "";
+                Integer whichDay = immutableDaysMap.get(createDate.substring(11));
+                achievements.set(whichDay, runningRecord.getDistance().intValue());
+            }
+            userRecord.setLikes(allLikes);
+            userRecord.setDislikes(allDislikes);
+            userRecord.setAchievements(achievements);
+            userRecord.setAllAchievements(allAchievements.intValue());
+            userRecords.add(userRecord);
+        }
+        weeklyReportResponse.setAllWeeklyRecords(userRecords);
+        return ResultUtils.success(null);
+    }
+
     private void setUserJoinResponse(UserJoinRequest userJoinRequest, UserInfo userInfo, UserJoinResponse userJoinResponse) {
         UserRecord currentUserRecord = new UserRecord();
         List<UserRecord> userRecords = new LinkedList<>();
@@ -85,7 +180,7 @@ public class FrontServices {
 
             if (targetDistance != null && runningRecords != null && runningRecords.size() > 0 && userInformation != null && !userInfo.getUserId().equals(userInformation.getUserId())) {
                 for (int i = 0; i < runningRecords.size(); i++) {
-                    List<VoteRecord> voteRecords = voteRecordMapper.selectByVoteUserIdAndRuningRecordId(runningRecords.get(i).getRuningRecordId());
+                    List<VoteRecord> voteRecords = voteRecordMapper.selectByRuningRecordId(runningRecords.get(i).getRuningRecordId());
                     int likes = 0;
                     int dislikes = 0;
                     for (int j = 0; j < voteRecords.size(); j++) {
@@ -145,6 +240,9 @@ public class FrontServices {
 
 
     public static void main(String[] args) {
+        List<Integer> s = new ArrayList<>(Collections.nCopies(7, 0));
+        s.set(2,2);
+        System.out.println(s);
         final ThisLocalizedWeek usWeek = new ThisLocalizedWeek(Locale.CHINA);
         System.out.println(usWeek);
         System.out.println(usWeek.getFirstDay("2018-04-18 11:11:11"));
