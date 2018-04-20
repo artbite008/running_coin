@@ -2,3 +2,4 @@ backend/.idea
 backend/target
 backend/src/main/resources/keystore.p12
 .idea/
+backend/runningclub.iml
