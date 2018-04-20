@@ -168,56 +168,66 @@ public class FrontServices {
     }
 
     private void setUserJoinResponse(UserJoinRequest userJoinRequest, UserInfo userInfo, UserJoinResponse userJoinResponse) {
-        UserRecord currentUserRecord = new UserRecord();
         List<UserRecord> userRecords = new LinkedList<>();
         List<UserGroup> usersInGroup = userGroupMapper.selectByGroupId(userJoinRequest.getGroupId());
         for (UserGroup userInGroup : usersInGroup) {
             float current = 0l;
             final ThisLocalizedWeek chinaWeek = new ThisLocalizedWeek(Locale.CHINA);
+            int likes = 0;
+            int dislikes = 0;
+            float lastRecord = 0l;
+            UserRecord userRecord = new UserRecord();
+
             UserInfo userInformation = userInfoMapper.selectByPrimaryKey(userInGroup.getUserId());
             List<RunningRecord> runningRecords = runningRecordMapper.selectByUserGroupIdAndTimeRange(userInGroup.getUserGroupId(), chinaWeek.getFirstDay(), chinaWeek.getLastDay());
             TargetDistance targetDistance = targetDistanceMapper.selectByUserGroupIdAndTimeRange(userInGroup.getUserGroupId(), chinaWeek.getFirstDay(), chinaWeek.getLastDay());
 
-            if (targetDistance != null && runningRecords != null && runningRecords.size() > 0 && userInformation != null && !userInfo.getUserId().equals(userInformation.getUserId())) {
-                for (int i = 0; i < runningRecords.size(); i++) {
-                    List<VoteRecord> voteRecords = voteRecordMapper.selectByRuningRecordId(runningRecords.get(i).getRuningRecordId());
-                    int likes = 0;
-                    int dislikes = 0;
-                    for (int j = 0; j < voteRecords.size(); j++) {
-                        if (voteRecords.get(j).getStatus().equals(VoteStatus.LIKE.getCode())) {
-                            likes++;
-                        } else if (voteRecords.get(j).getStatus().equals(VoteStatus.DISLIKE.getCode())) {
-                            dislikes++;
-                        }
-                    }
-                    current += runningRecords.get(i).getDistance();
-                    UserRecord userRecord = setOtherUsersRecords(userInformation, runningRecords, targetDistance, i, likes, dislikes);
-                    if (i == runningRecords.size() - 1) {
-                        float rate = ((current / targetDistance.getTargetDistance()) * 100);
-                        if (rate <= RunningProgress.ERROR.getCode()) {
-                            userRecord.setColor(RunningProgress.ERROR.getMsg());
-                        } else if (rate > RunningProgress.ERROR.getCode() && rate <= RunningProgress.WARNING.getCode()) {
-                            userRecord.setColor(RunningProgress.WARNING.getMsg());
-                        } else if (rate > RunningProgress.WARNING.getCode() && rate <= RunningProgress.SUCCESS.getCode()) {
-                            userRecord.setColor(RunningProgress.WARNING.getMsg());
-                        } else {
-                            userRecord.setColor(RunningProgress.SUCCESS.getMsg());
-                        }
+            for (int i = 0; i < runningRecords.size(); i++) {
+                List<VoteRecord> voteRecords = voteRecordMapper.selectByRuningRecordId(runningRecords.get(i).getRuningRecordId());
+                for (int j = 0; j < voteRecords.size(); j++) {
+                    if (voteRecords.get(j).getStatus().equals(VoteStatus.LIKE.getCode())) {
+                        likes++;
+                    } else if (voteRecords.get(j).getStatus().equals(VoteStatus.DISLIKE.getCode())) {
+                        dislikes++;
                     }
                 }
-
+                current += runningRecords.get(i).getDistance();
+                if (i == runningRecords.size() - 1) {
+                    lastRecord = runningRecords.get(i).getDistance();
+                }
             }
-            userJoinResponse.setUserRecord(currentUserRecord);
-            userJoinResponse.setOtherUsersRecord(userRecords);
+            userRecord = setUserRecords(userRecord, current, userInformation, targetDistance, lastRecord, likes, dislikes);
+
+            if (userInfo.getUserId().equals(userInGroup.getUserId())) {
+                userJoinResponse.setUserRecord(userRecord);
+            } else {
+                userRecords.add(userRecord);
+            }
         }
+        userJoinResponse.setOtherUsersRecord(userRecords);
     }
 
-    private UserRecord setOtherUsersRecords(UserInfo userInformation, List<RunningRecord> runningRecords, TargetDistance targetDistance, int i, int likes, int dislikes) {
-        UserRecord userRecord = new UserRecord();
+    private UserRecord setUserRecords(UserRecord userRecord, float current, UserInfo userInformation, TargetDistance targetDistance, float lastRecord, int likes, int dislikes) {
+        float rate;
+        if (targetDistance != null) {
+            rate = ((current / (targetDistance.getTargetDistance())) * 100);
+            userRecord.setTarget(targetDistance.getTargetDistance());
+        } else {
+            rate = 0l;
+        }
+        if (rate <= RunningProgress.ERROR.getCode()) {
+            userRecord.setColor(RunningProgress.ERROR.getMsg());
+        } else if (rate > RunningProgress.ERROR.getCode() && rate <= RunningProgress.WARNING.getCode()) {
+            userRecord.setColor(RunningProgress.WARNING.getMsg());
+        } else if (rate > RunningProgress.WARNING.getCode() && rate <= RunningProgress.SUCCESS.getCode()) {
+            userRecord.setColor(RunningProgress.WARNING.getMsg());
+        } else {
+            userRecord.setColor(RunningProgress.SUCCESS.getMsg());
+        }
+        userRecord.setUserId(userInformation.getUserId());
         userRecord.setNickName(userInformation.getUserName());
         userRecord.setCoins(userInformation.getCoins());
-        userRecord.setTarget(targetDistance.getTargetDistance());
-        userRecord.setLatestRecord(runningRecords.get(i).getDistance());
+        userRecord.setLatestRecord(lastRecord);
         userRecord.setLikes(likes);
         userRecord.setDislikes(dislikes);
         return userRecord;

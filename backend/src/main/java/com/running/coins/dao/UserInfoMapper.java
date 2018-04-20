@@ -23,11 +23,11 @@ public interface UserInfoMapper {
     int deleteByPrimaryKey(Integer userId);
 
     @Insert({
-        "insert into User_Info (UserId, GroupId, ",
+        "insert into User_Info (UserId,",
         "UserName, Status, ",
         "Role, Coins, TotalDistance, ",
         "MetaData, Icon)",
-        "values (#{userId,jdbcType=INTEGER}, #{groupId,jdbcType=INTEGER}, ",
+        "values (#{userId,jdbcType=INTEGER},",
         "#{userName,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, ",
         "#{role,jdbcType=VARCHAR}, #{coins,jdbcType=INTEGER}, #{totalDistance,jdbcType=REAL}, ",
         "#{metaData,jdbcType=VARCHAR}, #{icon,jdbcType=LONGVARBINARY})"
@@ -39,13 +39,12 @@ public interface UserInfoMapper {
 
     @Select({
         "select",
-        "UserId, GroupId, UserName, Status, Role, Coins, TotalDistance, MetaData, Icon",
+        "UserId, UserName, Status, Role, Coins, TotalDistance, MetaData, Icon",
         "from User_Info",
         "where UserId = #{userId,jdbcType=INTEGER}"
     })
     @Results({
         @Result(column="UserId", property="userId", jdbcType=JdbcType.INTEGER, id=true),
-        @Result(column="GroupId", property="groupId", jdbcType=JdbcType.INTEGER),
         @Result(column="UserName", property="userName", jdbcType=JdbcType.VARCHAR),
         @Result(column="Status", property="status", jdbcType=JdbcType.VARCHAR),
         @Result(column="Role", property="role", jdbcType=JdbcType.VARCHAR),
@@ -61,8 +60,7 @@ public interface UserInfoMapper {
 
     @Update({
         "update User_Info",
-        "set GroupId = #{groupId,jdbcType=INTEGER},",
-          "UserName = #{userName,jdbcType=VARCHAR},",
+        "set UserName = #{userName,jdbcType=VARCHAR},",
           "Status = #{status,jdbcType=VARCHAR},",
           "Role = #{role,jdbcType=VARCHAR},",
           "Coins = #{coins,jdbcType=INTEGER},",
@@ -75,8 +73,7 @@ public interface UserInfoMapper {
 
     @Update({
         "update User_Info",
-        "set GroupId = #{groupId,jdbcType=INTEGER},",
-          "UserName = #{userName,jdbcType=VARCHAR},",
+        "set UserName = #{userName,jdbcType=VARCHAR},",
           "Status = #{status,jdbcType=VARCHAR},",
           "Role = #{role,jdbcType=VARCHAR},",
           "Coins = #{coins,jdbcType=INTEGER},",
@@ -85,23 +82,4 @@ public interface UserInfoMapper {
         "where UserId = #{userId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(UserInfo record);
-
-    @Select({
-            "select",
-            "UserId, GroupId, UserName, Status, Role, Coins, TotalDistance, MetaData, Icon",
-            "from User_Info",
-            "where GroupId = #{groupId,jdbcType=INTEGER}"
-    })
-    @Results({
-            @Result(column="UserId", property="userId", jdbcType=JdbcType.INTEGER, id=true),
-            @Result(column="GroupId", property="groupId", jdbcType=JdbcType.INTEGER),
-            @Result(column="UserName", property="userName", jdbcType=JdbcType.VARCHAR),
-            @Result(column="Status", property="status", jdbcType=JdbcType.VARCHAR),
-            @Result(column="Role", property="role", jdbcType=JdbcType.VARCHAR),
-            @Result(column="Coins", property="coins", jdbcType=JdbcType.INTEGER),
-            @Result(column="TotalDistance", property="totalDistance", jdbcType=JdbcType.REAL),
-            @Result(column="MetaData", property="metaData", jdbcType=JdbcType.VARCHAR),
-            @Result(column="Icon", property="icon", jdbcType=JdbcType.LONGVARBINARY)
-    })
-    List<UserInfo> selectByGroupId(Integer groupId);
 }
