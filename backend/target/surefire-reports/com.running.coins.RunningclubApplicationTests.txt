@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.running.coins.RunningclubApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.452 s - in com.running.coins.RunningclubApplicationTests
