@@ -237,18 +237,4 @@ public class FrontServices {
         userInfo.setTotalDistance(0.00f);
         userInfo.setIcon(userJoinRequest.getIcon());
     }
-
-
-    public static void main(String[] args) {
-        List<Integer> s = new ArrayList<>(Collections.nCopies(7, 0));
-        s.set(2,2);
-        System.out.println(s);
-        final ThisLocalizedWeek usWeek = new ThisLocalizedWeek(Locale.CHINA);
-        System.out.println(usWeek);
-        System.out.println(usWeek.getFirstDay("2018-04-18 11:11:11"));
-        System.out.println(usWeek.getLastDay("2018-04-18 11:11:11"));
-// The English (United States) week starts on SUNDAY and ends on SATURDAY
-        System.out.println(usWeek.getFirstDay()); // 2018-01-14
-        System.out.println(usWeek.getLastDay());  // 2018-01-20
-    }
 }

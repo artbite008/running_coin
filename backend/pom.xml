@@ -117,7 +117,7 @@
 
     <build>
         <plugins>
-            <plugin>
+           <!-- <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
@@ -147,16 +147,16 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <!--允许移动生成的文件 -->
+                    &lt;!&ndash;允许移动生成的文件 &ndash;&gt;
                     <verbose>true</verbose>
-                    <!-- 是否覆盖 -->
-                    <overwrite>true</overwrite>
-                    <!-- 自动生成的配置 -->
+                    &lt;!&ndash; 是否覆盖 &ndash;&gt;
+                    <overwrite>false</overwrite>
+                    &lt;!&ndash; 自动生成的配置 &ndash;&gt;
                     <configurationFile>
                         src/main/resources/mybatis-generator.xml
                     </configurationFile>
                 </configuration>
-            </plugin>
+            </plugin>-->
         </plugins>
     </build>
 

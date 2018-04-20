@@ -18,11 +18,15 @@ public class FrontController {
     FrontServices frontServices;
 
     @GetMapping("/user/weekly/report")
+    @ApiOperation(value = "", notes = "")
+    @ApiImplicitParam(name = "currentUserWeeklyReportRequest", value = "", required = true, dataType = "CurrentUserWeeklyReportRequest")
     public ResponseMessage getUserWeeklyReport(@RequestBody CurrentUserWeeklyReportRequest currentUserWeeklyReportRequest) {
         return frontServices.currentUserWeekly(currentUserWeeklyReportRequest);
     }
 
     @GetMapping("/everyone/weekly/report")
+    @ApiOperation(value = "", notes = "")
+    @ApiImplicitParam(name = "weeklyReportRequest", value = "", required = true, dataType = "WeeklyReportRequest")
     public ResponseMessage getEveryoneWeeklyReport(@RequestBody WeeklyReportRequest weeklyReportRequest) {
         return frontServices.everyOneWeekly(weeklyReportRequest);
     }
