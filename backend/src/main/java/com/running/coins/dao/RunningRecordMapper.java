@@ -1,14 +1,7 @@
 package com.running.coins.dao;
 
 import com.running.coins.model.RunningRecord;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
 
@@ -32,11 +25,12 @@ public interface RunningRecordMapper {
         "Evidence)",
         "values (#{runingRecordId,jdbcType=INTEGER}, #{userGroupId,jdbcType=INTEGER}, ",
         "#{distance,jdbcType=REAL}, #{creationTime,jdbcType=TIMESTAMP}, ",
-        "#{lastVotedTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, ",
+        "#{lastVotedTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, ",
         "#{score,jdbcType=INTEGER}, #{settledTime,jdbcType=TIMESTAMP}, ",
         "#{earnedCoins,jdbcType=DOUBLE}, #{comments,jdbcType=VARCHAR}, ",
         "#{evidence,jdbcType=LONGVARBINARY})"
     })
+    @Options(useGeneratedKeys=true, keyProperty="RuningRecordId", keyColumn="RuningRecordId")
     int insert(RunningRecord record);
 
     @InsertProvider(type=RunningRecordSqlProvider.class, method="insertSelective")
@@ -55,7 +49,7 @@ public interface RunningRecordMapper {
         @Result(column="Distance", property="distance", jdbcType=JdbcType.REAL),
         @Result(column="CreationTime", property="creationTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="LastVotedTime", property="lastVotedTime", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="Status", property="status", jdbcType=JdbcType.VARCHAR),
+        @Result(column="Status", property="status", jdbcType=JdbcType.INTEGER),
         @Result(column="Score", property="score", jdbcType=JdbcType.INTEGER),
         @Result(column="SettledTime", property="settledTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="EarnedCoins", property="earnedCoins", jdbcType=JdbcType.DOUBLE),
@@ -73,7 +67,7 @@ public interface RunningRecordMapper {
           "Distance = #{distance,jdbcType=REAL},",
           "CreationTime = #{creationTime,jdbcType=TIMESTAMP},",
           "LastVotedTime = #{lastVotedTime,jdbcType=TIMESTAMP},",
-          "Status = #{status,jdbcType=VARCHAR},",
+          "Status = #{status,jdbcType=INTEGER},",
           "Score = #{score,jdbcType=INTEGER},",
           "SettledTime = #{settledTime,jdbcType=TIMESTAMP},",
           "EarnedCoins = #{earnedCoins,jdbcType=DOUBLE},",
@@ -89,7 +83,7 @@ public interface RunningRecordMapper {
           "Distance = #{distance,jdbcType=REAL},",
           "CreationTime = #{creationTime,jdbcType=TIMESTAMP},",
           "LastVotedTime = #{lastVotedTime,jdbcType=TIMESTAMP},",
-          "Status = #{status,jdbcType=VARCHAR},",
+          "Status = #{status,jdbcType=INTEGER},",
           "Score = #{score,jdbcType=INTEGER},",
           "SettledTime = #{settledTime,jdbcType=TIMESTAMP},",
           "EarnedCoins = #{earnedCoins,jdbcType=DOUBLE},",
@@ -114,7 +108,7 @@ public interface RunningRecordMapper {
             @Result(column="Distance", property="distance", jdbcType=JdbcType.REAL),
             @Result(column="CreationTime", property="creationTime", jdbcType=JdbcType.TIMESTAMP),
             @Result(column="LastVotedTime", property="lastVotedTime", jdbcType=JdbcType.TIMESTAMP),
-            @Result(column="Status", property="status", jdbcType=JdbcType.VARCHAR),
+            @Result(column="Status", property="status", jdbcType=JdbcType.INTEGER),
             @Result(column="Score", property="score", jdbcType=JdbcType.INTEGER),
             @Result(column="SettledTime", property="settledTime", jdbcType=JdbcType.TIMESTAMP),
             @Result(column="EarnedCoins", property="earnedCoins", jdbcType=JdbcType.DOUBLE),

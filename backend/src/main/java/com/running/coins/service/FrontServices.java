@@ -6,7 +6,6 @@ import com.google.common.collect.Maps;
 import com.running.coins.common.enums.ResultEnum;
 import com.running.coins.common.enums.RunningProgress;
 import com.running.coins.common.enums.VoteStatus;
-import com.running.coins.common.enums.WeekDays;
 import com.running.coins.common.util.DateUtils;
 import com.running.coins.common.util.ResultUtils;
 import com.running.coins.common.util.ThisLocalizedWeek;
@@ -20,15 +19,14 @@ import com.running.coins.model.response.ResponseMessage;
 import com.running.coins.model.response.UserJoinResponse;
 import com.running.coins.model.response.WeeklyReportResponse;
 import com.running.coins.model.transition.UserRecord;
-import io.swagger.models.auth.In;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.DayOfWeek;
-import java.time.temporal.WeekFields;
 import java.util.*;
+
+import static com.running.coins.common.util.DateUtils.parseForFrontEnd1;
 
 @Service
 public class FrontServices {
@@ -100,7 +98,7 @@ public class FrontServices {
                 userGroup.getUserGroupId(),
                 DateUtils.parse(start),
                 DateUtils.parse(end));
-        String rangeOfTime = DateUtils.parseForFrontEnd1(start) + "" + DateUtils.parseForFrontEnd1(end);
+        String rangeOfTime = parseForFrontEnd1(start) + " to " + parseForFrontEnd1(end);
         currentUserWeeklyReportResponse.setTimeRange(rangeOfTime);
         List<UserRecord> currentUserWeeklyReportList = new LinkedList<>();
         for (RunningRecord runningRecord : runningRecords) {
@@ -129,13 +127,14 @@ public class FrontServices {
     public ResponseMessage everyOneWeekly(WeeklyReportRequest weeklyReportRequest) {
         WeeklyReportResponse weeklyReportResponse = new WeeklyReportResponse();
         List<UserRecord> userRecords = Lists.newLinkedList();
-        Float allAchievements = 0f;
-        int allLikes = 0;
-        int allDislikes = 0;
-        List<Integer> achievements = new ArrayList<>(Collections.nCopies(7, 0));
         List<UserGroup> userGroups = userGroupMapper.selectByGroupId(weeklyReportRequest.getGroupId());
         ThisLocalizedWeek thisLocalizedWeek = new ThisLocalizedWeek(Locale.CHINA);
         for (UserGroup userGroup : userGroups) {
+            List<Integer> achievements = new ArrayList<>(Collections.nCopies(7, 0));
+            Float allAchievements = 0f;
+            int allLikes = 0;
+            int allDislikes = 0;
+            Map<Integer, Float> dayAchievementMap = Maps.newHashMap();
             UserRecord userRecord = new UserRecord();
             Date start = thisLocalizedWeek.getFirstDay();
             Date end = thisLocalizedWeek.getLastDay();
@@ -153,10 +152,19 @@ public class FrontServices {
                         allDislikes++;
                     }
                 }
-                String createDate = DateUtils.parseForFrontEnd1(runningRecord.getCreationTime()) + "";
+                String createDate = parseForFrontEnd1(runningRecord.getCreationTime()).toUpperCase();
                 Integer whichDay = immutableDaysMap.get(createDate.substring(11));
-                achievements.set(whichDay, runningRecord.getDistance().intValue());
+                if (dayAchievementMap.containsKey(whichDay)) {
+                    float temp = dayAchievementMap.get(whichDay);
+                    dayAchievementMap.put(whichDay, temp + runningRecord.getDistance());
+                } else {
+                    dayAchievementMap.put(whichDay, runningRecord.getDistance());
+                }
+                achievements.set(whichDay, dayAchievementMap.get(whichDay).intValue());
             }
+            userRecord.setUserGroupId(userGroup.getUserGroupId());
+            userRecord.setUserId(userGroup.getUserId());
+            userRecord.setGroupId(userGroup.getGroupId());
             userRecord.setLikes(allLikes);
             userRecord.setDislikes(allDislikes);
             userRecord.setAchievements(achievements);
@@ -164,60 +172,71 @@ public class FrontServices {
             userRecords.add(userRecord);
         }
         weeklyReportResponse.setAllWeeklyRecords(userRecords);
-        return ResultUtils.success(null);
+        return ResultUtils.success(weeklyReportResponse);
     }
 
     private void setUserJoinResponse(UserJoinRequest userJoinRequest, UserInfo userInfo, UserJoinResponse userJoinResponse) {
-        UserRecord currentUserRecord = new UserRecord();
         List<UserRecord> userRecords = new LinkedList<>();
         List<UserGroup> usersInGroup = userGroupMapper.selectByGroupId(userJoinRequest.getGroupId());
         for (UserGroup userInGroup : usersInGroup) {
             float current = 0l;
             final ThisLocalizedWeek chinaWeek = new ThisLocalizedWeek(Locale.CHINA);
+            int likes = 0;
+            int dislikes = 0;
+            float lastRecord = 0l;
+            UserRecord userRecord = new UserRecord();
+
             UserInfo userInformation = userInfoMapper.selectByPrimaryKey(userInGroup.getUserId());
             List<RunningRecord> runningRecords = runningRecordMapper.selectByUserGroupIdAndTimeRange(userInGroup.getUserGroupId(), chinaWeek.getFirstDay(), chinaWeek.getLastDay());
             TargetDistance targetDistance = targetDistanceMapper.selectByUserGroupIdAndTimeRange(userInGroup.getUserGroupId(), chinaWeek.getFirstDay(), chinaWeek.getLastDay());
 
-            if (targetDistance != null && runningRecords != null && runningRecords.size() > 0 && userInformation != null && !userInfo.getUserId().equals(userInformation.getUserId())) {
-                for (int i = 0; i < runningRecords.size(); i++) {
-                    List<VoteRecord> voteRecords = voteRecordMapper.selectByRuningRecordId(runningRecords.get(i).getRuningRecordId());
-                    int likes = 0;
-                    int dislikes = 0;
-                    for (int j = 0; j < voteRecords.size(); j++) {
-                        if (voteRecords.get(j).getStatus().equals(VoteStatus.LIKE.getCode())) {
-                            likes++;
-                        } else if (voteRecords.get(j).getStatus().equals(VoteStatus.DISLIKE.getCode())) {
-                            dislikes++;
-                        }
-                    }
-                    current += runningRecords.get(i).getDistance();
-                    UserRecord userRecord = setOtherUsersRecords(userInformation, runningRecords, targetDistance, i, likes, dislikes);
-                    if (i == runningRecords.size() - 1) {
-                        float rate = ((current / targetDistance.getTargetDistance()) * 100);
-                        if (rate <= RunningProgress.ERROR.getCode()) {
-                            userRecord.setColor(RunningProgress.ERROR.getMsg());
-                        } else if (rate > RunningProgress.ERROR.getCode() && rate <= RunningProgress.WARNING.getCode()) {
-                            userRecord.setColor(RunningProgress.WARNING.getMsg());
-                        } else if (rate > RunningProgress.WARNING.getCode() && rate <= RunningProgress.SUCCESS.getCode()) {
-                            userRecord.setColor(RunningProgress.WARNING.getMsg());
-                        } else {
-                            userRecord.setColor(RunningProgress.SUCCESS.getMsg());
-                        }
+            for (int i = 0; i < runningRecords.size(); i++) {
+                List<VoteRecord> voteRecords = voteRecordMapper.selectByRuningRecordId(runningRecords.get(i).getRuningRecordId());
+                for (int j = 0; j < voteRecords.size(); j++) {
+                    if (voteRecords.get(j).getStatus().equals(VoteStatus.LIKE.getCode())) {
+                        likes++;
+                    } else if (voteRecords.get(j).getStatus().equals(VoteStatus.DISLIKE.getCode())) {
+                        dislikes++;
                     }
                 }
-
+                current += runningRecords.get(i).getDistance();
+                if (i == runningRecords.size() - 1) {
+                    lastRecord = runningRecords.get(i).getDistance();
+                }
             }
-            userJoinResponse.setUserRecord(currentUserRecord);
-            userJoinResponse.setOtherUsersRecord(userRecords);
+            userRecord = setUserRecords(userInGroup, userRecord, current, userInformation, targetDistance, lastRecord, likes, dislikes);
+
+            if (userInfo.getUserId().equals(userInGroup.getUserId())) {
+                userJoinResponse.setUserRecord(userRecord);
+            } else {
+                userRecords.add(userRecord);
+            }
         }
+        userJoinResponse.setOtherUsersRecord(userRecords);
     }
 
-    private UserRecord setOtherUsersRecords(UserInfo userInformation, List<RunningRecord> runningRecords, TargetDistance targetDistance, int i, int likes, int dislikes) {
-        UserRecord userRecord = new UserRecord();
+    private UserRecord setUserRecords(UserGroup userInGroup, UserRecord userRecord, float current, UserInfo userInformation, TargetDistance targetDistance, float lastRecord, int likes, int dislikes) {
+        float rate;
+        if (targetDistance != null) {
+            rate = ((current / (targetDistance.getTargetDistance())) * 100);
+            userRecord.setTarget(targetDistance.getTargetDistance());
+        } else {
+            rate = 0l;
+        }
+        if (rate <= RunningProgress.ERROR.getCode()) {
+            userRecord.setColor(RunningProgress.ERROR.getMsg());
+        } else if (rate > RunningProgress.ERROR.getCode() && rate <= RunningProgress.WARNING.getCode()) {
+            userRecord.setColor(RunningProgress.WARNING.getMsg());
+        } else if (rate > RunningProgress.WARNING.getCode() && rate <= RunningProgress.SUCCESS.getCode()) {
+            userRecord.setColor(RunningProgress.WARNING.getMsg());
+        } else {
+            userRecord.setColor(RunningProgress.SUCCESS.getMsg());
+        }
+        userRecord.setUserGroupId(userInGroup.getUserGroupId());
+        userRecord.setUserId(userInformation.getUserId());
         userRecord.setNickName(userInformation.getUserName());
         userRecord.setCoins(userInformation.getCoins());
-        userRecord.setTarget(targetDistance.getTargetDistance());
-        userRecord.setLatestRecord(runningRecords.get(i).getDistance());
+        userRecord.setLatestRecord(lastRecord);
         userRecord.setLikes(likes);
         userRecord.setDislikes(dislikes);
         return userRecord;
@@ -237,4 +256,5 @@ public class FrontServices {
         userInfo.setTotalDistance(0.00f);
         userInfo.setIcon(userJoinRequest.getIcon());
     }
+
 }

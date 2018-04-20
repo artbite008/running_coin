@@ -4,7 +4,9 @@ import com.running.coins.common.util.ResultUtils;
 import com.running.coins.common.enums.VoteStatus;
 import com.running.coins.common.util.DateUtils;
 import com.running.coins.dao.RunningRecordMapper;
+import com.running.coins.dao.UserGroupMapper;
 import com.running.coins.dao.VoteRecordMapper;
+import com.running.coins.model.UserGroup;
 import com.running.coins.model.VoteRecord;
 import com.running.coins.model.request.VoteRequest;
 import com.running.coins.model.response.ResponseMessage;
@@ -24,11 +26,21 @@ public class VoteServices {
     VoteRecordMapper voteRecordMapper;
     @Autowired
     RunningRecordMapper runningRecordMapper;
+    @Autowired
+    UserGroupMapper userGroupMapper;
 
     public ResponseMessage vote(VoteRequest voteRequest) {
+        int userGroupId;
+        if (voteRequest.getVoteUserGroupId() == null || voteRequest.getVoteUserGroupId() == 0) {
+            userGroupId = userGroupMapper.selectByGroupIdAndUserId
+                    (voteRequest.getGroupId(),
+                            voteRequest.getVoteUserId()).getUserGroupId();
+            voteRequest.setVoteUserGroupId(userGroupId);
+        } else {
+            userGroupId = voteRequest.getVoteUserGroupId();
+        }
         VoteRecord voteRecord = voteRecordMapper.
-                selectByVoteUserIdAndRuningRecordId(voteRequest.getVoteUserId(),
-                        voteRequest.getRunningRecordId());
+                selectByVoteUserIdAndRuningRecordId(voteRequest.getRunningRecordId(), userGroupId);
         if (voteRecord == null) {
             voteRecord = new VoteRecord();
             SetVoteRecord(voteRequest, voteRecord);
@@ -37,14 +49,14 @@ public class VoteServices {
             voteRecord.setUpdatedTime(DateUtils.parse(new Date()));
             voteRecordMapper.updateByPrimaryKey(voteRecord);
         }
-        return ResultUtils.success();
+        return ResultUtils.success(voteRecord);
     }
 
     private void SetVoteRecord(VoteRequest voteRequest, VoteRecord voteRecord) {
         if (voteRecord.getStatus() == null) {
             voteRecord.setRuningRecordId(voteRequest.getRunningRecordId());
             voteRecord.setVoteUserId(voteRecord.getVoteUserId());
-            voteRecord.setGroupId(voteRequest.getGroupId());
+            voteRecord.setVoteUserGroupId(voteRequest.getVoteUserGroupId());
             setMutableField(voteRequest, voteRecord);
             voteRecord.setVotedTime(DateUtils.parse(new Date()));
             voteRecordMapper.insert(voteRecord);

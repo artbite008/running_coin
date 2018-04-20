@@ -1,6 +1,7 @@
 package com.running.coins.service;
 
 import com.running.coins.common.enums.RunningCoins;
+import com.running.coins.common.enums.SportRecordStatus;
 import com.running.coins.common.util.DateUtils;
 import com.running.coins.common.util.ResultUtils;
 import com.running.coins.common.util.ThisLocalizedWeek;
@@ -31,14 +32,25 @@ public class RunningInfoService {
 
     public ResponseMessage submitTarget(SubmitUserSportTargetRequest submitUserSportTargetRequest) {
         ThisLocalizedWeek thisLocalizedWeek = new ThisLocalizedWeek(Locale.CHINA);
-        TargetDistance targetDistance = targetDistanceMapper.selectByUserGroupIdAndTimeRange(
-                submitUserSportTargetRequest.getUserGroupId(),
+        TargetDistance targetDistance = null;
+        int userGroupId;
+        if (submitUserSportTargetRequest.getUserGroupId() == null
+                || submitUserSportTargetRequest.getUserGroupId() == 0) {
+            userGroupId = userGroupMapper.
+                    selectByGroupIdAndUserId(submitUserSportTargetRequest.getGroupId(),
+                            submitUserSportTargetRequest.getUserId()).getUserGroupId();
+        } else {
+            userGroupId = submitUserSportTargetRequest.getUserGroupId();
+        }
+        targetDistance = targetDistanceMapper.selectByUserGroupIdAndTimeRange(
+                userGroupId,
                 thisLocalizedWeek.getFirstDay(), thisLocalizedWeek.getLastDay());
+
         if (targetDistance == null) {
             targetDistance = new TargetDistance();
             targetDistance.setTargetDistance(Float.valueOf(submitUserSportTargetRequest.getTargetDistance()));
             targetDistance.setCreationTime(DateUtils.parse(new Date()));
-            targetDistance.setUserGroupId(submitUserSportTargetRequest.getUserGroupId());
+            targetDistance.setUserGroupId(userGroupId);
             targetDistanceMapper.insert(targetDistance);
         } else {
             targetDistance.setCreationTime(DateUtils.parse(new Date()));
@@ -51,12 +63,13 @@ public class RunningInfoService {
     public ResponseMessage submitSportRecord(SubmitUserSportRecordRequest submitUserSportRecordRequest) {
         RunningRecord runningRecord = new RunningRecord();
         runningRecord.setCreationTime(DateUtils.parse(new Date()));
-        runningRecord.setDistance(submitUserSportRecordRequest.getDistance());
+        runningRecord.setDistance(Float.valueOf(submitUserSportRecordRequest.getDistance()));
         UserGroup userGroup = userGroupMapper.selectByGroupIdAndUserId(submitUserSportRecordRequest.getGroupId(), submitUserSportRecordRequest.getUserId());
         runningRecord.setUserGroupId(userGroup.getUserGroupId());
+        runningRecord.setStatus(SportRecordStatus.SUBMITTED.getCode());
         CountEarnedCoins(submitUserSportRecordRequest, runningRecord);
         recordMapper.insert(runningRecord);
-        return ResultUtils.success();
+        return ResultUtils.success(runningRecord);
     }
 
     private void CountEarnedCoins(SubmitUserSportRecordRequest submitUserSportRecordRequest, RunningRecord runningRecord) {

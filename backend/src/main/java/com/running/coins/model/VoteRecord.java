@@ -6,11 +6,11 @@ import java.util.Date;
 
 @Data
 public class VoteRecord {
-    private Integer voteRecordId;
+    private Integer VoteRecordId;
 
     private Integer voteUserId;
 
-    private Integer groupId;
+    private Integer voteUserGroupId;
 
     private Integer runingRecordId;
 
