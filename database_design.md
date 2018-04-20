@@ -45,8 +45,9 @@
 | Primary Key(Sequence) | Foreign Key |              |                |
 
 # Database Connection Info
-
+````
 #database
 spring.datasource.url=jdbc:mysql://47.96.173.94:3306/runningcoin?useUnicode=yes&amp;characterEncoding=UTF-8&amp;useSSL=false
 spring.datasource.username=root
 spring.datasource.password=qwert6
+````
