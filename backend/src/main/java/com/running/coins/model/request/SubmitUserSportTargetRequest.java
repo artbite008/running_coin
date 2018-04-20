@@ -7,4 +7,5 @@ public class SubmitUserSportTargetRequest {
     private Integer userId;
     private Integer userGroupId;
     private Integer targetDistance;
+    private Integer groupId;
 }

@@ -17,26 +17,15 @@ public class DateUtils {
         return time;
     }
 
-    public static Date parseForFrontEnd(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm dd");
+    public static String parseForFrontEnd(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm E");
         String nowTime = sdf.format(date);
-        Date time = null;
-        try {
-            time = sdf.parse(nowTime);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return time;
+        return nowTime;
     }
-    public static Date parseForFrontEnd1(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd dd");
+    public static String parseForFrontEnd1(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd E");
         String nowTime = sdf.format(date);
-        Date time = null;
-        try {
-            time = sdf.parse(nowTime);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return time;
+        return nowTime;
     }
+
 }

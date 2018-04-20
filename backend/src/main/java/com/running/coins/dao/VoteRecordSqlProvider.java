@@ -17,8 +17,8 @@ public class VoteRecordSqlProvider {
             sql.VALUES("VoteUserId", "#{voteUserId,jdbcType=INTEGER}");
         }
         
-        if (record.getGroupId() != null) {
-            sql.VALUES("GroupId", "#{groupId,jdbcType=INTEGER}");
+        if (record.getVoteUserGroupId() != null) {
+            sql.VALUES("VoteUserGroupId", "#{voteUserGroupId,jdbcType=INTEGER}");
         }
         
         if (record.getRuningRecordId() != null) {
@@ -56,8 +56,8 @@ public class VoteRecordSqlProvider {
             sql.SET("VoteUserId = #{voteUserId,jdbcType=INTEGER}");
         }
         
-        if (record.getGroupId() != null) {
-            sql.SET("GroupId = #{groupId,jdbcType=INTEGER}");
+        if (record.getVoteUserGroupId() != null) {
+            sql.SET("VoteUserGroupId = #{voteUserGroupId,jdbcType=INTEGER}");
         }
         
         if (record.getRuningRecordId() != null) {

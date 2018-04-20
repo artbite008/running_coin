@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Data
 public class RunningRecord {
-    private Integer runingRecordId;
+    private Integer RuningRecordId;
 
     private Integer userGroupId;
 
@@ -16,7 +16,7 @@ public class RunningRecord {
 
     private Date lastVotedTime;
 
-    private String status;
+    private Integer status;
 
     private Integer score;
 

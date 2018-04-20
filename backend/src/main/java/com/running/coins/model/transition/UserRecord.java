@@ -8,6 +8,7 @@ import java.util.List;
 public class UserRecord {
     private Integer runningRecordId;
     private Integer userId;
+    private Integer userGroupId;
     private Integer groupId;
     private String nickName;
     private Double coins;

@@ -1,14 +1,7 @@
 package com.running.coins.dao;
 
 import com.running.coins.model.VoteRecord;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
 
@@ -23,31 +16,31 @@ public interface VoteRecordMapper {
     int deleteByPrimaryKey(Integer voteRecordId);
 
     @Insert({
-        "insert into Vote_Record (VoteRecordId, VoteUserId, ",
-        "GroupId, RuningRecordId, ",
+        "insert into Vote_Record (VoteRecordId, ",
+        "VoteUserGroupId, RuningRecordId, ",
         "VotedTime, UpdatedTime, ",
         "Status, Score, Comments)",
-        "values (#{voteRecordId,jdbcType=INTEGER}, #{voteUserId,jdbcType=INTEGER}, ",
-        "#{groupId,jdbcType=INTEGER}, #{runingRecordId,jdbcType=INTEGER}, ",
+        "values (#{voteRecordId,jdbcType=INTEGER}, #{voteUserGroupId,jdbcType=INTEGER}, ",
+        "#{runingRecordId,jdbcType=INTEGER}, ",
         "#{votedTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP}, ",
         "#{status,jdbcType=INTEGER}, #{score,jdbcType=INTEGER}, #{comments,jdbcType=VARCHAR})"
     })
-    int insert(VoteRecord record);
+    @Options(useGeneratedKeys=true, keyProperty="VoteRecordId", keyColumn="VoteRecordId")
+     int insert(VoteRecord record);
 
     @InsertProvider(type=VoteRecordSqlProvider.class, method="insertSelective")
     int insertSelective(VoteRecord record);
 
     @Select({
         "select",
-        "VoteRecordId, VoteUserId, GroupId, RuningRecordId, VotedTime, UpdatedTime, ",
+        "VoteRecordId, VoteUserGroupId, RuningRecordId, VotedTime, UpdatedTime, ",
         "Status, Score, Comments",
         "from Vote_Record",
         "where VoteRecordId = #{voteRecordId,jdbcType=INTEGER}"
     })
     @Results({
         @Result(column="VoteRecordId", property="voteRecordId", jdbcType=JdbcType.INTEGER, id=true),
-        @Result(column="VoteUserId", property="voteUserId", jdbcType=JdbcType.INTEGER),
-        @Result(column="GroupId", property="groupId", jdbcType=JdbcType.INTEGER),
+        @Result(column="VoteUserGroupId", property="voteUserGroupId", jdbcType=JdbcType.INTEGER),
         @Result(column="RuningRecordId", property="runingRecordId", jdbcType=JdbcType.INTEGER),
         @Result(column="VotedTime", property="votedTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="UpdatedTime", property="updatedTime", jdbcType=JdbcType.TIMESTAMP),
@@ -62,8 +55,7 @@ public interface VoteRecordMapper {
 
     @Update({
         "update Vote_Record",
-        "set VoteUserId = #{voteUserId,jdbcType=INTEGER},",
-          "GroupId = #{groupId,jdbcType=INTEGER},",
+        "set VoteUserGroupId = #{voteUserGroupId,jdbcType=INTEGER},",
           "RuningRecordId = #{runingRecordId,jdbcType=INTEGER},",
           "VotedTime = #{votedTime,jdbcType=TIMESTAMP},",
           "UpdatedTime = #{updatedTime,jdbcType=TIMESTAMP},",
@@ -76,16 +68,15 @@ public interface VoteRecordMapper {
 
     @Select({
             "select",
-            "VoteRecordId, VoteUserId, GroupId, RuningRecordId, VotedTime, UpdatedTime, ",
+            "VoteRecordId, VoteUserGroupId, RuningRecordId, VotedTime, UpdatedTime, ",
             "Status, Score, Comments",
             "from Vote_Record",
             "where RuningRecordId = #{runningRecordId,jdbcType=INTEGER}",
-            "and VoteUserId = #{voteUserId,jdbcType=INTEGER}"
+            "and VoteUserGroupId = #{voteUserGroupId,jdbcType=INTEGER}"
     })
     @Results({
             @Result(column="VoteRecordId", property="voteRecordId", jdbcType=JdbcType.INTEGER, id=true),
-            @Result(column="VoteUserId", property="voteUserId", jdbcType=JdbcType.INTEGER),
-            @Result(column="GroupId", property="groupId", jdbcType=JdbcType.INTEGER),
+            @Result(column="VoteUserGroupId", property="voteUserGroupId", jdbcType=JdbcType.INTEGER),
             @Result(column="RuningRecordId", property="runingRecordId", jdbcType=JdbcType.INTEGER),
             @Result(column="VotedTime", property="votedTime", jdbcType=JdbcType.TIMESTAMP),
             @Result(column="UpdatedTime", property="updatedTime", jdbcType=JdbcType.TIMESTAMP),
@@ -93,19 +84,18 @@ public interface VoteRecordMapper {
             @Result(column="Score", property="score", jdbcType=JdbcType.INTEGER),
             @Result(column="Comments", property="comments", jdbcType=JdbcType.VARCHAR)
     })
-    VoteRecord selectByVoteUserIdAndRuningRecordId(Integer runningRecordId, Integer voteUserId);
+    VoteRecord selectByVoteUserIdAndRuningRecordId(Integer runningRecordId, Integer voteUserGroupId);
 
     @Select({
             "select",
-            "VoteRecordId, VoteUserId, GroupId, RuningRecordId, VotedTime, UpdatedTime, ",
+            "VoteRecordId, VoteUserGroupId, RuningRecordId, VotedTime, UpdatedTime, ",
             "Status, Score, Comments",
             "from Vote_Record",
             "where RuningRecordId = #{runningRecordId,jdbcType=INTEGER}"
     })
     @Results({
             @Result(column="VoteRecordId", property="voteRecordId", jdbcType=JdbcType.INTEGER, id=true),
-            @Result(column="VoteUserId", property="voteUserId", jdbcType=JdbcType.INTEGER),
-            @Result(column="GroupId", property="groupId", jdbcType=JdbcType.INTEGER),
+            @Result(column="VoteUserGroupId", property="voteUserGroupId", jdbcType=JdbcType.INTEGER),
             @Result(column="RuningRecordId", property="runingRecordId", jdbcType=JdbcType.INTEGER),
             @Result(column="VotedTime", property="votedTime", jdbcType=JdbcType.TIMESTAMP),
             @Result(column="UpdatedTime", property="updatedTime", jdbcType=JdbcType.TIMESTAMP),
