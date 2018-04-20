@@ -19,7 +19,7 @@ public class RunningController {
     RunningInfoService runningInfoService;
 
     @ApiOperation(value = "submit users' running records", notes = "submit records")
-    @ApiImplicitParam(name = "voteRequest", value = "Request body of user list", required = true, dataType = "VoteRequest")
+    @ApiImplicitParam(name = "submitUserSportRecordRequest", value = "", required = true, dataType = "SubmitUserSportRecordRequest")
     @PostMapping("/submit/sport/record")
     public ResponseMessage submitRecord (@RequestBody SubmitUserSportRecordRequest submitUserSportRecordRequest) {
         ResponseMessage responseMessage = runningInfoService.submitSportRecord(submitUserSportRecordRequest);
@@ -27,8 +27,8 @@ public class RunningController {
     }
 
     @ApiOperation(value = "submit users' running target", notes = "submit target")
-    @ApiImplicitParam(name = "voteRequest", value = "Request body of user list", required = true, dataType = "VoteRequest")
-    @PostMapping("/submit/sport/record")
+    @ApiImplicitParam(name = "submitUserSportTargetRequest", value = "", required = true, dataType = "SubmitUserSportTargetRequest")
+    @PostMapping("/submit/sport/target")
     public ResponseMessage submitTarget (@RequestBody SubmitUserSportTargetRequest submitUserSportTargetRequest) {
         ResponseMessage responseMessage = runningInfoService.submitTarget(submitUserSportTargetRequest);
         return responseMessage;
