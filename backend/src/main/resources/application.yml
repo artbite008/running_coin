@@ -1,5 +1,5 @@
 server:
-  port: 8443
+  port: 443
   ssl:
     key-alias: guxiangfly.cn
     key-store-type: JKS
