@@ -1,7 +1,8 @@
-import {users as mockUsers} from '../mock/RC-user.mock';
-import {progressBarColorSets as _progressBarColorSets} from '../mock/RC-progressBar.mock';
-import {achievements} from '../mock/RC-user.mock';
-import {UserService} from '../service/index';
+import { users as mockUsers } from '../mock/RC-user.mock';
+import { progressBarColorSets as _progressBarColorSets } from '../mock/RC-progressBar.mock';
+import { achievements } from '../mock/RC-user.mock';
+import { UserService, WxService as WX, RecordService } from '../service/index';
+import { hashToInt } from '../../utils/util';
 
 const app = getApp();
 
@@ -10,7 +11,7 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    users: mockUsers,
+    users: [],
     progressBarColorSets: _progressBarColorSets,
     showBackdrop: false,
     dialogEvent: '',
@@ -18,34 +19,34 @@ Page({
     achievements: achievements,
     register: wx.getStorageSync('register')
   },
-  goToGuard: function() {
+  goToGuard: function () { // do not use navigateTo
     wx.redirectTo({
       url: '../RC-user-guard/index'
     })
   },
-  goToMyProfile: function() {
+  goToMyProfile: function () {
     wx.navigateTo({
       url: '../RC-user-profile/index'
     })
   },
-  goToReport: function() {
+  goToReport: function () {
     wx.navigateTo({
       url: '../RC-user-report/index'
     })
   },
-  goToVote: function(e) {
+  goToVote: function (e) {
     this.setData({
       dialogEvent: 'vote'
     });
     this.backdropMgt();
   },
-  mark: function() {
+  mark: function () {
     this.setData({
       dialogEvent: 'mark'
     });
     this.backdropMgt();
   },
-  backdropMgt: function() {
+  backdropMgt: function () {
     let _showBackdrop = this.data.showBackdrop;
     this.setData({
       showBackdrop: !_showBackdrop
@@ -66,38 +67,45 @@ Page({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
+    } else if (this.data.canIUse) {
       app.userInfoReadyCallback = res => {
         this.setData({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
       };
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo;
+      WX
+        .userInfo(false)
+        .then(res => {
+          const userInfo = res.userInfo;
+          app.globalData.userInfo = userInfo;
           this.setData({
-            userInfo: res.userInfo,
+            userInfo: userInfo,
             hasUserInfo: true
+          });
+          UserService
+          .getInstance()
+            .createAndUpdateUser({
+            userName: userInfo.nickName,
+            groupId: 1,
+            unionId: hashToInt(`${userInfo.nickName}-${userInfo.city}-${userInfo.province}-${userInfo.country}`),
+            icon: userInfo.avatarUrl
           })
-        }
-      });
+        });
     } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
+      // this is from wechat offical demo for some kind of backward compatible
+      WX
+        .userInfo(true)
+        .then(res => {
           app.globalData.userInfo = res.userInfo;
           this.setData({
             userInfo: res.userInfo,
             hasUserInfo: true
-          })
-        }
-      });
+          });
+        });
     }
   },
-  getUserInfo: function(e) {
+  getUserInfo: function (e) {
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
@@ -108,6 +116,17 @@ Page({
     const val = e.detail.value
     this.setData({
       markAchievement: achievements[val[0]]
-    })
+    });
+  },
+  submitRecord: function (e) {
+    const record = this.data.markAchievement;
+    RecordService
+      .getInstance()
+      .submitRecord(244868665, record, 1, '')
+      .then(res => {
+        wx.showToast({
+          title: 'submit!'
+        });
+      });
   }
 })

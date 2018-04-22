@@ -87,7 +87,7 @@
             </view>
           </picker-view-column>
         </picker-view>
-        <button class='like-dislike-button save bg-warning'>
+        <button class='like-dislike-button save bg-warning' bindtap='submitRecord'>
           <image src='../imgs/save.svg'></image>
         </button>
       </view>

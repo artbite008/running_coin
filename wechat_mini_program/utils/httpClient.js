@@ -75,20 +75,20 @@ class HttpClient {
     })
   }
 
-  get(url, data, header) {
-    return this.req({ url, method: METHODS.GET, header, data })
+  get(url, header, payload) {
+    return this.req({ url, method: METHODS.GET, header, payload })
   }
 
-  post(url, data, header) {
-    return this.req({ url, method: METHODS.POST, header, data })
+  post(url, header, payload) {
+    return this.req({ url, method: METHODS.POST, header, payload })
   }
 
-  put(url, data, header) {
-    return this.req({ url, method: METHODS.PUT, header, data })
+  put(url, header, payload) {
+    return this.req({ url, method: METHODS.PUT, header, payload })
   }
 
-  delete(url, data, header) {
-    return this.req({ url, method: METHODS.DELETE, header, data })
+  delete(url, header, payload) {
+    return this.req({ url, method: METHODS.DELETE, header, payload })
   }
   ///////////////////////////////////////////////////////////////////
 
