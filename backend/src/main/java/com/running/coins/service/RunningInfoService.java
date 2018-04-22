@@ -23,12 +23,21 @@ import java.util.Locale;
 @Service
 public class RunningInfoService {
 
-    @Autowired
+    private final
     TargetDistanceMapper targetDistanceMapper;
-    @Autowired
+    private final
     RunningRecordMapper recordMapper;
-    @Autowired
+    private final
     UserGroupMapper userGroupMapper;
+
+    @Autowired
+    public RunningInfoService(TargetDistanceMapper targetDistanceMapper,
+                              RunningRecordMapper recordMapper,
+                              UserGroupMapper userGroupMapper) {
+        this.targetDistanceMapper = targetDistanceMapper;
+        this.recordMapper = recordMapper;
+        this.userGroupMapper = userGroupMapper;
+    }
 
     public ResponseMessage submitTarget(SubmitUserSportTargetRequest submitUserSportTargetRequest) {
         ThisLocalizedWeek thisLocalizedWeek = new ThisLocalizedWeek(Locale.CHINA);

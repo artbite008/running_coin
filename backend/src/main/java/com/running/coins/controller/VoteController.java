@@ -8,14 +8,18 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class VoteController {
 
-    @Autowired
+    private final
     VoteServices voteServices;
+
+    @Autowired
+    public VoteController(VoteServices voteServices) {
+        this.voteServices = voteServices;
+    }
 
     @ApiOperation(value = "Vote for users' running records", notes = "vote")
     @ApiImplicitParam(name = "voteRequest", value = "Request body of user list", required = true, dataType = "VoteRequest")

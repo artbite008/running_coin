@@ -14,8 +14,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/front")
 public class FrontController {
 
-    @Autowired
+    private final
     FrontServices frontServices;
+
+    @Autowired
+    public FrontController(FrontServices frontServices) {
+        this.frontServices = frontServices;
+    }
 
     @PostMapping("/user/weekly/report")
     @ApiOperation(value = "", notes = "")
