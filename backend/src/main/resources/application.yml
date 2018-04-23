@@ -5,8 +5,7 @@ server:
     key-store-type: JKS
     key-store: classpath:guxiangfly.cn.jks
     key-store-password: 45lgrs8gokejt0
-security:
-  require-ssl: true
+
 
 spring:
   datasource:

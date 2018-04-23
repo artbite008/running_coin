@@ -1,14 +1,7 @@
 package com.running.coins.dao;
 
 import com.running.coins.model.UserInfo;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
 
@@ -20,7 +13,7 @@ public interface UserInfoMapper {
         "delete from User_Info",
         "where UserId = #{userId,jdbcType=INTEGER}"
     })
-    int deleteByPrimaryKey(Integer userId);
+    int deleteByPrimaryKey(@Param("userId") Integer userId);
 
     @Insert({
         "insert into User_Info (UserId,",
@@ -53,7 +46,7 @@ public interface UserInfoMapper {
         @Result(column="MetaData", property="metaData", jdbcType=JdbcType.VARCHAR),
         @Result(column="Icon", property="icon", jdbcType=JdbcType.LONGVARBINARY)
     })
-    UserInfo selectByPrimaryKey(Integer userId);
+    UserInfo selectByPrimaryKey(@Param("userId") Integer userId);
 
     @UpdateProvider(type=UserInfoSqlProvider.class, method="updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(UserInfo record);
