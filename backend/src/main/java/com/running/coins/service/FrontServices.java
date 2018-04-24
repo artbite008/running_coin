@@ -252,6 +252,7 @@ public class FrontServices {
         userRecord.setLatestRecord(lastRecord);
         userRecord.setLikes(likes);
         userRecord.setDislikes(dislikes);
+        userRecord.setIcon(userInformation.getIcon());
         return userRecord;
     }
 
