@@ -1691,3 +1691,975 @@ Caused by: org.apache.ibatis.binding.BindingException: Parameter 'groupId' not f
 2018-04-24 07:57:01.301 [ restartedMain ] - [ INFO  ] [ com.running.coins.RunningclubApplication : 59 ] - Started RunningclubApplication in 8.077 seconds (JVM running for 9.617)
 2018-04-24 07:57:12.935 [ https-jsse-nio-443-exec-10 ] - [ INFO  ] [ org.apache.tomcat.util.http.parser.Cookie : 180 ] - A cookie header was received [1524498019,1524527461; Hm_lpvt_ba7c84ce230944c13900faeba642b2b4=1524527461] that contained an invalid cookie. That cookie will be ignored.Note: further occurrences of this error will be logged at DEBUG level.
 2018-04-24 07:57:12.946 [ https-jsse-nio-443-exec-10 ] - [ INFO  ] [ o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] : 180 ] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-04-25 13:36:24.081 [ restartedMain ] - [ INFO  ] [ com.running.coins.RunningclubApplication : 50 ] - Starting RunningclubApplication on LM-SHC-16502802 with PID 52627 (/Users/fangzhang/IdeaProjects/runningclub/running_coin/backend/target/classes started by fangzhang in /Users/fangzhang/IdeaProjects/runningclub/running_coin/backend)
+2018-04-25 13:36:24.083 [ restartedMain ] - [ INFO  ] [ com.running.coins.RunningclubApplication : 659 ] - No active profile set, falling back to default profiles: default
+2018-04-25 13:36:26.408 [ restartedMain ] - [ INFO  ] [ org.apache.coyote.http11.Http11NioProtocol : 180 ] - Initializing ProtocolHandler ["https-jsse-nio-443"]
+2018-04-25 13:36:26.418 [ restartedMain ] - [ INFO  ] [ org.apache.catalina.core.StandardService : 180 ] - Starting service [Tomcat]
+2018-04-25 13:36:26.418 [ restartedMain ] - [ INFO  ] [ org.apache.catalina.core.StandardEngine : 180 ] - Starting Servlet Engine: Apache Tomcat/8.5.29
+2018-04-25 13:36:26.422 [ localhost-startStop-1 ] - [ INFO  ] [ org.apache.catalina.core.AprLifecycleListener : 180 ] - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/Users/fangzhang/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+2018-04-25 13:36:26.495 [ localhost-startStop-1 ] - [ INFO  ] [ o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] : 180 ] - Initializing Spring embedded WebApplicationContext
+2018-04-25 13:36:29.008 [ restartedMain ] - [ INFO  ] [ com.zaxxer.hikari.HikariDataSource : 110 ] - HikariPool-1 - Starting...
+2018-04-25 13:36:29.175 [ restartedMain ] - [ INFO  ] [ com.zaxxer.hikari.HikariDataSource : 123 ] - HikariPool-1 - Start completed.
+2018-04-25 13:36:29.217 [ restartedMain ] - [ INFO  ] [ org.quartz.impl.StdSchedulerFactory : 1208 ] - Using default implementation for ThreadExecutor
+2018-04-25 13:36:29.226 [ restartedMain ] - [ INFO  ] [ org.quartz.core.SchedulerSignalerImpl : 61 ] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2018-04-25 13:36:29.227 [ restartedMain ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 229 ] - Quartz Scheduler v.2.3.0 created.
+2018-04-25 13:36:29.227 [ restartedMain ] - [ INFO  ] [ org.quartz.simpl.RAMJobStore : 155 ] - RAMJobStore initialized.
+2018-04-25 13:36:29.228 [ restartedMain ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 294 ] - Scheduler meta-data: Quartz Scheduler (v2.3.0) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2018-04-25 13:36:29.228 [ restartedMain ] - [ INFO  ] [ org.quartz.impl.StdSchedulerFactory : 1362 ] - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2018-04-25 13:36:29.228 [ restartedMain ] - [ INFO  ] [ org.quartz.impl.StdSchedulerFactory : 1366 ] - Quartz scheduler version: 2.3.0
+2018-04-25 13:36:29.229 [ restartedMain ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 2287 ] - JobFactory set to: org.springframework.boot.autoconfigure.quartz.AutowireCapableBeanJobFactory@45e52c93
+2018-04-25 13:36:29.413 [ restartedMain ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 547 ] - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2018-04-25 13:36:29.426 [ restartedMain ] - [ INFO  ] [ s.d.s.web.plugins.DocumentationPluginsBootstrapper : 80 ] - Context refreshed
+2018-04-25 13:36:29.441 [ restartedMain ] - [ INFO  ] [ s.d.s.web.plugins.DocumentationPluginsBootstrapper : 83 ] - Found {0} custom documentation plugin(s)
+2018-04-25 13:36:29.450 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 53 ] - Scanning for api listing references
+2018-04-25 13:36:29.453 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getEveryoneWeeklyReport was front-controller
+2018-04-25 13:36:29.455 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: getEveryoneWeeklyReport belongs to groups: [[ResourceGroup{groupName='front-controller', position=0, controller=com.running.coins.controller.FrontController}]] 
+2018-04-25 13:36:29.456 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method userJoin was front-controller
+2018-04-25 13:36:29.456 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: userJoin belongs to groups: [[ResourceGroup{groupName='front-controller', position=0, controller=com.running.coins.controller.FrontController}]] 
+2018-04-25 13:36:29.456 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getUserWeeklyReport was front-controller
+2018-04-25 13:36:29.456 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: getUserWeeklyReport belongs to groups: [[ResourceGroup{groupName='front-controller', position=0, controller=com.running.coins.controller.FrontController}]] 
+2018-04-25 13:36:29.457 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitRecord was running-controller
+2018-04-25 13:36:29.457 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: submitRecord belongs to groups: [[ResourceGroup{groupName='running-controller', position=0, controller=com.running.coins.controller.RunningController}]] 
+2018-04-25 13:36:29.457 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitTarget was running-controller
+2018-04-25 13:36:29.457 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: submitTarget belongs to groups: [[ResourceGroup{groupName='running-controller', position=0, controller=com.running.coins.controller.RunningController}]] 
+2018-04-25 13:36:29.458 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method vote was vote-controller
+2018-04-25 13:36:29.458 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: vote belongs to groups: [[ResourceGroup{groupName='vote-controller', position=0, controller=com.running.coins.controller.VoteController}]] 
+2018-04-25 13:36:29.461 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 84 ] - Created resource listing Path: /default/front-controller Description: front-controller Position: 0
+2018-04-25 13:36:29.462 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 84 ] - Created resource listing Path: /default/vote-controller Description: vote-controller Position: 0
+2018-04-25 13:36:29.462 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 84 ] - Created resource listing Path: /default/running-controller Description: running-controller Position: 0
+2018-04-25 13:36:29.481 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:36:29.481 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:36:29.485 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:36:29.486 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:36:29.512 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:36:29.512 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:36:29.514 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:36:29.514 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:36:29.516 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:36:29.516 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:36:29.516 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:36:29.516 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:36:29.520 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:36:29.520 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:36:29.521 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:36:29.521 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:36:29.522 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /front/everyone/weekly/report.com.running.coins.controller.FrontController.getEveryoneWeeklyReport.DefaultGenericTypeNamingStrategy
+2018-04-25 13:36:29.522 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /front/everyone/weekly/report.com.running.coins.controller.FrontController.getEveryoneWeeklyReport.DefaultGenericTypeNamingStrategy
+2018-04-25 13:36:29.536 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getEveryoneWeeklyReport was front-controller
+2018-04-25 13:36:29.547 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getEveryoneWeeklyReport was front-controller
+2018-04-25 13:36:29.555 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:36:29.555 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:36:29.555 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:36:29.556 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:36:29.557 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:36:29.557 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:36:29.557 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:36:29.557 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:36:29.558 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:36:29.558 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:36:29.558 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:36:29.558 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:36:29.559 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /front/user/weekly/report.com.running.coins.controller.FrontController.getUserWeeklyReport.DefaultGenericTypeNamingStrategy
+2018-04-25 13:36:29.559 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /front/user/weekly/report.com.running.coins.controller.FrontController.getUserWeeklyReport.DefaultGenericTypeNamingStrategy
+2018-04-25 13:36:29.560 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getUserWeeklyReport was front-controller
+2018-04-25 13:36:29.561 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getUserWeeklyReport was front-controller
+2018-04-25 13:36:29.562 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:36:29.562 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:36:29.562 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:36:29.562 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:36:29.564 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:36:29.564 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:36:29.565 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:36:29.565 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:36:29.565 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:36:29.565 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:36:29.565 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:36:29.566 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:36:29.566 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /front/user/join.com.running.coins.controller.FrontController.userJoin.DefaultGenericTypeNamingStrategy
+2018-04-25 13:36:29.566 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /front/user/join.com.running.coins.controller.FrontController.userJoin.DefaultGenericTypeNamingStrategy
+2018-04-25 13:36:29.567 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method userJoin was front-controller
+2018-04-25 13:36:29.568 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method userJoin was front-controller
+2018-04-25 13:36:29.573 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:36:29.573 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:36:29.573 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:36:29.573 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:36:29.575 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:36:29.575 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:36:29.575 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:36:29.575 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:36:29.575 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:36:29.576 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:36:29.576 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:36:29.576 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:36:29.576 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /submit/sport/record.com.running.coins.controller.RunningController.submitRecord.DefaultGenericTypeNamingStrategy
+2018-04-25 13:36:29.577 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /submit/sport/record.com.running.coins.controller.RunningController.submitRecord.DefaultGenericTypeNamingStrategy
+2018-04-25 13:36:29.577 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitRecord was running-controller
+2018-04-25 13:36:29.578 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitRecord was running-controller
+2018-04-25 13:36:29.579 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:36:29.580 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:36:29.580 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:36:29.580 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:36:29.581 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:36:29.581 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:36:29.582 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:36:29.582 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:36:29.582 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:36:29.582 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:36:29.583 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:36:29.583 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:36:29.583 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /submit/sport/target.com.running.coins.controller.RunningController.submitTarget.DefaultGenericTypeNamingStrategy
+2018-04-25 13:36:29.583 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /submit/sport/target.com.running.coins.controller.RunningController.submitTarget.DefaultGenericTypeNamingStrategy
+2018-04-25 13:36:29.584 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitTarget was running-controller
+2018-04-25 13:36:29.585 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitTarget was running-controller
+2018-04-25 13:36:29.586 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:36:29.586 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:36:29.586 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:36:29.586 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:36:29.586 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:36:29.587 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:36:29.587 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:36:29.587 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:36:29.588 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:36:29.589 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:36:29.589 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:36:29.589 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:36:29.589 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /vote.com.running.coins.controller.VoteController.vote.DefaultGenericTypeNamingStrategy
+2018-04-25 13:36:29.590 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /vote.com.running.coins.controller.VoteController.vote.DefaultGenericTypeNamingStrategy
+2018-04-25 13:36:29.590 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method vote was vote-controller
+2018-04-25 13:36:29.591 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method vote was vote-controller
+2018-04-25 13:36:29.602 [ restartedMain ] - [ INFO  ] [ org.apache.coyote.http11.Http11NioProtocol : 180 ] - Starting ProtocolHandler ["https-jsse-nio-443"]
+2018-04-25 13:36:29.620 [ restartedMain ] - [ ERROR ] [ org.apache.catalina.core.StandardService : 182 ] - Failed to start connector [Connector[HTTP/1.1-443]]
+org.apache.catalina.LifecycleException: Failed to start component [Connector[HTTP/1.1-443]]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:167)
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:225)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:256)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:198)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.startWebServer(ServletWebServerApplicationContext.java:300)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.finishRefresh(ServletWebServerApplicationContext.java:162)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:553)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1255)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1243)
+	at com.running.coins.RunningclubApplication.main(RunningclubApplication.java:12)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: org.apache.catalina.LifecycleException: Protocol handler start failed
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1020)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	... 18 common frames omitted
+Caused by: java.net.SocketException: Permission denied
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:433)
+	at sun.nio.ch.Net.bind(Net.java:425)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:210)
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1150)
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:591)
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1018)
+	... 19 common frames omitted
+2018-04-25 13:36:29.623 [ restartedMain ] - [ INFO  ] [ org.apache.coyote.http11.Http11NioProtocol : 180 ] - Pausing ProtocolHandler ["https-jsse-nio-443"]
+2018-04-25 13:36:29.624 [ restartedMain ] - [ INFO  ] [ org.apache.catalina.core.StandardService : 180 ] - Stopping service [Tomcat]
+2018-04-25 13:36:29.632 [ restartedMain ] - [ INFO  ] [ org.apache.catalina.util.LifecycleBase : 180 ] - The stop() method was called on component [StandardServer[-1]] after stop() had already been called. The second call will be ignored.
+2018-04-25 13:36:29.632 [ restartedMain ] - [ INFO  ] [ org.apache.coyote.http11.Http11NioProtocol : 180 ] - Stopping ProtocolHandler ["https-jsse-nio-443"]
+2018-04-25 13:36:29.632 [ restartedMain ] - [ INFO  ] [ org.apache.coyote.http11.Http11NioProtocol : 180 ] - Destroying ProtocolHandler ["https-jsse-nio-443"]
+2018-04-25 13:36:29.648 [ restartedMain ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 585 ] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2018-04-25 13:36:29.650 [ restartedMain ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 666 ] - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2018-04-25 13:36:29.650 [ restartedMain ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 585 ] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2018-04-25 13:36:29.650 [ restartedMain ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 740 ] - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2018-04-25 13:36:29.666 [ restartedMain ] - [ INFO  ] [ com.zaxxer.hikari.HikariDataSource : 381 ] - HikariPool-1 - Shutdown initiated...
+2018-04-25 13:36:29.673 [ restartedMain ] - [ INFO  ] [ com.zaxxer.hikari.HikariDataSource : 383 ] - HikariPool-1 - Shutdown completed.
+2018-04-25 13:37:02.547 [ main ] - [ INFO  ] [ com.running.coins.RunningclubApplicationTests : 50 ] - Starting RunningclubApplicationTests on LM-SHC-16502802 with PID 53988 (started by fangzhang in /Users/fangzhang/IdeaProjects/runningclub/running_coin/backend)
+2018-04-25 13:37:02.549 [ main ] - [ INFO  ] [ com.running.coins.RunningclubApplicationTests : 659 ] - No active profile set, falling back to default profiles: default
+2018-04-25 13:37:07.979 [ main ] - [ INFO  ] [ com.zaxxer.hikari.HikariDataSource : 110 ] - HikariPool-1 - Starting...
+2018-04-25 13:37:08.243 [ main ] - [ INFO  ] [ com.zaxxer.hikari.HikariDataSource : 123 ] - HikariPool-1 - Start completed.
+2018-04-25 13:37:08.328 [ main ] - [ INFO  ] [ org.quartz.impl.StdSchedulerFactory : 1208 ] - Using default implementation for ThreadExecutor
+2018-04-25 13:37:08.341 [ main ] - [ INFO  ] [ org.quartz.core.SchedulerSignalerImpl : 61 ] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2018-04-25 13:37:08.342 [ main ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 229 ] - Quartz Scheduler v.2.3.0 created.
+2018-04-25 13:37:08.343 [ main ] - [ INFO  ] [ org.quartz.simpl.RAMJobStore : 155 ] - RAMJobStore initialized.
+2018-04-25 13:37:08.344 [ main ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 294 ] - Scheduler meta-data: Quartz Scheduler (v2.3.0) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2018-04-25 13:37:08.344 [ main ] - [ INFO  ] [ org.quartz.impl.StdSchedulerFactory : 1362 ] - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2018-04-25 13:37:08.345 [ main ] - [ INFO  ] [ org.quartz.impl.StdSchedulerFactory : 1366 ] - Quartz scheduler version: 2.3.0
+2018-04-25 13:37:08.345 [ main ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 2287 ] - JobFactory set to: org.springframework.boot.autoconfigure.quartz.AutowireCapableBeanJobFactory@58cda03f
+2018-04-25 13:37:08.515 [ main ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 547 ] - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2018-04-25 13:37:08.539 [ main ] - [ INFO  ] [ s.d.s.web.plugins.DocumentationPluginsBootstrapper : 80 ] - Context refreshed
+2018-04-25 13:37:08.571 [ main ] - [ INFO  ] [ s.d.s.web.plugins.DocumentationPluginsBootstrapper : 83 ] - Found {0} custom documentation plugin(s)
+2018-04-25 13:37:08.585 [ main ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 53 ] - Scanning for api listing references
+2018-04-25 13:37:08.590 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getEveryoneWeeklyReport was front-controller
+2018-04-25 13:37:08.594 [ main ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: getEveryoneWeeklyReport belongs to groups: [[ResourceGroup{groupName='front-controller', position=0, controller=com.running.coins.controller.FrontController}]] 
+2018-04-25 13:37:08.595 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method userJoin was front-controller
+2018-04-25 13:37:08.596 [ main ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: userJoin belongs to groups: [[ResourceGroup{groupName='front-controller', position=0, controller=com.running.coins.controller.FrontController}]] 
+2018-04-25 13:37:08.597 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getUserWeeklyReport was front-controller
+2018-04-25 13:37:08.597 [ main ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: getUserWeeklyReport belongs to groups: [[ResourceGroup{groupName='front-controller', position=0, controller=com.running.coins.controller.FrontController}]] 
+2018-04-25 13:37:08.598 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitRecord was running-controller
+2018-04-25 13:37:08.598 [ main ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: submitRecord belongs to groups: [[ResourceGroup{groupName='running-controller', position=0, controller=com.running.coins.controller.RunningController}]] 
+2018-04-25 13:37:08.599 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitTarget was running-controller
+2018-04-25 13:37:08.600 [ main ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: submitTarget belongs to groups: [[ResourceGroup{groupName='running-controller', position=0, controller=com.running.coins.controller.RunningController}]] 
+2018-04-25 13:37:08.600 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method vote was vote-controller
+2018-04-25 13:37:08.601 [ main ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: vote belongs to groups: [[ResourceGroup{groupName='vote-controller', position=0, controller=com.running.coins.controller.VoteController}]] 
+2018-04-25 13:37:08.605 [ main ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 84 ] - Created resource listing Path: /default/vote-controller Description: vote-controller Position: 0
+2018-04-25 13:37:08.606 [ main ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 84 ] - Created resource listing Path: /default/running-controller Description: running-controller Position: 0
+2018-04-25 13:37:08.607 [ main ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 84 ] - Created resource listing Path: /default/front-controller Description: front-controller Position: 0
+2018-04-25 13:37:08.675 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:37:08.675 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:37:08.683 [ main ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:37:08.684 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:37:08.716 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:37:08.716 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:37:08.722 [ main ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:37:08.722 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:37:08.724 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:08.724 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:08.725 [ main ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:08.725 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:08.729 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:08.729 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:08.730 [ main ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:08.730 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:08.731 [ main ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /front/everyone/weekly/report.com.running.coins.controller.FrontController.getEveryoneWeeklyReport.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:08.732 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /front/everyone/weekly/report.com.running.coins.controller.FrontController.getEveryoneWeeklyReport.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:08.748 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getEveryoneWeeklyReport was front-controller
+2018-04-25 13:37:08.763 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getEveryoneWeeklyReport was front-controller
+2018-04-25 13:37:08.774 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:37:08.775 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:37:08.775 [ main ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:37:08.776 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:37:08.778 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:37:08.778 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:37:08.779 [ main ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:37:08.779 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:37:08.780 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:08.780 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:08.781 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:08.781 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:08.781 [ main ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /front/user/weekly/report.com.running.coins.controller.FrontController.getUserWeeklyReport.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:08.782 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /front/user/weekly/report.com.running.coins.controller.FrontController.getUserWeeklyReport.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:08.784 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getUserWeeklyReport was front-controller
+2018-04-25 13:37:08.785 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getUserWeeklyReport was front-controller
+2018-04-25 13:37:08.787 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:37:08.787 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:37:08.788 [ main ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:37:08.788 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:37:08.791 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:37:08.791 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:37:08.792 [ main ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:37:08.792 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:37:08.793 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:08.793 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:08.794 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:08.794 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:08.794 [ main ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /front/user/join.com.running.coins.controller.FrontController.userJoin.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:08.795 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /front/user/join.com.running.coins.controller.FrontController.userJoin.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:08.796 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method userJoin was front-controller
+2018-04-25 13:37:08.798 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method userJoin was front-controller
+2018-04-25 13:37:08.803 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:37:08.804 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:37:08.804 [ main ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:37:08.804 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:37:08.806 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:37:08.807 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:37:08.808 [ main ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:37:08.808 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:37:08.809 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:08.809 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:08.810 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:08.811 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:08.812 [ main ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /submit/sport/record.com.running.coins.controller.RunningController.submitRecord.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:08.812 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /submit/sport/record.com.running.coins.controller.RunningController.submitRecord.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:08.814 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitRecord was running-controller
+2018-04-25 13:37:08.815 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitRecord was running-controller
+2018-04-25 13:37:08.817 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:37:08.817 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:37:08.818 [ main ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:37:08.818 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:37:08.820 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:37:08.821 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:37:08.821 [ main ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:37:08.822 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:37:08.822 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:08.823 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:08.823 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:08.824 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:08.824 [ main ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /submit/sport/target.com.running.coins.controller.RunningController.submitTarget.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:08.824 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /submit/sport/target.com.running.coins.controller.RunningController.submitTarget.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:08.826 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitTarget was running-controller
+2018-04-25 13:37:08.828 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitTarget was running-controller
+2018-04-25 13:37:08.829 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:08.830 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:08.831 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:08.831 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:08.831 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:37:08.832 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:37:08.832 [ main ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:37:08.832 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:37:08.835 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:37:08.835 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:37:08.836 [ main ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:37:08.836 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:37:08.836 [ main ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /vote.com.running.coins.controller.VoteController.vote.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:08.837 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /vote.com.running.coins.controller.VoteController.vote.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:08.839 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method vote was vote-controller
+2018-04-25 13:37:08.840 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method vote was vote-controller
+2018-04-25 13:37:08.854 [ main ] - [ INFO  ] [ com.running.coins.RunningclubApplicationTests : 59 ] - Started RunningclubApplicationTests in 6.728 seconds (JVM running for 7.569)
+2018-04-25 13:37:09.059 [ Thread-3 ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 585 ] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2018-04-25 13:37:09.062 [ Thread-3 ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 666 ] - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2018-04-25 13:37:09.062 [ Thread-3 ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 585 ] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2018-04-25 13:37:09.063 [ Thread-3 ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 740 ] - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2018-04-25 13:37:09.087 [ Thread-3 ] - [ INFO  ] [ com.zaxxer.hikari.HikariDataSource : 381 ] - HikariPool-1 - Shutdown initiated...
+2018-04-25 13:37:09.096 [ Thread-3 ] - [ INFO  ] [ com.zaxxer.hikari.HikariDataSource : 383 ] - HikariPool-1 - Shutdown completed.
+2018-04-25 13:37:17.752 [ restartedMain ] - [ INFO  ] [ com.running.coins.RunningclubApplication : 50 ] - Starting RunningclubApplication on LM-SHC-16502802 with PID 54015 (/Users/fangzhang/IdeaProjects/runningclub/running_coin/backend/target/classes started by fangzhang in /Users/fangzhang/IdeaProjects/runningclub/running_coin/backend)
+2018-04-25 13:37:17.757 [ restartedMain ] - [ INFO  ] [ com.running.coins.RunningclubApplication : 659 ] - No active profile set, falling back to default profiles: default
+2018-04-25 13:37:20.004 [ restartedMain ] - [ INFO  ] [ org.apache.coyote.http11.Http11NioProtocol : 180 ] - Initializing ProtocolHandler ["https-jsse-nio-443"]
+2018-04-25 13:37:20.013 [ restartedMain ] - [ INFO  ] [ org.apache.catalina.core.StandardService : 180 ] - Starting service [Tomcat]
+2018-04-25 13:37:20.013 [ restartedMain ] - [ INFO  ] [ org.apache.catalina.core.StandardEngine : 180 ] - Starting Servlet Engine: Apache Tomcat/8.5.29
+2018-04-25 13:37:20.017 [ localhost-startStop-1 ] - [ INFO  ] [ org.apache.catalina.core.AprLifecycleListener : 180 ] - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/Users/fangzhang/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+2018-04-25 13:37:20.077 [ localhost-startStop-1 ] - [ INFO  ] [ o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] : 180 ] - Initializing Spring embedded WebApplicationContext
+2018-04-25 13:37:22.426 [ restartedMain ] - [ INFO  ] [ com.zaxxer.hikari.HikariDataSource : 110 ] - HikariPool-1 - Starting...
+2018-04-25 13:37:22.610 [ restartedMain ] - [ INFO  ] [ com.zaxxer.hikari.HikariDataSource : 123 ] - HikariPool-1 - Start completed.
+2018-04-25 13:37:22.655 [ restartedMain ] - [ INFO  ] [ org.quartz.impl.StdSchedulerFactory : 1208 ] - Using default implementation for ThreadExecutor
+2018-04-25 13:37:22.664 [ restartedMain ] - [ INFO  ] [ org.quartz.core.SchedulerSignalerImpl : 61 ] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2018-04-25 13:37:22.664 [ restartedMain ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 229 ] - Quartz Scheduler v.2.3.0 created.
+2018-04-25 13:37:22.665 [ restartedMain ] - [ INFO  ] [ org.quartz.simpl.RAMJobStore : 155 ] - RAMJobStore initialized.
+2018-04-25 13:37:22.666 [ restartedMain ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 294 ] - Scheduler meta-data: Quartz Scheduler (v2.3.0) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2018-04-25 13:37:22.666 [ restartedMain ] - [ INFO  ] [ org.quartz.impl.StdSchedulerFactory : 1362 ] - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2018-04-25 13:37:22.666 [ restartedMain ] - [ INFO  ] [ org.quartz.impl.StdSchedulerFactory : 1366 ] - Quartz scheduler version: 2.3.0
+2018-04-25 13:37:22.666 [ restartedMain ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 2287 ] - JobFactory set to: org.springframework.boot.autoconfigure.quartz.AutowireCapableBeanJobFactory@17acd4b9
+2018-04-25 13:37:22.882 [ restartedMain ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 547 ] - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2018-04-25 13:37:22.898 [ restartedMain ] - [ INFO  ] [ s.d.s.web.plugins.DocumentationPluginsBootstrapper : 80 ] - Context refreshed
+2018-04-25 13:37:22.912 [ restartedMain ] - [ INFO  ] [ s.d.s.web.plugins.DocumentationPluginsBootstrapper : 83 ] - Found {0} custom documentation plugin(s)
+2018-04-25 13:37:22.921 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 53 ] - Scanning for api listing references
+2018-04-25 13:37:22.924 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getEveryoneWeeklyReport was front-controller
+2018-04-25 13:37:22.926 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: getEveryoneWeeklyReport belongs to groups: [[ResourceGroup{groupName='front-controller', position=0, controller=com.running.coins.controller.FrontController}]] 
+2018-04-25 13:37:22.926 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method userJoin was front-controller
+2018-04-25 13:37:22.927 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: userJoin belongs to groups: [[ResourceGroup{groupName='front-controller', position=0, controller=com.running.coins.controller.FrontController}]] 
+2018-04-25 13:37:22.927 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getUserWeeklyReport was front-controller
+2018-04-25 13:37:22.927 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: getUserWeeklyReport belongs to groups: [[ResourceGroup{groupName='front-controller', position=0, controller=com.running.coins.controller.FrontController}]] 
+2018-04-25 13:37:22.927 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitRecord was running-controller
+2018-04-25 13:37:22.927 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: submitRecord belongs to groups: [[ResourceGroup{groupName='running-controller', position=0, controller=com.running.coins.controller.RunningController}]] 
+2018-04-25 13:37:22.928 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitTarget was running-controller
+2018-04-25 13:37:22.928 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: submitTarget belongs to groups: [[ResourceGroup{groupName='running-controller', position=0, controller=com.running.coins.controller.RunningController}]] 
+2018-04-25 13:37:22.928 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method vote was vote-controller
+2018-04-25 13:37:22.928 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: vote belongs to groups: [[ResourceGroup{groupName='vote-controller', position=0, controller=com.running.coins.controller.VoteController}]] 
+2018-04-25 13:37:22.931 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 84 ] - Created resource listing Path: /default/front-controller Description: front-controller Position: 0
+2018-04-25 13:37:22.932 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 84 ] - Created resource listing Path: /default/running-controller Description: running-controller Position: 0
+2018-04-25 13:37:22.932 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 84 ] - Created resource listing Path: /default/vote-controller Description: vote-controller Position: 0
+2018-04-25 13:37:22.951 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:37:22.951 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:37:22.955 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:37:22.956 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:37:22.980 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:37:22.981 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:37:22.983 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:37:22.984 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:37:22.985 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:22.985 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:22.985 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:22.985 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:22.989 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:22.989 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:22.990 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:22.990 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:22.991 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /front/everyone/weekly/report.com.running.coins.controller.FrontController.getEveryoneWeeklyReport.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:22.991 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /front/everyone/weekly/report.com.running.coins.controller.FrontController.getEveryoneWeeklyReport.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:23.002 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getEveryoneWeeklyReport was front-controller
+2018-04-25 13:37:23.013 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getEveryoneWeeklyReport was front-controller
+2018-04-25 13:37:23.022 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:37:23.022 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:37:23.022 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:37:23.023 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:37:23.024 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:37:23.024 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:37:23.025 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:37:23.025 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:37:23.025 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:23.026 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:23.026 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:23.026 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:23.026 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /front/user/weekly/report.com.running.coins.controller.FrontController.getUserWeeklyReport.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:23.026 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /front/user/weekly/report.com.running.coins.controller.FrontController.getUserWeeklyReport.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:23.027 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getUserWeeklyReport was front-controller
+2018-04-25 13:37:23.028 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getUserWeeklyReport was front-controller
+2018-04-25 13:37:23.029 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:37:23.029 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:37:23.030 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:37:23.030 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:37:23.031 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:37:23.032 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:37:23.032 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:37:23.032 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:37:23.032 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:23.033 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:23.033 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:23.033 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:23.033 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /front/user/join.com.running.coins.controller.FrontController.userJoin.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:23.033 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /front/user/join.com.running.coins.controller.FrontController.userJoin.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:23.035 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method userJoin was front-controller
+2018-04-25 13:37:23.036 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method userJoin was front-controller
+2018-04-25 13:37:23.041 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:37:23.042 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:37:23.042 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:37:23.042 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:37:23.044 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:37:23.045 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:37:23.045 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:37:23.045 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:37:23.046 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:23.046 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:23.047 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:23.047 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:23.047 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /submit/sport/record.com.running.coins.controller.RunningController.submitRecord.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:23.047 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /submit/sport/record.com.running.coins.controller.RunningController.submitRecord.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:23.048 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitRecord was running-controller
+2018-04-25 13:37:23.049 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitRecord was running-controller
+2018-04-25 13:37:23.050 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:37:23.050 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:37:23.051 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:37:23.051 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:37:23.052 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:37:23.053 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:37:23.053 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:37:23.053 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:37:23.054 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:23.054 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:23.054 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:23.054 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:23.054 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /submit/sport/target.com.running.coins.controller.RunningController.submitTarget.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:23.055 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /submit/sport/target.com.running.coins.controller.RunningController.submitTarget.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:23.056 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitTarget was running-controller
+2018-04-25 13:37:23.056 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitTarget was running-controller
+2018-04-25 13:37:23.058 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:23.058 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:23.058 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:23.058 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:23.059 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:37:23.059 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:37:23.059 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:37:23.059 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:37:23.061 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:37:23.062 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:37:23.062 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:37:23.062 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:37:23.063 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /vote.com.running.coins.controller.VoteController.vote.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:23.063 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /vote.com.running.coins.controller.VoteController.vote.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:23.064 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method vote was vote-controller
+2018-04-25 13:37:23.065 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method vote was vote-controller
+2018-04-25 13:37:23.076 [ restartedMain ] - [ INFO  ] [ org.apache.coyote.http11.Http11NioProtocol : 180 ] - Starting ProtocolHandler ["https-jsse-nio-443"]
+2018-04-25 13:37:23.095 [ restartedMain ] - [ ERROR ] [ org.apache.catalina.core.StandardService : 182 ] - Failed to start connector [Connector[HTTP/1.1-443]]
+org.apache.catalina.LifecycleException: Failed to start component [Connector[HTTP/1.1-443]]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:167)
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:225)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:256)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:198)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.startWebServer(ServletWebServerApplicationContext.java:300)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.finishRefresh(ServletWebServerApplicationContext.java:162)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:553)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1255)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1243)
+	at com.running.coins.RunningclubApplication.main(RunningclubApplication.java:12)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: org.apache.catalina.LifecycleException: Protocol handler start failed
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1020)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	... 18 common frames omitted
+Caused by: java.net.SocketException: Permission denied
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:433)
+	at sun.nio.ch.Net.bind(Net.java:425)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:210)
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1150)
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:591)
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1018)
+	... 19 common frames omitted
+2018-04-25 13:37:23.098 [ restartedMain ] - [ INFO  ] [ org.apache.coyote.http11.Http11NioProtocol : 180 ] - Pausing ProtocolHandler ["https-jsse-nio-443"]
+2018-04-25 13:37:23.099 [ restartedMain ] - [ INFO  ] [ org.apache.catalina.core.StandardService : 180 ] - Stopping service [Tomcat]
+2018-04-25 13:37:23.107 [ restartedMain ] - [ INFO  ] [ org.apache.catalina.util.LifecycleBase : 180 ] - The stop() method was called on component [StandardServer[-1]] after stop() had already been called. The second call will be ignored.
+2018-04-25 13:37:23.108 [ restartedMain ] - [ INFO  ] [ org.apache.coyote.http11.Http11NioProtocol : 180 ] - Stopping ProtocolHandler ["https-jsse-nio-443"]
+2018-04-25 13:37:23.108 [ restartedMain ] - [ INFO  ] [ org.apache.coyote.http11.Http11NioProtocol : 180 ] - Destroying ProtocolHandler ["https-jsse-nio-443"]
+2018-04-25 13:37:23.122 [ restartedMain ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 585 ] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2018-04-25 13:37:23.124 [ restartedMain ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 666 ] - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2018-04-25 13:37:23.124 [ restartedMain ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 585 ] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2018-04-25 13:37:23.124 [ restartedMain ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 740 ] - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2018-04-25 13:37:23.139 [ restartedMain ] - [ INFO  ] [ com.zaxxer.hikari.HikariDataSource : 381 ] - HikariPool-1 - Shutdown initiated...
+2018-04-25 13:37:23.145 [ restartedMain ] - [ INFO  ] [ com.zaxxer.hikari.HikariDataSource : 383 ] - HikariPool-1 - Shutdown completed.
+2018-04-25 13:37:45.087 [ restartedMain ] - [ INFO  ] [ com.running.coins.RunningclubApplication : 50 ] - Starting RunningclubApplication on LM-SHC-16502802 with PID 54030 (/Users/fangzhang/IdeaProjects/runningclub/running_coin/backend/target/classes started by fangzhang in /Users/fangzhang/IdeaProjects/runningclub/running_coin/backend)
+2018-04-25 13:37:45.089 [ restartedMain ] - [ INFO  ] [ com.running.coins.RunningclubApplication : 659 ] - No active profile set, falling back to default profiles: default
+2018-04-25 13:37:47.156 [ restartedMain ] - [ INFO  ] [ org.apache.coyote.http11.Http11NioProtocol : 180 ] - Initializing ProtocolHandler ["http-nio-9090"]
+2018-04-25 13:37:47.164 [ restartedMain ] - [ INFO  ] [ org.apache.catalina.core.StandardService : 180 ] - Starting service [Tomcat]
+2018-04-25 13:37:47.164 [ restartedMain ] - [ INFO  ] [ org.apache.catalina.core.StandardEngine : 180 ] - Starting Servlet Engine: Apache Tomcat/8.5.29
+2018-04-25 13:37:47.167 [ localhost-startStop-1 ] - [ INFO  ] [ org.apache.catalina.core.AprLifecycleListener : 180 ] - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/Users/fangzhang/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+2018-04-25 13:37:47.225 [ localhost-startStop-1 ] - [ INFO  ] [ o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] : 180 ] - Initializing Spring embedded WebApplicationContext
+2018-04-25 13:37:49.464 [ restartedMain ] - [ INFO  ] [ com.zaxxer.hikari.HikariDataSource : 110 ] - HikariPool-1 - Starting...
+2018-04-25 13:37:49.628 [ restartedMain ] - [ INFO  ] [ com.zaxxer.hikari.HikariDataSource : 123 ] - HikariPool-1 - Start completed.
+2018-04-25 13:37:49.669 [ restartedMain ] - [ INFO  ] [ org.quartz.impl.StdSchedulerFactory : 1208 ] - Using default implementation for ThreadExecutor
+2018-04-25 13:37:49.678 [ restartedMain ] - [ INFO  ] [ org.quartz.core.SchedulerSignalerImpl : 61 ] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2018-04-25 13:37:49.678 [ restartedMain ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 229 ] - Quartz Scheduler v.2.3.0 created.
+2018-04-25 13:37:49.679 [ restartedMain ] - [ INFO  ] [ org.quartz.simpl.RAMJobStore : 155 ] - RAMJobStore initialized.
+2018-04-25 13:37:49.679 [ restartedMain ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 294 ] - Scheduler meta-data: Quartz Scheduler (v2.3.0) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2018-04-25 13:37:49.679 [ restartedMain ] - [ INFO  ] [ org.quartz.impl.StdSchedulerFactory : 1362 ] - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2018-04-25 13:37:49.679 [ restartedMain ] - [ INFO  ] [ org.quartz.impl.StdSchedulerFactory : 1366 ] - Quartz scheduler version: 2.3.0
+2018-04-25 13:37:49.680 [ restartedMain ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 2287 ] - JobFactory set to: org.springframework.boot.autoconfigure.quartz.AutowireCapableBeanJobFactory@7d24fb99
+2018-04-25 13:37:49.844 [ restartedMain ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 547 ] - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2018-04-25 13:37:49.857 [ restartedMain ] - [ INFO  ] [ s.d.s.web.plugins.DocumentationPluginsBootstrapper : 80 ] - Context refreshed
+2018-04-25 13:37:49.870 [ restartedMain ] - [ INFO  ] [ s.d.s.web.plugins.DocumentationPluginsBootstrapper : 83 ] - Found {0} custom documentation plugin(s)
+2018-04-25 13:37:49.878 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 53 ] - Scanning for api listing references
+2018-04-25 13:37:49.881 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getEveryoneWeeklyReport was front-controller
+2018-04-25 13:37:49.882 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: getEveryoneWeeklyReport belongs to groups: [[ResourceGroup{groupName='front-controller', position=0, controller=com.running.coins.controller.FrontController}]] 
+2018-04-25 13:37:49.883 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method userJoin was front-controller
+2018-04-25 13:37:49.883 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: userJoin belongs to groups: [[ResourceGroup{groupName='front-controller', position=0, controller=com.running.coins.controller.FrontController}]] 
+2018-04-25 13:37:49.883 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getUserWeeklyReport was front-controller
+2018-04-25 13:37:49.883 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: getUserWeeklyReport belongs to groups: [[ResourceGroup{groupName='front-controller', position=0, controller=com.running.coins.controller.FrontController}]] 
+2018-04-25 13:37:49.884 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitRecord was running-controller
+2018-04-25 13:37:49.884 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: submitRecord belongs to groups: [[ResourceGroup{groupName='running-controller', position=0, controller=com.running.coins.controller.RunningController}]] 
+2018-04-25 13:37:49.884 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitTarget was running-controller
+2018-04-25 13:37:49.884 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: submitTarget belongs to groups: [[ResourceGroup{groupName='running-controller', position=0, controller=com.running.coins.controller.RunningController}]] 
+2018-04-25 13:37:49.884 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method vote was vote-controller
+2018-04-25 13:37:49.885 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: vote belongs to groups: [[ResourceGroup{groupName='vote-controller', position=0, controller=com.running.coins.controller.VoteController}]] 
+2018-04-25 13:37:49.887 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 84 ] - Created resource listing Path: /default/front-controller Description: front-controller Position: 0
+2018-04-25 13:37:49.888 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 84 ] - Created resource listing Path: /default/running-controller Description: running-controller Position: 0
+2018-04-25 13:37:49.889 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 84 ] - Created resource listing Path: /default/vote-controller Description: vote-controller Position: 0
+2018-04-25 13:37:49.905 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:37:49.906 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:37:49.909 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:37:49.910 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:37:49.933 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:37:49.933 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:37:49.935 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:37:49.936 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:37:49.937 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:49.937 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:49.937 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:49.938 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:49.941 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:49.942 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:49.942 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:49.942 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:49.943 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /front/everyone/weekly/report.com.running.coins.controller.FrontController.getEveryoneWeeklyReport.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:49.943 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /front/everyone/weekly/report.com.running.coins.controller.FrontController.getEveryoneWeeklyReport.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:49.955 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getEveryoneWeeklyReport was front-controller
+2018-04-25 13:37:49.965 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getEveryoneWeeklyReport was front-controller
+2018-04-25 13:37:49.972 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:37:49.973 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:37:49.973 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:37:49.973 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:37:49.975 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:37:49.975 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:37:49.975 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:37:49.975 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:37:49.976 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:49.976 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:49.976 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:49.976 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:49.977 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /front/user/weekly/report.com.running.coins.controller.FrontController.getUserWeeklyReport.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:49.977 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /front/user/weekly/report.com.running.coins.controller.FrontController.getUserWeeklyReport.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:49.978 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getUserWeeklyReport was front-controller
+2018-04-25 13:37:49.979 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getUserWeeklyReport was front-controller
+2018-04-25 13:37:49.980 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:37:49.980 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:37:49.980 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:37:49.980 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:37:49.982 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:37:49.982 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:37:49.982 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:37:49.982 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:37:49.983 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:49.983 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:49.983 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:49.983 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:49.983 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /front/user/join.com.running.coins.controller.FrontController.userJoin.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:49.983 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /front/user/join.com.running.coins.controller.FrontController.userJoin.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:49.985 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method userJoin was front-controller
+2018-04-25 13:37:49.985 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method userJoin was front-controller
+2018-04-25 13:37:49.990 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:37:49.990 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:37:49.990 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:37:49.991 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:37:49.992 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:37:49.992 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:37:49.992 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:37:49.993 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:37:49.993 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:49.993 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:49.993 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:49.994 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:49.994 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /submit/sport/record.com.running.coins.controller.RunningController.submitRecord.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:49.994 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /submit/sport/record.com.running.coins.controller.RunningController.submitRecord.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:49.995 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitRecord was running-controller
+2018-04-25 13:37:49.996 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitRecord was running-controller
+2018-04-25 13:37:49.997 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:37:49.997 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:37:49.997 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:37:49.997 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:37:49.998 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:37:49.999 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:37:49.999 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:37:49.999 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:37:50.000 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:50.000 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:50.000 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:50.000 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:50.000 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /submit/sport/target.com.running.coins.controller.RunningController.submitTarget.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:50.001 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /submit/sport/target.com.running.coins.controller.RunningController.submitTarget.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:50.002 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitTarget was running-controller
+2018-04-25 13:37:50.002 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitTarget was running-controller
+2018-04-25 13:37:50.004 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:50.004 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:50.004 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:50.004 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:37:50.005 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:37:50.005 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:37:50.005 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:37:50.005 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:37:50.006 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:37:50.007 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:37:50.007 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:37:50.007 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:37:50.007 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /vote.com.running.coins.controller.VoteController.vote.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:50.008 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /vote.com.running.coins.controller.VoteController.vote.DefaultGenericTypeNamingStrategy
+2018-04-25 13:37:50.008 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method vote was vote-controller
+2018-04-25 13:37:50.009 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method vote was vote-controller
+2018-04-25 13:37:50.018 [ restartedMain ] - [ INFO  ] [ org.apache.coyote.http11.Http11NioProtocol : 180 ] - Starting ProtocolHandler ["http-nio-9090"]
+2018-04-25 13:37:50.041 [ restartedMain ] - [ INFO  ] [ org.apache.tomcat.util.net.NioSelectorPool : 180 ] - Using a shared selector for servlet write/read
+2018-04-25 13:37:50.056 [ restartedMain ] - [ INFO  ] [ com.running.coins.RunningclubApplication : 59 ] - Started RunningclubApplication in 5.434 seconds (JVM running for 6.083)
+2018-04-25 13:38:00.326 [ http-nio-9090-exec-1 ] - [ INFO  ] [ o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] : 180 ] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-04-25 13:43:15.275 [ Thread-20 ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 585 ] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2018-04-25 13:43:15.283 [ Thread-20 ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 666 ] - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2018-04-25 13:43:15.283 [ Thread-20 ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 585 ] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2018-04-25 13:43:15.284 [ Thread-20 ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 740 ] - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2018-04-25 13:43:15.300 [ Thread-20 ] - [ INFO  ] [ com.zaxxer.hikari.HikariDataSource : 381 ] - HikariPool-1 - Shutdown initiated...
+2018-04-25 13:43:15.305 [ Thread-20 ] - [ INFO  ] [ com.zaxxer.hikari.HikariDataSource : 383 ] - HikariPool-1 - Shutdown completed.
+2018-04-25 13:43:27.902 [ main ] - [ INFO  ] [ com.running.coins.RunningclubApplicationTests : 50 ] - Starting RunningclubApplicationTests on LM-SHC-16502802 with PID 57114 (started by fangzhang in /Users/fangzhang/IdeaProjects/runningclub/running_coin/backend)
+2018-04-25 13:43:27.904 [ main ] - [ INFO  ] [ com.running.coins.RunningclubApplicationTests : 659 ] - No active profile set, falling back to default profiles: default
+2018-04-25 13:43:32.340 [ main ] - [ INFO  ] [ com.zaxxer.hikari.HikariDataSource : 110 ] - HikariPool-1 - Starting...
+2018-04-25 13:43:32.592 [ main ] - [ INFO  ] [ com.zaxxer.hikari.HikariDataSource : 123 ] - HikariPool-1 - Start completed.
+2018-04-25 13:43:32.648 [ main ] - [ INFO  ] [ org.quartz.impl.StdSchedulerFactory : 1208 ] - Using default implementation for ThreadExecutor
+2018-04-25 13:43:32.663 [ main ] - [ INFO  ] [ org.quartz.core.SchedulerSignalerImpl : 61 ] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2018-04-25 13:43:32.663 [ main ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 229 ] - Quartz Scheduler v.2.3.0 created.
+2018-04-25 13:43:32.664 [ main ] - [ INFO  ] [ org.quartz.simpl.RAMJobStore : 155 ] - RAMJobStore initialized.
+2018-04-25 13:43:32.665 [ main ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 294 ] - Scheduler meta-data: Quartz Scheduler (v2.3.0) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2018-04-25 13:43:32.666 [ main ] - [ INFO  ] [ org.quartz.impl.StdSchedulerFactory : 1362 ] - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2018-04-25 13:43:32.666 [ main ] - [ INFO  ] [ org.quartz.impl.StdSchedulerFactory : 1366 ] - Quartz scheduler version: 2.3.0
+2018-04-25 13:43:32.666 [ main ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 2287 ] - JobFactory set to: org.springframework.boot.autoconfigure.quartz.AutowireCapableBeanJobFactory@438aaa9f
+2018-04-25 13:43:32.816 [ main ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 547 ] - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2018-04-25 13:43:32.833 [ main ] - [ INFO  ] [ s.d.s.web.plugins.DocumentationPluginsBootstrapper : 80 ] - Context refreshed
+2018-04-25 13:43:32.881 [ main ] - [ INFO  ] [ s.d.s.web.plugins.DocumentationPluginsBootstrapper : 83 ] - Found {0} custom documentation plugin(s)
+2018-04-25 13:43:32.890 [ main ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 53 ] - Scanning for api listing references
+2018-04-25 13:43:32.893 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getEveryoneWeeklyReport was front-controller
+2018-04-25 13:43:32.895 [ main ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: getEveryoneWeeklyReport belongs to groups: [[ResourceGroup{groupName='front-controller', position=0, controller=com.running.coins.controller.FrontController}]] 
+2018-04-25 13:43:32.897 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method userJoin was front-controller
+2018-04-25 13:43:32.897 [ main ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: userJoin belongs to groups: [[ResourceGroup{groupName='front-controller', position=0, controller=com.running.coins.controller.FrontController}]] 
+2018-04-25 13:43:32.898 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getUserWeeklyReport was front-controller
+2018-04-25 13:43:32.898 [ main ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: getUserWeeklyReport belongs to groups: [[ResourceGroup{groupName='front-controller', position=0, controller=com.running.coins.controller.FrontController}]] 
+2018-04-25 13:43:32.898 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitRecord was running-controller
+2018-04-25 13:43:32.899 [ main ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: submitRecord belongs to groups: [[ResourceGroup{groupName='running-controller', position=0, controller=com.running.coins.controller.RunningController}]] 
+2018-04-25 13:43:32.899 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitTarget was running-controller
+2018-04-25 13:43:32.899 [ main ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: submitTarget belongs to groups: [[ResourceGroup{groupName='running-controller', position=0, controller=com.running.coins.controller.RunningController}]] 
+2018-04-25 13:43:32.900 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method vote was vote-controller
+2018-04-25 13:43:32.900 [ main ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: vote belongs to groups: [[ResourceGroup{groupName='vote-controller', position=0, controller=com.running.coins.controller.VoteController}]] 
+2018-04-25 13:43:32.903 [ main ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 84 ] - Created resource listing Path: /default/front-controller Description: front-controller Position: 0
+2018-04-25 13:43:32.904 [ main ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 84 ] - Created resource listing Path: /default/running-controller Description: running-controller Position: 0
+2018-04-25 13:43:32.905 [ main ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 84 ] - Created resource listing Path: /default/vote-controller Description: vote-controller Position: 0
+2018-04-25 13:43:32.925 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:43:32.926 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:43:32.932 [ main ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:43:32.932 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:43:32.958 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:43:32.958 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:43:32.962 [ main ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:43:32.963 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:43:32.964 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:32.964 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:32.965 [ main ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:32.965 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:32.967 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:32.968 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:32.968 [ main ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:32.969 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:32.970 [ main ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /front/everyone/weekly/report.com.running.coins.controller.FrontController.getEveryoneWeeklyReport.DefaultGenericTypeNamingStrategy
+2018-04-25 13:43:32.970 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /front/everyone/weekly/report.com.running.coins.controller.FrontController.getEveryoneWeeklyReport.DefaultGenericTypeNamingStrategy
+2018-04-25 13:43:32.985 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getEveryoneWeeklyReport was front-controller
+2018-04-25 13:43:32.996 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getEveryoneWeeklyReport was front-controller
+2018-04-25 13:43:33.004 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:43:33.004 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:43:33.005 [ main ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:43:33.005 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:43:33.007 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:43:33.007 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:43:33.007 [ main ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:43:33.008 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:43:33.008 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:33.009 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:33.009 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:33.009 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:33.010 [ main ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /front/user/weekly/report.com.running.coins.controller.FrontController.getUserWeeklyReport.DefaultGenericTypeNamingStrategy
+2018-04-25 13:43:33.010 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /front/user/weekly/report.com.running.coins.controller.FrontController.getUserWeeklyReport.DefaultGenericTypeNamingStrategy
+2018-04-25 13:43:33.012 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getUserWeeklyReport was front-controller
+2018-04-25 13:43:33.013 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getUserWeeklyReport was front-controller
+2018-04-25 13:43:33.015 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:43:33.015 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:43:33.016 [ main ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:43:33.016 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:43:33.018 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:43:33.019 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:43:33.019 [ main ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:43:33.020 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:43:33.020 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:33.021 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:33.021 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:33.021 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:33.022 [ main ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /front/user/join.com.running.coins.controller.FrontController.userJoin.DefaultGenericTypeNamingStrategy
+2018-04-25 13:43:33.022 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /front/user/join.com.running.coins.controller.FrontController.userJoin.DefaultGenericTypeNamingStrategy
+2018-04-25 13:43:33.024 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method userJoin was front-controller
+2018-04-25 13:43:33.025 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method userJoin was front-controller
+2018-04-25 13:43:33.030 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:43:33.031 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:43:33.032 [ main ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:43:33.032 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:43:33.034 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:43:33.034 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:43:33.034 [ main ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:43:33.035 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:43:33.035 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:33.035 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:33.036 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:33.036 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:33.037 [ main ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /submit/sport/record.com.running.coins.controller.RunningController.submitRecord.DefaultGenericTypeNamingStrategy
+2018-04-25 13:43:33.037 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /submit/sport/record.com.running.coins.controller.RunningController.submitRecord.DefaultGenericTypeNamingStrategy
+2018-04-25 13:43:33.038 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitRecord was running-controller
+2018-04-25 13:43:33.038 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitRecord was running-controller
+2018-04-25 13:43:33.039 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:43:33.040 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:43:33.040 [ main ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:43:33.040 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:43:33.042 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:43:33.043 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:43:33.043 [ main ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:43:33.044 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:43:33.044 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:33.045 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:33.045 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:33.045 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:33.046 [ main ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /submit/sport/target.com.running.coins.controller.RunningController.submitTarget.DefaultGenericTypeNamingStrategy
+2018-04-25 13:43:33.046 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /submit/sport/target.com.running.coins.controller.RunningController.submitTarget.DefaultGenericTypeNamingStrategy
+2018-04-25 13:43:33.047 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitTarget was running-controller
+2018-04-25 13:43:33.048 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitTarget was running-controller
+2018-04-25 13:43:33.049 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:33.050 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:33.050 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:33.050 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:33.051 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:43:33.051 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:43:33.051 [ main ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:43:33.051 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:43:33.053 [ main ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:43:33.054 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:43:33.054 [ main ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:43:33.055 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:43:33.055 [ main ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /vote.com.running.coins.controller.VoteController.vote.DefaultGenericTypeNamingStrategy
+2018-04-25 13:43:33.056 [ main ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /vote.com.running.coins.controller.VoteController.vote.DefaultGenericTypeNamingStrategy
+2018-04-25 13:43:33.057 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method vote was vote-controller
+2018-04-25 13:43:33.058 [ main ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method vote was vote-controller
+2018-04-25 13:43:33.074 [ main ] - [ INFO  ] [ com.running.coins.RunningclubApplicationTests : 59 ] - Started RunningclubApplicationTests in 5.544 seconds (JVM running for 6.328)
+2018-04-25 13:43:33.194 [ Thread-3 ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 585 ] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2018-04-25 13:43:33.197 [ Thread-3 ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 666 ] - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2018-04-25 13:43:33.197 [ Thread-3 ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 585 ] - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2018-04-25 13:43:33.198 [ Thread-3 ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 740 ] - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2018-04-25 13:43:33.220 [ Thread-3 ] - [ INFO  ] [ com.zaxxer.hikari.HikariDataSource : 381 ] - HikariPool-1 - Shutdown initiated...
+2018-04-25 13:43:33.227 [ Thread-3 ] - [ INFO  ] [ com.zaxxer.hikari.HikariDataSource : 383 ] - HikariPool-1 - Shutdown completed.
+2018-04-25 13:43:41.634 [ restartedMain ] - [ INFO  ] [ com.running.coins.RunningclubApplication : 50 ] - Starting RunningclubApplication on LM-SHC-16502802 with PID 57133 (/Users/fangzhang/IdeaProjects/runningclub/running_coin/backend/target/classes started by fangzhang in /Users/fangzhang/IdeaProjects/runningclub/running_coin/backend)
+2018-04-25 13:43:41.636 [ restartedMain ] - [ INFO  ] [ com.running.coins.RunningclubApplication : 659 ] - No active profile set, falling back to default profiles: default
+2018-04-25 13:43:43.793 [ restartedMain ] - [ INFO  ] [ org.apache.coyote.http11.Http11NioProtocol : 180 ] - Initializing ProtocolHandler ["http-nio-9090"]
+2018-04-25 13:43:43.802 [ restartedMain ] - [ INFO  ] [ org.apache.catalina.core.StandardService : 180 ] - Starting service [Tomcat]
+2018-04-25 13:43:43.803 [ restartedMain ] - [ INFO  ] [ org.apache.catalina.core.StandardEngine : 180 ] - Starting Servlet Engine: Apache Tomcat/8.5.29
+2018-04-25 13:43:43.806 [ localhost-startStop-1 ] - [ INFO  ] [ org.apache.catalina.core.AprLifecycleListener : 180 ] - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/Users/fangzhang/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+2018-04-25 13:43:43.874 [ localhost-startStop-1 ] - [ INFO  ] [ o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] : 180 ] - Initializing Spring embedded WebApplicationContext
+2018-04-25 13:43:46.465 [ restartedMain ] - [ INFO  ] [ com.zaxxer.hikari.HikariDataSource : 110 ] - HikariPool-1 - Starting...
+2018-04-25 13:43:46.652 [ restartedMain ] - [ INFO  ] [ com.zaxxer.hikari.HikariDataSource : 123 ] - HikariPool-1 - Start completed.
+2018-04-25 13:43:46.700 [ restartedMain ] - [ INFO  ] [ org.quartz.impl.StdSchedulerFactory : 1208 ] - Using default implementation for ThreadExecutor
+2018-04-25 13:43:46.712 [ restartedMain ] - [ INFO  ] [ org.quartz.core.SchedulerSignalerImpl : 61 ] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2018-04-25 13:43:46.712 [ restartedMain ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 229 ] - Quartz Scheduler v.2.3.0 created.
+2018-04-25 13:43:46.713 [ restartedMain ] - [ INFO  ] [ org.quartz.simpl.RAMJobStore : 155 ] - RAMJobStore initialized.
+2018-04-25 13:43:46.713 [ restartedMain ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 294 ] - Scheduler meta-data: Quartz Scheduler (v2.3.0) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2018-04-25 13:43:46.714 [ restartedMain ] - [ INFO  ] [ org.quartz.impl.StdSchedulerFactory : 1362 ] - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2018-04-25 13:43:46.714 [ restartedMain ] - [ INFO  ] [ org.quartz.impl.StdSchedulerFactory : 1366 ] - Quartz scheduler version: 2.3.0
+2018-04-25 13:43:46.714 [ restartedMain ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 2287 ] - JobFactory set to: org.springframework.boot.autoconfigure.quartz.AutowireCapableBeanJobFactory@21862e67
+2018-04-25 13:43:46.893 [ restartedMain ] - [ INFO  ] [ org.quartz.core.QuartzScheduler : 547 ] - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2018-04-25 13:43:46.908 [ restartedMain ] - [ INFO  ] [ s.d.s.web.plugins.DocumentationPluginsBootstrapper : 80 ] - Context refreshed
+2018-04-25 13:43:46.924 [ restartedMain ] - [ INFO  ] [ s.d.s.web.plugins.DocumentationPluginsBootstrapper : 83 ] - Found {0} custom documentation plugin(s)
+2018-04-25 13:43:46.933 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 53 ] - Scanning for api listing references
+2018-04-25 13:43:46.936 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getEveryoneWeeklyReport was front-controller
+2018-04-25 13:43:46.937 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: getEveryoneWeeklyReport belongs to groups: [[ResourceGroup{groupName='front-controller', position=0, controller=com.running.coins.controller.FrontController}]] 
+2018-04-25 13:43:46.938 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method userJoin was front-controller
+2018-04-25 13:43:46.939 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: userJoin belongs to groups: [[ResourceGroup{groupName='front-controller', position=0, controller=com.running.coins.controller.FrontController}]] 
+2018-04-25 13:43:46.939 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getUserWeeklyReport was front-controller
+2018-04-25 13:43:46.939 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: getUserWeeklyReport belongs to groups: [[ResourceGroup{groupName='front-controller', position=0, controller=com.running.coins.controller.FrontController}]] 
+2018-04-25 13:43:46.939 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitRecord was running-controller
+2018-04-25 13:43:46.940 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: submitRecord belongs to groups: [[ResourceGroup{groupName='running-controller', position=0, controller=com.running.coins.controller.RunningController}]] 
+2018-04-25 13:43:46.940 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitTarget was running-controller
+2018-04-25 13:43:46.940 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: submitTarget belongs to groups: [[ResourceGroup{groupName='running-controller', position=0, controller=com.running.coins.controller.RunningController}]] 
+2018-04-25 13:43:46.940 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method vote was vote-controller
+2018-04-25 13:43:46.940 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 72 ] - Request mapping: vote belongs to groups: [[ResourceGroup{groupName='vote-controller', position=0, controller=com.running.coins.controller.VoteController}]] 
+2018-04-25 13:43:46.943 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 84 ] - Created resource listing Path: /default/running-controller Description: running-controller Position: 0
+2018-04-25 13:43:46.944 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 84 ] - Created resource listing Path: /default/vote-controller Description: vote-controller Position: 0
+2018-04-25 13:43:46.945 [ restartedMain ] - [ INFO  ] [ s.d.spring.web.scanners.ApiListingReferenceScanner : 84 ] - Created resource listing Path: /default/front-controller Description: front-controller Position: 0
+2018-04-25 13:43:46.964 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:43:46.964 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:43:46.969 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:43:46.969 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:43:46.996 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:43:46.996 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:43:46.999 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:43:46.999 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.WeeklyReportRequest(false)
+2018-04-25 13:43:47.000 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:47.000 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:47.001 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:47.001 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:47.005 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:47.005 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:47.005 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:47.005 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:47.006 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /front/everyone/weekly/report.com.running.coins.controller.FrontController.getEveryoneWeeklyReport.DefaultGenericTypeNamingStrategy
+2018-04-25 13:43:47.006 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /front/everyone/weekly/report.com.running.coins.controller.FrontController.getEveryoneWeeklyReport.DefaultGenericTypeNamingStrategy
+2018-04-25 13:43:47.020 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getEveryoneWeeklyReport was front-controller
+2018-04-25 13:43:47.030 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getEveryoneWeeklyReport was front-controller
+2018-04-25 13:43:47.036 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:43:47.037 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:43:47.037 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:43:47.037 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:43:47.038 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:43:47.038 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:43:47.038 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:43:47.039 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.CurrentUserWeeklyReportRequest(false)
+2018-04-25 13:43:47.039 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:47.039 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:47.039 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:47.039 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:47.040 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /front/user/weekly/report.com.running.coins.controller.FrontController.getUserWeeklyReport.DefaultGenericTypeNamingStrategy
+2018-04-25 13:43:47.040 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /front/user/weekly/report.com.running.coins.controller.FrontController.getUserWeeklyReport.DefaultGenericTypeNamingStrategy
+2018-04-25 13:43:47.041 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getUserWeeklyReport was front-controller
+2018-04-25 13:43:47.042 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method getUserWeeklyReport was front-controller
+2018-04-25 13:43:47.043 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:43:47.043 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:43:47.043 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:43:47.043 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:43:47.045 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:43:47.045 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:43:47.045 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:43:47.045 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.UserJoinRequest(false)
+2018-04-25 13:43:47.045 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:47.045 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:47.046 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:47.046 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:47.046 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /front/user/join.com.running.coins.controller.FrontController.userJoin.DefaultGenericTypeNamingStrategy
+2018-04-25 13:43:47.046 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /front/user/join.com.running.coins.controller.FrontController.userJoin.DefaultGenericTypeNamingStrategy
+2018-04-25 13:43:47.047 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method userJoin was front-controller
+2018-04-25 13:43:47.048 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method userJoin was front-controller
+2018-04-25 13:43:47.052 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:43:47.052 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:43:47.053 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:43:47.053 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:43:47.054 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:43:47.054 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:43:47.054 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:43:47.055 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.SubmitUserSportRecordRequest(false)
+2018-04-25 13:43:47.055 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:47.055 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:47.055 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:47.056 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:47.056 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /submit/sport/record.com.running.coins.controller.RunningController.submitRecord.DefaultGenericTypeNamingStrategy
+2018-04-25 13:43:47.056 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /submit/sport/record.com.running.coins.controller.RunningController.submitRecord.DefaultGenericTypeNamingStrategy
+2018-04-25 13:43:47.057 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitRecord was running-controller
+2018-04-25 13:43:47.058 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitRecord was running-controller
+2018-04-25 13:43:47.058 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:43:47.059 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:43:47.059 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:43:47.059 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:43:47.060 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:43:47.060 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:43:47.061 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:43:47.061 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.SubmitUserSportTargetRequest(false)
+2018-04-25 13:43:47.061 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:47.061 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:47.061 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:47.061 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:47.062 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /submit/sport/target.com.running.coins.controller.RunningController.submitTarget.DefaultGenericTypeNamingStrategy
+2018-04-25 13:43:47.062 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /submit/sport/target.com.running.coins.controller.RunningController.submitTarget.DefaultGenericTypeNamingStrategy
+2018-04-25 13:43:47.063 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitTarget was running-controller
+2018-04-25 13:43:47.063 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method submitTarget was running-controller
+2018-04-25 13:43:47.064 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:47.065 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:47.065 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:47.065 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.response.ResponseMessage(true)
+2018-04-25 13:43:47.065 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:43:47.065 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache models with key com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:43:47.066 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:43:47.066 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:43:47.067 [ restartedMain ] - [ INFO  ] [ s.documentation.schema.ModelContextKeyGenerator : 46 ] - Cache Key Generated: com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:43:47.067 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 79 ] - Caching aspect applied for cache modelDependencies with key com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:43:47.068 [ restartedMain ] - [ INFO  ] [ s.d.schema.property.ModelPropertiesKeyGenerator : 48 ] - Cache key generated: com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:43:47.068 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache modelProperties with key com.running.coins.model.request.VoteRequest(false)
+2018-04-25 13:43:47.068 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.OperationsKeyGenerator : 51 ] - Cache key generated: /vote.com.running.coins.controller.VoteController.vote.DefaultGenericTypeNamingStrategy
+2018-04-25 13:43:47.068 [ restartedMain ] - [ INFO  ] [ s.documentation.spring.web.caching.CachingAspect : 68 ] - Caching aspect applied for cache operations with key /vote.com.running.coins.controller.VoteController.vote.DefaultGenericTypeNamingStrategy
+2018-04-25 13:43:47.069 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method vote was vote-controller
+2018-04-25 13:43:47.070 [ restartedMain ] - [ INFO  ] [ s.d.s.web.ClassOrApiAnnotationResourceGrouping : 100 ] - Group for method vote was vote-controller
+2018-04-25 13:43:47.079 [ restartedMain ] - [ INFO  ] [ org.apache.coyote.http11.Http11NioProtocol : 180 ] - Starting ProtocolHandler ["http-nio-9090"]
+2018-04-25 13:43:47.102 [ restartedMain ] - [ INFO  ] [ org.apache.tomcat.util.net.NioSelectorPool : 180 ] - Using a shared selector for servlet write/read
+2018-04-25 13:43:47.118 [ restartedMain ] - [ INFO  ] [ com.running.coins.RunningclubApplication : 59 ] - Started RunningclubApplication in 6.082 seconds (JVM running for 6.81)
+2018-04-25 13:45:10.481 [ http-nio-9090-exec-1 ] - [ INFO  ] [ o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] : 180 ] - Initializing Spring FrameworkServlet 'dispatcherServlet'
