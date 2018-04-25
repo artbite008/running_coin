@@ -1,61 +1,4 @@
-CREATE DATABASE `runningcoin` /*!40100 DEFAULT CHARACTER SET utf8 */;
-
-CREATE TABLE `Group` (
-  `GroupId` int(11) NOT NULL AUTO_INCREMENT,
-  `GroupName` varchar(45) CHARACTER SET latin1 NOT NULL,
-  `MetaData` varchar(2000) CHARACTER SET latin1 DEFAULT NULL,
-  PRIMARY KEY (`GroupId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE `User_Info` (
-  `UserId` int(11) NOT NULL AUTO_INCREMENT,
-  `UserName` varchar(45) CHARACTER SET latin1 NOT NULL,
-  `Status` varchar(20) CHARACTER SET latin1 NOT NULL,
-  `Role` varchar(20) CHARACTER SET latin1 NOT NULL,
-  `Coins` int(11) DEFAULT NULL,
-  `Icon` blob,
-  `TotalDistance` float(9,1) DEFAULT NULL,
-  `MetaData` varchar(2000) CHARACTER SET latin1 DEFAULT NULL,
-  PRIMARY KEY (`UserId`),
-  KEY `GroupId_idx` (`GroupId`),
-  CONSTRAINT `GroupId` FOREIGN KEY (`GroupId`) REFERENCES `User_Group` (`GroupId`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE `UserGroup` (
-  `UserGroupId` int(11) NOT NULL AUTO_INCREMENT,
-  `UserId` int(11) NOT NULL，
-  `GroupId` int(11) NOT NULL，
-  PRIMARY KEY (`UserGroupId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-CREATE TABLE `Running_Record` (
-  `RuningRecordId` int(11) NOT NULL AUTO_INCREMENT,
-  `UserGroupId` int(11) NOT NULL,
-  `Distance` float(3,1) NOT NULL,
-  `CreationTime` datetime NOT NULL,
-  `LastVotedTime` datetime DEFAULT NULL,
-  `Status` varchar(45) CHARACTER SET latin1 NOT NULL,
-  `Score` int(11) DEFAULT NULL,
-  `SettledTime` datetime DEFAULT NULL,
-  `EarnedCoins` int(11) DEFAULT NULL,
-  `Comments` varchar(200) CHARACTER SET latin1 DEFAULT NULL,
-  `Evidence` blob,
-  PRIMARY KEY (`RuningRecordId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-CREATE TABLE `Vote_Record` (
-  `VoteRecordId` int(11) NOT NULL AUTO_INCREMENT,
-  `VoteUserGroupId` int(11) NOT NULL,
-  `RuningRecordId` int(11) NOT NULL,
-  `VotedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `CanceledTime` timestamp NULL DEFAULT NULL,
-  `Status` varchar(45) CHARACTER SET latin1 NOT NULL,
-  `Score` int(11) NOT NULL,
-  `Comments` varchar(200) CHARACTER SET latin1 DEFAULT NULL,
-  PRIMARY KEY (`VoteRecordId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `Target_Distance`;
 
 CREATE TABLE `Target_Distance` (
   `TargetDistanceId` int(11) NOT NULL AUTO_INCREMENT,
@@ -64,3 +7,102 @@ CREATE TABLE `Target_Distance` (
   `TargetDistance` float(3,1) NOT NULL,
   PRIMARY KEY (`TargetDistanceId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `Target_Distance` WRITE;
+/*!40000 ALTER TABLE `Target_Distance` DISABLE KEYS */;
+
+INSERT INTO `Target_Distance` (`TargetDistanceId`, `UserGroupId`, `CreationTime`, `TargetDistance`)
+VALUES
+  (1,5,'2018-04-20 16:23:15',12.0),
+  (2,1,'2018-04-20 16:28:57',11.0);
+
+/*!40000 ALTER TABLE `Target_Distance` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table User_Info
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `User_Info`;
+
+CREATE TABLE `User_Info` (
+  `UserId` int(11) NOT NULL AUTO_INCREMENT,
+  `UserName` varchar(45)  NOT NULL,
+  `Status` varchar(20)  NOT NULL,
+  `Role` varchar(20)  NOT NULL,
+  `Coins` double DEFAULT NULL,
+  `Icon` blob,
+  `TotalDistance` float(9,1) DEFAULT NULL,
+  `MetaData` varchar(2000)  DEFAULT NULL,
+  PRIMARY KEY (`UserId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `User_Info` WRITE;
+/*!40000 ALTER TABLE `User_Info` DISABLE KEYS */;
+
+INSERT INTO `User_Info` (`UserId`, `UserName`, `Status`, `Role`, `Coins`, `Icon`, `TotalDistance`, `MetaData`)
+VALUES
+  (122,'james','active','member',0,X'3132322E68746D6C',0.0,NULL),
+  (123,'speed','active','member',0,X'3132332E68746D6C',0.0,NULL),
+  (124,'seagull','active','member',0,X'3132342E68746D6C',0.0,NULL),
+  (125,'bulldog','active','member',0,X'3132352E68746D6C',0.0,NULL),
+  (126,'danny','active','member',0,X'3132362E68746D6C',0.0,NULL);
+
+/*!40000 ALTER TABLE `User_Info` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table UserGroup
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `UserGroup`;
+
+CREATE TABLE `UserGroup` (
+  `UserGroupId` int(11) NOT NULL AUTO_INCREMENT,
+  `UserId` int(11) NOT NULL,
+  `GroupId` int(11) NOT NULL,
+  PRIMARY KEY (`UserGroupId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `UserGroup` WRITE;
+/*!40000 ALTER TABLE `UserGroup` DISABLE KEYS */;
+
+INSERT INTO `UserGroup` (`UserGroupId`, `UserId`, `GroupId`)
+VALUES
+  (1,126,1),
+  (2,122,1),
+  (3,123,1),
+  (4,124,1),
+  (5,125,1);
+
+/*!40000 ALTER TABLE `UserGroup` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table Vote_Record
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `Vote_Record`;
+
+CREATE TABLE `Vote_Record` (
+  `VoteRecordId` int(11) NOT NULL AUTO_INCREMENT,
+  `VoteUserGroupId` int(11) NOT NULL,
+  `RuningRecordId` int(11) NOT NULL,
+  `VotedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `UpdatedTime` timestamp NULL DEFAULT NULL,
+  `Status` int(11) NOT NULL,
+  `Score` int(11) NOT NULL,
+  `Comments` varchar(200)  DEFAULT NULL,
+  PRIMARY KEY (`VoteRecordId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `Vote_Record` WRITE;
+/*!40000 ALTER TABLE `Vote_Record` DISABLE KEYS */;
+
+INSERT INTO `Vote_Record` (`VoteRecordId`, `VoteUserGroupId`, `RuningRecordId`, `VotedTime`, `UpdatedTime`, `Status`, `Score`, `Comments`)
+VALUES
+  (1,1,7,'2018-04-20 17:32:35','2018-04-20 17:37:58',1,0,NULL),
+  (4,2,1,'2018-04-20 17:46:53',NULL,1,0,NULL);
+
+/*!40000 ALTER TABLE `Vote_Record` ENABLE KEYS */;
+UNLOCK TABLES;
