@@ -117,4 +117,7 @@ public interface RunningRecordMapper {
     })
     List<RunningRecord> selectByUserGroupIdAndTimeRange(@Param("userGroupId") Integer userGroupId, @Param("start") Date start,  @Param("end") Date end);
 
+
+
+
 }
