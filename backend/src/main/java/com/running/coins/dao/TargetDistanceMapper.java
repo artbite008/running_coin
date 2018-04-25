@@ -21,6 +21,7 @@ public interface TargetDistanceMapper {
         "values (#{targetDistanceId,jdbcType=INTEGER}, #{userGroupId,jdbcType=INTEGER}, ",
         "#{creationTime,jdbcType=TIMESTAMP}, #{targetDistance,jdbcType=REAL})"
     })
+    @Options(useGeneratedKeys=true, keyProperty="TargetDistanceId", keyColumn="TargetDistanceId")
     int insert(TargetDistance record);
 
     @InsertProvider(type=TargetDistanceSqlProvider.class, method="insertSelective")
@@ -50,6 +51,7 @@ public interface TargetDistanceMapper {
           "TargetDistance = #{targetDistance,jdbcType=REAL}",
         "where TargetDistanceId = #{targetDistanceId,jdbcType=INTEGER}"
     })
+    @Options(useGeneratedKeys=true, keyProperty="TargetDistanceId", keyColumn="TargetDistanceId")
     int updateByPrimaryKey(TargetDistance record);
 
     @Select({

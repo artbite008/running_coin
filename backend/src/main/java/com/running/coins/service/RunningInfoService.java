@@ -41,7 +41,7 @@ public class RunningInfoService {
 
     public ResponseMessage submitTarget(SubmitUserSportTargetRequest submitUserSportTargetRequest) {
         ThisLocalizedWeek thisLocalizedWeek = new ThisLocalizedWeek(Locale.CHINA);
-        TargetDistance targetDistance = null;
+        TargetDistance targetDistance;
         int userGroupId;
         if (submitUserSportTargetRequest.getUserGroupId() == null
                 || submitUserSportTargetRequest.getUserGroupId() == 0) {
@@ -66,7 +66,7 @@ public class RunningInfoService {
             targetDistance.setTargetDistance(Float.valueOf(submitUserSportTargetRequest.getTargetDistance()));
             targetDistanceMapper.updateByPrimaryKey(targetDistance);
         }
-        return ResultUtils.success();
+        return ResultUtils.success(targetDistance);
     }
 
     public ResponseMessage submitSportRecord(SubmitUserSportRecordRequest submitUserSportRecordRequest) {

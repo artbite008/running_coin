@@ -4,7 +4,7 @@ public enum VoteStatus {
     LIKE(0, "like"),
     CANCELLIKE(1, "cancelLike"),
     DISLIKE(2, "dislike"),
-    CANCELDISLIKE(4, "cancelDisLike");
+    CANCELDISLIKE(3, "cancelDisLike");
 
     private Integer code;
 

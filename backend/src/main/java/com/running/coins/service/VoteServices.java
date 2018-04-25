@@ -74,6 +74,7 @@ public class VoteServices {
 
     private void setMutableField(VoteRequest voteRequest, VoteRecord voteRecord) {
         voteRecord.setStatus(voteRequest.getStatus());
+        voteRecord.setVoteUserId(voteRequest.getVoteUserId());
         if (VoteStatus.LIKE.getCode().equals(voteRequest.getStatus())) {
             voteRecord.setScore(1);
         } else if (VoteStatus.DISLIKE.getCode().equals(voteRequest.getStatus())) {
