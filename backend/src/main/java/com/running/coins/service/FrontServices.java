@@ -142,6 +142,10 @@ public class FrontServices {
         List<UserRecord> userRecords = Lists.newLinkedList();
         List<UserGroup> userGroups = userGroupMapper.selectByGroupId(weeklyReportRequest.getGroupId());
         ThisLocalizedWeek thisLocalizedWeek = new ThisLocalizedWeek(Locale.CHINA);
+        Date start = thisLocalizedWeek.getFirstDay();
+        Date end = thisLocalizedWeek.getLastDay();
+        String rangeOfTime = parseForFrontEnd1(start) + " to " + parseForFrontEnd1(end);
+
         for (UserGroup userGroup : userGroups) {
             List<Integer> achievements = new ArrayList<>(Collections.nCopies(7, 0));
             Float allAchievements = 0f;
@@ -149,8 +153,6 @@ public class FrontServices {
             int allDislikes = 0;
             Map<Integer, Float> dayAchievementMap = Maps.newHashMap();
             UserRecord userRecord = new UserRecord();
-            Date start = thisLocalizedWeek.getFirstDay();
-            Date end = thisLocalizedWeek.getLastDay();
             List<RunningRecord> runningRecords = runningRecordMapper.selectByUserGroupIdAndTimeRange(
                     userGroup.getUserGroupId(),
                     DateUtils.parse(start),
@@ -184,6 +186,7 @@ public class FrontServices {
             userRecord.setAllAchievements(allAchievements.intValue());
             userRecords.add(userRecord);
         }
+        weeklyReportResponse.setTimeRange(rangeOfTime);
         weeklyReportResponse.setAllWeeklyRecords(userRecords);
         return ResultUtils.success(weeklyReportResponse);
     }
