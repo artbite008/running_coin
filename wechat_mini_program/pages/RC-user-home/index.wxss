@@ -1,21 +1,22 @@
-/**index.wxss**/
-
 .userinfo {
+  min-height: 180px;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: top;
 }
 
 .userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
+  width: 180rpx;
+  height: 180rpx;
+  margin: 30rpx 20rpx 20rpx 20rpx;
   border-radius: 50%;
+  border:5px solid #ffd80d; 
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
 }
 
 .userinfo-nickname-block {
-  padding: 8px 0 0 0;
-  width: 60%;
+  margin: 10px 0 0 8px;
+  width: 55%;
   display: flex;
   flex-direction: column;
   align-items: left;
@@ -24,24 +25,43 @@
 .userinfo-nickname {
   margin-bottom: 10px;
   font-size: 15px;
+  color: #fff;
+}
+.userinfo-nickname text {
+  margin-left: 20px;
+}
+.user-card-decorator {
+  background-color: #006efc;
 }
 
-.usermotto {
-  margin-top: 200px;
+.userinfo-nickname.decorator {
+  font-weight: 600;
+  font-size: 21px;
+  color: #ffd80d;
+  overflow-wrap: break-word;
 }
 
-.card {
-  width: 85%;
-  padding: 0 10px 0 10px;
-  position: relative;
-  overflow: hidden;
-  border-radius: 4px;
-  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-                        0 3px 1px -2px rgba(0, 0, 0, 0.2),
-                        0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-                0 3px 1px -2px rgba(0, 0, 0, 0.2),
-                0 1px 5px 0 rgba(0, 0, 0, 0.12);
+.peopleInfo-avatar {
+  width: 130rpx;
+  height: 130rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+}
+
+.peopleInfo-nickname {
+  margin-bottom: 6px;
+  font-size: 12px;
+  color: #767676;
+}
+
+.peopleInfo-nickname-block {
+  height: 90%;
+  margin: 0;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
 }
 
 .people-list {
@@ -52,26 +72,27 @@
 }
 
 .people-list-item {
-  padding: 10px 0 0 0;
+  margin: 10px 0 10px 0;
   width: 100%;
   height: 90px;
   display: flex;
   flex-direction: row;
-   align-items: left; 
+  align-items: left;
 }
 
-.divider {
-  border-color: rgba(0,0,0,0.12);
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
+.click-to-see-everybody {
+  width: 50%;
+  height: 80px;
 }
 
-.user-card-decorator {
-  background-color: #ffe7ec;
-}
-
-.userinfo-nickname.decorator {
-  color: #630;
+.click-to-see-everybody .link {
+  margin: 40px 20px 20px 20px;
+  font-size: 15px;
+  border-radius: 20px;
+  background-color: #ff5151;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
 }
 
 .vote-area {
@@ -79,34 +100,92 @@
   margin: 10px 0 0 10px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
 }
 
 .vote-icon-align {
   display: flex;
   flex-direction: row;
+  align-items: right;
+  height: 100%;
+}
+
+.vote-icon-align.distance {
+  color:#ff5151;
+  font-weight: 800;
+  font-size: 50px;
+}
+
+.vote-icon-align.unit {
+  font-size: 12px;
+  height: 30%;
+  color: #767676;
+}
+
+.voting-container {
+  height: 200px;
+  width: 300px;
+  position: absolute;
+  margin: auto;
+  padding: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
   align-items: center;
-  height:100%
 }
 
-
-.progress {
-  height:8px;
-  border-radius: 3px;
+.like-dislike-button {
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  z-index: 1;
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12); 
 }
 
-.bg-error {
-  background-color: #ff5151
+.like-dislike-button image {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  height: 40px;
+  width: 40px;
 }
 
-.bg-success {
-  background-color: #71c63e
+.like-dislike-button.save {
+  position: fixed;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 80px;
 }
 
-.bg-info {
-  background-color: #006efc
+.voting-slogan {
+  color: #767676;
+  position: absolute;
+  left: 40px;
+  right: 40px;
+  top: 15%;
+  font-weight: 700;
+  font-size: 16px;
 }
 
-.bg-warning {
-  background-color: #ffd80d
+.marking-container {
+  color: #767676;
+  height: 200px;
+  width: 80%;
+  position: absolute;
+  margin: auto;
+  padding: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }

@@ -43,20 +43,33 @@ public class FrontServices {
             .put("SUN", 6)
             .build();
 
-    @Autowired
+    private final
     UserInfoMapper userInfoMapper;
 
-    @Autowired
+    private final
     UserGroupMapper userGroupMapper;
 
-    @Autowired
+    private final
     TargetDistanceMapper targetDistanceMapper;
 
-    @Autowired
+    private final
     RunningRecordMapper runningRecordMapper;
 
-    @Autowired
+    private final
     VoteRecordMapper voteRecordMapper;
+
+    @Autowired
+    public FrontServices(UserInfoMapper userInfoMapper,
+                         UserGroupMapper userGroupMapper,
+                         TargetDistanceMapper targetDistanceMapper,
+                         RunningRecordMapper runningRecordMapper,
+                         VoteRecordMapper voteRecordMapper) {
+        this.userInfoMapper = userInfoMapper;
+        this.userGroupMapper = userGroupMapper;
+        this.targetDistanceMapper = targetDistanceMapper;
+        this.runningRecordMapper = runningRecordMapper;
+        this.voteRecordMapper = voteRecordMapper;
+    }
 
     public ResponseMessage userJoin(UserJoinRequest userJoinRequest) {
         UserJoinResponse userJoinResponse = new UserJoinResponse();
@@ -239,6 +252,7 @@ public class FrontServices {
         userRecord.setLatestRecord(lastRecord);
         userRecord.setLikes(likes);
         userRecord.setDislikes(dislikes);
+        userRecord.setIcon(userInformation.getIcon());
         return userRecord;
     }
 

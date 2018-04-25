@@ -1,0 +1,9 @@
+backend/.idea
+backend/target
+backend/.mvn
+backend/.gitingnore
+backend/runningclub.iml
+
+backend/src/main/resources/keystore.p12
+.idea/
+

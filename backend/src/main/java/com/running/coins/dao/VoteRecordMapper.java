@@ -13,7 +13,7 @@ public interface VoteRecordMapper {
         "delete from Vote_Record",
         "where VoteRecordId = #{voteRecordId,jdbcType=INTEGER}"
     })
-    int deleteByPrimaryKey(Integer voteRecordId);
+    int deleteByPrimaryKey(@Param("voteRecordId") Integer voteRecordId);
 
     @Insert({
         "insert into Vote_Record (VoteRecordId, ",
@@ -48,7 +48,7 @@ public interface VoteRecordMapper {
         @Result(column="Score", property="score", jdbcType=JdbcType.INTEGER),
         @Result(column="Comments", property="comments", jdbcType=JdbcType.VARCHAR)
     })
-    VoteRecord selectByPrimaryKey(Integer voteRecordId);
+    VoteRecord selectByPrimaryKey(@Param("voteRecordId") Integer voteRecordId);
 
     @UpdateProvider(type=VoteRecordSqlProvider.class, method="updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(VoteRecord record);
@@ -84,7 +84,7 @@ public interface VoteRecordMapper {
             @Result(column="Score", property="score", jdbcType=JdbcType.INTEGER),
             @Result(column="Comments", property="comments", jdbcType=JdbcType.VARCHAR)
     })
-    VoteRecord selectByVoteUserIdAndRuningRecordId(Integer runningRecordId, Integer voteUserGroupId);
+    VoteRecord selectByVoteUserIdAndRuningRecordId(@Param("RuningRecordId") Integer runningRecordId,@Param("VoteUserGroupId") Integer voteUserGroupId);
 
     @Select({
             "select",
@@ -103,5 +103,5 @@ public interface VoteRecordMapper {
             @Result(column="Score", property="score", jdbcType=JdbcType.INTEGER),
             @Result(column="Comments", property="comments", jdbcType=JdbcType.VARCHAR)
     })
-    List<VoteRecord> selectByRuningRecordId(Integer runningRecordId);
+    List<VoteRecord> selectByRuningRecordId(@Param("runningRecordId") Integer runningRecordId);
 }

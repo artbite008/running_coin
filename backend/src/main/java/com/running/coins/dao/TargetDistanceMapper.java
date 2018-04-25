@@ -1,14 +1,7 @@
 package com.running.coins.dao;
 
 import com.running.coins.model.TargetDistance;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
 
@@ -20,7 +13,7 @@ public interface TargetDistanceMapper {
         "delete from Target_Distance",
         "where TargetDistanceId = #{targetDistanceId,jdbcType=INTEGER}"
     })
-    int deleteByPrimaryKey(Integer targetDistanceId);
+    int deleteByPrimaryKey(@Param("targetDistanceId") Integer targetDistanceId);
 
     @Insert({
         "insert into Target_Distance (TargetDistanceId, UserGroupId, ",
@@ -45,7 +38,7 @@ public interface TargetDistanceMapper {
         @Result(column="CreationTime", property="creationTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="TargetDistance", property="targetDistance", jdbcType=JdbcType.REAL)
     })
-    TargetDistance selectByPrimaryKey(Integer targetDistanceId);
+    TargetDistance selectByPrimaryKey(@Param("targetDistanceId") Integer targetDistanceId);
 
     @UpdateProvider(type=TargetDistanceSqlProvider.class, method="updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(TargetDistance record);
@@ -73,5 +66,5 @@ public interface TargetDistanceMapper {
             @Result(column="CreationTime", property="creationTime", jdbcType=JdbcType.TIMESTAMP),
             @Result(column="TargetDistance", property="targetDistance", jdbcType=JdbcType.REAL)
     })
-    TargetDistance selectByUserGroupIdAndTimeRange(Integer userGroupId, Date start, Date end);
+    TargetDistance selectByUserGroupIdAndTimeRange(@Param("userGroupId") Integer userGroupId,@Param("start") Date start, @Param("end")Date end);
 }

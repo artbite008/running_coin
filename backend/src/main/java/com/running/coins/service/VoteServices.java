@@ -22,12 +22,21 @@ public class VoteServices {
 
     private final static Logger logger = LoggerFactory.getLogger(VoteServices.class);
 
-    @Autowired
+    private final
     VoteRecordMapper voteRecordMapper;
-    @Autowired
+    private final
     RunningRecordMapper runningRecordMapper;
-    @Autowired
+    private final
     UserGroupMapper userGroupMapper;
+
+    @Autowired
+    public VoteServices(VoteRecordMapper voteRecordMapper,
+                        RunningRecordMapper runningRecordMapper,
+                        UserGroupMapper userGroupMapper) {
+        this.voteRecordMapper = voteRecordMapper;
+        this.runningRecordMapper = runningRecordMapper;
+        this.userGroupMapper = userGroupMapper;
+    }
 
     public ResponseMessage vote(VoteRequest voteRequest) {
         int userGroupId;

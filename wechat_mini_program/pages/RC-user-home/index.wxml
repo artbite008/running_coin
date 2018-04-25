@@ -1,37 +1,96 @@
-<!--index.wxml-->
-<view class="container bg-primary">
-  <view class="userinfo card user-card-decorator">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+<view hidden="{{showBackdrop}}">
+<view class="container">
+  <view class="card userinfo user-card-decorator" bindtap='goToMyProfile'>
+    <block wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo">
+    </block>
     <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
       <view class="userinfo-nickname-block">
-        <text class="userinfo-nickname decorator">Speed</text>
-        <text class="userinfo-nickname decorator">Last Week Champion</text>
+        <text class="userinfo-nickname decorator">{{userInfo.nickName}}</text>
+        <view class="userinfo-nickname">
+          <image class='small-icon' src="../imgs/dollar.svg"></image>
+          <text>5</text>
+        </view>
+        <view class="userinfo-nickname">
+          <image class='small-icon' src="../imgs/progress.svg"></image>
+          <text>5km</text>
+        </view>
+        <view class="userinfo-nickname">
+          <image src="../imgs/like.svg" class='small-icon'></image>
+          <image src="../imgs/dislike.svg" class='small-icon'></image>
+          <text>8/9</text>
+        </view>
+        <view style='width: 80%;' class="bg-warning progress"></view>
       </view>
     </block>
   </view>
-  <view class="people-list card bg-light">
-    <view class="people-list-item divider" wx:for="{{users}}" wx:for-item="user">
+  <view class="people-list card bg-light" bindtap='goToVote'>
+    <view class="people-list-item divider" wx:for="{{users}}" wx:for-item="user" wx:key="user.id">
       <block>
-        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+        <image class="peopleInfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
       </block>
       <block>
-        <view class="userinfo-nickname-block">
-          <text space="true" class="userinfo-nickname decorator">target: {{user.target}} KM</text>
-          <text class="userinfo-nickname decorator">current: {{user.current}} KM</text>
-          <view style='width: {{user.current / user.target * 100}}%;' class="bg-{{user.color}} progress"></view>
+        <view class="peopleInfo-nickname-block">
+          <text class="peopleInfo-nickname">{{user.nickName}}</text>
+          <text class="peopleInfo-nickname">Coins: {{user.coins}} </text>
+          <text class="peopleInfo-nickname">Goal/Current: 10/9</text>
+          <view style='width: {{user.current / user.target * 100}}%;' class="bg-{{user.color}} progress">
+          </view>
         </view>
       </block>
       <block>
-      <view class='vote-area'>
-        <view class='vote-icon-align'>
-          <icon type="success" size="25" color="{{progressBarColorSets.sucess}}"/>
+        <view class='vote-area'>
+          <view class='vote-icon-align distance'>
+            <text>{{user.latestRecord}}</text>
+          </view>
+          <view class='vote-icon-align unit'>
+            <text>km</text>
+          </view>
         </view>
-        <view class='vote-icon-align'>
-          <icon type="cancel" size="25" color="{{progressBarColorSets.error}}"/>
-        </view>
-      </view>
       </block>
     </view>
+  </view>
+  <view class='click-to-see-everybody'>
+    <button class='link' bindtap='goToReport'>See Weekly</button>
+  </view>
+</view>
+
+
+
+<button class='fab bg-info running-icon' bindtap='mark'>
+  <image src='../imgs/run.svg'></image>
+</button>
+</view>
+<view hidden ="{{!showBackdrop}}">
+  <view class='backdrop'></view>
+  <view class='backdrop-front-content'>
+    <block wx:if="{{dialogEvent === 'vote'}}">
+      <text class='voting-slogan'>Double Tap Thumb Up Or Thumb Down To Vote For Your Mates, With Love !</text>
+      <icon type="cancel" size="40" color="red" bindtap='backdropMgt' />
+      <view class="card voting-container bg-warning">
+        <button class='like-dislike-button'>
+          <image src='../imgs/like.svg'></image>
+        </button>
+        <button class='like-dislike-button'>
+          <image src='../imgs/dislike.svg'></image>
+        </button>
+      </view>
+    </block>
+    <block wx:if="{{dialogEvent === 'mark'}}">
+      <text class='voting-slogan'>Type In My Newest Achievement !</text>
+      <icon type="cancel" size="40" color="red" bindtap='backdropMgt' />
+      <view class="card marking-container bg-light">
+        <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px; border-radius: 10px;" value="{{value}}" bindchange="bindChange">
+          <picker-view-column>
+            <view wx:for="{{achievements}}" style="line-height: 50px; padding-left: 20px;">
+              I Just Run {{item}} km
+            </view>
+          </picker-view-column>
+        </picker-view>
+        <button class='like-dislike-button save bg-warning' bindtap='submitRecord'>
+          <image src='../imgs/save.svg'></image>
+        </button>
+      </view>
+    </block>
   </view>
 </view>

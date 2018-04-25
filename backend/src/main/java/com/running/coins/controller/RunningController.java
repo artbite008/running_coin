@@ -9,14 +9,18 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class RunningController {
 
-    @Autowired
+    private final
     RunningInfoService runningInfoService;
+
+    @Autowired
+    public RunningController(RunningInfoService runningInfoService) {
+        this.runningInfoService = runningInfoService;
+    }
 
     @ApiOperation(value = "submit users' running records", notes = "submit records")
     @ApiImplicitParam(name = "submitUserSportRecordRequest", value = "", required = true, dataType = "SubmitUserSportRecordRequest")

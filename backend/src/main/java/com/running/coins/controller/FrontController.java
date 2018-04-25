@@ -14,8 +14,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/front")
 public class FrontController {
 
-    @Autowired
+    private final
     FrontServices frontServices;
+
+    @Autowired
+    public FrontController(FrontServices frontServices) {
+        this.frontServices = frontServices;
+    }
 
     @PostMapping("/user/weekly/report")
     @ApiOperation(value = "", notes = "")
@@ -26,7 +31,7 @@ public class FrontController {
 
     @PostMapping("/everyone/weekly/report")
     @ApiOperation(value = "", notes = "")
-    @ApiImplicitParam(name = "weeklyReportRequest", value = "", required = true, dataType = "WeeklyReportRequest")
+    @ApiImplicitParam(name = "weeklyReportRequest", required = true, dataType = "WeeklyReportRequest")
     public ResponseMessage getEveryoneWeeklyReport(@RequestBody WeeklyReportRequest weeklyReportRequest) {
         return frontServices.everyOneWeekly(weeklyReportRequest);
     }

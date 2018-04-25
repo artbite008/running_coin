@@ -25,4 +25,5 @@ public class UserRecord {
     private Integer allDislikes;
     private Boolean voted;
     private String color;
+    private String icon;
 }

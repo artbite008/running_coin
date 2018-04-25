@@ -1,2 +1,31 @@
-<!--pages/RC-user-report/index.wxml-->
-<text>pages/RC-user-report/index.wxml</text>
+<view class="container">
+  <block wx:for="{{weekRecords}}" wx:key="id" wx:for-item="record">
+    <view class='record-range-container'>
+      {{record.range}}
+    </view>
+    <view class='people-list card bg-warning'>
+      <view class='people-list-item divider' wx:for="{{record.record}}" wx:key="id" wx:for-item="rc">
+        <block>
+          <image class="peopleInfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+        </block>
+        <view class='achievements-container'>
+          <view class="date-container">
+            <view class='date' wx:for="{{rc.achievements}}" wx:key="id" wx:for-item="ach">{{ach}}</view>
+          </view>
+          <view class='bar-chart-container'>
+            <view class='bar bg-light-primary card sub' wx:for="{{rc.achievements}}" wx:key="id" wx:for-item="ach" style='height: {{ach / 10 * 100}}%'>
+            </view>
+          </view>
+        </view>
+        <view class='statistic-container'>
+          <view class='vote-icon-align distance'>
+            <text>{{rc.allAchievements}}</text>
+          </view>
+          <view class='vote-icon-align unit'>
+            <text>km</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

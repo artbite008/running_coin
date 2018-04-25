@@ -14,7 +14,7 @@ public interface RunningRecordMapper {
         "delete from Running_Record",
         "where RuningRecordId = #{runingRecordId,jdbcType=INTEGER}"
     })
-    int deleteByPrimaryKey(Integer runingRecordId);
+    int deleteByPrimaryKey(@Param("runingRecordId") Integer runingRecordId);
 
     @Insert({
         "insert into Running_Record (RuningRecordId, UserGroupId, ",
@@ -56,7 +56,7 @@ public interface RunningRecordMapper {
         @Result(column="Comments", property="comments", jdbcType=JdbcType.VARCHAR),
         @Result(column="Evidence", property="evidence", jdbcType=JdbcType.LONGVARBINARY)
     })
-    RunningRecord selectByPrimaryKey(Integer runingRecordId);
+    RunningRecord selectByPrimaryKey(@Param("runingRecordId") Integer runingRecordId);
 
     @UpdateProvider(type=RunningRecordSqlProvider.class, method="updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(RunningRecord record);
@@ -115,6 +115,6 @@ public interface RunningRecordMapper {
             @Result(column="Comments", property="comments", jdbcType=JdbcType.VARCHAR),
             @Result(column="Evidence", property="evidence", jdbcType=JdbcType.LONGVARBINARY)
     })
-    List<RunningRecord> selectByUserGroupIdAndTimeRange(Integer userGroupId, Date start, Date end);
+    List<RunningRecord> selectByUserGroupIdAndTimeRange(@Param("userGroupId") Integer userGroupId, @Param("start") Date start,  @Param("end") Date end);
 
 }

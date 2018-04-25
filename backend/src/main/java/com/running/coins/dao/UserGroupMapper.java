@@ -1,14 +1,7 @@
 package com.running.coins.dao;
 
 import com.running.coins.model.UserGroup;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
 
@@ -20,7 +13,7 @@ public interface UserGroupMapper {
         "delete from UserGroup",
         "where UserGroupId = #{userGroupId,jdbcType=INTEGER}"
     })
-    int deleteByPrimaryKey(Integer userGroupId);
+    int deleteByPrimaryKey(@Param("userGroupId") Integer userGroupId);
 
     @Insert({
         "insert into UserGroup (UserGroupId, UserId, ",
@@ -44,7 +37,7 @@ public interface UserGroupMapper {
         @Result(column="UserId", property="userId", jdbcType=JdbcType.INTEGER),
         @Result(column="GroupId", property="groupId", jdbcType=JdbcType.INTEGER)
     })
-    UserGroup selectByPrimaryKey(Integer userGroupId);
+    UserGroup selectByPrimaryKey(@Param("userGroupId") Integer userGroupId);
 
     @Select({
             "select",
@@ -57,7 +50,7 @@ public interface UserGroupMapper {
             @Result(column="UserId", property="userId", jdbcType=JdbcType.INTEGER),
             @Result(column="GroupId", property="groupId", jdbcType=JdbcType.INTEGER)
     })
-    List<UserGroup> selectByGroupId(Integer groupId);
+    List<UserGroup> selectByGroupId(@Param("groupId") Integer groupId);
 
     @Select({
             "select",
@@ -71,7 +64,7 @@ public interface UserGroupMapper {
             @Result(column="GroupId", property="groupId", jdbcType=JdbcType.INTEGER),
             @Result(column="UserId", property="userId", jdbcType=JdbcType.INTEGER)
     })
-    UserGroup selectByGroupIdAndUserId(Integer groupId, Integer userId);
+    UserGroup selectByGroupIdAndUserId(@Param("groupId") Integer groupId,@Param("userId") Integer userId);
 
     @UpdateProvider(type=UserGroupSqlProvider.class, method="updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(UserGroup record);

@@ -1,15 +1,15 @@
 {
-  "pages":[
+  "pages": [
     "pages/RC-user-home/index",
+    "pages/RC-user-guard/index",
     "pages/RC-user-profile/index",
     "pages/RC-user-report/index",
-    "pages/RC-user-score/index",
-    "pages/logs/logs"
+    "pages/RC-user-score/index"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#006efc",
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "eBay Payment Running Club",
-    "navigationBarTextStyle":"white"
+    "navigationBarTextStyle": "black"
   }
 }
