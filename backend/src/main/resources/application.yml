@@ -1,5 +1,10 @@
 server:
-  port: 9090
+  port: 443
+  ssl:
+    key-alias: guxiangfly.cn
+    key-store-type: JKS
+    key-store: classpath:guxiangfly.cn.jks
+    key-store-password: 45lgrs8gokejt0
 
 
 spring:
