@@ -1,13 +1,15 @@
-import { users as mockUsers } from '../mock/RC-user.mock';
 import { progressBarColorSets as _progressBarColorSets } from '../mock/RC-progressBar.mock';
 import { achievements } from '../mock/RC-user.mock';
 import { UserService, WxService as WX, RecordService } from '../service/index';
 import { hashToInt } from '../../utils/util';
 
+const iconPlaceholder = '../imgs/avatar-placeholder.jpg';
+
 const app = getApp();
 
 Page({
   data: {
+    iconph: iconPlaceholder,
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -17,7 +19,11 @@ Page({
     dialogEvent: '',
     markAchievement: 0,
     achievements: achievements,
-    register: wx.getStorageSync('register')
+    register: wx.getStorageSync('register'),
+    // for vote
+    whoIsGonnaBeVote: {},
+    liked: false,
+    disliked: false
   },
   goToGuard: function () { // do not use navigateTo
     wx.redirectTo({
@@ -35,10 +41,39 @@ Page({
     })
   },
   goToVote: function (e) {
-    this.setData({
-      dialogEvent: 'vote'
-    });
-    this.backdropMgt();
+    const currentUser = e.currentTarget.dataset.user;
+    let that = this;
+    UserService
+      .getInstance()
+      .getVoteStatus(currentUser.runningRecordId, this.data.userInfo.userGroupId)
+      .then(res => {
+        const voteStatus = res.data.data.voteStatus;
+        that.voteStatusChooser(voteStatus);
+        that.setData({
+          dialogEvent: 'vote',
+          whoIsGonnaBeVote: currentUser
+        });
+        that.backdropMgt();
+      });
+  },
+  voteStatusChooser: function(voteStatus) {
+    const vs = `${voteStatus}`;
+    if (vs === '0') { // liked
+      this.setData({
+        liked: true,
+        disliked: false
+      });
+    } else if (vs === '2') { // disliked
+      this.setData({
+        liked: false,
+        disliked: true
+      });
+    } else {  // not yet or unknown
+      this.setData({
+        liked: false,
+        disliked: false
+      });
+    }
   },
   mark: function () {
     this.setData({
@@ -70,28 +105,9 @@ Page({
     } else if (this.data.canIUse) {
       app.userInfoReadyCallback = res => {
         this.setData({
-          userInfo: res.userInfo,
           hasUserInfo: true
         })
       };
-      WX
-        .userInfo(false)
-        .then(res => {
-          const userInfo = res.userInfo;
-          app.globalData.userInfo = userInfo;
-          this.setData({
-            userInfo: userInfo,
-            hasUserInfo: true
-          });
-          UserService
-          .getInstance()
-            .createAndUpdateUser({
-            userName: userInfo.nickName,
-            groupId: 1,
-            unionId: hashToInt(`${userInfo.nickName}-${userInfo.city}-${userInfo.province}-${userInfo.country}`),
-            icon: userInfo.avatarUrl
-          })
-        });
     } else {
       // this is from wechat offical demo for some kind of backward compatible
       WX
@@ -104,6 +120,39 @@ Page({
           });
         });
     }
+    this.loadData();
+  },
+  loadData: function() {
+    let that = this;
+    return WX
+      // get user Info
+      .userInfo(false)
+      .then(res => {
+        const userInfo = res.userInfo;
+        app.globalData.userInfo = userInfo;
+
+        that.setData({
+          hasUserInfo: true
+        });
+
+        // create or update user
+        return UserService
+          .getInstance()
+          .createAndUpdateUser({
+            userName: userInfo.nickName,
+            groupId: 1,
+            unionId: hashToInt(`${userInfo.nickName}-${userInfo.city}-${userInfo.province}-${userInfo.country}`),
+            icon: userInfo.avatarUrl
+          });
+      }).then(res => {
+        const homePageModel = res.data.data;
+        that.setData({
+          userInfo: homePageModel.userRecord || {},
+          users: homePageModel.otherUsersRecord || []
+        });
+        Object.assign(app.globalData.userInfo, homePageModel.userRecord);
+        return new Promise((resolve) => resolve());
+      });
   },
   getUserInfo: function (e) {
     app.globalData.userInfo = e.detail.userInfo
@@ -120,13 +169,78 @@ Page({
   },
   submitRecord: function (e) {
     const record = this.data.markAchievement;
+    const userInfo = this.data.userInfo;
     RecordService
       .getInstance()
-      .submitRecord(244868665, record, 1, '')
+      .submitRecord(userInfo.userId, record, 1, '')
+      .then(res => wx.showToast({ title: 'submit!' }));
+  },
+
+
+  /////////////////////////////////////////// double tap event ////////////////////////////////////
+
+  touchStartTime: 0,
+  touchEndTime: 0,
+  lastTapTime: 0,
+  lastTapTimeoutFunc: null,
+
+  doubleTap: function (e) {
+
+    const doubleTapAction = e.currentTarget.dataset.action || '';
+    if (doubleTapAction === '') return;
+
+    let that = this;
+    that.lastTapTimeoutFunc = that[doubleTapAction];
+    if (that.touchEndTime - that.touchStartTime < 350) {
+      let currentTime = e.timeStamp
+      let lastTapTime = that.lastTapTime
+      that.lastTapTime = currentTime
+      if (currentTime - lastTapTime < 300) {
+        // console.log("double tap")
+        that.lastTapTimeoutFunc(that.data.whoIsGonnaBeVote);
+      }
+    }
+  },
+
+  // voteUserId,
+  // groupId,
+  // voteUserGroupId,
+  // status,
+  // runningRecordId
+  like: function (user) {
+    const me = app.globalData.userInfo;
+    const liked = this.data.liked;
+    const voteStatus = liked ? 1: 0;
+    let that = this;
+    UserService
+      .getInstance()
+      .voteUser(me.userId, 1, me.userGroupId, voteStatus, user.runningRecordId)
       .then(res => {
-        wx.showToast({
-          title: 'submit!'
-        });
+        wx.showToast({ title: 'submit !' });
+        const voteStatus = res.data.data.status;
+        that.voteStatusChooser(voteStatus);
       });
-  }
-})
+  },
+
+  dislike: function (user) {
+    const me = app.globalData.userInfo;
+    const disliked = this.data.disliked;
+    const voteStatus = disliked ? 3 : 2;
+    let that = this;
+    UserService
+      .getInstance()
+      .voteUser(me.userId, 1, me.userGroupId, voteStatus, user.runningRecordId)
+      .then(res => {
+        wx.showToast({ title: 'submit !' });
+        const voteStatus = res.data.data.status;
+        that.voteStatusChooser(voteStatus);
+      });
+  },
+
+  /////////////////////////////////////////// double tap event ////////////////////////////////////
+  onPullDownRefresh: function () {
+    this
+      .loadData()
+      .then(() => wx.stopPullDownRefresh());
+  },
+});

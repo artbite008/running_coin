@@ -1,7 +1,7 @@
 <view hidden ="{{showBackdrop != 'none'}}">
 <view class="container" >
   <view class='user-avatar-placeholder-container'>
-    <image class="userinfo-avatar avatar-float" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <image class="userinfo-avatar avatar-float" src="{{userInfo.icon}}" background-size="cover"></image>
   </view>
   <view class='card bg-error'>
     <view class='nickname-container'>
@@ -9,20 +9,20 @@
     </view>
     <view class='userinfo'>
       <view class='section'>
-        <text>100</text>
+        <text>{{userInfo.coins || 0}}</text>
         <button class="retarget">
           <image src="../imgs/dollar.svg" class='small-icon'></image>
         </button>
       </view>
       <view class='section'>
-        <text>8/9</text>
+        <text>{{userInfo.likes || 0}}/{{userInfo.dislikes || 0}}</text>
         <button class="retarget">
           <image src="../imgs/like.svg" class='small-icon'></image>
           <image src="../imgs/dislike.svg" class='small-icon'></image>
         </button>
       </view>
       <view class='section'>
-        <text>5/10</text>
+        <text>{{userInfo.current || 0}}/{{userInfo.target || 0}}</text>
         <button class="retarget">
           <image src="../imgs/progress.svg" class='small-icon'></image>
           <image src="../imgs/goal.svg" class='small-icon'></image>
@@ -43,10 +43,10 @@
       </view>
       <view class='section-vote'>
         <view>
-          <image src="../imgs/like.svg" class='small-icon'></image> {{record.vote}}
+          <image src="../imgs/like.svg" class='small-icon'></image> {{record.likes}}
         </view>
         <view>
-          <image src="../imgs/dislike.svg" class='small-icon'></image> {{record.devote}}
+          <image src="../imgs/dislike.svg" class='small-icon'></image> {{record.dislikes}}
         </view>
       </view>
     </view>
@@ -63,15 +63,15 @@
     <block wx:if="{{dialogEvent === 'plan'}}">
       <text class='planning-slogan'>Set My Goal ! Click Yellow Button To Save.</text>
       <view class="card planning-container bg-light">
-        <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px; border-radius: 10px;" value="{{value}}" bindchange="bindChange">
+        <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px; border-radius: 10px; font-weight: 600;" value="{{value}}" bindchange="bindChange">
           <picker-view-column>
             <view wx:for="{{plans}}" style="line-height: 50px; padding-left: 20px;">
-              I Wanna Run {{item}} km
+              I Wanna Run {{item}} km !
             </view>
           </picker-view-column>
         </picker-view>
       </view>
-      <button class='like-dislike-button save bg-warning'>
+      <button class='like-dislike-button save bg-warning' bindtap='submitTarget'>
         <image src='../imgs/goal.svg'></image>
       </button>
     </block>

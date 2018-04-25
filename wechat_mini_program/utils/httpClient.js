@@ -51,15 +51,15 @@ class HttpClient {
    * intercept using interceptors
    */
   intercept(rsp) {
+    wx.hideLoading();
     return rsp;
-    // this
-    //   .interceptors
-    //   .filter(f => typeof f === 'function')
-    //   .every(f => f(rsp));
   }
 
   ////////////////////////////////////////////////////////////////
   req({ url, method, header, payload }) {
+    wx.showLoading({
+      title: 'loading...',
+    });
     return new Promise((resolve, reject) => {
       wx.request({
         url: (this.urlPrefixStr || '') + url,
@@ -70,9 +70,9 @@ class HttpClient {
           ...header
         },
         success: res => this.intercept(res) && resolve(res),
-        fail: reject
+        fail: res => this.intercept(res) && reject(res)
       })
-    })
+    });
   }
 
   get(url, header, payload) {

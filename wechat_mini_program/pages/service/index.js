@@ -1,7 +1,7 @@
 import {HttpClient as hc} from '../../utils/httpClient';
 
 const envLocal = 'https://test.com';  // mapping in hosts file
-const envQa = 'http://127.0.0.1';
+const envQa = 'https://guxiangfly.cn';
 const envProd = 'http://127.0.0.1';
 
 /**
@@ -16,7 +16,7 @@ class UserService {
     if (this.us) {
       return this.us;
     } else {
-      this.us = new UserService(hc.getInstance().urlPrefix(envLocal));
+      this.us = new UserService(hc.getInstance().urlPrefix(envQa));
       return this.us;
     }
   }
@@ -39,12 +39,30 @@ class UserService {
     return this.$http.post('/front/user/join', null, user);
   }
 
-  voteUser(userId, vote, cancel) {
+  voteUser(voteUserId, groupId, voteUserGroupId, status, runningRecordId) {
     return this.$http.post('/vote', null, {
-      userId: userId,
-      voteStatus: vote,
-      cancel: cancel
+      voteUserId,
+      groupId,
+      voteUserGroupId,
+      status,
+      runningRecordId
     });
+  }
+
+  getVoteStatus(runningRecordId, voteUserGroupId) {
+    return this.$http.get('/vote', null, {
+      runningRecordId, 
+      voteUserGroupId
+    });
+  }
+
+  submitTarget(userId, userGroupId, targetDistance, groupId) {
+    return this.$http.post('/submit/sport/target', null, {
+      userId,
+      userGroupId,
+      targetDistance,
+      groupId
+    })
   }
 }
 
@@ -60,7 +78,7 @@ class RecordService {
     if (this.rs) {
       return this.rs;
     } else {
-      this.rs = new RecordService(hc.getInstance().urlPrefix(envLocal));
+      this.rs = new RecordService(hc.getInstance().urlPrefix(envQa));
       return this.rs;
     }
   }
@@ -86,13 +104,16 @@ class RecordService {
     })
   }
 
-  getWeeklyRecord() {
-    return this.$http.get('/record/week', null, null);
+  getEveryoneWeeklyRecord(groupId) {
+    return this.$http.post('/front/everyone/weekly/report', null, {
+      groupId
+    });
   }
 
-  getWeeklyRecordByUserId(userId) {
-    return this.$http.get('/record/week', null, {
-      userId: userId
+  getWeeklyRecordByUserId(userId, groupId) {
+    return this.$http.post('/front/user/weekly/report', null, {
+      userId,
+      groupId
     });
   }
 }
@@ -143,7 +164,7 @@ class WxAuthService {
     if (this.wxs) {
       return this.wxs;
     } else {
-      this.wxs = new WxAuthService(hc.getInstance().urlPrefix(envLocal));
+      this.wxs = new WxAuthService(hc.getInstance().urlPrefix(envQa));
       return this.wxs;
     }
   }
