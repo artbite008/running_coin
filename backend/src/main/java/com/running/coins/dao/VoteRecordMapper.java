@@ -105,4 +105,6 @@ public interface VoteRecordMapper {
             @Result(column = "Comments", property = "comments", jdbcType = JdbcType.VARCHAR)
     })
     List<VoteRecord> selectByRuningRecordId(@Param("runingRecordId") Integer runingRecordId);
+
+
 }
