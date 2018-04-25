@@ -94,7 +94,7 @@ public class FrontServices {
             responseMessage.setData(userJoinResponse);
         } catch (Throwable e) {
             logger.error(e.getMessage(), e);
-            responseMessage.setMsg("Error occurs in inserting into DB" + e.getMessage());
+            responseMessage.setMsg("Error occurs in inserting into DB" + e.getMessage() + " or " + e);
             responseMessage.setCode(ResultEnum.INSERT_ERROR.getCode());
             responseMessage.setData(userJoinResponse);
         }
@@ -192,7 +192,8 @@ public class FrontServices {
         List<UserRecord> userRecords = new LinkedList<>();
         List<UserGroup> usersInGroup = userGroupMapper.selectByGroupId(userJoinRequest.getGroupId());
         for (UserGroup userInGroup : usersInGroup) {
-            float current = 0l;
+            float current;
+            float overallDoneDistance = 0l;
             final ThisLocalizedWeek chinaWeek = new ThisLocalizedWeek(Locale.CHINA);
             int likes = 0;
             int dislikes = 0;
@@ -202,8 +203,13 @@ public class FrontServices {
             UserInfo userInformation = userInfoMapper.selectByPrimaryKey(userInGroup.getUserId());
             List<RunningRecord> runningRecords = runningRecordMapper.selectByUserGroupIdAndTimeRange(userInGroup.getUserGroupId(), chinaWeek.getFirstDay(), chinaWeek.getLastDay());
             TargetDistance targetDistance = targetDistanceMapper.selectByUserGroupIdAndTimeRange(userInGroup.getUserGroupId(), chinaWeek.getFirstDay(), chinaWeek.getLastDay());
+            if (runningRecords != null && runningRecords.size() > 0) {
+                lastRecord = runningRecords.get(runningRecords.size() - 1).getDistance();
+            }
 
+            List<UserRecord> tempRecords = Lists.newLinkedList();
             for (int i = 0; i < runningRecords.size(); i++) {
+                userRecord = new UserRecord();
                 List<VoteRecord> voteRecords = voteRecordMapper.selectByRuningRecordId(runningRecords.get(i).getRuningRecordId());
                 for (int j = 0; j < voteRecords.size(); j++) {
                     if (voteRecords.get(j).getStatus().equals(VoteStatus.LIKE.getCode())) {
@@ -212,26 +218,34 @@ public class FrontServices {
                         dislikes++;
                     }
                 }
-                current += runningRecords.get(i).getDistance();
-                if (i == runningRecords.size() - 1) {
-                    lastRecord = runningRecords.get(i).getDistance();
+                if (i == 0) {
+                    for (int k = 0; k < runningRecords.size(); k++) {
+                        overallDoneDistance += runningRecords.get(k).getDistance();
+                    }
+                }
+                current = runningRecords.get(i).getDistance();
+
+                userRecord.setRunningRecordId(runningRecords.get(i).getRuningRecordId());
+                userRecord.setCurrent(current);
+                userRecord = setUserRecords(userInGroup, userRecord, overallDoneDistance, userInformation, targetDistance, lastRecord, likes, dislikes);
+                if (!userInfo.getUserId().equals(userInGroup.getUserId())) {
+                    tempRecords.add(userRecord);
                 }
             }
-            userRecord = setUserRecords(userInGroup, userRecord, current, userInformation, targetDistance, lastRecord, likes, dislikes);
 
             if (userInfo.getUserId().equals(userInGroup.getUserId())) {
                 userJoinResponse.setUserRecord(userRecord);
             } else {
-                userRecords.add(userRecord);
+                userRecords.addAll(tempRecords);
             }
         }
         userJoinResponse.setOtherUsersRecord(userRecords);
     }
 
-    private UserRecord setUserRecords(UserGroup userInGroup, UserRecord userRecord, float current, UserInfo userInformation, TargetDistance targetDistance, float lastRecord, int likes, int dislikes) {
+    private UserRecord setUserRecords(UserGroup userInGroup, UserRecord userRecord, float overallDoneDistance, UserInfo userInformation, TargetDistance targetDistance, float lastRecord, int likes, int dislikes) {
         float rate;
         if (targetDistance != null) {
-            rate = ((current / (targetDistance.getTargetDistance())) * 100);
+            rate = ((overallDoneDistance / (targetDistance.getTargetDistance())) * 100);
             userRecord.setTarget(targetDistance.getTargetDistance());
         } else {
             rate = 0l;
@@ -245,6 +259,7 @@ public class FrontServices {
         } else {
             userRecord.setColor(RunningProgress.SUCCESS.getMsg());
         }
+        userRecord.setOverallDoneDistance(overallDoneDistance);
         userRecord.setUserGroupId(userInGroup.getUserGroupId());
         userRecord.setUserId(userInformation.getUserId());
         userRecord.setNickName(userInformation.getUserName());
