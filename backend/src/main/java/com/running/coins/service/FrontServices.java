@@ -161,7 +161,7 @@ public class FrontServices {
                 for (VoteRecord voteRecord : voteRecords) {
                     if (voteRecord.getStatus().equals(VoteStatus.LIKE.getCode())) {
                         allLikes++;
-                    } else if (voteRecord.equals(VoteStatus.DISLIKE.getCode())) {
+                    } else if (voteRecord.getStatus().equals(VoteStatus.DISLIKE.getCode())) {
                         allDislikes++;
                     }
                 }
