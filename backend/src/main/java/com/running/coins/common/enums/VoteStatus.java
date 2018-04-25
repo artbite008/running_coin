@@ -1,6 +1,7 @@
 package com.running.coins.common.enums;
 
 public enum VoteStatus {
+    NOTYET(-1, "notyet"),
     LIKE(0, "like"),
     CANCELLIKE(1, "cancelLike"),
     DISLIKE(2, "dislike"),

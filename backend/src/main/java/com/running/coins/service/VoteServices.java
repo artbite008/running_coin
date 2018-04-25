@@ -6,16 +6,17 @@ import com.running.coins.common.util.DateUtils;
 import com.running.coins.dao.RunningRecordMapper;
 import com.running.coins.dao.UserGroupMapper;
 import com.running.coins.dao.VoteRecordMapper;
-import com.running.coins.model.UserGroup;
 import com.running.coins.model.VoteRecord;
 import com.running.coins.model.request.VoteRequest;
 import com.running.coins.model.response.ResponseMessage;
+import com.running.coins.model.response.VoteStatusResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 public class VoteServices {
@@ -59,6 +60,23 @@ public class VoteServices {
             voteRecordMapper.updateByPrimaryKey(voteRecord);
         }
         return ResultUtils.success(voteRecord);
+    }
+
+    /**
+     * query for vote record using running Record Id and user group Id
+     * @param runningRecordId runningRecordId
+     * @param voteUserGroupId userGroupId
+     * @return VoteStatusResponse
+     */
+    public ResponseMessage queryVoteRecord(int runningRecordId, int voteUserGroupId) {
+        VoteRecord vr = voteRecordMapper.selectByVoteUserIdAndRuningRecordId(runningRecordId, voteUserGroupId);
+        int voteStatus;
+        if(vr == null) {
+            voteStatus = VoteStatus.NOTYET.getCode();
+        } else {
+            voteStatus = vr.getStatus();
+        }
+        return ResultUtils.success(VoteStatusResponse.builder().voteRecord(vr).voteStatus(voteStatus).build());
     }
 
     private void SetVoteRecord(VoteRequest voteRequest, VoteRecord voteRecord) {

@@ -187,6 +187,7 @@ public class FrontServices {
             userRecord.setAchievements(achievements);
             userRecord.setAllAchievements(allAchievements.intValue());
             userRecord.setNickName(userInfo.getUserName());
+            userRecord.setIcon(userInfo.getIcon());
             userRecord.setTarget(targetDistance == null ? 0 : targetDistance.getTargetDistance());
             userRecords.add(userRecord);
         }
