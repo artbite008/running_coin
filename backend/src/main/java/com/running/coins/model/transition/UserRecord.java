@@ -14,6 +14,7 @@ public class UserRecord {
     private Double coins;
     private Float current;
     private Float target;
+    private Float overallDoneDistance;
     private Float distance;
     private Integer likes;
     private Integer dislikes;
@@ -25,4 +26,5 @@ public class UserRecord {
     private Integer allDislikes;
     private Boolean voted;
     private String color;
+    private String icon;
 }

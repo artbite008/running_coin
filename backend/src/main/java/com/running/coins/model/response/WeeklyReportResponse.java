@@ -7,5 +7,6 @@ import java.util.List;
 
 @Data
 public class WeeklyReportResponse {
+    private String timeRange;
     List<UserRecord> allWeeklyRecords;
 }

@@ -6,4 +6,4 @@ backend/runningclub.iml
 
 backend/src/main/resources/keystore.p12
 .idea/
-
+logs/
