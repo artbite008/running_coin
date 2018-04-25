@@ -148,6 +148,8 @@ public class FrontServices {
 
         for (UserGroup userGroup : userGroups) {
             List<Integer> achievements = new ArrayList<>(Collections.nCopies(7, 0));
+            UserInfo userInfo = userInfoMapper.selectByPrimaryKey(userGroup.getUserId());
+            TargetDistance targetDistance = targetDistanceMapper.selectByUserGroupIdAndTimeRange(userGroup.getUserGroupId(), start, end);
             Float allAchievements = 0f;
             int allLikes = 0;
             int allDislikes = 0;
@@ -184,6 +186,8 @@ public class FrontServices {
             userRecord.setDislikes(allDislikes);
             userRecord.setAchievements(achievements);
             userRecord.setAllAchievements(allAchievements.intValue());
+            userRecord.setNickName(userInfo.getUserName());
+            userRecord.setTarget(targetDistance == null ? 0 : targetDistance.getTargetDistance());
             userRecords.add(userRecord);
         }
         weeklyReportResponse.setTimeRange(rangeOfTime);
@@ -237,6 +241,7 @@ public class FrontServices {
             }
 
             if (userInfo.getUserId().equals(userInGroup.getUserId())) {
+                userRecord.setTarget(targetDistance.getTargetDistance());
                 userJoinResponse.setUserRecord(userRecord);
             } else {
                 userRecords.addAll(tempRecords);
