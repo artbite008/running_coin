@@ -20,7 +20,7 @@
           <image src="../imgs/dislike.svg" class='small-icon'></image>
           <text>{{userInfo.likes || 0}}/{{userInfo.dislikes  || 0}}</text>
         </view>
-        <view style='width: {{((user.current || 0) / (user.target || 1)) > 1 ? 100 : ((user.current || 0) / (user.target || 1) * 100)}} %;' class="bg-{{userInfo.color}} progress"></view>
+        <view style='width: {{((userInfo.current || 0) / (userInfo.target || 1)) > 1 ? 100 : ((userInfo.current || 0) / (userInfo.target || 1) * 100)}}%;' class="bg-{{userInfo.color}} progress"></view>
       </view>
     </block>
   </view>
