@@ -9,7 +9,7 @@ server:
 
 spring:
   datasource:
-     url: jdbc:mysql://127.0.0.1:3306/runningcoin
+     url: jdbc:mysql://47.96.173.94:3306/runningcoin?useUnicode=yes&amp;characterEncoding=UTF-8&amp;useSSL=false
      username: root
-     password: root
+     password: qwert6
      driver-class-name: com.mysql.jdbc.Driver
