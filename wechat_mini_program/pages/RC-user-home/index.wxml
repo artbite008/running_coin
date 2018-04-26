@@ -38,7 +38,7 @@
         <view class="peopleInfo-nickname-block">
           <text class="peopleInfo-nickname">{{user.nickName}}</text>
           <text class="peopleInfo-nickname">Coins: {{user.coins}} </text>
-          <text class="peopleInfo-nickname">Goal/Current: {{user.current || 0}}/{{user.target || 0}}</text>
+          <text class="peopleInfo-nickname">Goal/Current: {{user.target || 0}}/{{user.overallDoneDistance || 0}}</text>
           <view style='width: {{((user.current || 0) / (user.target || 1)) > 1 ? 100 : ((user.current || 0) / (user.target || 1)  * 100)}}%;' class="bg-{{user.color}} progress">
           </view>
         </view>
@@ -46,7 +46,7 @@
       <block>
         <view class='vote-area'>
           <view class='vote-icon-align distance'>
-            <text>{{user.latestRecord}}</text>
+            <text>{{user.current}}</text>
           </view>
           <view class='vote-icon-align unit'>
             <text>km</text>
