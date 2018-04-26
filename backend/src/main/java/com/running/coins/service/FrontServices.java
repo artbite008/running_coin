@@ -76,6 +76,7 @@ public class FrontServices {
         ResponseMessage responseMessage = new ResponseMessage();
         UserInfo userInfo;
         UserGroup userGroup;
+        TargetDistance targetDistance;
         try {
             userInfo = userInfoMapper.selectByPrimaryKey(userJoinRequest.getUnionId());
             if (userInfo == null) {
@@ -83,8 +84,17 @@ public class FrontServices {
                 userInfo = new UserInfo();
                 SetUserInfo(userJoinRequest, userInfo);
                 SetUserGroup(userJoinRequest, userGroup);
+                // setup a default target
+                targetDistance = new TargetDistance();
+                targetDistance.setTargetDistance(0f);
+
                 userInfoMapper.insert(userInfo);
                 userGroupMapper.insert(userGroup);
+
+                //insert the default target, distance 0
+                userGroup = userGroupMapper.selectByGroupIdAndUserId(userGroup.getGroupId(), userGroup.getUserId());
+                targetDistance.setUserGroupId(userGroup.getUserGroupId());
+                this.targetDistanceMapper.insert(targetDistance);
             }
 
             setUserJoinResponse(userJoinRequest, userInfo, userJoinResponse);
@@ -201,12 +211,12 @@ public class FrontServices {
         List<UserGroup> usersInGroup = userGroupMapper.selectByGroupId(userJoinRequest.getGroupId());
         for (UserGroup userInGroup : usersInGroup) {
             float current;
-            float overallDoneDistance = 0l;
+            float overallDoneDistance = 0f;
             final ThisLocalizedWeek chinaWeek = new ThisLocalizedWeek(Locale.CHINA);
             int likes = 0;
             int dislikes = 0;
-            float lastRecord = 0l;
-            UserRecord userRecord = new UserRecord();
+            float lastRecord = 0f;
+            UserRecord userRecord = null;
 
             UserInfo userInformation = userInfoMapper.selectByPrimaryKey(userInGroup.getUserId());
             List<RunningRecord> runningRecords = runningRecordMapper.selectByUserGroupIdAndTimeRange(userInGroup.getUserGroupId(), chinaWeek.getFirstDay(), chinaWeek.getLastDay());
@@ -241,8 +251,22 @@ public class FrontServices {
                 }
             }
 
+            // if no userRecord, enrich userRecord using placeholder info
+            if (null == userRecord) {
+               userRecord = new UserRecord();
+               userRecord = setUserRecords(userInGroup,
+                       userRecord,
+                       overallDoneDistance,
+                       userInformation,
+                       targetDistance,
+                       lastRecord,
+                       likes,
+                       dislikes);
+            }
             if (userInfo.getUserId().equals(userInGroup.getUserId())) {
-                userRecord.setTarget(targetDistance.getTargetDistance());
+                if (null != targetDistance) { // add null check
+                    userRecord.setTarget(targetDistance.getTargetDistance());
+                }
                 userJoinResponse.setUserRecord(userRecord);
             } else {
                 userRecords.addAll(tempRecords);

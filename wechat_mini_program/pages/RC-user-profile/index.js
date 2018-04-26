@@ -66,7 +66,7 @@ Page({
   },
   loadData: function() {
     let that = this;
-    RecordService
+    return RecordService
       .getInstance()
       .getWeeklyRecordByUserId(app.globalData.userInfo.userId, 1)
       .then(res => {

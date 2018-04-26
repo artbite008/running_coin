@@ -44,7 +44,7 @@ Page({
   },
   loadData: function() {
     let that = this;
-    RecordService
+    return RecordService
       .getInstance()
       .getEveryoneWeeklyRecord(1)
       .then(res => {
