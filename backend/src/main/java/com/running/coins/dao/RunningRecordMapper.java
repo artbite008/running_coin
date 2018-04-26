@@ -1,6 +1,7 @@
 package com.running.coins.dao;
 
 import com.running.coins.model.RunningRecord;
+import com.running.coins.model.RunningRecordWithfinalScore;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
@@ -98,8 +99,8 @@ public interface RunningRecordMapper {
             "Score, SettledTime, EarnedCoins, Comments, Evidence",
             "from Running_Record",
             "where UserGroupId = #{userGroupId,jdbcType=INTEGER}",
-            "and CreationTime >= #{start,jdbcType=DATE}",
-            "and CreationTime <= #{end,jdbcType=DATE}",
+            "and CreationTime >= #{start,jdbcType=TIMESTAMP}",
+            "and CreationTime <= #{end,jdbcType=TIMESTAMP}",
             "ORDER BY CreationTime ASC"
     })
     @Results({
@@ -118,6 +119,76 @@ public interface RunningRecordMapper {
     List<RunningRecord> selectByUserGroupIdAndTimeRange(@Param("userGroupId") Integer userGroupId, @Param("start") Date start,  @Param("end") Date end);
 
 
+
+    @Select({
+            "select",
+            "RuningRecordId, UserGroupId, Distance, CreationTime, LastVotedTime, Status, ",
+            "Score, SettledTime, EarnedCoins, Comments, Evidence",
+            "from Running_Record",
+            "And CreationTime > date_sub(#{nowtime,jdbcType=TIMESTAMP},INTERVAL 24 HOUR)",
+            "And CreationTime < #{nowtime,jdbcType=TIMESTAMP})"
+    })
+    @Results({
+            @Result(column="RuningRecordId", property="runingRecordId", jdbcType=JdbcType.INTEGER, id=true),
+            @Result(column="UserGroupId", property="userGroupId", jdbcType=JdbcType.INTEGER),
+            @Result(column="Distance", property="distance", jdbcType=JdbcType.REAL),
+            @Result(column="CreationTime", property="creationTime", jdbcType=JdbcType.TIMESTAMP),
+            @Result(column="LastVotedTime", property="lastVotedTime", jdbcType=JdbcType.TIMESTAMP),
+            @Result(column="Status", property="status", jdbcType=JdbcType.INTEGER),
+            @Result(column="Score", property="score", jdbcType=JdbcType.INTEGER),
+            @Result(column="SettledTime", property="settledTime", jdbcType=JdbcType.TIMESTAMP),
+            @Result(column="EarnedCoins", property="earnedCoins", jdbcType=JdbcType.DOUBLE),
+            @Result(column="Comments", property="comments", jdbcType=JdbcType.VARCHAR),
+            @Result(column="Evidence", property="evidence", jdbcType=JdbcType.LONGVARBINARY)
+    })
+    List<RunningRecord> selectRunningUserByRecordWithIn24hours(@Param("nowtime") Date nowtime);
+
+
+
+    @Select({
+            " SELECT",
+            "   runningrecordResult.RuningRecordId AS RuningRecordId,",
+            "   finalscore,",
+            "   UserGroupId,",
+            "   Distance,",
+            "   CreationTime,",
+            "   LastVotedTime,",
+            "   Status,",
+            "   Score,",
+            "   SettledTime,",
+            "   EarnedCoins,",
+            "   Comments,",
+            "   Evidence",
+            " FROM (",
+            "        SELECT",
+            "          RuningRecordId,",
+            "          sum(Score) AS finalScore",
+            "        FROM Vote_Record",
+            "        WHERE VotedTime > date_sub(now(), INTERVAL 24 HOUR)",
+            "        GROUP BY RuningRecordId",
+            "      ) AS voteResult RIGHT JOIN (",
+            "                                  SELECT *",
+            "                                  FROM Running_Record",
+            "                                  WHERE CreationTime > date_sub(now(), INTERVAL 24 HOUR)",
+            "                                        AND CreationTime < now()",
+            "                                ) AS runningrecordResult",
+            "     ON voteResult.RuningRecordId = runningrecordResult.RuningRecordId"
+    })
+    @Results({
+            @Result(column="finalScore", property="finalscore", jdbcType=JdbcType.INTEGER),
+            @Result(column="RuningRecordId", property="runingRecordId", jdbcType=JdbcType.INTEGER, id=true),
+            @Result(column="UserGroupId", property="userGroupId", jdbcType=JdbcType.INTEGER),
+            @Result(column="Distance", property="distance", jdbcType=JdbcType.REAL),
+            @Result(column="CreationTime", property="creationTime", jdbcType=JdbcType.TIMESTAMP),
+            @Result(column="LastVotedTime", property="lastVotedTime", jdbcType=JdbcType.TIMESTAMP),
+            @Result(column="Status", property="status", jdbcType=JdbcType.INTEGER),
+            @Result(column="Score", property="score", jdbcType=JdbcType.INTEGER),
+            @Result(column="SettledTime", property="settledTime", jdbcType=JdbcType.TIMESTAMP),
+            @Result(column="EarnedCoins", property="earnedCoins", jdbcType=JdbcType.DOUBLE),
+            @Result(column="Comments", property="comments", jdbcType=JdbcType.VARCHAR),
+            @Result(column="Evidence", property="evidence", jdbcType=JdbcType.LONGVARBINARY)
+    })
+    List<RunningRecordWithfinalScore> selectRunningRecordWithfinalScoreIn24hours();
 
 
 }

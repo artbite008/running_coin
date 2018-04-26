@@ -1,41 +1,57 @@
 package com.running.coins.job;
 
-import com.running.coins.common.util.DateUtils;
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.running.coins.dao.RunningRecordMapper;
 import com.running.coins.dao.VoteRecordMapper;
 import com.running.coins.model.RunningRecord;
 import com.running.coins.model.RunningRecordWithfinalScore;
+import com.running.coins.model.VoteRecord;
+import com.running.coins.service.RunningInfoService;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.xml.crypto.Data;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
- * VoteCountjob
+ * JobTest
  *
  * @author guxiang
- * @date 2018/4/25
+ * @date 2018/4/26
  */
-@Configuration
-@EnableScheduling
-public class VoteCountjob {
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class JobTest {
 
+    @Autowired
+    private RunningRecordMapper runningRecordMapper;
 
     @Autowired
     private VoteRecordMapper voteRecordMapper;
 
-    @Autowired
-    private RunningRecordMapper runningRecordMapper;
-    /**
-     * 设置定时任务  每天 3:00:00 统计
-     */
-    @Scheduled(cron = "00 00 3 * * ?")
-    public void executeVoteCount() {
+    @Test
+    public void testJob() {
+        Date date = new Date();
+
+//        /** 1 取出所有人24小时内的跑步记录*/
+//        List<RunningRecord> runningRecords = runningRecordMapper.selectRunningUserByRecordWithIn24hours(date);
+//
+//        /** 2 分别对跑步记录 在24小时内进行的投票的结果的清算*/
+//        for (RunningRecord runningRecord : runningRecords) {
+//            List<VoteRecord> voteRecords = voteRecordMapper.selectByRunningRecordIdAndLimitedTime(runningRecord.getRuningRecordId(), date);
+//            int grade = 0;
+//            for (VoteRecord voteRecord : voteRecords) {
+//                if (voteRecord.getStatus() == -1) {
+//
+//                }
+//            }
+//        }
+
 
         List<RunningRecordWithfinalScore> runningRecordWithfinalScores = runningRecordMapper.selectRunningRecordWithfinalScoreIn24hours();
 
@@ -54,6 +70,7 @@ public class VoteCountjob {
 
             runningRecordMapper.updateByPrimaryKey(runningRecord);
         }
+
 
     }
 }

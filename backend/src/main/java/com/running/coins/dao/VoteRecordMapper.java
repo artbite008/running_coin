@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -106,5 +107,32 @@ public interface VoteRecordMapper {
     })
     List<VoteRecord> selectByRuningRecordId(@Param("runingRecordId") Integer runingRecordId);
 
+
+    /**
+     * find out the voteRecord info  within 24 hours
+     * @param runingRecordId
+     * @param limitedTime
+     * @return
+     */
+    @Select({
+            "select",
+            "VoteRecordId, VoteUserGroupId, RuningRecordId, VotedTime, UpdatedTime, ",
+            "Status, Score, Comments",
+            "from Vote_Record",
+            "where RuningRecordId = #{runingRecordId,jdbcType=INTEGER}",
+            "And VotedTime > date_sub(#{limitedTime,jdbcType=TIMESTAMP},INTERVAL 24 HOUR)",
+            "And VotedTime < #{limitedTime,jdbcType=TIMESTAMP})"
+    })
+    @Results({
+            @Result(column = "VoteRecordId", property = "voteRecordId", jdbcType = JdbcType.INTEGER, id = true),
+            @Result(column = "VoteUserGroupId", property = "voteUserGroupId", jdbcType = JdbcType.INTEGER),
+            @Result(column = "RuningRecordId", property = "runingRecordId", jdbcType = JdbcType.INTEGER),
+            @Result(column = "VotedTime", property = "votedTime", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "UpdatedTime", property = "updatedTime", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "Status", property = "status", jdbcType = JdbcType.INTEGER),
+            @Result(column = "Score", property = "score", jdbcType = JdbcType.INTEGER),
+            @Result(column = "Comments", property = "comments", jdbcType = JdbcType.VARCHAR)
+    })
+    List<VoteRecord> selectByRunningRecordIdAndLimitedTime(@Param("runningRecordId") Integer runingRecordId,@Param("limitedTime") Date  limitedTime);
 
 }

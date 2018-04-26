@@ -1,5 +1,6 @@
 package com.running.coins.common.util;
 
+import javax.xml.crypto.Data;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,4 +29,14 @@ public class DateUtils {
         return nowTime;
     }
 
+    public static Date[] parseToDayRange(Date date){
+        Date[] dates = new Date[2];
+        SimpleDateFormat sdf = new SimpleDateFormat(" yyyy-MM-dd");
+        String nowDay = sdf.format(date);
+        date.setDate(date.getDay()-1);
+        String preDay = sdf.format(date);
+
+        preDay += "12:00:00";
+        return  null;
+    }
 }
