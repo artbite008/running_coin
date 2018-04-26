@@ -1,6 +1,7 @@
 import { progressBarColorSets as _progressBarColorSets} from '../mock/RC-progressBar.mock.js';
 import { plans } from '../mock/RC-user.mock';
-import { UserService, RecordService } from '../service/index';
+import { UserService, WxService as WX, RecordService } from '../service/index';
+import { hashToInt } from '../../utils/util';
 
 const app = getApp();
 
@@ -14,7 +15,7 @@ Page({
     weeklyReords: [],
     showBackdrop: 'none',
     dialogEvent: '',
-    plan: 5,
+    plan: plans[0],
     plans: plans
   },
 
@@ -79,6 +80,33 @@ Page({
         return new Promise((resolve) => resolve());
       });
   },
+  refreshUserInfo: function() {
+    let that = this;
+    return WX
+      // get user Info
+      .userInfo(false)
+      .then(res => {
+        const userInfo = res.userInfo;
+        app.globalData.userInfo = userInfo;
+
+        // create or update user
+        return UserService
+          .getInstance()
+          .createAndUpdateUser({
+            userName: userInfo.nickName,
+            groupId: 1,
+            unionId: hashToInt(`${userInfo.nickName}-${userInfo.city}-${userInfo.province}-${userInfo.country}`),
+            icon: userInfo.avatarUrl
+          });
+      }).then(res => {
+        const homePageModel = res.data.data;
+        that.setData({
+          userInfo: homePageModel.userRecord || {},
+        });
+        Object.assign(app.globalData.userInfo, homePageModel.userRecord);
+        return new Promise((resolve) => resolve());
+      });
+  },
   getUserInfo: function (e) {
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
@@ -119,6 +147,7 @@ Page({
       .then(res => wx.showToast({ title: 'submit!' }));;
   },
   onPullDownRefresh: function () {
+    this.refreshUserInfo();
     this
       .loadData()
       .then(() => wx.stopPullDownRefresh());

@@ -17,7 +17,7 @@ Page({
     progressBarColorSets: _progressBarColorSets,
     showBackdrop: false,
     dialogEvent: '',
-    markAchievement: 0,
+    markAchievement: achievements[0],
     achievements: achievements,
     register: wx.getStorageSync('register'),
     // for vote
