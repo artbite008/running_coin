@@ -32,9 +32,9 @@ public class VoteCountjob {
     @Autowired
     private RunningRecordMapper runningRecordMapper;
     /**
-     * 设置定时任务  每天 3:00:00 统计
+     * 设置定时任务  每天 23:00:00 统计
      */
-    @Scheduled(cron = "00 00 3 * * ?")
+    @Scheduled(cron = "00 00 23 * * ?")
     public void executeVoteCount() {
 
         List<RunningRecordWithfinalScore> runningRecordWithfinalScores = runningRecordMapper.selectRunningRecordWithfinalScoreIn24hours();

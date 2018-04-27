@@ -135,7 +135,7 @@ public class FrontServices {
             for (VoteRecord voteRecord : voteRecords) {
                 if (voteRecord.getStatus().equals(VoteStatus.LIKE.getCode())) {
                     likes++;
-                } else if (voteRecord.equals(VoteStatus.DISLIKE.getCode())) {
+                } else if (voteRecord.getStatus().equals(VoteStatus.DISLIKE.getCode())) {
                     dislikes++;
                 }
             }
@@ -275,6 +275,18 @@ public class FrontServices {
         userJoinResponse.setOtherUsersRecord(userRecords);
     }
 
+    /**
+     * Green  跑步过之后
+     * @param userInGroup
+     * @param userRecord
+     * @param overallDoneDistance
+     * @param userInformation
+     * @param targetDistance
+     * @param lastRecord
+     * @param likes
+     * @param dislikes
+     * @return
+     */
     private UserRecord setUserRecords(UserGroup userInGroup, UserRecord userRecord, float overallDoneDistance, UserInfo userInformation, TargetDistance targetDistance, float lastRecord, int likes, int dislikes) {
         float rate;
         if (targetDistance != null) {

@@ -34,23 +34,12 @@ public class JobTest {
     @Autowired
     private VoteRecordMapper voteRecordMapper;
 
-    @Test
+    /**
+     * 防止 maven package 的时候执行 test
+     */
+ /*  @Test
     public void testJob() {
         Date date = new Date();
-
-//        /** 1 取出所有人24小时内的跑步记录*/
-//        List<RunningRecord> runningRecords = runningRecordMapper.selectRunningUserByRecordWithIn24hours(date);
-//
-//        /** 2 分别对跑步记录 在24小时内进行的投票的结果的清算*/
-//        for (RunningRecord runningRecord : runningRecords) {
-//            List<VoteRecord> voteRecords = voteRecordMapper.selectByRunningRecordIdAndLimitedTime(runningRecord.getRuningRecordId(), date);
-//            int grade = 0;
-//            for (VoteRecord voteRecord : voteRecords) {
-//                if (voteRecord.getStatus() == -1) {
-//
-//                }
-//            }
-//        }
 
 
         List<RunningRecordWithfinalScore> runningRecordWithfinalScores = runningRecordMapper.selectRunningRecordWithfinalScoreIn24hours();
@@ -72,5 +61,5 @@ public class JobTest {
         }
 
 
-    }
+    }*/
 }
