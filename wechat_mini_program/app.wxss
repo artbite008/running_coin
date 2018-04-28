@@ -73,6 +73,11 @@
   border-radius: 3px;
 }
 
+.progress-container {
+  display: flex;
+  flex-direction: row;
+}
+
 .bg-error {
   background-color: #ff5151;
 }

@@ -22,7 +22,7 @@
         </button>
       </view>
       <view class='section'>
-        <text>{{userInfo.current || 0}}/{{userInfo.target || 0}}</text>
+        <text>{{userInfo.distancevalided || 0}}/{{userInfo.target || 0}}</text>
         <button class="retarget">
           <image src="../imgs/progress.svg" class='small-icon'></image>
           <image src="../imgs/goal.svg" class='small-icon'></image>

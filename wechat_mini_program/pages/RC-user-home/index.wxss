@@ -112,8 +112,8 @@
 
 .vote-icon-align.distance {
   color:#ff5151;
-  font-weight: 800;
-  font-size: 50px;
+  font-weight: 400;
+  font-size: 40px;
 }
 
 .vote-icon-align.unit {
