@@ -3,6 +3,7 @@ package com.running.coins.common.util;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
 import java.time.temporal.WeekFields;
 import java.util.Date;
@@ -24,13 +25,14 @@ public class ThisLocalizedWeek {// Try and always specify the time zone you're w
 
     public Date getFirstDay() {
         LocalDate localDate = LocalDate.now(TZ).with(TemporalAdjusters.previousOrSame(this.firstDayOfWeek));
-        Date date = Date.from(localDate.atStartOfDay(ZoneId.of("Asia/Shanghai")).toInstant());
+        Date date = Date.from(localDate.atStartOfDay(ZoneId.of("Asia/Shanghai")).toInstant().plus(1,ChronoUnit.DAYS));
+        /** add one date  set week as Monday to Sunday*/
         return DateUtils.parse(date);
     }
 
     public Date getLastDay() {
         LocalDate localDate = LocalDate.now(TZ).with(TemporalAdjusters.nextOrSame(this.lastDayOfWeek));
-        Date date = Date.from(localDate.atStartOfDay(ZoneId.of("Asia/Shanghai")).toInstant());
+        Date date = Date.from(localDate.atStartOfDay(ZoneId.of("Asia/Shanghai")).toInstant().plusSeconds(2*24*60*60-1));
         return DateUtils.parse(date);
     }
 
@@ -42,14 +44,19 @@ public class ThisLocalizedWeek {// Try and always specify the time zone you're w
     public Date getFirstDay(String date) {
         String[] strs = date.split("-");
         LocalDate localDate = LocalDate.of(Integer.valueOf(strs[0]), Integer.valueOf(strs[1]), Integer.valueOf(strs[2].substring(0, 2))).with(TemporalAdjusters.previousOrSame(this.firstDayOfWeek));
-        Date dateReturn = Date.from(localDate.atStartOfDay(ZoneId.of("Asia/Shanghai")).toInstant());
+        Date dateReturn = Date.from(localDate.atStartOfDay(ZoneId.of("Asia/Shanghai")).toInstant().plus(1,ChronoUnit.DAYS));
+
+        /** add one date  set week as Monday to Sunday*/
+
         return DateUtils.parse(dateReturn);
     }
 
     public Date getLastDay(String date) {
         String[] strs = date.split("-");
         LocalDate localDate = LocalDate.of(Integer.valueOf(strs[0]), Integer.valueOf(strs[1]), Integer.valueOf(strs[2].substring(0, 2))).with(TemporalAdjusters.nextOrSame(this.lastDayOfWeek));
-        Date dateReturn = Date.from(localDate.atStartOfDay(ZoneId.of("Asia/Shanghai")).toInstant());
+        Date dateReturn = Date.from(localDate.atStartOfDay(ZoneId.of("Asia/Shanghai")).toInstant().plus(1,ChronoUnit.DAYS));
+        /** add one date  set week as Monday to Sunday*/
+
         return DateUtils.parse(dateReturn);
     }
 
