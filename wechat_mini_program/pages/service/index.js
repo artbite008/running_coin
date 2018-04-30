@@ -1,8 +1,8 @@
 import {HttpClient as hc} from '../../utils/httpClient';
 
 const envLocal = 'https://test.com';  // mapping in hosts file
-const envQa = 'https://guxiangfly.cn';
-//const envQa = 'https://localhost';
+//const envQa = 'https://guxiangfly.cn';
+const envQa = 'https://localhost';
 const envProd = 'http://127.0.0.1';
 
 /**

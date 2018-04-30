@@ -242,6 +242,8 @@ public class FrontServices {
                 if (i == 0) {
                     for (int k = 0; k < runningRecords.size(); k++) {
 
+                        overallDoneDistance += runningRecords.get(k).getDistance();
+
                         if (runningRecords.get(k).getStatus()==3){
                             distancevalided+=runningRecords.get(k).getDistance();
                         }else if (runningRecords.get(k).getStatus()==0){
@@ -252,7 +254,8 @@ public class FrontServices {
                     }
                 }
 
-                current = distancevalided+distanceWaitvalided;
+
+                current = runningRecords.get(i).getDistance();
                 userRecord.setRunningRecordId(runningRecords.get(i).getRuningRecordId());
                 userRecord.setCurrent(current);
                 userRecord = setUserRecords(userInGroup, userRecord, overallDoneDistance, distancevalided,distanceWaitvalided,distanceRejected,userInformation, targetDistance, lastRecord, likes, dislikes);

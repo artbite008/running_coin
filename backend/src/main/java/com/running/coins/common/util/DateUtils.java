@@ -23,6 +23,14 @@ public class DateUtils {
         String nowTime = sdf.format(date);
         return nowTime;
     }
+
+
+
+    public static String parseForFrontEnd2(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss E");
+        String nowTime = sdf.format(date);
+        return nowTime;
+    }
     public static String parseForFrontEnd1(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd E");
         String nowTime = sdf.format(date);

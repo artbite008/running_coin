@@ -1,22 +1,8 @@
 package com.running.coins.job;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import com.running.coins.dao.RunningRecordMapper;
 import com.running.coins.dao.VoteRecordMapper;
-import com.running.coins.model.RunningRecord;
-import com.running.coins.model.RunningRecordWithfinalScore;
-import com.running.coins.model.VoteRecord;
-import com.running.coins.service.RunningInfoService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * JobTest
@@ -24,8 +10,8 @@ import java.util.Map;
  * @author guxiang
  * @date 2018/4/26
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
 public class JobTest {
 
     @Autowired
@@ -42,13 +28,13 @@ public class JobTest {
         Date date = new Date();
 
 
-        List<RunningRecordWithfinalScore> runningRecordWithfinalScores = runningRecordMapper.selectRunningRecordWithfinalScoreIn24hours();
+        List<RunningRecordWithInfo> runningRecordWithfinalScores = runningRecordMapper.selectRunningRecordWithInfoScoreIn24hours();
 
-        for (RunningRecordWithfinalScore runningRecordWithfinalScore : runningRecordWithfinalScores) {
+        for (RunningRecordWithInfo runningRecordWithfinalScore : runningRecordWithfinalScores) {
             System.out.println(runningRecordWithfinalScore);
 
             RunningRecord runningRecord = runningRecordWithfinalScore;
-            runningRecord.setScore(runningRecordWithfinalScore.getFinalscore());
+            runningRecord.setScore(runningRecordWithfinalScore.getFinalScore());
             if (runningRecord.getScore()==null){
                 runningRecord.setStatus(1);
             }else if (runningRecord.getScore()<=0){

@@ -33,9 +33,7 @@
             style='width: {{((userInfo.distanceWaitvalided || 0) / ((userInfo.distanceWaitvalided || 0) + (userInfo.distancevalided || 0))) > 1 ? 100 : (((userInfo.distanceWaitvalided || 0) / ((userInfo.distanceWaitvalided || 0) + (userInfo.distancevalided || 0))) * 100)}}%;' 
             class="bg-warning progress">
         </view>
-        
-        
-        
+      
         </view>
       </view>
     </block>

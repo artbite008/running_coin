@@ -1,7 +1,7 @@
 package com.running.coins.dao;
 
 import com.running.coins.model.RunningRecord;
-import com.running.coins.model.RunningRecordWithfinalScore;
+import com.running.coins.model.RunningRecordWithInfo;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
@@ -146,36 +146,41 @@ public interface RunningRecordMapper {
 
 
     @Select({
-            " SELECT",
-            "   runningrecordResult.RuningRecordId AS RuningRecordId,",
-            "   finalscore,",
-            "   UserGroupId,",
-            "   Distance,",
-            "   CreationTime,",
-            "   LastVotedTime,",
-            "   Status,",
-            "   Score,",
-            "   SettledTime,",
-            "   EarnedCoins,",
-            "   Comments,",
-            "   Evidence",
-            " FROM (",
-            "        SELECT",
-            "          RuningRecordId,",
-            "          sum(Score) AS finalScore",
-            "        FROM Vote_Record",
-            "        WHERE VotedTime > date_sub(now(), INTERVAL 24 HOUR)",
-            "        GROUP BY RuningRecordId",
-            "      ) AS voteResult RIGHT JOIN (",
+            "SELECT",
+            "  runningrecordResult.RuningRecordId AS RuningRecordId,",
+            "  FinalScore,",
+            "  UserName,",
+            "  runningrecordResult.UserGroupId AS  UserGroupId,",
+            "  Distance,",
+            "  CreationTime,",
+            "  LastVotedTime,",
+            "  runningrecordResult.Status  as Status,",
+            "  Score,",
+            "  SettledTime,",
+            "  EarnedCoins,",
+            "  Comments,",
+            "  Evidence",
+            "FROM (",
+            "       SELECT",
+            "         RuningRecordId,",
+            "         sum(Score) AS FinalScore",
+            "       FROM Vote_Record",
+            "       WHERE VotedTime > date_sub(now(), INTERVAL 24 HOUR)",
+            "       GROUP BY RuningRecordId",
+            "     ) AS voteResult RIGHT JOIN (",
             "                                  SELECT *",
             "                                  FROM Running_Record",
             "                                  WHERE CreationTime > date_sub(now(), INTERVAL 24 HOUR)",
             "                                        AND CreationTime < now()",
             "                                ) AS runningrecordResult",
-            "     ON voteResult.RuningRecordId = runningrecordResult.RuningRecordId"
+            "    ON voteResult.RuningRecordId = runningrecordResult.RuningRecordId",
+            "LEFT JOIN UserGroup",
+            "   on UserGroup.UserGroupId = runningrecordResult.UserGroupId",
+            "LEFT JOIN User_Info",
+            "  on User_Info.UserId= UserGroup.UserId;"
     })
     @Results({
-            @Result(column="finalScore", property="finalscore", jdbcType=JdbcType.INTEGER),
+            @Result(column="finalScore", property="finalScore", jdbcType=JdbcType.INTEGER),
             @Result(column="RuningRecordId", property="runingRecordId", jdbcType=JdbcType.INTEGER, id=true),
             @Result(column="UserGroupId", property="userGroupId", jdbcType=JdbcType.INTEGER),
             @Result(column="Distance", property="distance", jdbcType=JdbcType.REAL),
@@ -188,7 +193,7 @@ public interface RunningRecordMapper {
             @Result(column="Comments", property="comments", jdbcType=JdbcType.VARCHAR),
             @Result(column="Evidence", property="evidence", jdbcType=JdbcType.LONGVARBINARY)
     })
-    List<RunningRecordWithfinalScore> selectRunningRecordWithfinalScoreIn24hours();
+    List<RunningRecordWithInfo> selectRunningRecordWithInfoScoreIn24hours();
 
 
 }

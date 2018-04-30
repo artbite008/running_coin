@@ -19,12 +19,18 @@ public class ThisLocalizedWeek {// Try and always specify the time zone you're w
 
     public ThisLocalizedWeek(final Locale locale) {
         this.locale = locale;
+
         this.firstDayOfWeek = WeekFields.of(locale).getFirstDayOfWeek();
         this.lastDayOfWeek = DayOfWeek.of(((this.firstDayOfWeek.getValue() + 5) % DayOfWeek.values().length) + 1);
     }
 
     public Date getFirstDay() {
         LocalDate localDate = LocalDate.now(TZ).with(TemporalAdjusters.previousOrSame(this.firstDayOfWeek));
+
+        /** for SunDay Bug*/
+        if (LocalDate.now().getDayOfWeek().equals(DayOfWeek.SUNDAY)){
+           localDate= localDate.plus(-7,ChronoUnit.DAYS);
+        }
         Date date = Date.from(localDate.atStartOfDay(ZoneId.of("Asia/Shanghai")).toInstant().plus(1,ChronoUnit.DAYS));
         /** add one date  set week as Monday to Sunday*/
         return DateUtils.parse(date);
@@ -32,6 +38,12 @@ public class ThisLocalizedWeek {// Try and always specify the time zone you're w
 
     public Date getLastDay() {
         LocalDate localDate = LocalDate.now(TZ).with(TemporalAdjusters.nextOrSame(this.lastDayOfWeek));
+
+        /** for SunDay Bug*/
+        if (LocalDate.now().getDayOfWeek().equals(DayOfWeek.SUNDAY)){
+            localDate= localDate.plus(-7,ChronoUnit.DAYS);
+        }
+
         Date date = Date.from(localDate.atStartOfDay(ZoneId.of("Asia/Shanghai")).toInstant().plusSeconds(2*24*60*60-1));
         return DateUtils.parse(date);
     }
@@ -68,4 +80,5 @@ public class ThisLocalizedWeek {// Try and always specify the time zone you're w
                 this.firstDayOfWeek,
                 this.lastDayOfWeek);
     }
+
 }

@@ -44,5 +44,4 @@ public class FrontController {
         return responseMessage;
     }
 
-
 }

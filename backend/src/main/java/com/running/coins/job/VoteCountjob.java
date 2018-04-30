@@ -2,17 +2,21 @@ package com.running.coins.job;
 
 import com.running.coins.common.util.DateUtils;
 import com.running.coins.dao.RunningRecordMapper;
+import com.running.coins.dao.UserInfoMapper;
 import com.running.coins.dao.VoteRecordMapper;
 import com.running.coins.model.RunningRecord;
-import com.running.coins.model.RunningRecordWithfinalScore;
+import com.running.coins.model.RunningRecordWithInfo;
+import com.running.coins.model.transition.MailBean;
+import com.running.coins.service.MailService;
+import freemarker.template.Template;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
-import javax.xml.crypto.Data;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,29 +35,50 @@ public class VoteCountjob {
 
     @Autowired
     private RunningRecordMapper runningRecordMapper;
+
+    @Autowired
+    private MailService mailService;
+
+
+    @Autowired
+    private JavaMailSender javaMailSender;
+
     /**
      * 设置定时任务  每天 23:00:00 统计
      */
     @Scheduled(cron = "00 00 23 * * ?")
     public void executeVoteCount() {
 
-        List<RunningRecordWithfinalScore> runningRecordWithfinalScores = runningRecordMapper.selectRunningRecordWithfinalScoreIn24hours();
+        System.err.println("开始执行任务");
+        List<RunningRecordWithInfo> runningRecordWithInfos = runningRecordMapper.selectRunningRecordWithInfoScoreIn24hours();
 
-        for (RunningRecordWithfinalScore runningRecordWithfinalScore : runningRecordWithfinalScores) {
-            System.out.println(runningRecordWithfinalScore);
+        List<MailBean> mailBeanList = new ArrayList();
 
-            RunningRecord runningRecord = runningRecordWithfinalScore;
-            runningRecord.setScore(runningRecordWithfinalScore.getFinalscore());
+        for (RunningRecordWithInfo runningRecordWithInfo : runningRecordWithInfos) {
+            System.out.println(runningRecordWithInfo);
+
+            MailBean mailBean = new MailBean();
+            mailBean.setDistance(runningRecordWithInfo.getDistance());
+            mailBean.setUsername(runningRecordWithInfo.getUsername());
+            mailBean.setCreationTime(DateUtils.parseForFrontEnd2(runningRecordWithInfo.getCreationTime()));
+
+            RunningRecord runningRecord = runningRecordWithInfo;
+            runningRecord.setScore(runningRecordWithInfo.getFinalScore());
             if (runningRecord.getScore()==null){
                 runningRecord.setStatus(1);
+                mailBean.setStatus("Expired");
             }else if (runningRecord.getScore()<=0){
                 runningRecord.setStatus(2);
+                mailBean.setStatus("Rejected");
             }else if (runningRecord.getScore()>0){
                 runningRecord.setStatus(3);
+                mailBean.setStatus("Passed");
             }
-
+            mailBeanList.add(mailBean);
             runningRecordMapper.updateByPrimaryKey(runningRecord);
         }
 
+        mailService.sendMessageMail(mailBeanList,"RunningClub Report", "message.ftl");
+        System.err.println("发送结束");
     }
 }
