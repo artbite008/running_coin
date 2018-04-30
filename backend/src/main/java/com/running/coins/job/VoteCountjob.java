@@ -6,9 +6,12 @@ import com.running.coins.dao.UserInfoMapper;
 import com.running.coins.dao.VoteRecordMapper;
 import com.running.coins.model.RunningRecord;
 import com.running.coins.model.RunningRecordWithInfo;
+import com.running.coins.model.UserInfo;
 import com.running.coins.model.transition.MailBean;
+import com.running.coins.model.transition.UserInfoBatchBean;
 import com.running.coins.service.MailService;
 import freemarker.template.Template;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -39,14 +42,14 @@ public class VoteCountjob {
     @Autowired
     private MailService mailService;
 
-
     @Autowired
-    private JavaMailSender javaMailSender;
+    private UserInfoMapper userInfoMapper;
+
 
     /**
      * 设置定时任务  每天 23:00:00 统计
      */
-    @Scheduled(cron = "00 00 23 * * ?")
+    @Scheduled(cron = "00 33 23 * * ?")
     public void executeVoteCount() {
 
         System.err.println("开始执行任务");
@@ -62,23 +65,36 @@ public class VoteCountjob {
             mailBean.setUsername(runningRecordWithInfo.getUsername());
             mailBean.setCreationTime(DateUtils.parseForFrontEnd2(runningRecordWithInfo.getCreationTime()));
 
+
             RunningRecord runningRecord = runningRecordWithInfo;
             runningRecord.setScore(runningRecordWithInfo.getFinalScore());
-            if (runningRecord.getScore()==null){
+            if (runningRecord.getScore() == null) {
                 runningRecord.setStatus(1);
                 mailBean.setStatus("Expired");
-            }else if (runningRecord.getScore()<=0){
+            } else if (runningRecord.getScore() <= 0) {
                 runningRecord.setStatus(2);
                 mailBean.setStatus("Rejected");
-            }else if (runningRecord.getScore()>0){
+            } else if (runningRecord.getScore() > 0) {
                 runningRecord.setStatus(3);
                 mailBean.setStatus("Passed");
+                mailBean.setEarnedCoins(runningRecordWithInfo.getEarnedCoins());
             }
+
             mailBeanList.add(mailBean);
             runningRecordMapper.updateByPrimaryKey(runningRecord);
         }
 
-        mailService.sendMessageMail(mailBeanList,"RunningClub Report", "message.ftl");
+
+        List<UserInfoBatchBean> userInfoBatchBeans = userInfoMapper.selectUserTotalInfo();
+        for (UserInfoBatchBean userInfoBatchBean : userInfoBatchBeans) {
+            UserInfo userInfo = userInfoMapper.selectByPrimaryKey(userInfoBatchBean.getUserId());
+            userInfo.setTotalDistance(userInfoBatchBean.getTotalDistance());
+            userInfo.setCoins(userInfoBatchBean.getTotalCoins());
+            userInfoMapper.updateByPrimaryKey(userInfo);
+        }
+        List<UserInfo> userInfos = userInfoMapper.selectAllUser();
+        mailService.sendMessageMail(mailBeanList,userInfos, "RunningClub Report", "message.ftl");
         System.err.println("发送结束");
     }
+
 }

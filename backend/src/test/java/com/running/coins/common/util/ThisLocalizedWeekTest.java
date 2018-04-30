@@ -35,7 +35,6 @@ public class ThisLocalizedWeekTest {
 
     @Test
     public void getLastDay() {
-
         LocalDate localDate = LocalDate.now();
         localDate.getDayOfWeek();
     }

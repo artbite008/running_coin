@@ -19,5 +19,4 @@ public class UserInfo {
     private String metaData;
 
     private String icon;
-
 }

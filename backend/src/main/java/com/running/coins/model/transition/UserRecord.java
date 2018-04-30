@@ -27,7 +27,8 @@ public class UserRecord {
     private Boolean voted;
     private String color;
     private String icon;
-    private float distancevalided;
-    private float distanceWaitvalided;
+    private float distanceValided;
+    private float distanceWaitValided;
     private float distanceRejected;
+    private int status;
 }

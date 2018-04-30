@@ -40,7 +40,13 @@ public class FrontServices {
             .put("THU", 3)
             .put("FRI", 4)
             .put("SAT", 5)
-            .put("SUN", 6)
+            .put("星期一", 0)
+            .put("星期二", 1)
+            .put("星期三", 2)
+            .put("星期四", 3)
+            .put("星期五", 4)
+            .put("星期六", 5)
+            .put("星期日", 6)
             .build();
 
     private final
@@ -170,7 +176,10 @@ public class FrontServices {
                     DateUtils.parse(start),
                     DateUtils.parse(end));
             for (RunningRecord runningRecord : runningRecords) {
-                allAchievements += runningRecord.getDistance();
+                if (runningRecord.getStatus() == 3) {
+                    allAchievements += runningRecord.getDistance();
+                }
+
                 List<VoteRecord> voteRecords = voteRecordMapper.selectByRuningRecordId(runningRecord.getRuningRecordId());
                 for (VoteRecord voteRecord : voteRecords) {
                     if (voteRecord.getStatus().equals(VoteStatus.LIKE.getCode())) {
@@ -183,11 +192,20 @@ public class FrontServices {
                 Integer whichDay = immutableDaysMap.get(createDate.substring(11));
                 if (dayAchievementMap.containsKey(whichDay)) {
                     float temp = dayAchievementMap.get(whichDay);
-                    dayAchievementMap.put(whichDay, temp + runningRecord.getDistance());
+                    if (runningRecord.getStatus() == 3) {
+                        dayAchievementMap.put(whichDay, temp + runningRecord.getDistance());
+                    }
                 } else {
-                    dayAchievementMap.put(whichDay, runningRecord.getDistance());
+                    if (runningRecord.getStatus() == 3) {
+                        dayAchievementMap.put(whichDay, runningRecord.getDistance());
+                    }
                 }
-                achievements.set(whichDay, dayAchievementMap.get(whichDay).intValue());
+                if (dayAchievementMap.get(whichDay) != null) {
+                    achievements.set(whichDay, dayAchievementMap.get(whichDay).intValue());
+                } else {
+                    achievements.set(whichDay, 0);
+                }
+
             }
             userRecord.setUserGroupId(userGroup.getUserGroupId());
             userRecord.setUserId(userGroup.getUserId());
@@ -211,14 +229,15 @@ public class FrontServices {
         List<UserGroup> usersInGroup = userGroupMapper.selectByGroupId(userJoinRequest.getGroupId());
         for (UserGroup userInGroup : usersInGroup) {
             float current;
-            float distancevalided=0f;
-            float distanceWaitvalided=0f;
+            float distanceValided = 0f;
+            float distanceWaitValided = 0f;
             float distanceRejected = 0f;
             float overallDoneDistance = 0f;
             final ThisLocalizedWeek chinaWeek = new ThisLocalizedWeek(Locale.CHINA);
             int likes = 0;
             int dislikes = 0;
             float lastRecord = 0f;
+            int status = 0;
             UserRecord userRecord = null;
 
             UserInfo userInformation = userInfoMapper.selectByPrimaryKey(userInGroup.getUserId());
@@ -231,6 +250,7 @@ public class FrontServices {
             List<UserRecord> tempRecords = Lists.newLinkedList();
             for (int i = 0; i < runningRecords.size(); i++) {
                 userRecord = new UserRecord();
+
                 List<VoteRecord> voteRecords = voteRecordMapper.selectByRuningRecordId(runningRecords.get(i).getRuningRecordId());
                 for (int j = 0; j < voteRecords.size(); j++) {
                     if (voteRecords.get(j).getStatus().equals(VoteStatus.LIKE.getCode())) {
@@ -244,40 +264,41 @@ public class FrontServices {
 
                         overallDoneDistance += runningRecords.get(k).getDistance();
 
-                        if (runningRecords.get(k).getStatus()==3){
-                            distancevalided+=runningRecords.get(k).getDistance();
-                        }else if (runningRecords.get(k).getStatus()==0){
-                            distanceWaitvalided+=runningRecords.get(k).getDistance();
-                        }else if (runningRecords.get(k).getStatus()==2){
-                            distanceRejected+=runningRecords.get(k).getDistance();
+                        if (runningRecords.get(k).getStatus() == 3) {
+                            distanceValided += runningRecords.get(k).getDistance();
+                        } else if (runningRecords.get(k).getStatus() == 0) {
+                            distanceWaitValided += runningRecords.get(k).getDistance();
+                        } else if (runningRecords.get(k).getStatus() == 2) {
+                            distanceRejected += runningRecords.get(k).getDistance();
                         }
                     }
                 }
 
-
+                status = runningRecords.get(i).getStatus();
                 current = runningRecords.get(i).getDistance();
                 userRecord.setRunningRecordId(runningRecords.get(i).getRuningRecordId());
                 userRecord.setCurrent(current);
-                userRecord = setUserRecords(userInGroup, userRecord, overallDoneDistance, distancevalided,distanceWaitvalided,distanceRejected,userInformation, targetDistance, lastRecord, likes, dislikes);
-                if (!userInfo.getUserId().equals(userInGroup.getUserId())) {
+                userRecord = setUserRecords(userInGroup, userRecord, overallDoneDistance, distanceValided, distanceWaitValided, distanceRejected, userInformation, targetDistance, lastRecord, likes, dislikes, status);
+                if (!userInfo.getUserId().equals(userInGroup.getUserId()) && userRecord.getStatus() == 0) {
                     tempRecords.add(userRecord);
                 }
             }
 
             // if no userRecord, enrich userRecord using placeholder info
             if (null == userRecord) {
-               userRecord = new UserRecord();
-               userRecord = setUserRecords(userInGroup,
-                       userRecord,
-                       overallDoneDistance,
-                       distancevalided,
-                       distanceWaitvalided,
-                       distanceRejected,
-                       userInformation,
-                       targetDistance,
-                       lastRecord,
-                       likes,
-                       dislikes);
+                userRecord = new UserRecord();
+                userRecord = setUserRecords(userInGroup,
+                        userRecord,
+                        overallDoneDistance,
+                        distanceValided,
+                        distanceWaitValided,
+                        distanceRejected,
+                        userInformation,
+                        targetDistance,
+                        lastRecord,
+                        likes,
+                        dislikes,
+                        status);
             }
             if (userInfo.getUserId().equals(userInGroup.getUserId())) {
                 if (null != targetDistance) { // add null check
@@ -293,6 +314,7 @@ public class FrontServices {
 
     /**
      * Green  跑步过之后
+     *
      * @param userInGroup
      * @param userRecord
      * @param overallDoneDistance
@@ -303,7 +325,7 @@ public class FrontServices {
      * @param dislikes
      * @return
      */
-    private UserRecord setUserRecords(UserGroup userInGroup, UserRecord userRecord, float overallDoneDistance,float distancevalided,float distanceWaitvalided,float distanceRejected, UserInfo userInformation, TargetDistance targetDistance, float lastRecord, int likes, int dislikes) {
+    private UserRecord setUserRecords(UserGroup userInGroup, UserRecord userRecord, float overallDoneDistance, float distancevalided, float distanceWaitvalided, float distanceRejected, UserInfo userInformation, TargetDistance targetDistance, float lastRecord, int likes, int dislikes, int status) {
         float rate;
         if (targetDistance != null) {
             rate = ((overallDoneDistance / (targetDistance.getTargetDistance())) * 100);
@@ -329,10 +351,10 @@ public class FrontServices {
         userRecord.setLikes(likes);
         userRecord.setDislikes(dislikes);
         userRecord.setIcon(userInformation.getIcon());
-        userRecord.setDistancevalided(distancevalided);
-        userRecord.setDistanceWaitvalided(distanceWaitvalided);
+        userRecord.setDistanceValided(distancevalided);
+        userRecord.setDistanceWaitValided(distanceWaitvalided);
         userRecord.setDistanceRejected(distanceRejected);
-
+        userRecord.setStatus(status);
         return userRecord;
     }
 

@@ -42,7 +42,7 @@ public class MailService {
     private FreeMarkerConfigurer configurer;
 
 
-    public void sendMessageMail(Object params, String title, String templateName) {
+    public void sendMessageMail(Object params,Object userInfos, String title, String templateName) {
 
         try {
 
@@ -54,6 +54,7 @@ public class MailService {
 
             Map<String, Object> model = new HashMap<>();
             model.put("MailBeanList", params);
+            model.put("UserInfoList", userInfos);
             try {
                 Template template = configurer.getConfiguration().getTemplate(templateName);
                 try {

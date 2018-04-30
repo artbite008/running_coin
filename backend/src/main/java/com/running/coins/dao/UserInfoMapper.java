@@ -1,6 +1,7 @@
 package com.running.coins.dao;
 
 import com.running.coins.model.UserInfo;
+import com.running.coins.model.transition.UserInfoBatchBean;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
@@ -75,4 +76,41 @@ public interface UserInfoMapper {
         "where UserId = #{userId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(UserInfo record);
+
+
+    @Select({
+            "select",
+            "UserId, UserName, Status, Role, Coins, TotalDistance, MetaData, Icon",
+            "from User_Info"
+    })
+    @Results({
+            @Result(column="UserId", property="userId", jdbcType=JdbcType.INTEGER, id=true),
+            @Result(column="UserName", property="userName", jdbcType=JdbcType.VARCHAR),
+            @Result(column="Status", property="status", jdbcType=JdbcType.VARCHAR),
+            @Result(column="Role", property="role", jdbcType=JdbcType.VARCHAR),
+            @Result(column="Coins", property="coins", jdbcType=JdbcType.INTEGER),
+            @Result(column="TotalDistance", property="totalDistance", jdbcType=JdbcType.REAL),
+            @Result(column="MetaData", property="metaData", jdbcType=JdbcType.VARCHAR),
+            @Result(column="Icon", property="icon", jdbcType=JdbcType.LONGVARBINARY)
+    })
+    List<UserInfo> selectAllUser();
+
+
+    @Select({
+            "SELECT",
+            "  sum(EarnedCoins) as TotalCoins,",
+            "  User_Info.UserId as UserId,",
+            "  sum(Distance)  as TotalDistance",
+            "FROM Running_Record",
+            "  LEFT JOIN UserGroup ON UserGroup.UserGroupId = Running_Record.UserGroupId",
+            "  LEFT JOIN User_Info ON User_Info.UserId = UserGroup.UserId",
+            "WHERE Running_Record.Status = 3 AND Score > 0",
+            "GROUP BY User_Info.UserId;"
+    })
+    @Results({
+            @Result(column="TotalCoins", property="totalCoins", jdbcType=JdbcType.DOUBLE),
+            @Result(column="UserId", property="userId", jdbcType=JdbcType.INTEGER),
+            @Result(column="TotalDistance", property="totalDistance", jdbcType=JdbcType.FLOAT)
+    })
+    List<UserInfoBatchBean>  selectUserTotalInfo();
 }

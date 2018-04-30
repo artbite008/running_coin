@@ -16,4 +16,5 @@ public class MailBean {
     private String creationTime;
     private Integer score;
     private String status;
+    private Double earnedCoins;
 }

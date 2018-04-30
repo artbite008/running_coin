@@ -13,7 +13,7 @@
         </view>
         <view class="userinfo-nickname">
           <image class='small-icon' src="../imgs/progress.svg"></image>
-          <text>{{userInfo.distancevalided || 0}}/{{userInfo.distanceWaitvalided}}/{{userInfo.target || 0}}km</text>
+          <text>{{userInfo.distanceValided || 0}}/{{userInfo.distanceWaitValided}}/{{userInfo.target || 0}}km</text>
         </view>
         <view class="userinfo-nickname">
           <image src="../imgs/like.svg" class='small-icon'></image>
@@ -21,16 +21,16 @@
           <text>{{userInfo.likes || 0}}/{{userInfo.dislikes  || 0}}</text>
         </view>
         <view 
-          style='width: {{(((userInfo.distanceWaitvalided || 0) + (userInfo.distancevalided || 0)) / (userInfo.target)) > 1 ? 100 : (((userInfo.distanceWaitvalided || 0) + (userInfo.distancevalided || 0)) / (userInfo.target) * 100)}}%;'
+          style='width: {{(((userInfo.distanceWaitValided || 0) + (userInfo.distanceValided || 0)) / (userInfo.target)) > 1 ? 100 : (((userInfo.distanceWaitValided || 0) + (userInfo.distanceValided || 0)) / (userInfo.target) * 100)}}%;'
           class='progress-container' >
           
           <view 
-            style='width: {{((userInfo.distancevalided || 0) / ((userInfo.distanceWaitvalided || 0) + (userInfo.distancevalided || 0))) > 1 ? 100 : (((userInfo.distancevalided || 0) / ((userInfo.distanceWaitvalided || 0) + (userInfo.distancevalided || 0))) * 100)}}%;' 
+            style='width: {{((userInfo.distanceValided || 0) / ((userInfo.distanceWaitValided || 0) + (userInfo.distanceValided || 0))) > 1 ? 100 : (((userInfo.distanceValided || 0) / ((userInfo.distanceWaitValided || 0) + (userInfo.distanceValided || 0))) * 100)}}%;' 
             class="bg-success progress">
           </view>
           
           <view 
-            style='width: {{((userInfo.distanceWaitvalided || 0) / ((userInfo.distanceWaitvalided || 0) + (userInfo.distancevalided || 0))) > 1 ? 100 : (((userInfo.distanceWaitvalided || 0) / ((userInfo.distanceWaitvalided || 0) + (userInfo.distancevalided || 0))) * 100)}}%;' 
+            style='width: {{((userInfo.distanceWaitValided || 0) / ((userInfo.distanceWaitValided || 0) + (userInfo.distanceValided || 0))) > 1 ? 100 : (((userInfo.distanceWaitValided || 0) / ((userInfo.distanceWaitValided || 0) + (userInfo.distanceValided || 0))) * 100)}}%;' 
             class="bg-warning progress">
         </view>
       
@@ -52,7 +52,7 @@
         <view class="peopleInfo-nickname-block">
           <text class="peopleInfo-nickname">{{user.nickName}}</text>
           <text class="peopleInfo-nickname">Coins: {{user.coins}} </text>
-          <text class="peopleInfo-nickname">Goal/Current: {{user.target || 0}}/{{user.overallDoneDistance || 0}}</text>
+          <text class="peopleInfo-nickname">Goal/Current: {{user.target || 0}}/{{user.distanceValided || 0}}</text>
           <view style='width: {{((user.current || 0) / (user.target || 1)) > 1 ? 100 : ((user.current || 0) / (user.target || 1)  * 100)}}%;' class="bg-primary progress">
           </view>
         </view>

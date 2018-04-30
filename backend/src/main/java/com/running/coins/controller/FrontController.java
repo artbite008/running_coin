@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/front")
 public class FrontController {
 
-    private final
+    private
     FrontServices frontServices;
 
     @Autowired

@@ -2,6 +2,7 @@ package com.running.coins.dao;
 
 import com.running.coins.model.RunningRecord;
 import com.running.coins.model.RunningRecordWithInfo;
+import com.running.coins.model.transition.UserInfoBatchBean;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
@@ -149,6 +150,7 @@ public interface RunningRecordMapper {
             "SELECT",
             "  runningrecordResult.RuningRecordId AS RuningRecordId,",
             "  FinalScore,",
+            "  User_Info.UserId as UserId,",
             "  UserName,",
             "  runningrecordResult.UserGroupId AS  UserGroupId,",
             "  Distance,",
@@ -183,6 +185,7 @@ public interface RunningRecordMapper {
             @Result(column="finalScore", property="finalScore", jdbcType=JdbcType.INTEGER),
             @Result(column="RuningRecordId", property="runingRecordId", jdbcType=JdbcType.INTEGER, id=true),
             @Result(column="UserGroupId", property="userGroupId", jdbcType=JdbcType.INTEGER),
+            @Result(column="UserId", property="userId", jdbcType=JdbcType.INTEGER),
             @Result(column="Distance", property="distance", jdbcType=JdbcType.REAL),
             @Result(column="CreationTime", property="creationTime", jdbcType=JdbcType.TIMESTAMP),
             @Result(column="LastVotedTime", property="lastVotedTime", jdbcType=JdbcType.TIMESTAMP),
@@ -194,6 +197,9 @@ public interface RunningRecordMapper {
             @Result(column="Evidence", property="evidence", jdbcType=JdbcType.LONGVARBINARY)
     })
     List<RunningRecordWithInfo> selectRunningRecordWithInfoScoreIn24hours();
+
+
+
 
 
 }
