@@ -49,7 +49,7 @@ public class VoteCountjob {
     /**
      * 设置定时任务  每天 23:00:00 统计
      */
-    @Scheduled(cron = "00 33 23 * * ?")
+    @Scheduled(cron = "00 00 23 * * ?")
     public void executeVoteCount() {
 
         System.err.println("开始执行任务");
@@ -93,7 +93,12 @@ public class VoteCountjob {
             userInfoMapper.updateByPrimaryKey(userInfo);
         }
         List<UserInfo> userInfos = userInfoMapper.selectAllUser();
-        mailService.sendMessageMail(mailBeanList,userInfos, "RunningClub Report", "message.ftl");
+        try {
+            mailService.sendMessageMail(mailBeanList,userInfos, "RunningClub Report", "message.ftl");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         System.err.println("发送结束");
     }
 
