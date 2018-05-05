@@ -3,7 +3,7 @@ package com.running.coins.model;
 import lombok.Data;
 
 /**
- * RunningRecordWithfinalscore
+ * RunningRecordWithInfo
  *
  * @author guxiang
  * @date 2018/4/27
