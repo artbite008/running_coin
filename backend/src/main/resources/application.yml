@@ -1,24 +1,3 @@
-server:
-  port: 443
-  ssl:
-    key-alias: guxiangfly.cn
-    key-store-type: JKS
-    key-store: classpath:guxiangfly.cn.jks
-    key-store-password: 45lgrs8gokejt0
-
-
 spring:
-  datasource:
-     #url: jdbc:mysql://47.96.173.94:3306/runningcoin?useUnicode=yes&amp;characterEncoding=UTF-8&amp;useSSL=false
-     url: jdbc:mysql://47.96.173.94:3306/runningcoin?useUnicode=yes&characterEncoding=UTF-8&useSSL=false
-     username: root
-     password: qwert6
-     driver-class-name: com.mysql.jdbc.Driver
-  mail:
-    host: smtp.qq.com
-    username: 964999133@qq.com
-    password: plmksuixpkdmbcag
-    addressesEmail: xianggu@ebay.com,bshen@ebay.com
-    properties.mail.smtp.auth: true
-    properties.mail.smtp.starttls.enable: true
-    properties.mail.smtp.starttls.required: true
+  profiles:
+    active: dev
