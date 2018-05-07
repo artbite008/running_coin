@@ -1,3 +1,59 @@
+DROP TABLE IF EXISTS `Group`;
+
+CREATE TABLE `Group` (
+  `GroupId` int(11) NOT NULL AUTO_INCREMENT,
+  `GroupName` varchar(45) CHARACTER SET latin1 NOT NULL,
+  `MetaData` varchar(2000) CHARACTER SET latin1 DEFAULT NULL,
+  PRIMARY KEY (`GroupId`)
+);
+
+LOCK TABLES `Group` WRITE;
+/*!40000 ALTER TABLE `Group` DISABLE KEYS */;
+
+INSERT INTO `Group` (`GroupId`, `GroupName`, `MetaData`)
+VALUES
+  (1,'test','{\"test\": {}}');
+
+/*!40000 ALTER TABLE `Group` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table Running_Record
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `Running_Record`;
+
+CREATE TABLE `Running_Record` (
+  `RuningRecordId` int(11) NOT NULL AUTO_INCREMENT,
+  `UserGroupId` int(11) NOT NULL,
+  `Distance` float(3,1) NOT NULL,
+  `CreationTime` datetime NOT NULL,
+  `LastVotedTime` datetime DEFAULT NULL,
+  `Status` int(11) NOT NULL,
+  `Score` int(11) DEFAULT NULL,
+  `SettledTime` datetime DEFAULT NULL,
+  `EarnedCoins` double DEFAULT NULL,
+  `Comments` varchar(200) CHARACTER SET latin1 DEFAULT NULL,
+  `Evidence` blob,
+  PRIMARY KEY (`RuningRecordId`)
+);
+
+LOCK TABLES `Running_Record` WRITE;
+/*!40000 ALTER TABLE `Running_Record` DISABLE KEYS */;
+
+INSERT INTO `Running_Record` (`RuningRecordId`, `UserGroupId`, `Distance`, `CreationTime`, `LastVotedTime`, `Status`, `Score`, `SettledTime`, `EarnedCoins`, `Comments`, `Evidence`)
+VALUES
+  (1,1,5.0,'2018-04-20 16:43:27',NULL,0,NULL,NULL,2,NULL,NULL),
+  (2,3,2.0,'2018-04-20 16:52:09',NULL,0,NULL,NULL,1,NULL,NULL),
+  (3,3,2.0,'2018-04-20 16:52:55',NULL,0,NULL,NULL,1,NULL,NULL),
+  (4,3,4.0,'2018-04-20 16:55:39',NULL,0,NULL,NULL,1,NULL,NULL),
+  (5,2,4.0,'2018-04-20 17:01:19',NULL,0,NULL,NULL,1,NULL,NULL),
+  (6,2,1.0,'2018-04-20 17:15:15',NULL,0,NULL,NULL,1,NULL,NULL),
+  (7,2,1.0,'2018-04-20 17:17:09',NULL,0,NULL,NULL,1,NULL,NULL);
+
+/*!40000 ALTER TABLE `Running_Record` ENABLE KEYS */;
+UNLOCK TABLES;
+
 DROP TABLE IF EXISTS `Target_Distance`;
 
 CREATE TABLE `Target_Distance` (
@@ -6,7 +62,7 @@ CREATE TABLE `Target_Distance` (
   `CreationTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `TargetDistance` float(3,1) NOT NULL,
   PRIMARY KEY (`TargetDistanceId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 LOCK TABLES `Target_Distance` WRITE;
 /*!40000 ALTER TABLE `Target_Distance` DISABLE KEYS */;
@@ -35,7 +91,7 @@ CREATE TABLE `User_Info` (
   `TotalDistance` float(9,1) DEFAULT NULL,
   `MetaData` varchar(2000)  DEFAULT NULL,
   PRIMARY KEY (`UserId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 LOCK TABLES `User_Info` WRITE;
 /*!40000 ALTER TABLE `User_Info` DISABLE KEYS */;
@@ -62,7 +118,7 @@ CREATE TABLE `UserGroup` (
   `UserId` int(11) NOT NULL,
   `GroupId` int(11) NOT NULL,
   PRIMARY KEY (`UserGroupId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 LOCK TABLES `UserGroup` WRITE;
 /*!40000 ALTER TABLE `UserGroup` DISABLE KEYS */;
@@ -94,7 +150,7 @@ CREATE TABLE `Vote_Record` (
   `Score` int(11) NOT NULL,
   `Comments` varchar(200)  DEFAULT NULL,
   PRIMARY KEY (`VoteRecordId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 LOCK TABLES `Vote_Record` WRITE;
 /*!40000 ALTER TABLE `Vote_Record` DISABLE KEYS */;

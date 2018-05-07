@@ -40,6 +40,7 @@ public class FrontServices {
             .put("THU", 3)
             .put("FRI", 4)
             .put("SAT", 5)
+            .put("SUN", 6)
             .put("星期一", 0)
             .put("星期二", 1)
             .put("星期三", 2)
