@@ -9,7 +9,8 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "1.9.94",
-	"appid": "wx8220102dd8c2c642",
+	"bak": "wx8220102dd8c2c642",
+  "appid":"wx5fac28aeaaaa5a59", 
 	"projectname": "testMinP",
 	"isGameTourist": false,
 	"condition": {

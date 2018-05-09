@@ -1,8 +1,8 @@
 import {HttpClient as hc} from '../../utils/httpClient';
 
 const envLocal = 'https://test.com';  // mapping in hosts file
-//const envQa = 'https://guxiangfly.cn';
-const envQa = 'https://localhost';
+const envQa = 'https://guxiangfly.cn';
+//const envQa = 'https://localhost';
 const envProd = 'http://127.0.0.1';
 
 /**
@@ -88,6 +88,12 @@ class RecordService {
 
   constructor(httpClient) {
     this.$http = httpClient;
+  }
+
+  serverUserLogin(jsCode) {
+    return this.$http.get('/login/onLogin', null, {
+      userId: userId
+    });
   }
 
   getUserRecord(userId) {

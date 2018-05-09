@@ -1,5 +1,6 @@
 package com.running.coins.model.response;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data

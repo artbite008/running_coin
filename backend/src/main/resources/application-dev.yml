@@ -19,3 +19,6 @@ spring:
     properties.mail.smtp.auth: true
     properties.mail.smtp.starttls.enable: true
     properties.mail.smtp.starttls.required: true
+wechat:
+  appid: wx5fac28aeaaaa5a59
+  secret: 3a6a7edad78faf5fa48d64a0911b6b87
