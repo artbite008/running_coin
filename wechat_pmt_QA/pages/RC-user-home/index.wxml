@@ -1,0 +1,115 @@
+<view hidden="{{showBackdrop}}">
+<view class="container">
+  <view class="card userinfo user-card-decorator" bindtap='goToMyProfile'>
+    <block wx:if="{{!hasUserInfo}}" open-type="getUserInfo">
+    </block>
+    <block wx:else>
+      <image class="userinfo-avatar" src="{{userInfo.icon}}" background-size="cover"></image>
+      <view class="userinfo-nickname-block">
+        <text class="userinfo-nickname decorator">{{userInfo.nickName}}</text>
+        <view class="userinfo-nickname">
+          <image class='small-icon' src="../imgs/dollar.svg"></image>
+          <text>{{userInfo.coins}}</text>
+        </view>
+        <view class="userinfo-nickname">
+          <image class='small-icon' src="../imgs/progress.svg"></image>
+          <text>{{userInfo.distanceValided || 0}}/{{userInfo.distanceWaitValided}}/{{userInfo.target || 0}}km</text>
+        </view>
+        <view class="userinfo-nickname">
+          <image src="../imgs/like.svg" class='small-icon'></image>
+          <image src="../imgs/dislike.svg" class='small-icon'></image>
+          <text>{{userInfo.likes || 0}}/{{userInfo.dislikes  || 0}}</text>
+        </view>
+        <view 
+          style='width: {{(((userInfo.distanceWaitValided || 0) + (userInfo.distanceValided || 0)) / (userInfo.target)) > 1 ? 100 : (((userInfo.distanceWaitValided || 0) + (userInfo.distanceValided || 0)) / (userInfo.target) * 100)}}%;'
+          class='progress-container' >
+          
+          <view 
+            style='width: {{((userInfo.distanceValided || 0) / ((userInfo.distanceWaitValided || 0) + (userInfo.distanceValided || 0))) > 1 ? 100 : (((userInfo.distanceValided || 0) / ((userInfo.distanceWaitValided || 0) + (userInfo.distanceValided || 0))) * 100)}}%;' 
+            class="bg-success progress">
+          </view>
+          
+          <view 
+            style='width: {{((userInfo.distanceWaitValided || 0) / ((userInfo.distanceWaitValided || 0) + (userInfo.distanceValided || 0))) > 1 ? 100 : (((userInfo.distanceWaitValided || 0) / ((userInfo.distanceWaitValided || 0) + (userInfo.distanceValided || 0))) * 100)}}%;' 
+            class="bg-warning progress">
+        </view>
+      
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="people-list card bg-light">
+    <view class="people-list-item divider"
+      wx:for="{{users}}" 
+      wx:for-item="user" 
+      wx:key="user.id"
+      data-user="{{user}}"
+      bindtap='goToVote'>
+      <block>
+        <image class="peopleInfo-avatar" src="{{user.icon || iconph}}" background-size="cover"></image>
+      </block>
+      <block>
+        <view class="peopleInfo-nickname-block">
+          <text class="peopleInfo-nickname">{{user.nickName}}</text>
+          <text class="peopleInfo-nickname">Coins: {{user.coins}} </text>
+          <text class="peopleInfo-nickname">Goal/Current: {{user.target || 0}}/{{user.distanceValided || 0}}</text>
+          <view style='width: {{((user.current || 0) / (user.target || 1)) > 1 ? 100 : ((user.current || 0) / (user.target || 1)  * 100)}}%;' class="bg-primary progress">
+          </view>
+        </view>
+      </block>
+      <block>
+        <view class='vote-area'>
+          <view class='vote-icon-align distance'>
+            <text>{{user.current}}</text>
+          </view>
+          <view class='vote-icon-align unit'>
+            <text>km</text>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view class='click-to-see-everybody'>
+    <button class='link' bindtap='goToReport'>See Weekly</button>
+  </view>
+</view>
+
+
+
+<button class='fab bg-info running-icon' bindtap='mark'>
+  <image src='../imgs/run.svg'></image>
+</button>
+</view>
+<view hidden ="{{!showBackdrop}}">
+  <view class='backdrop'></view>
+  <view class='backdrop-front-content'>
+    <block wx:if="{{dialogEvent === 'vote'}}">
+      <text class='voting-slogan'>Double Tap Thumb Up Or Thumb Down To Vote For Your Mates, With Love !\n Gray Icon Is Your Current Choice !</text>
+      <icon type="cancel" size="40" color="red" bindtap='backdropMgt' />
+      <view class="card voting-container bg-warning">
+        <button class='like-dislike-button' bindtap='doubleTap' data-action="like">
+          <image src='../imgs/like.svg' class='{{liked ? "gray" : "" }}'></image>
+        </button>
+        <button class='like-dislike-button' bindtap='doubleTap' data-action="dislike">
+          <image src='../imgs/dislike.svg' class='{{disliked ? "gray" : "" }}'></image>
+        </button>
+      </view>
+    </block>
+    <block wx:if="{{dialogEvent === 'mark'}}">
+      <text class='voting-slogan'>Type In My Newest Achievement !</text>
+      <icon type="cancel" size="40" color="red" bindtap='backdropMgt' />
+      <view class="card marking-container bg-light">
+        <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px; border-radius: 10px; font-weight: 600;" value="{{value}}" bindchange="bindChange">
+          <picker-view-column>
+            <view wx:for="{{achievements}}" style="line-height: 50px; padding-left: 20px;">
+              I Just Run {{item}} km
+            </view>
+          </picker-view-column>
+        </picker-view>
+        <button class='like-dislike-button save bg-warning' bindtap='submitRecord'>
+          <image src='../imgs/save.svg'></image>
+        </button>
+      </view>
+    </block>
+  </view>
+</view>

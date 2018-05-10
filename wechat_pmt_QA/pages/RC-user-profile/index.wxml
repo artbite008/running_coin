@@ -1,0 +1,79 @@
+<view hidden ="{{showBackdrop != 'none'}}">
+<view class="container" >
+  <view class='user-avatar-placeholder-container'>
+    <image class="userinfo-avatar avatar-float" src="{{userInfo.icon}}" background-size="cover"></image>
+  </view>
+  <view class='card bg-error'>
+    <view class='nickname-container'>
+      <text class='nickname'>{{userInfo.nickName}}</text>
+    </view>
+    <view class='userinfo'>
+      <view class='section'>
+        <text>{{userInfo.coins || 0}}</text>
+        <button class="retarget">
+          <image src="../imgs/dollar.svg" class='small-icon'></image>
+        </button>
+      </view>
+      <view class='section'>
+        <text>{{userInfo.likes || 0}}/{{userInfo.dislikes || 0}}</text>
+        <button class="retarget">
+          <image src="../imgs/like.svg" class='small-icon'></image>
+          <image src="../imgs/dislike.svg" class='small-icon'></image>
+        </button>
+      </view>
+      <view class='section'>
+        <text>{{userInfo.distanceValided || 0}}/{{userInfo.target || 0}}</text>
+        <button class="retarget">
+          <image src="../imgs/progress.svg" class='small-icon'></image>
+          <image src="../imgs/goal.svg" class='small-icon'></image>
+        </button>
+      </view>
+    </view>
+  </view>
+  <view class='record-range-container'>
+    {{weeklyReords.range}}
+  </view>
+  <view class='my-record-list card bg-light'>
+    <view class='my-record-list-item divider' wx:for="{{weeklyReords.record}}" wx:for-item="record" wx:key="record.id">
+      <view class='section-date'>
+        <text>{{record.date}}</text>
+      </view>
+      <view class='section-distance'>
+        <text>{{record.distance}} km</text>
+      </view>
+      <view class='section-vote'>
+        <view>
+          <image src="../imgs/like.svg" class='small-icon'></image> {{record.likes}}
+        </view>
+        <view>
+          <image src="../imgs/dislike.svg" class='small-icon'></image> {{record.dislikes}}
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<button class='fab bg-error' bindtap='goToPlan'>
+  <image class='edit-icon' src='../imgs/edit.svg'></image>
+</button>
+</view>
+<view style='display: {{showBackdrop}}'>
+  <view class='backdrop'></view>
+  <view class='backdrop-front-content'>
+    <icon type="cancel" size="40" color="red" bindtap='backdropMgt' />
+    <block wx:if="{{dialogEvent === 'plan'}}">
+      <text class='planning-slogan'>Set My Goal ! Click Yellow Button To Save.</text>
+      <view class="card planning-container bg-light">
+        <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px; border-radius: 10px; font-weight: 600;" value="{{value}}" bindchange="bindChange">
+          <picker-view-column>
+            <view wx:for="{{plans}}" style="line-height: 50px; padding-left: 20px;">
+              I Wanna Run {{item}} km !
+            </view>
+          </picker-view-column>
+        </picker-view>
+      </view>
+      <button class='like-dislike-button save bg-warning' bindtap='submitTarget'>
+        <image src='../imgs/goal.svg'></image>
+      </button>
+    </block>
+  </view>
+</view>

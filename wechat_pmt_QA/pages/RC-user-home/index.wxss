@@ -1,0 +1,191 @@
+.userinfo {
+  min-height: 180px;
+  display: flex;
+  flex-direction: row;
+  align-items: top;
+}
+
+.userinfo-avatar {
+  width: 180rpx;
+  height: 180rpx;
+  margin: 30rpx 20rpx 20rpx 20rpx;
+  border-radius: 50%;
+  border:5px solid #ffd80d; 
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+}
+
+.userinfo-nickname-block {
+  margin: 10px 0 0 8px;
+  width: 55%;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.userinfo-nickname {
+  margin-bottom: 10px;
+  font-size: 15px;
+  color: #fff;
+}
+.userinfo-nickname text {
+  margin-left: 20px;
+}
+.user-card-decorator {
+  background-color: #006efc;
+}
+
+.userinfo-nickname.decorator {
+  font-weight: 600;
+  font-size: 21px;
+  color: #ffd80d;
+  overflow-wrap: break-word;
+}
+
+.peopleInfo-avatar {
+  width: 130rpx;
+  height: 130rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+}
+
+.peopleInfo-nickname {
+  margin-bottom: 6px;
+  font-size: 12px;
+  color: #767676;
+}
+
+.peopleInfo-nickname-block {
+  height: 90%;
+  margin: 0;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.people-list {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.people-list-item {
+  margin: 10px 0 10px 0;
+  width: 100%;
+  height: 90px;
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+}
+
+.click-to-see-everybody {
+  width: 50%;
+  height: 80px;
+}
+
+.click-to-see-everybody .link {
+  margin: 40px 20px 20px 20px;
+  font-size: 15px;
+  border-radius: 20px;
+  background-color: #ff5151;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+}
+
+.vote-area {
+  height: 80%;
+  margin: 10px 0 0 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.vote-icon-align {
+  display: flex;
+  flex-direction: row;
+  align-items: right;
+  height: 100%;
+}
+
+.vote-icon-align.distance {
+  color:#ff5151;
+  font-weight: 400;
+  font-size: 40px;
+}
+
+.vote-icon-align.unit {
+  font-size: 12px;
+  height: 30%;
+  color: #767676;
+}
+
+.voting-container {
+  height: 200px;
+  width: 300px;
+  position: absolute;
+  margin: auto;
+  padding: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.like-dislike-button {
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  z-index: 1;
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12); 
+}
+
+.like-dislike-button image {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  height: 40px;
+  width: 40px;
+}
+
+.like-dislike-button.save {
+  position: fixed;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 80px;
+}
+
+.voting-slogan {
+  color: #767676;
+  position: absolute;
+  left: 40px;
+  right: 40px;
+  top: 15%;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.marking-container {
+  color: #767676;
+  height: 200px;
+  width: 80%;
+  position: absolute;
+  margin: auto;
+  padding: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

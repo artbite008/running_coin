@@ -1,0 +1,17 @@
+<view class='guard-container-wrapper bg-light' hidden="{{register === 'true'}}">
+  <view class='container'>
+    <view class='card img-card container'>
+      <image src='../imgs/preview.png' mode='scaleToFill'></image>
+    </view>
+    <view>
+      <text class='register-notice'>Welcome To CCOE Payment Running Club\nType In Your Register Code</text>
+      <view class='container' style='flex-direction: row'>
+        <input placeholder-style="color:#BBD4FF"  bindinput="bindKeyInput" placeholder="register code"/>
+        <button class='submit' bindtap='verfyRegisterCode'>
+          <image src='../imgs/icons8-enter-64.png'></image>
+        </button>
+      </view>
+    </view>
+    <view class='guard-slogan'> Run For Fun Run For Love</view>
+  </view>
+</view>

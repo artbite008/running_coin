@@ -1,0 +1,41 @@
+<view class="container">
+  <block wx:for="{{weekRecords}}" wx:key="id" wx:for-item="record">
+    <view class='record-range-container'>
+      {{range}}
+    </view>
+    <view class='people-list card bg-warning'>
+      <view class='people-list-item divider' wx:for="{{record.record}}" wx:key="id" wx:for-item="rc">
+        <view class='peopleInfo-avatar-container'>
+          <image class="peopleInfo-avatar" src="{{rc.icon || iconPh}}" background-size="cover"></image>
+           <text class='vote-icon-align unit'>{{ util.sub(rc.nickName) }}</text> 
+        </view>
+        <view class='achievements-container'>
+          <view class="date-container">
+            <view class='date' wx:for="{{rc.achievements}}" wx:key="id" wx:for-item="ach">{{ach}}</view>
+          </view>
+          <view class='bar-chart-container'>
+            <view class='bar bg-light-primary card sub' wx:for="{{rc.achievements}}" wx:key="id" wx:for-item="ach" style='height: {{ ach >= 15 ? 100 : (ach / 15 * 100)}}%'>
+            </view>
+          </view>
+        </view>
+        <view class='statistic-container'>
+          <view class='vote-icon-align distance'>
+            <text>{{rc.allAchievements}}</text>
+          </view>
+          <view class='vote-icon-align unit'>
+            <text>km</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>
+
+
+
+<wxs module="util">
+    var sub = function(val) {
+        return val.substring(0, 7)
+    }
+    module.exports.sub = sub;
+</wxs>

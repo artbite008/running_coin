@@ -1,0 +1,91 @@
+.record-range-container {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #767676;
+  font-weight: 600;
+}
+
+.people-list {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.people-list-item {
+  padding: 20px 0 20px 0;
+  width: 100%;
+  height: 90px;
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+}
+
+.peopleInfo-avatar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.peopleInfo-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+}
+
+.people-list-item .achievements-container {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.people-list-item .achievements-container .date-container {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+.date-container .date {
+  color: #c9002c;
+  width: 100%;
+  margin: 0 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.people-list-item .achievements-container .bar-chart-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+.bar-chart-container .bar {
+  width: 100%;
+  margin: 0 10px;
+  border-radius: 5px;
+}
+
+.people-list-item .statistic-container {
+  width: 20%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+.vote-icon-align.distance {
+  color:#ff5151;
+  font-weight: 800;
+  font-size: 50px;
+}
+
+.vote-icon-align.unit {
+  font-size: 10px;
+  height: 30%;
+  color: #767676;
+}

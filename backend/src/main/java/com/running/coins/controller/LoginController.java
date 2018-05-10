@@ -31,12 +31,12 @@ public class LoginController {
     @GetMapping("/onLogin")
     @ApiOperation(value = "user  onLogin by code", notes = "submit records")
     @ApiImplicitParam(name = "onLogin", value = "", required = true, dataType = "onLogin")
-    public ResponseMessage onLogin(@RequestParam("code")String code, String olduserId){
+    public ResponseMessage onLogin(@RequestParam("code") String code,
+                                   @RequestParam(value = "olduserId", required = false,defaultValue = "000") int olduserId,
+                                   @RequestParam(value = "session", required = false ,defaultValue = "0000") String session) {
 
-
-        ResponseMessage responseMessage =userLoginService.userLoginService(code,olduserId);
-
-        return  responseMessage;
+        ResponseMessage responseMessage = userLoginService.userLoginService(code, olduserId);
+        return responseMessage;
     }
 
 
