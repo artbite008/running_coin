@@ -199,7 +199,27 @@ public interface RunningRecordMapper {
     List<RunningRecordWithInfo> selectRunningRecordWithInfoScoreIn24hours();
 
 
-
-
+    @Select({
+            "SELECT",
+            "  RuningRecordId, UserGroupId, Distance, CreationTime, LastVotedTime, Status,",
+            "  Score, SettledTime, EarnedCoins, Comments, Evidence",
+            "FROM Running_Record",
+            "WHERE UserGroupId = #{userGroupId,jdbcType=INTEGER}",
+            "AND CreationTime > date_sub(now(), INTERVAL 1 HOUR)"
+    })
+    @Results({
+            @Result(column="RuningRecordId", property="runingRecordId", jdbcType=JdbcType.INTEGER, id=true),
+            @Result(column="UserGroupId", property="userGroupId", jdbcType=JdbcType.INTEGER),
+            @Result(column="Distance", property="distance", jdbcType=JdbcType.REAL),
+            @Result(column="CreationTime", property="creationTime", jdbcType=JdbcType.TIMESTAMP),
+            @Result(column="LastVotedTime", property="lastVotedTime", jdbcType=JdbcType.TIMESTAMP),
+            @Result(column="Status", property="status", jdbcType=JdbcType.INTEGER),
+            @Result(column="Score", property="score", jdbcType=JdbcType.INTEGER),
+            @Result(column="SettledTime", property="settledTime", jdbcType=JdbcType.TIMESTAMP),
+            @Result(column="EarnedCoins", property="earnedCoins", jdbcType=JdbcType.DOUBLE),
+            @Result(column="Comments", property="comments", jdbcType=JdbcType.VARCHAR),
+            @Result(column="Evidence", property="evidence", jdbcType=JdbcType.LONGVARBINARY)
+    })
+    List<RunningRecord> selectRunningRecordLatestHourByUserGroupId(@Param("userGroupId") Integer userGroupId);
 
 }

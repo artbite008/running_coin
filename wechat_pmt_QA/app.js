@@ -4,8 +4,7 @@ App({
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
-    var olduserId = hashToInt(`${userInfo.nickName}-${userInfo.city}-${userInfo.province}-${userInfo.country}`)
-
+  
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
 

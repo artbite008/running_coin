@@ -65,8 +65,14 @@
       <view class="card planning-container bg-light">
         <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px; border-radius: 10px; font-weight: 600;" value="{{value}}" bindchange="bindChange">
           <picker-view-column>
+         
             <view wx:for="{{plans}}" style="line-height: 50px; padding-left: 20px;">
-              I Wanna Run {{item}} km !
+               <view wx:if="{{item==0}}">
+                  ask for leave
+               </view>
+               <view wx:else>
+                  I Wanna Run {{item}} km !
+               </view>
             </view>
           </picker-view-column>
         </picker-view>

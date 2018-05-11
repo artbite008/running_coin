@@ -110,8 +110,7 @@ Page({
       };
     } else {
       // this is from wechat offical demo for some kind of backward compatible
-      WX
-        .userInfo(true)
+      WX.userInfo(true)
         .then(res => {
           app.globalData.userInfo = res.userInfo;
           this.setData({

@@ -1,5 +1,6 @@
 package com.running.coins.service;
 
+import com.running.coins.common.enums.ResultEnum;
 import com.running.coins.common.enums.RunningCoins;
 import com.running.coins.common.enums.SportRecordStatus;
 import com.running.coins.common.util.DateUtils;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 @Service
@@ -77,6 +79,13 @@ public class RunningInfoService {
         runningRecord.setUserGroupId(userGroup.getUserGroupId());
         runningRecord.setStatus(SportRecordStatus.SUBMITTED.getCode());
         CountEarnedCoins(submitUserSportRecordRequest, runningRecord);
+
+        /** 判断单个用户最新打卡的时间 两次打卡间隔 必须超过1小时*/
+        List<RunningRecord> runningRecordsInOneHour = recordMapper.selectRunningRecordLatestHourByUserGroupId(runningRecord.getUserGroupId());
+        if (runningRecordsInOneHour!=null){
+            return ResultUtils.error(ResultEnum.RECORDTIME_ERROR);
+        }
+
         recordMapper.insert(runningRecord);
         return ResultUtils.success(runningRecord);
     }

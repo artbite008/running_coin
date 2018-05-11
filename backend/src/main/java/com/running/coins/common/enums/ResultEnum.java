@@ -1,10 +1,10 @@
 package com.running.coins.common.enums;
 
 public enum ResultEnum {
+    RECORDTIME_ERROR(400,"RecordTime Error: you must record after one hour"),
     UNKNOWN_ERROR(100, "Unknown Error"),
     SYSTEM_ERROR(200, "System Error"),
     INSERT_ERROR(300, "Insert Error"),
-
     SUCCESS(0, "success");
 
     private Integer code;
