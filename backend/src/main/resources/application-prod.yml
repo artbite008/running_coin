@@ -1,11 +1,10 @@
 server:
-  port: 443
-  ssl:
-    key-alias: guxiangfly.cn
-    key-store-type: JKS
-    key-store: classpath:guxiangfly.cn.jks
-    key-store-password: 45lgrs8gokejt0
-
+  port: 2443
+  #ssl:
+  #  key-alias: guxiangfly.cn
+  #  key-store-type: JKS
+  #  key-store: classpath:guxiangfly.cn.jks
+  #  key-store-password: 45lgrs8gokejt0
 
 spring:
   datasource:
@@ -21,3 +20,6 @@ spring:
     properties.mail.smtp.auth: true
     properties.mail.smtp.starttls.enable: true
     properties.mail.smtp.starttls.required: true
+wechat:
+  appid: wx8220102dd8c2c642
+  secret: c278c7b91d6d6aca16016297812d4972

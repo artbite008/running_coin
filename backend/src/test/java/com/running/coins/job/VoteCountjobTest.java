@@ -22,7 +22,7 @@ public class VoteCountjobTest {
 
 
     @Autowired
-    private VoteCountjob voteCountjob;
+    private VoteCountJob voteCountjob;
 
     /**
      * for maven test

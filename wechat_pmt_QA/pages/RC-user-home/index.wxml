@@ -2,6 +2,7 @@
 <view class="container">
   <view class="card userinfo user-card-decorator" bindtap='goToMyProfile'>
     <block wx:if="{{!hasUserInfo}}" open-type="getUserInfo">
+        <button type="primary" catchtap="primary" open-type='getUserInfo' bindgetuserinfo='getUserInfobywx'> allow to get User Info </button>
     </block>
     <block wx:else>
       <image class="userinfo-avatar" src="{{userInfo.icon}}" background-size="cover"></image>
@@ -96,7 +97,9 @@
       </view>
     </block>
     <block wx:if="{{dialogEvent === 'mark'}}">
-      <text class='voting-slogan'>Type In My Newest Achievement !</text>
+      <text class='voting-slogan'>
+     You Can Only Record Once In An Hour ! \n
+       \t The Latest One Will Be Accepted If You Save Twice</text>
       <icon type="cancel" size="40" color="red" bindtap='backdropMgt' />
       <view class="card marking-container bg-light">
         <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px; border-radius: 10px; font-weight: 600;" value="{{value}}" bindchange="bindChange">

@@ -212,11 +212,12 @@ const achievements = [
     12,
     13,
     14,
-    15
+    15,
+    16
 ];
 
 const plans = [
-    0,
+
     7,
     8,
     9,
@@ -235,7 +236,8 @@ const plans = [
     22,
     23,
     24,
-    25
+    25,
+    0
 ];
 
 export {users, myWeeklyRecords, allWeeklyRecords, achievements, plans};

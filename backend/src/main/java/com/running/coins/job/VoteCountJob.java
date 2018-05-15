@@ -30,7 +30,7 @@ import java.util.List;
  */
 @Configuration
 @EnableScheduling
-public class VoteCountjob {
+public class VoteCountJob {
 
 
     @Autowired
@@ -56,7 +56,6 @@ public class VoteCountjob {
         List<RunningRecordWithInfo> runningRecordWithInfos = runningRecordMapper.selectRunningRecordWithInfoScoreIn24hours();
 
         List<MailBean> mailBeanList = new ArrayList();
-
         for (RunningRecordWithInfo runningRecordWithInfo : runningRecordWithInfos) {
             System.out.println(runningRecordWithInfo);
 

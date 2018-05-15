@@ -26,7 +26,6 @@ public class ThisLocalizedWeek {// Try and always specify the time zone you're w
 
     public Date getFirstDay() {
         LocalDate localDate = LocalDate.now(TZ).with(TemporalAdjusters.previousOrSame(this.firstDayOfWeek));
-
         /** for SunDay Bug*/
         if (LocalDate.now().getDayOfWeek().equals(DayOfWeek.SUNDAY)){
            localDate= localDate.plus(-7,ChronoUnit.DAYS);
@@ -48,11 +47,34 @@ public class ThisLocalizedWeek {// Try and always specify the time zone you're w
         return DateUtils.parse(date);
     }
 
+    public Date getPreFirstDay(){
+        LocalDate localDate = LocalDate.now(TZ).with(TemporalAdjusters.previousOrSame(this.firstDayOfWeek));
+        /** for SunDay Bug*/
+        if (LocalDate.now().getDayOfWeek().equals(DayOfWeek.SUNDAY)){
+            localDate= localDate.plus(-7,ChronoUnit.DAYS);
+        }
+        Date date = Date.from(localDate.atStartOfDay(ZoneId.of("Asia/Shanghai")).toInstant().plus(1,ChronoUnit.DAYS).plus(-7,ChronoUnit.DAYS));
+        return DateUtils.parse(date);
+    }
+
+    public Date getPreLastDay() {
+        LocalDate localDate = LocalDate.now(TZ).with(TemporalAdjusters.nextOrSame(this.lastDayOfWeek));
+        /** for SunDay Bug*/
+        if (LocalDate.now().getDayOfWeek().equals(DayOfWeek.SUNDAY)){
+            localDate= localDate.plus(-7,ChronoUnit.DAYS);
+        }
+
+        Date date = Date.from(localDate.atStartOfDay(ZoneId.of("Asia/Shanghai")).toInstant().plusSeconds(2*24*60*60-1).plus(-7,ChronoUnit.DAYS));
+        return DateUtils.parse(date);
+    }
+
+
+
+
     /**
      * @param date 2018-04-18 11:11:11
      * @return
      */
-
     public Date getFirstDay(String date) {
         String[] strs = date.split("-");
         LocalDate localDate = LocalDate.of(Integer.valueOf(strs[0]), Integer.valueOf(strs[1]), Integer.valueOf(strs[2].substring(0, 2))).with(TemporalAdjusters.previousOrSame(this.firstDayOfWeek));

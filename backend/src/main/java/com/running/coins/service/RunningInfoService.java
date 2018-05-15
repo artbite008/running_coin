@@ -80,10 +80,20 @@ public class RunningInfoService {
         runningRecord.setStatus(SportRecordStatus.SUBMITTED.getCode());
         CountEarnedCoins(submitUserSportRecordRequest, runningRecord);
 
-        /** 判断单个用户最新打卡的时间 两次打卡间隔 必须超过1小时*/
+        /**
+         * 判断单个用户最新打卡的时间 两次打卡间隔 必须超过1小时
+         * 如果用户在1小时内保存了两次，则以最新的一次为准，用户可用以修改distance
+         */
         List<RunningRecord> runningRecordsInOneHour = recordMapper.selectRunningRecordLatestHourByUserGroupId(runningRecord.getUserGroupId());
-        if (runningRecordsInOneHour!=null){
-            return ResultUtils.error(ResultEnum.RECORDTIME_ERROR);
+        if (runningRecordsInOneHour.size()!=0){
+            RunningRecord runningRecordChange = runningRecordsInOneHour.get(0);
+            Float oldDistance = runningRecordChange.getDistance();
+            Float newDistance = Float.valueOf(submitUserSportRecordRequest.getDistance());
+
+            runningRecordChange.setDistance(newDistance);
+            int i = recordMapper.updateByPrimaryKey(runningRecordChange);
+
+            return ResultUtils.error(400,"Change Distance From "+oldDistance+" to "+newDistance);
         }
 
         recordMapper.insert(runningRecord);

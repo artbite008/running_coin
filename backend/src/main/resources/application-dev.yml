@@ -1,10 +1,12 @@
 server:
-  port: 443
-  ssl:
-    key-alias: guxiangfly.cn
-    key-store-type: JKS
-    key-store: classpath:guxiangfly.cn.jks
-    key-store-password: 45lgrs8gokejt0
+  port: 3443
+  #ssl:
+  #  key-alias: guxiangfly.cn
+  #  key-store-type: JKS
+  #  key-store: classpath:guxiangfly.cn.jks
+  #  key-store-password: 45lgrs8gokejt0
+  servlet:
+    context-path: /dev/
 spring:
   datasource:
      url: jdbc:mysql://47.96.173.94:3306/runningcoin_QA?useUnicode=yes&useSSL=false

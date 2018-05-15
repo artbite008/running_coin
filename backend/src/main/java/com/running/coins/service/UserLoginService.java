@@ -25,7 +25,7 @@ public class UserLoginService {
 
 
     @Value("${wechat.appid}")
-    private  String appId;
+    private String appId;
 
     @Value("${wechat.secret}")
     private String appSecret;
@@ -34,10 +34,16 @@ public class UserLoginService {
     private TempUserInfoForOpenIdMapper tempUserInfoForOpenIdMapper;
 
 
-    public ResponseMessage userLoginService(String code, int olduserId) {
+    public ResponseMessage userLoginService(String code, int olduserId, String sessionOpenId) {
+
+        if (sessionOpenId != "0000" && sessionOpenId.length() >= 28) {
+
+            return ResultUtils.success(sessionOpenId);
+        }
+
         RestTemplate restTemplate = new RestTemplate();
-        String  url = String.format("https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code",appId,appSecret,code);
-        String  result = restTemplate.getForObject(url, String.class);
+        String url = String.format("https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code", appId, appSecret, code);
+        String result = restTemplate.getForObject(url, String.class);
         WeChatOpenIdResponse weChatOpenIdResponse = JSON.parseObject(result, WeChatOpenIdResponse.class);
         String openId = weChatOpenIdResponse.getOpenid();
 
@@ -52,10 +58,10 @@ public class UserLoginService {
         criteria.andOpenIdEqualTo(openId);
         List<TempUserInfoForOpenId> tempUserInfoForOpenIds = tempUserInfoForOpenIdMapper.selectByExample(tempUserInfoForOpenIdExample);
 
-        if (tempUserInfoForOpenIds.size()==0){
+        if (tempUserInfoForOpenIds.size() == 0) {
             tempUserInfoForOpenIdMapper.insert(tempUserInfoForOpenId);
         }
 
-        return ResultUtils.success();
+        return ResultUtils.success(openId);
     }
 }

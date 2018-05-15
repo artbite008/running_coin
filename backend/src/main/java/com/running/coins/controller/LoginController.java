@@ -32,10 +32,10 @@ public class LoginController {
     @ApiOperation(value = "user  onLogin by code", notes = "submit records")
     @ApiImplicitParam(name = "onLogin", value = "", required = true, dataType = "onLogin")
     public ResponseMessage onLogin(@RequestParam("code") String code,
-                                   @RequestParam(value = "olduserId", required = false,defaultValue = "000") int olduserId,
-                                   @RequestParam(value = "session", required = false ,defaultValue = "0000") String session) {
+                                   @RequestParam(value = "olduserId", required = false,defaultValue = "0000") int olduserId,
+                                   @RequestParam(value = "sessionOpenId", required = false ,defaultValue = "0000") String sessionOpenId) {
 
-        ResponseMessage responseMessage = userLoginService.userLoginService(code, olduserId);
+        ResponseMessage responseMessage = userLoginService.userLoginService(code, olduserId,sessionOpenId);
         return responseMessage;
     }
 
