@@ -1,6 +1,5 @@
 package com.running.coins.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.running.coins.common.util.ResultUtils;

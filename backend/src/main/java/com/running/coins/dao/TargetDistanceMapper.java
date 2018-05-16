@@ -76,7 +76,7 @@ public interface TargetDistanceMapper {
             "select",
             "TargetDistanceId, UserGroupId, CreationTime, TargetDistance",
             "from Target_Distance",
-            "and CreationTime >= #{start,jdbcType=DATE}",
+            "where CreationTime >= #{start,jdbcType=DATE}",
             "and CreationTime <= #{end,jdbcType=DATE}"
     })
     @Results({

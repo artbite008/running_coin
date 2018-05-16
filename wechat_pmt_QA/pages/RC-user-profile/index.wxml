@@ -61,14 +61,14 @@
   <view class='backdrop-front-content'>
     <icon type="cancel" size="40" color="red" bindtap='backdropMgt' />
     <block wx:if="{{dialogEvent === 'plan'}}">
-      <text class='planning-slogan'>Set My Goal ! Click Yellow Button To Save.</text>
+      <text class='planning-slogan'>Set weekly goal！ Click yellow button to save.</text>
       <view class="card planning-container bg-light">
         <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px; border-radius: 10px; font-weight: 600;" value="{{value}}" bindchange="bindChange">
           <picker-view-column>
          
             <view wx:for="{{plans}}" style="line-height: 50px; padding-left: 20px;">
                <view wx:if="{{item==0}}">
-                  ask for leave
+                  Ask For Leave
                </view>
                <view wx:else>
                   I Wanna Run {{item}} km !

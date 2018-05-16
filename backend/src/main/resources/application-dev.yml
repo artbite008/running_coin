@@ -1,12 +1,14 @@
 server:
   port: 3443
+  # 改为已经改为Nginx部署
+  servlet:
+    context-path: /dev/
   #ssl:
   #  key-alias: guxiangfly.cn
   #  key-store-type: JKS
   #  key-store: classpath:guxiangfly.cn.jks
   #  key-store-password: 45lgrs8gokejt0
-  servlet:
-    context-path: /dev/
+
 spring:
   datasource:
      url: jdbc:mysql://47.96.173.94:3306/runningcoin_QA?useUnicode=yes&useSSL=false

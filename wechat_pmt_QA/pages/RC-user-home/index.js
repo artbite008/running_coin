@@ -26,10 +26,10 @@ Page({
         liked: false,
         disliked: false
     },
-    getUserInfobywx:function(){
-      this
-        .loadData()
-        .then(() => wx.stopPullDownRefresh());
+    getUserInfobywx: function () {
+        this
+            .loadData()
+            .then(() => wx.stopPullDownRefresh());
     },
     goToGuard: function () { // do not use navigateTo
         wx.redirectTo({
@@ -109,16 +109,8 @@ Page({
                 userInfo: app.globalData.userInfo,
                 hasUserInfo: true
             })
-        } else if (this.data.canIUse) {
-            console.log("can i use ")
-            app.userInfoReadyCallback = res => {
-                this.setData({
-                    hasUserInfo: true
-                })
-            };
         } else {
-            // this is from wechat offical demo for some kind of backward compatible
-            console.log("执行到 home/index.js 114")
+           /* console.log("执行到 home/index.js 114")
             WX.userInfo(true)
                 .then(res => {
                     app.globalData.userInfo = res.userInfo;
@@ -126,26 +118,23 @@ Page({
                         userInfo: res.userInfo,
                         hasUserInfo: true
                     });
-                })
-                .then(res => {
-                    if (wx.getStorageSync('sessionOpenId')!=null){
-                        return;
-                    } 
-                    WX.login().then(res => {
-                        console.log("get jsCode to login" + res.code);
+                    if (!wx.getStorageSync('sessionOpenId')) {
+                        WX.login().then(res => {
+                            console.log("get jsCode to login" + res.code);
 
-                        RecordService.getInstance().serverUserLogin(
-                            res.code,
-                            hashToInt(`${userInfo.nickName}-${userInfo.city}-${userInfo.province}-${userInfo.country}`),
-                            null
-                        )
-                    }).then(res => {
-                        console.dir(res);
-                        console.log("store the openid in app"+res.data.data);
-                        app.globalData.sessionOpenId = res.data.data;
-                        wx.setStorageSync('sessionOpenId', res.data.data);
-                    })
-                });
+                            RecordService.getInstance().serverUserLogin(
+                                res.code,
+                                hashToInt(`${userInfo.nickName}-${userInfo.city}-${userInfo.province}-${userInfo.country}`),
+                                null
+                            )
+                        }).then(res => {
+                            console.dir(res);
+                            console.log("store the openid in app" + res.data.data);
+                            app.globalData.sessionOpenId = res.data.data;
+                            wx.setStorageSync('sessionOpenId', res.data.data);
+                        })
+                    }
+                })*/
         }
         this.loadData();
     },
@@ -162,23 +151,23 @@ Page({
                     hasUserInfo: true
                 });
 
-              if(wx.getStorageSync('sessionOpenId')==null){
-                WX.login().then(res => {
-                  console.log("get jsCode to login" + res.code);
-                  const userInfo = app.globalData.userInfo;
-                  RecordService.getInstance().serverUserLogin(
-                    res.code,
-                    hashToInt(`${userInfo.nickName}-${userInfo.city}-${userInfo.province}-${userInfo.country}`),
-                    null
-                  ).then(res => {
-                    console.log("store the openid in app " + res.data.data)
-                    console.dir(res);
-                    app.globalData.sessionOpenId = res.data.data;
-                    wx.setStorageSync('sessionOpenId', res.data.data);
-                  })
-                })
-              }
-                
+                if (!wx.getStorageSync('sessionOpenId')) {
+                    WX.login().then(res => {
+                        console.log("get jsCode to login" + res.code);
+                        const userInfo = app.globalData.userInfo;
+                        RecordService.getInstance().serverUserLogin(
+                            res.code,
+                            hashToInt(`${userInfo.nickName}-${userInfo.city}-${userInfo.province}-${userInfo.country}`),
+                            wx.getStorageSync('sessionOpenId')
+                        ).then(res => {
+                            console.log("store the openid in app " + res.data.data)
+                            console.dir(res);
+                            app.globalData.sessionOpenId = res.data.data;
+                            wx.setStorageSync('sessionOpenId', res.data.data);
+                        })
+                    })
+                }
+
 
                 // create or update user
                 return UserService
@@ -222,31 +211,31 @@ Page({
 
                 console.log("这是打卡的结果");
                 console.dir(res);
-                if (res.data.code===0)
-                wx.showToast({title: 'Success!'})
+                if (res.data.code === 0)
+                    wx.showToast({title: 'Success!'})
 
-                else if (res.data.code == 400){
+                else if (res.data.code == 400) {
                     wx.showToast({
-                      title: res.data.msg,
-                      icon:'none'
-                      }
+                            title: res.data.msg,
+                            icon: 'none'
+                        }
                     )
                 }
                 else {
-                  wx.showToast({
-                      title: 'UnKnown Exception',
-                      icon: 'none'
-                    }
-                  )
+                    wx.showToast({
+                            title: 'UnKnown Exception',
+                            icon: 'none'
+                        }
+                    )
                 }
 
                 var that = this;
 
                 setTimeout(function () {
-                  that
-                      .loadData()
-                      .then(() => wx.stopPullDownRefresh());
-                  that.backdropMgt();
+                    that
+                        .loadData()
+                        .then(() => wx.stopPullDownRefresh());
+                    that.backdropMgt();
                 }, 1500)
 
             });
