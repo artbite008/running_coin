@@ -3,6 +3,7 @@ package com.running.coins.dao;
 import com.running.coins.model.RunningRecord;
 import com.running.coins.model.RunningRecordWithInfo;
 import com.running.coins.model.transition.UserInfoBatchBean;
+import com.running.coins.model.transition.UserRecord;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
@@ -222,4 +223,74 @@ public interface RunningRecordMapper {
     })
     List<RunningRecord> selectRunningRecordLatestHourByUserGroupId(@Param("userGroupId") Integer userGroupId);
 
+
+    @Select({
+            "SELECT\n" +
+                    "  Running_Record.RuningRecordId    AS RunningRecordId,\n" +
+                    "  User_Info.UserId                 AS UserId,\n" +
+                    "  UserGroup.UserGroupId            AS UserGroupId,\n" +
+                    "  User_Info.UserName               AS NickName,\n" +
+                    "  User_Info.Coins                  AS Coins,\n" +
+                    "  User_Info.Icon                   AS Icon,\n" +
+                    "  Running_Record.Distance          AS Current,\n" +
+                    "  Target_Distance.TargetDistance   AS Target,\n" +
+                    "  VoteResult.likes                 AS Likes,\n" +
+                    "  VoteResult.dislikes              AS Dislikes,\n" +
+                    "  RecordHasVoted.distancePassVoted AS DistancePassVoted,\n" +
+                    "  RecordWaitVoted.distanceWaitVote AS DistanceWaitVote\n" +
+                    "  Running_Record.Status            AS Status\n" +
+                    "\n" +
+                    "FROM Running_Record\n" +
+                    "  LEFT JOIN UserGroup ON UserGroup.UserGroupId = Running_Record.UserGroupId\n" +
+                    "  LEFT JOIN User_Info ON UserGroup.UserId = User_Info.UserId\n" +
+                    "  LEFT JOIN Target_Distance ON UserGroup.UserGroupId = Target_Distance.UserGroupId\n" +
+                    "  LEFT JOIN (\n" +
+                    "              SELECT\n" +
+                    "                RuningRecordId,\n" +
+                    "                sum(CASE WHEN Score = 1\n" +
+                    "                  THEN 1\n" +
+                    "                    ELSE 0 END) AS likes,\n" +
+                    "                sum(CASE WHEN Score = -1\n" +
+                    "                  THEN 1\n" +
+                    "                    ELSE 0 END) AS dislikes\n" +
+                    "              FROM Vote_Record\n" +
+                    "              WHERE VotedTime >= #{start,jdbcType=TIMESTAMP} AND VotedTime <= #{end,jdbcType=TIMESTAMP}\n" +
+                    "              GROUP BY RuningRecordId\n" +
+                    "            ) AS VoteResult ON VoteResult.RuningRecordId = Running_Record.RuningRecordId\n" +
+                    "  LEFT JOIN (\n" +
+                    "              SELECT\n" +
+                    "                UserGroupId,\n" +
+                    "                sum(Distance) AS distancePassVoted\n" +
+                    "              FROM Running_Record\n" +
+                    "              WHERE CreationTime >= #{start,jdbcType=TIMESTAMP} AND CreationTime <= #{end,jdbcType=TIMESTAMP}\n" +
+                    "                    AND Status = 3\n" +
+                    "              GROUP BY UserGroupId\n" +
+                    "            ) AS RecordHasVoted ON RecordHasVoted.UserGroupId = UserGroup.UserGroupId\n" +
+                    "  LEFT JOIN (\n" +
+                    "              SELECT\n" +
+                    "                UserGroupId,\n" +
+                    "                sum(Distance) AS distanceWaitVote\n" +
+                    "              FROM Running_Record\n" +
+                    "              WHERE CreationTime >= #{start,jdbcType=TIMESTAMP} AND CreationTime =< #{end,jdbcType=TIMESTAMP}\n" +
+                    "                    AND Status IS NULL\n" +
+                    "              GROUP BY UserGroupId\n" +
+                    "            ) AS RecordWaitVoted ON RecordWaitVoted.UserGroupId = UserGroup.UserGroupId\n" +
+                    "WHERE Running_Record.CreationTime >= #{start,jdbcType=TIMESTAMP} AND Running_Record.CreationTime <= #{end,jdbcType=TIMESTAMP}"
+    })
+    @Results({
+            @Result(column="RunningRecordId", property="runningRecordId", jdbcType=JdbcType.INTEGER, id=true),
+            @Result(column="userId", property="userId", jdbcType=JdbcType.INTEGER),
+            @Result(column="UserGroupId", property="userGroupId", jdbcType=JdbcType.INTEGER),
+            @Result(column="NickName", property="nickName", jdbcType=JdbcType.VARCHAR),
+            @Result(column="Coins", property="coins", jdbcType=JdbcType.FLOAT),
+            @Result(column="Icon", property="icon", jdbcType=JdbcType.VARCHAR),
+            @Result(column="Current", property="current", jdbcType=JdbcType.FLOAT),
+            @Result(column="Target", property="target", jdbcType=JdbcType.FLOAT),
+            @Result(column="Likes", property="likes", jdbcType=JdbcType.INTEGER),
+            @Result(column="Dislikes", property="dislikes", jdbcType=JdbcType.INTEGER),
+            @Result(column="DistancePassVoted", property="distanceValided", jdbcType=JdbcType.FLOAT),
+            @Result(column="DistanceWaitVote", property="distanceWaitValided", jdbcType=JdbcType.FLOAT),
+            @Result(column="Status", property="status", jdbcType=JdbcType.LONGVARBINARY)
+    })
+    List<UserRecord> selectDailyUserRecord(@Param("start")Date  start, @Param("end") Date end);
 }

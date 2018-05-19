@@ -12,6 +12,7 @@ import com.running.coins.common.util.ThisLocalizedWeek;
 import com.running.coins.dao.*;
 import com.running.coins.model.*;
 import com.running.coins.model.request.CurrentUserWeeklyReportRequest;
+import com.running.coins.model.request.DailyReportRequest;
 import com.running.coins.model.request.UserJoinRequest;
 import com.running.coins.model.request.WeeklyReportRequest;
 import com.running.coins.model.response.CurrentUserWeeklyReportResponse;
@@ -374,4 +375,7 @@ public class FrontServices {
         userInfo.setIcon(userJoinRequest.getIcon());
     }
 
+    public ResponseMessage everyOneDailly(DailyReportRequest dailyReportRequest) {
+        return null;
+    }
 }

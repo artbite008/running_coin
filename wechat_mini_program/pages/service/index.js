@@ -1,15 +1,16 @@
 import {HttpClient as hc} from '../../utils/httpClient';
 
 const envLocal = 'https://test.com';  // mapping in hosts file
-const envQa = 'https://guxiangfly.cn';
+//const envQa = 'https://guxiangfly.cn';
 //const envQa = 'https://localhost';
-const envProd = 'http://127.0.0.1';
+const envQa = 'https://guxiangfly.cn';
+//const envQa = 'http://guxiangfly.nat300.top';
 
 /**
  * user services for
  * query user info by user Id
  * create user info
- * vote user
+ * vote user 
  */
 class UserService {
 
@@ -90,10 +91,20 @@ class RecordService {
     this.$http = httpClient;
   }
 
-  serverUserLogin(jsCode) {
+  serverUserLogin(jsCode,olduserId,sessionOpenId) {
     return this.$http.get('/login/onLogin', null, {
-      userId: userId
+        code: jsCode,
+        olduserId: olduserId,
+        sessionOpenId: sessionOpenId
     });
+  }
+
+  serverDailyUserRecord(){
+    return this.$http.post('/login/onLogin', null, null);
+  }
+
+  getAllUserRecord(userId){
+    
   }
 
   getUserRecord(userId) {

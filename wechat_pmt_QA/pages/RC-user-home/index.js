@@ -110,36 +110,98 @@ Page({
                 hasUserInfo: true
             })
         } else {
-           /* console.log("执行到 home/index.js 114")
-            WX.userInfo(true)
-                .then(res => {
-                    app.globalData.userInfo = res.userInfo;
-                    this.setData({
-                        userInfo: res.userInfo,
-                        hasUserInfo: true
-                    });
-                    if (!wx.getStorageSync('sessionOpenId')) {
-                        WX.login().then(res => {
-                            console.log("get jsCode to login" + res.code);
+            /* console.log("执行到 home/index.js 114")
+             WX.userInfo(true)
+                 .then(res => {
+                     app.globalData.userInfo = res.userInfo;
+                     this.setData({
+                         userInfo: res.userInfo,
+                         hasUserInfo: true
+                     });
+                     if (!wx.getStorageSync('sessionOpenId')) {
+                         WX.login().then(res => {
+                             console.log("get jsCode to login" + res.code);
 
-                            RecordService.getInstance().serverUserLogin(
-                                res.code,
-                                hashToInt(`${userInfo.nickName}-${userInfo.city}-${userInfo.province}-${userInfo.country}`),
-                                null
-                            )
-                        }).then(res => {
-                            console.dir(res);
-                            console.log("store the openid in app" + res.data.data);
-                            app.globalData.sessionOpenId = res.data.data;
-                            wx.setStorageSync('sessionOpenId', res.data.data);
-                        })
-                    }
-                })*/
+                             RecordService.getInstance().serverUserLogin(
+                                 res.code,
+                                 hashToInt(`${userInfo.nickName}-${userInfo.city}-${userInfo.province}-${userInfo.country}`),
+                                 null
+                             )
+                         }).then(res => {
+                             console.dir(res);
+                             console.log("store the openid in app" + res.data.data);
+                             app.globalData.sessionOpenId = res.data.data;
+                             wx.setStorageSync('sessionOpenId', res.data.data);
+                         })
+                     }
+                 })*/
         }
         this.loadData();
     },
     loadData: function () {
         let that = this;
+        /*
+               WX.userInfo(false)
+                    .then(res => {
+                        const userInfo = res.userInfo;
+                        app.globalData.userInfo = userInfo;
+
+                        that.setData({
+                            hasUserInfo: true
+                        });
+                        if (!wx.getStorageSync('sessionOpenId')) {
+                            return WX.login()
+                        } else {
+                            UserService
+                                .getInstance()
+                                .createAndUpdateUser({
+                                    userName: userInfo.nickName,
+                                    groupId: 1,
+                                    unionId: hashToInt(`${userInfo.nickName}-${userInfo.city}-${userInfo.province}-${userInfo.country}`),
+                                    icon: userInfo.avatarUrl
+                                }).then(res => {
+                                const homePageModel = res.data.data;
+                                that.setData({
+                                    userInfo: homePageModel.userRecord || {},
+                                    users: homePageModel.otherUsersRecord || []
+                                });
+                                Object.assign(app.globalData.userInfo, homePageModel.userRecord);
+                                return new Promise((resolve) => resolve());
+                            })
+                        }
+                    })
+                    .then(res => {
+                        console.log("get jsCode to login" + res.code);
+                        const userInfo = app.globalData.userInfo;
+                        return RecordService.getInstance().serverUserLogin(
+                            res.code,
+                            hashToInt(`${userInfo.nickName}-${userInfo.city}-${userInfo.province}-${userInfo.country}`),
+                            wx.getStorageSync('sessionOpenId'))
+                    })
+                    .then(res => {
+                        console.log("store the openid in app " + res.data.data)
+                        console.dir(res);
+                        app.globalData.sessionOpenId = res.data.data;
+                        wx.setStorageSync('sessionOpenId', res.data.data);
+
+                        return UserService.getInstance()
+                            .createAndUpdateUser({
+                                userName: userInfo.nickName,
+                                groupId: 1,
+                                unionId: hashToInt(`${userInfo.nickName}-${userInfo.city}-${userInfo.province}-${userInfo.country}`),
+                                icon: userInfo.avatarUrl
+                            });
+                    })
+                    .then(res => {
+                        const homePageModel = res.data.data;
+                        that.setData({
+                            userInfo: homePageModel.userRecord || {},
+                            users: homePageModel.otherUsersRecord || []
+                        });
+                        Object.assign(app.globalData.userInfo, homePageModel.userRecord);
+                        return new Promise((resolve) => resolve());
+                    });*/
+
         return WX
         // get user Info
             .userInfo(false)
@@ -152,22 +214,25 @@ Page({
                 });
 
                 if (!wx.getStorageSync('sessionOpenId')) {
-                    WX.login().then(res => {
-                        console.log("get jsCode to login" + res.code);
-                        const userInfo = app.globalData.userInfo;
-                        RecordService.getInstance().serverUserLogin(
-                            res.code,
-                            hashToInt(`${userInfo.nickName}-${userInfo.city}-${userInfo.province}-${userInfo.country}`),
-                            wx.getStorageSync('sessionOpenId')
-                        ).then(res => {
+
+                    WX.login()
+                        .then(res => {
+                            console.log("get jsCode to login" + res.code);
+                            const userInfo = app.globalData.userInfo;
+                            return RecordService.getInstance().serverUserLogin(
+                                res.code,
+                                hashToInt(`${userInfo.nickName}-${userInfo.city}-${userInfo.province}-${userInfo.country}`),
+                                wx.getStorageSync('sessionOpenId')
+                            )
+                        })
+                        .then(res => {
                             console.log("store the openid in app " + res.data.data)
                             console.dir(res);
                             app.globalData.sessionOpenId = res.data.data;
                             wx.setStorageSync('sessionOpenId', res.data.data);
-                        })
-                    })
-                }
+                        });
 
+                }
 
                 // create or update user
                 return UserService

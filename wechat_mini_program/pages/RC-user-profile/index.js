@@ -144,7 +144,14 @@ Page({
     UserService
       .getInstance()
       .submitTarget(userInfo.userId, userInfo.userGroupId, plan, 1)
-      .then(res => wx.showToast({ title: 'submit!' }));;
+      .then(res => wx.showToast({ title: 'submit Success!' }));;
+
+     this.backdropMgt();
+
+      this.refreshUserInfo();
+      this
+          .loadData()
+          .then(() => wx.stopPullDownRefresh());
   },
   onPullDownRefresh: function () {
     this.refreshUserInfo();

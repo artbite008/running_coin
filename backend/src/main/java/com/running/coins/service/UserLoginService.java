@@ -37,7 +37,6 @@ public class UserLoginService {
     public ResponseMessage userLoginService(String code, int olduserId, String sessionOpenId) {
 
         if (sessionOpenId != "0000" && sessionOpenId.length() >= 28) {
-
             return ResultUtils.success(sessionOpenId);
         }
 
