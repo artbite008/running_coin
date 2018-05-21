@@ -166,7 +166,7 @@ Page({
                                     users: homePageModel.otherUsersRecord || []
                                 });
                                 Object.assign(app.globalData.userInfo, homePageModel.userRecord);
-                                return new Promise((resolve) => resolve());
+                                //return new Promise((resolve) => resolve());
                             })
                         }
                     })

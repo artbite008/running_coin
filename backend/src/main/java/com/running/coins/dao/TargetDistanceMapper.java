@@ -76,6 +76,23 @@ public interface TargetDistanceMapper {
             "select",
             "TargetDistanceId, UserGroupId, CreationTime, TargetDistance",
             "from Target_Distance",
+            "where UserGroupId = #{userGroupId,jdbcType=INTEGER}",
+            "and CreationTime >= #{start,jdbcType=DATE}",
+            "and CreationTime <= #{end,jdbcType=DATE}"
+    })
+    @Results({
+            @Result(column="TargetDistanceId", property="targetDistanceId", jdbcType=JdbcType.INTEGER, id=true),
+            @Result(column="UserGroupId", property="userGroupId", jdbcType=JdbcType.INTEGER),
+            @Result(column="CreationTime", property="creationTime", jdbcType=JdbcType.TIMESTAMP),
+            @Result(column="TargetDistance", property="targetDistance", jdbcType=JdbcType.REAL)
+    })
+    List<TargetDistance> selectByUserGroupIdAndTimeRangeReturnList(@Param("userGroupId") Integer userGroupId,@Param("start") Date start, @Param("end")Date end);
+
+
+    @Select({
+            "select",
+            "TargetDistanceId, UserGroupId, CreationTime, TargetDistance",
+            "from Target_Distance",
             "where CreationTime >= #{start,jdbcType=DATE}",
             "and CreationTime <= #{end,jdbcType=DATE}"
     })

@@ -33,7 +33,7 @@ public class TargetFreshJob {
     /**
      * 设置定时任务  每周一 00:00:01 执行
      */
-    @Scheduled(cron = "1 0 0 ? * 2")
+    @Scheduled(cron = "1 0 0 ? * 1")
     public void executeTargetFresh() {
 
         Date day=new Date();
@@ -45,6 +45,18 @@ public class TargetFreshJob {
         List<TargetDistance> targetDistances = targetDistanceMapper.selectByTimeRange(thisLocalizedWeek.getPreFirstDay(), thisLocalizedWeek.getPreLastDay());
 
         for (TargetDistance targetDistance : targetDistances) {
+
+
+            /**
+             * 为了保证数据一周只能有一次 先删除然后再插入
+             */
+            List<TargetDistance> targetDistanceolds = targetDistanceMapper.selectByUserGroupIdAndTimeRangeReturnList(targetDistance.getUserGroupId(), thisLocalizedWeek.getFirstDay(), thisLocalizedWeek.getLastDay());
+            if (targetDistanceolds!=null){
+                for (TargetDistance targetDistanceold : targetDistanceolds) {
+                    targetDistanceMapper.deleteByPrimaryKey(targetDistanceold.getTargetDistanceId());
+                }
+            }
+
             targetDistance.setCreationTime(new Date());
             targetDistance.setTargetDistanceId(null);
             log.info("Generate Target"+ targetDistance.toString());
