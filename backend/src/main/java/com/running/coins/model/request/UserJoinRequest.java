@@ -6,6 +6,6 @@ import lombok.Data;
 public class UserJoinRequest {
     private String userName;
     private int groupId;
-    private int unionId;
     private String icon;
+    private String jsCode;
 }

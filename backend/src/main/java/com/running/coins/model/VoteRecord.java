@@ -6,6 +6,7 @@ import java.util.Date;
 
 @Data
 public class VoteRecord {
+
     private Integer VoteRecordId;
 
     private Integer voteUserId;
@@ -24,4 +25,4 @@ public class VoteRecord {
 
     private String comments;
 
-    }
+}

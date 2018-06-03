@@ -65,10 +65,10 @@
                 selectByExampleQueryId="false">
              <property name="useActualColumnNames" value="true"/>
          </table>-->
-        <table tableName="TempUserInfoForOpenId" domainObjectName="TempUserInfoForOpenId" enableCountByExample="false"
+<!--        <table tableName="TempUserInfoForOpenId" domainObjectName="TempUserInfoForOpenId" enableCountByExample="false"
                enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true">
             <property name="useActualColumnNames" value="true"/>
-        </table>
+        </table>-->
     </context>
 </generatorConfiguration>

@@ -3,8 +3,10 @@ package com.running.coins.service;
 import com.alibaba.fastjson.JSON;
 import com.running.coins.common.util.ResultUtils;
 import com.running.coins.dao.TempUserInfoForOpenIdMapper;
+import com.running.coins.dao.UserInfoMapper;
 import com.running.coins.model.TempUserInfoForOpenId;
 import com.running.coins.model.TempUserInfoForOpenIdExample;
+import com.running.coins.model.request.UserJoinRequest;
 import com.running.coins.model.response.ResponseMessage;
 import com.running.coins.model.response.WeChatOpenIdResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,9 @@ public class UserLoginService {
     @Autowired
     private TempUserInfoForOpenIdMapper tempUserInfoForOpenIdMapper;
 
+    @Autowired
+    private UserInfoMapper userInfoMapper;
+
 
     public ResponseMessage userLoginService(String code, int olduserId, String sessionOpenId) {
 
@@ -59,6 +64,32 @@ public class UserLoginService {
 
         if (tempUserInfoForOpenIds.size() == 0) {
             tempUserInfoForOpenIdMapper.insert(tempUserInfoForOpenId);
+        }
+
+        return ResultUtils.success(openId);
+    }
+
+    public ResponseMessage userLoginServiceV2(UserJoinRequest userJoinRequest) {
+
+
+
+        RestTemplate restTemplate = new RestTemplate();
+        String url = String.format("https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code", appId, appSecret, userJoinRequest.getJsCode());
+        String result = restTemplate.getForObject(url, String.class);
+        WeChatOpenIdResponse weChatOpenIdResponse = JSON.parseObject(result, WeChatOpenIdResponse.class);
+        String openId = weChatOpenIdResponse.getOpenid();
+
+        System.out.println(openId);
+      //  userInfoMapper.selectByPrimaryKey()
+
+        /**查询openid 如果没有存在openid 那么就存入*/
+        TempUserInfoForOpenIdExample tempUserInfoForOpenIdExample = new TempUserInfoForOpenIdExample();
+        TempUserInfoForOpenIdExample.Criteria criteria = tempUserInfoForOpenIdExample.createCriteria();
+        criteria.andOpenIdEqualTo(openId);
+        List<TempUserInfoForOpenId> tempUserInfoForOpenIds = tempUserInfoForOpenIdMapper.selectByExample(tempUserInfoForOpenIdExample);
+
+        if (tempUserInfoForOpenIds.size() == 0) {
+            //tempUserInfoForOpenIdMapper.insert(tempUserInfoForOpenId);
         }
 
         return ResultUtils.success(openId);

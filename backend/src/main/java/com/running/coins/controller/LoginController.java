@@ -3,6 +3,7 @@ package com.running.coins.controller;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.running.coins.common.util.ResultUtils;
+import com.running.coins.model.request.UserJoinRequest;
 import com.running.coins.model.response.ResponseMessage;
 import com.running.coins.model.response.WeChatOpenIdResponse;
 import com.running.coins.service.UserLoginService;
@@ -36,6 +37,14 @@ public class LoginController {
 
         ResponseMessage responseMessage = userLoginService.userLoginService(code, olduserId,sessionOpenId);
         return responseMessage;
+    }
+
+    @GetMapping("/onLoginV2")
+    @ApiOperation(value = "user  onLogin by code", notes = "submit records")
+    @ApiImplicitParam(name = "onLogin", value = "", required = true, dataType = "onLogin")
+    public ResponseMessage onLoginV2(@RequestBody UserJoinRequest userJoinRequest) {
+         userLoginService.userLoginServiceV2(userJoinRequest);
+        return null;
     }
 
 

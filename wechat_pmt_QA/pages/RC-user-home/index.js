@@ -24,7 +24,8 @@ Page({
         // for vote
         whoIsGonnaBeVote: {},
         liked: false,
-        disliked: false
+        disliked: false,
+        sessionOpenId: null
     },
     getUserInfobywx: function () {
         this
@@ -104,9 +105,10 @@ Page({
             });
         }
         console.log("执行到 home/index.js 101")
-        if (app.globalData.userInfo != null) {
+        let tempsessionOpenId = wx.getStorageSync('sessionOpenId');
+        if (tempsessionOpenId != null && tempsessionOpenId.length>=28 ) {
             this.setData({
-                userInfo: app.globalData.userInfo,
+                sessionOpenId: tempsessionOpenId,
                 hasUserInfo: true
             })
         } else {
@@ -166,7 +168,7 @@ Page({
                                     users: homePageModel.otherUsersRecord || []
                                 });
                                 Object.assign(app.globalData.userInfo, homePageModel.userRecord);
-                                //return new Promise((resolve) => resolve());
+
                             })
                         }
                     })
@@ -213,16 +215,16 @@ Page({
                     hasUserInfo: true
                 });
 
-                if (!wx.getStorageSync('sessionOpenId')) {
+                if (! (this.data.sessionOpenId != null && this.data.sessionOpenId.length==28)) {
 
                     WX.login()
                         .then(res => {
                             console.log("get jsCode to login" + res.code);
                             const userInfo = app.globalData.userInfo;
-                            return RecordService.getInstance().serverUserLogin(
+                            return RecordService.getInstance().serverUserLoginV2(
                                 res.code,
-                                hashToInt(`${userInfo.nickName}-${userInfo.city}-${userInfo.province}-${userInfo.country}`),
-                                wx.getStorageSync('sessionOpenId')
+                                userInfo.nickName,
+                                userInfo.avatarUrl
                             )
                         })
                         .then(res => {
@@ -249,7 +251,7 @@ Page({
                     userInfo: homePageModel.userRecord || {},
                     users: homePageModel.otherUsersRecord || []
                 });
-                Object.assign(app.globalData.userInfo, homePageModel.userRecord);
+               // Object.assign(app.globalData.userInfo, homePageModel.userRecord);
                 return new Promise((resolve) => resolve());
             });
     },

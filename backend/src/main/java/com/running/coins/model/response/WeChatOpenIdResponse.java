@@ -6,7 +6,7 @@ package com.running.coins.model.response;
  * @author guxiang
  * @date 2018/5/10
  */
-public class WeChatOpenIdResponse {
+public class  WeChatOpenIdResponse {
 
     private String session_key;
     private String openid;
