@@ -1,0 +1,26 @@
+server:
+  port: 443
+  # 改为已经改为Nginx部署
+  ssl:
+    key-alias: guxiangfly.cn
+    key-store-type: JKS
+    key-store: classpath:guxiangfly.cn.jks
+    key-store-password: 45lgrs8gokejt0
+
+spring:
+  datasource:
+     url: jdbc:mysql://127.0.0.1:3306/runningcoin_local?useUnicode=yes&useSSL=false
+     username: root
+     password: root
+     driver-class-name: com.mysql.jdbc.Driver
+  mail:
+    host: smtp.qq.com
+    username: 964999133@qq.com
+    password: plmksuixpkdmbcag
+    addressesEmail: xianggu@ebay.com,bshen@ebay.com
+    properties.mail.smtp.auth: true
+    properties.mail.smtp.starttls.enable: true
+    properties.mail.smtp.starttls.required: true
+wechat:
+  appid: wx5fac28aeaaaa5a59
+  secret: 3a6a7edad78faf5fa48d64a0911b6b87
