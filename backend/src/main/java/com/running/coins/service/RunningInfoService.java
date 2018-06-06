@@ -48,8 +48,8 @@ public class RunningInfoService {
         if (submitUserSportTargetRequest.getUserGroupId() == null
                 || submitUserSportTargetRequest.getUserGroupId() == 0) {
             userGroupId = userGroupMapper.
-                    selectByGroupIdAndUserId(submitUserSportTargetRequest.getGroupId(),
-                            submitUserSportTargetRequest.getUserId()).getUserGroupId();
+                    selectByGroupIdAndUserOpenId(submitUserSportTargetRequest.getGroupId(),
+                            submitUserSportTargetRequest.getUserOpenId()).getUserGroupId();
         } else {
             userGroupId = submitUserSportTargetRequest.getUserGroupId();
         }
@@ -75,7 +75,7 @@ public class RunningInfoService {
         RunningRecord runningRecord = new RunningRecord();
         runningRecord.setCreationTime(DateUtils.parse(new Date()));
         runningRecord.setDistance(Float.valueOf(submitUserSportRecordRequest.getDistance()));
-        UserGroup userGroup = userGroupMapper.selectByGroupIdAndUserId(submitUserSportRecordRequest.getGroupId(), submitUserSportRecordRequest.getUserId());
+        UserGroup userGroup = userGroupMapper.selectByGroupIdAndUserOpenId(submitUserSportRecordRequest.getGroupId(), submitUserSportRecordRequest.getUserOpenId());
         runningRecord.setUserGroupId(userGroup.getUserGroupId());
         runningRecord.setStatus(SportRecordStatus.SUBMITTED.getCode());
         CountEarnedCoins(submitUserSportRecordRequest, runningRecord);

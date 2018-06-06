@@ -7,7 +7,7 @@ import java.util.List;
 @Data
 public class UserRecord {
     private Integer runningRecordId;
-    private Integer userId;
+    private String userOpenId;
     private Integer userGroupId;
     private Integer groupId;
     private String nickName;

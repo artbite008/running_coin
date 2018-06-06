@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class VoteRequest {
-    private Integer voteUserId;
+    private String voteOpenId;
     private Integer groupId;
     private Integer voteUserGroupId;
     private Integer status;

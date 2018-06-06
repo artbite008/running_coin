@@ -9,8 +9,9 @@
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
         <!--数据库链接地址账号密码-->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://47.96.173.94:3306/runningcoin_QA?useUnicode=yes"
-                        userId="root" password="qwert6">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/runningcoin_local?useUnicode=yes"
+                        userId="root" password="root">
         </jdbcConnection>
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
@@ -65,10 +66,16 @@
                 selectByExampleQueryId="false">
              <property name="useActualColumnNames" value="true"/>
          </table>-->
-<!--        <table tableName="TempUserInfoForOpenId" domainObjectName="TempUserInfoForOpenId" enableCountByExample="false"
-               enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"
-               selectByExampleQueryId="true">
+        <!--        <table tableName="TempUserInfoForOpenId" domainObjectName="TempUserInfoForOpenId" enableCountByExample="false"
+                       enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"
+                       selectByExampleQueryId="true">
+                    <property name="useActualColumnNames" value="true"/>
+                </table>-->
+
+        <table tableName="Vote_Record" domainObjectName="VoteRecord" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
             <property name="useActualColumnNames" value="true"/>
-        </table>-->
+        </table>
     </context>
 </generatorConfiguration>

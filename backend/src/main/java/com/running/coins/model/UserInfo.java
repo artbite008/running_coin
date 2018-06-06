@@ -18,5 +18,7 @@ public class UserInfo {
 
     private String metaData;
 
+    private String openId;
+
     private String icon;
 }

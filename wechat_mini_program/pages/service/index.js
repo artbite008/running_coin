@@ -3,7 +3,7 @@ import {HttpClient as hc} from '../../utils/httpClient';
 const envLocal = 'https://test.com';  // mapping in hosts file
 //const envQa = 'https://guxiangfly.cn';
 //const envQa = 'https://localhost';
-const envQa = 'https://guxiangfly.cn';
+const envQa = 'https://www.runningcoin.club';
 //const envQa = 'http://guxiangfly.nat300.top';
 
 /**

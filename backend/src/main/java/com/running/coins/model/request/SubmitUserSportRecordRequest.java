@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class SubmitUserSportRecordRequest {
-    private Integer userId;
+    private String userOpenId;
     private Float distance;
     private Integer groupId;
     private String evidence;

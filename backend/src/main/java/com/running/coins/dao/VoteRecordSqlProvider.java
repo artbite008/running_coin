@@ -7,14 +7,10 @@ public class VoteRecordSqlProvider {
 
     public String insertSelective(VoteRecord record) {
         SQL sql = new SQL();
-        sql.INSERT_INTO("Vote_Record");
+        sql.INSERT_INTO("vote_record");
         
         if (record.getVoteRecordId() != null) {
             sql.VALUES("VoteRecordId", "#{voteRecordId,jdbcType=INTEGER}");
-        }
-        
-        if (record.getVoteUserId() != null) {
-            sql.VALUES("VoteUserId", "#{voteUserId,jdbcType=INTEGER}");
         }
         
         if (record.getVoteUserGroupId() != null) {
@@ -50,11 +46,7 @@ public class VoteRecordSqlProvider {
 
     public String updateByPrimaryKeySelective(VoteRecord record) {
         SQL sql = new SQL();
-        sql.UPDATE("Vote_Record");
-        
-        if (record.getVoteUserId() != null) {
-            sql.SET("VoteUserId = #{voteUserId,jdbcType=INTEGER}");
-        }
+        sql.UPDATE("vote_record");
         
         if (record.getVoteUserGroupId() != null) {
             sql.SET("VoteUserGroupId = #{voteUserGroupId,jdbcType=INTEGER}");

@@ -1,7 +1,6 @@
 package com.running.coins.controller;
 
 import com.running.coins.model.request.CurrentUserWeeklyReportRequest;
-import com.running.coins.model.request.DailyReportRequest;
 import com.running.coins.model.request.UserJoinRequest;
 import com.running.coins.model.request.WeeklyReportRequest;
 import com.running.coins.model.response.ResponseMessage;
@@ -45,13 +44,6 @@ public class FrontController {
     public ResponseMessage userJoin(@RequestBody UserJoinRequest userJoinRequest) {
         ResponseMessage responseMessage = frontServices.userJoin(userJoinRequest);
         return responseMessage;
-    }
-
-    @PostMapping("/everyone/daily/report")
-    @ApiOperation(value = "", notes = "")
-    @ApiImplicitParam(name = "dailyReportRequest", required = true, dataType = "DailyReportRequest")
-    public ResponseMessage getEveryoneDailyReport(@RequestBody DailyReportRequest dailyReportRequest){
-        return frontServices.everyOneDailly(dailyReportRequest);
     }
 
 }

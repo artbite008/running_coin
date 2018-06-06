@@ -3,7 +3,7 @@ package com.running.coins.model;
 public class UserGroup {
     private Integer userGroupId;
 
-    private Integer userId;
+    private String userOpenid;
 
     private Integer groupId;
 
@@ -15,12 +15,12 @@ public class UserGroup {
         this.userGroupId = userGroupId;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public String getUserOpenid() {
+        return userOpenid;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUserOpenid(String userOpenid) {
+        this.userOpenid = userOpenid == null ? null : userOpenid.trim();
     }
 
     public Integer getGroupId() {

@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class CurrentUserWeeklyReportRequest {
-    private Integer userId;
+    private String userOpenId;
     private Integer groupId;
 }

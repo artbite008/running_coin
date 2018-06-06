@@ -7,7 +7,7 @@ public class UserInfoSqlProvider {
 
     public String insertSelective(UserInfo record) {
         SQL sql = new SQL();
-        sql.INSERT_INTO("User_Info");
+        sql.INSERT_INTO("user_info");
         
         if (record.getUserId() != null) {
             sql.VALUES("UserId", "#{userId,jdbcType=INTEGER}");
@@ -26,7 +26,7 @@ public class UserInfoSqlProvider {
         }
         
         if (record.getCoins() != null) {
-            sql.VALUES("Coins", "#{coins,jdbcType=INTEGER}");
+            sql.VALUES("Coins", "#{coins,jdbcType=DOUBLE}");
         }
         
         if (record.getTotalDistance() != null) {
@@ -35,6 +35,10 @@ public class UserInfoSqlProvider {
         
         if (record.getMetaData() != null) {
             sql.VALUES("MetaData", "#{metaData,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getOpenId() != null) {
+            sql.VALUES("OpenId", "#{openId,jdbcType=VARCHAR}");
         }
         
         if (record.getIcon() != null) {
@@ -46,8 +50,8 @@ public class UserInfoSqlProvider {
 
     public String updateByPrimaryKeySelective(UserInfo record) {
         SQL sql = new SQL();
-        sql.UPDATE("User_Info");
-
+        sql.UPDATE("user_info");
+        
         if (record.getUserName() != null) {
             sql.SET("UserName = #{userName,jdbcType=VARCHAR}");
         }
@@ -61,7 +65,7 @@ public class UserInfoSqlProvider {
         }
         
         if (record.getCoins() != null) {
-            sql.SET("Coins = #{coins,jdbcType=INTEGER}");
+            sql.SET("Coins = #{coins,jdbcType=DOUBLE}");
         }
         
         if (record.getTotalDistance() != null) {
@@ -72,12 +76,58 @@ public class UserInfoSqlProvider {
             sql.SET("MetaData = #{metaData,jdbcType=VARCHAR}");
         }
         
+        if (record.getOpenId() != null) {
+            sql.SET("OpenId = #{openId,jdbcType=VARCHAR}");
+        }
+        
         if (record.getIcon() != null) {
             sql.SET("Icon = #{icon,jdbcType=LONGVARBINARY}");
         }
         
         sql.WHERE("UserId = #{userId,jdbcType=INTEGER}");
         
+        return sql.toString();
+    }
+
+
+    public String updateByOpenIdSelective(UserInfo record) {
+        SQL sql = new SQL();
+        sql.UPDATE("user_info");
+
+        if (record.getUserName() != null) {
+            sql.SET("UserName = #{userName,jdbcType=VARCHAR}");
+        }
+
+        if (record.getStatus() != null) {
+            sql.SET("Status = #{status,jdbcType=VARCHAR}");
+        }
+
+        if (record.getRole() != null) {
+            sql.SET("Role = #{role,jdbcType=VARCHAR}");
+        }
+
+        if (record.getCoins() != null) {
+            sql.SET("Coins = #{coins,jdbcType=DOUBLE}");
+        }
+
+        if (record.getTotalDistance() != null) {
+            sql.SET("TotalDistance = #{totalDistance,jdbcType=REAL}");
+        }
+
+        if (record.getMetaData() != null) {
+            sql.SET("MetaData = #{metaData,jdbcType=VARCHAR}");
+        }
+
+        if (record.getOpenId() != null) {
+            sql.SET("OpenId = #{openId,jdbcType=VARCHAR}");
+        }
+
+        if (record.getIcon() != null) {
+            sql.SET("Icon = #{icon,jdbcType=LONGVARBINARY}");
+        }
+
+        sql.WHERE("OpenId =#{openId,jdbcType=VARCHAR}");
+
         return sql.toString();
     }
 }

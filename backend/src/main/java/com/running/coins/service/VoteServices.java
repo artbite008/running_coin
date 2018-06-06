@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.Optional;
 
 @Service
 public class VoteServices {
@@ -42,9 +41,9 @@ public class VoteServices {
     public ResponseMessage vote(VoteRequest voteRequest) {
         int userGroupId;
         if (voteRequest.getVoteUserGroupId() == null || voteRequest.getVoteUserGroupId() == 0) {
-            userGroupId = userGroupMapper.selectByGroupIdAndUserId
+            userGroupId = userGroupMapper.selectByGroupIdAndUserOpenId
                     (voteRequest.getGroupId(),
-                            voteRequest.getVoteUserId()).getUserGroupId();
+                            voteRequest.getVoteOpenId()).getUserGroupId();
             voteRequest.setVoteUserGroupId(userGroupId);
         } else {
             userGroupId = voteRequest.getVoteUserGroupId();
@@ -53,7 +52,7 @@ public class VoteServices {
                 selectByVoteUserIdAndRuningRecordId(voteRequest.getRunningRecordId(), userGroupId);
         if (voteRecord == null) {
             voteRecord = new VoteRecord();
-            SetVoteRecord(voteRequest, voteRecord);
+            setVoteRecord(voteRequest, voteRecord);
         } else {
             setMutableField(voteRequest, voteRecord);
             voteRecord.setUpdatedTime(DateUtils.parse(new Date()));
@@ -79,10 +78,10 @@ public class VoteServices {
         return ResultUtils.success(VoteStatusResponse.builder().voteRecord(vr).voteStatus(voteStatus).build());
     }
 
-    private void SetVoteRecord(VoteRequest voteRequest, VoteRecord voteRecord) {
+    private void setVoteRecord(VoteRequest voteRequest, VoteRecord voteRecord) {
         if (voteRecord.getStatus() == null) {
             voteRecord.setRuningRecordId(voteRequest.getRunningRecordId());
-            voteRecord.setVoteUserId(voteRecord.getVoteUserId());
+            voteRecord.setVoteOpenId(voteRecord.getVoteOpenId());
             voteRecord.setVoteUserGroupId(voteRequest.getVoteUserGroupId());
             setMutableField(voteRequest, voteRecord);
             voteRecord.setVotedTime(DateUtils.parse(new Date()));
@@ -92,7 +91,7 @@ public class VoteServices {
 
     private void setMutableField(VoteRequest voteRequest, VoteRecord voteRecord) {
         voteRecord.setStatus(voteRequest.getStatus());
-        voteRecord.setVoteUserId(voteRequest.getVoteUserId());
+        voteRecord.setVoteOpenId(voteRequest.getVoteOpenId());
         if (VoteStatus.LIKE.getCode().equals(voteRequest.getStatus())) {
             voteRecord.setScore(1);
         } else if (VoteStatus.DISLIKE.getCode().equals(voteRequest.getStatus())) {

@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class SubmitUserSportTargetRequest {
-    private Integer userId;
+    private String userOpenId;
     private Integer userGroupId;
     private Integer targetDistance;
     private Integer groupId;

@@ -12,7 +12,6 @@ import com.running.coins.common.util.ThisLocalizedWeek;
 import com.running.coins.dao.*;
 import com.running.coins.model.*;
 import com.running.coins.model.request.CurrentUserWeeklyReportRequest;
-import com.running.coins.model.request.DailyReportRequest;
 import com.running.coins.model.request.UserJoinRequest;
 import com.running.coins.model.request.WeeklyReportRequest;
 import com.running.coins.model.response.CurrentUserWeeklyReportResponse;
@@ -86,21 +85,19 @@ public class FrontServices {
         UserGroup userGroup;
         TargetDistance targetDistance;
         try {
-            userInfo = userInfoMapper.selectByPrimaryKey(userJoinRequest.getUnionId());
+            userInfo = userInfoMapper.selectByOpenId(userJoinRequest.getOpenId());
             if (userInfo == null) {
                 userGroup = new UserGroup();
                 userInfo = new UserInfo();
-                SetUserInfo(userJoinRequest, userInfo);
-                SetUserGroup(userJoinRequest, userGroup);
+                setUserInfo(userJoinRequest, userInfo);
+                setUserGroup(userJoinRequest, userGroup);
                 // setup a default target
                 targetDistance = new TargetDistance();
                 targetDistance.setTargetDistance(0f);
 
-                userInfoMapper.insert(userInfo);
-                userGroupMapper.insert(userGroup);
 
                 //insert the default target, distance 0
-                userGroup = userGroupMapper.selectByGroupIdAndUserId(userGroup.getGroupId(), userGroup.getUserId());
+                userGroup = userGroupMapper.selectByGroupIdAndUserOpenId(userGroup.getGroupId(), userGroup.getUserOpenid());
                 targetDistance.setUserGroupId(userGroup.getUserGroupId());
                 this.targetDistanceMapper.insert(targetDistance);
             }
@@ -121,7 +118,7 @@ public class FrontServices {
 
     public ResponseMessage currentUserWeekly(CurrentUserWeeklyReportRequest currentUserWeeklyReportRequest) {
         CurrentUserWeeklyReportResponse currentUserWeeklyReportResponse = new CurrentUserWeeklyReportResponse();
-        UserGroup userGroup = userGroupMapper.selectByGroupIdAndUserId(currentUserWeeklyReportRequest.getGroupId(), currentUserWeeklyReportRequest.getUserId());
+        UserGroup userGroup = userGroupMapper.selectByGroupIdAndUserOpenId(currentUserWeeklyReportRequest.getGroupId(), currentUserWeeklyReportRequest.getUserOpenId());
         ThisLocalizedWeek thisLocalizedWeek = new ThisLocalizedWeek(Locale.CHINA);
         Date start = thisLocalizedWeek.getFirstDay();
         Date end = thisLocalizedWeek.getLastDay();
@@ -166,7 +163,7 @@ public class FrontServices {
 
         for (UserGroup userGroup : userGroups) {
             List<Integer> achievements = new ArrayList<>(Collections.nCopies(7, 0));
-            UserInfo userInfo = userInfoMapper.selectByPrimaryKey(userGroup.getUserId());
+            UserInfo userInfo = userInfoMapper.selectByOpenId(userGroup.getUserOpenid());
             TargetDistance targetDistance = targetDistanceMapper.selectByUserGroupIdAndTimeRange(userGroup.getUserGroupId(), start, end);
             Float allAchievements = 0f;
             int allLikes = 0;
@@ -210,7 +207,7 @@ public class FrontServices {
 
             }
             userRecord.setUserGroupId(userGroup.getUserGroupId());
-            userRecord.setUserId(userGroup.getUserId());
+            userRecord.setUserOpenId(userGroup.getUserOpenid());
             userRecord.setGroupId(userGroup.getGroupId());
             userRecord.setLikes(allLikes);
             userRecord.setDislikes(allDislikes);
@@ -242,7 +239,7 @@ public class FrontServices {
             int status = 0;
             UserRecord userRecord = null;
 
-            UserInfo userInformation = userInfoMapper.selectByPrimaryKey(userInGroup.getUserId());
+            UserInfo userInformation = userInfoMapper.selectByOpenId(userInGroup.getUserOpenid());
             List<RunningRecord> runningRecords = runningRecordMapper.selectByUserGroupIdAndTimeRange(userInGroup.getUserGroupId(), chinaWeek.getFirstDay(), chinaWeek.getLastDay());
             TargetDistance targetDistance = targetDistanceMapper.selectByUserGroupIdAndTimeRange(userInGroup.getUserGroupId(), chinaWeek.getFirstDay(), chinaWeek.getLastDay());
             if (runningRecords != null && runningRecords.size() > 0) {
@@ -281,7 +278,7 @@ public class FrontServices {
                 userRecord.setRunningRecordId(runningRecords.get(i).getRuningRecordId());
                 userRecord.setCurrent(current);
                 userRecord = setUserRecords(userInGroup, userRecord, overallDoneDistance, distanceValided, distanceWaitValided, distanceRejected, userInformation, targetDistance, lastRecord, likes, dislikes, status);
-                if (!userInfo.getUserId().equals(userInGroup.getUserId()) && userRecord.getStatus() == 0) {
+                if (!userInfo.getOpenId().equals(userInGroup.getUserOpenid()) && userRecord.getStatus() == 0) {
                     tempRecords.add(userRecord);
                 }
             }
@@ -302,7 +299,7 @@ public class FrontServices {
                         dislikes,
                         status);
             }
-            if (userInfo.getUserId().equals(userInGroup.getUserId())) {
+            if (userInfo.getOpenId().equals(userInGroup.getUserOpenid())) {
                 if (null != targetDistance) { // add null check
                     userRecord.setTarget(targetDistance.getTargetDistance());
                 }
@@ -346,7 +343,7 @@ public class FrontServices {
         }
         userRecord.setOverallDoneDistance(overallDoneDistance);
         userRecord.setUserGroupId(userInGroup.getUserGroupId());
-        userRecord.setUserId(userInformation.getUserId());
+        userRecord.setUserOpenId(userInformation.getOpenId());
         userRecord.setNickName(userInformation.getUserName());
         userRecord.setCoins(userInformation.getCoins());
         userRecord.setLatestRecord(lastRecord);
@@ -360,13 +357,12 @@ public class FrontServices {
         return userRecord;
     }
 
-    private void SetUserGroup(UserJoinRequest userJoinRequest, UserGroup userGroup) {
+    private void setUserGroup(UserJoinRequest userJoinRequest, UserGroup userGroup) {
         userGroup.setGroupId(userJoinRequest.getGroupId());
-        userGroup.setUserId(userJoinRequest.getUnionId());
+        userGroup.setUserOpenid(userJoinRequest.getOpenId());
     }
 
-    private void SetUserInfo(UserJoinRequest userJoinRequest, UserInfo userInfo) {
-        userInfo.setUserId(userJoinRequest.getUnionId());
+    private void setUserInfo(UserJoinRequest userJoinRequest, UserInfo userInfo) {
         userInfo.setUserName(userJoinRequest.getUserName());
         userInfo.setCoins(0d);
         userInfo.setRole("member");
@@ -375,7 +371,5 @@ public class FrontServices {
         userInfo.setIcon(userJoinRequest.getIcon());
     }
 
-    public ResponseMessage everyOneDailly(DailyReportRequest dailyReportRequest) {
-        return null;
-    }
+
 }

@@ -7,14 +7,14 @@ public class UserGroupSqlProvider {
 
     public String insertSelective(UserGroup record) {
         SQL sql = new SQL();
-        sql.INSERT_INTO("UserGroup");
+        sql.INSERT_INTO("usergroup");
         
         if (record.getUserGroupId() != null) {
             sql.VALUES("UserGroupId", "#{userGroupId,jdbcType=INTEGER}");
         }
         
-        if (record.getUserId() != null) {
-            sql.VALUES("UserId", "#{userId,jdbcType=INTEGER}");
+        if (record.getUserOpenid() != null) {
+            sql.VALUES("UserOpenid", "#{userOpenid,jdbcType=VARCHAR}");
         }
         
         if (record.getGroupId() != null) {
@@ -26,10 +26,10 @@ public class UserGroupSqlProvider {
 
     public String updateByPrimaryKeySelective(UserGroup record) {
         SQL sql = new SQL();
-        sql.UPDATE("UserGroup");
+        sql.UPDATE("usergroup");
         
-        if (record.getUserId() != null) {
-            sql.SET("UserId = #{userId,jdbcType=INTEGER}");
+        if (record.getUserOpenid() != null) {
+            sql.SET("UserOpenid = #{userOpenid,jdbcType=VARCHAR}");
         }
         
         if (record.getGroupId() != null) {
