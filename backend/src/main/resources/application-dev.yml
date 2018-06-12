@@ -11,7 +11,7 @@ server:
 
 spring:
   datasource:
-     url: jdbc:mysql://47.96.173.94:3306/runningcoin_QA?useUnicode=yes&useSSL=false
+     url: jdbc:mysql://47.96.173.94:3306/runningcoinv2_qa?useUnicode=yes&useSSL=false
      username: root
      password: qwert6
      driver-class-name: com.mysql.jdbc.Driver

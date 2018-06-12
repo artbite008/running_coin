@@ -60,8 +60,8 @@ public interface TargetDistanceMapper {
             "TargetDistanceId, UserGroupId, CreationTime, TargetDistance",
             "from Target_Distance",
             "where UserGroupId = #{userGroupId,jdbcType=INTEGER}",
-            "and CreationTime >= #{start,jdbcType=DATE}",
-            "and CreationTime <= #{end,jdbcType=DATE}"
+            "and CreationTime >= #{start,jdbcType=TIMESTAMP}",
+            "and CreationTime <= #{end,jdbcType=TIMESTAMP}"
     })
     @Results({
             @Result(column="TargetDistanceId", property="targetDistanceId", jdbcType=JdbcType.INTEGER, id=true),
@@ -77,8 +77,8 @@ public interface TargetDistanceMapper {
             "TargetDistanceId, UserGroupId, CreationTime, TargetDistance",
             "from Target_Distance",
             "where UserGroupId = #{userGroupId,jdbcType=INTEGER}",
-            "and CreationTime >= #{start,jdbcType=DATE}",
-            "and CreationTime <= #{end,jdbcType=DATE}"
+            "and CreationTime >= #{start,jdbcType=TIMESTAMP}",
+            "and CreationTime <= #{end,jdbcType=TIMESTAMP}"
     })
     @Results({
             @Result(column="TargetDistanceId", property="targetDistanceId", jdbcType=JdbcType.INTEGER, id=true),
@@ -93,8 +93,8 @@ public interface TargetDistanceMapper {
             "select",
             "TargetDistanceId, UserGroupId, CreationTime, TargetDistance",
             "from Target_Distance",
-            "where CreationTime >= #{start,jdbcType=DATE}",
-            "and CreationTime <= #{end,jdbcType=DATE}"
+            "where CreationTime >= #{start,jdbcType=TIMESTAMP}",
+            "and CreationTime <= #{end,jdbcType=TIMESTAMP}"
     })
     @Results({
             @Result(column="TargetDistanceId", property="targetDistanceId", jdbcType=JdbcType.INTEGER, id=true),

@@ -69,7 +69,7 @@ Page({
     let that = this;
     return RecordService
       .getInstance()
-      .getWeeklyRecordByUserId(app.globalData.userInfo.userId, 1)
+      .getWeeklyRecordByUserId(wx.getStorageSync('sessionOpenId'), 1)
       .then(res => {
         that.setData({
           weeklyReords: {
@@ -95,7 +95,7 @@ Page({
           .createAndUpdateUser({
             userName: userInfo.nickName,
             groupId: 1,
-            unionId: hashToInt(`${userInfo.nickName}-${userInfo.city}-${userInfo.province}-${userInfo.country}`),
+            openId: wx.getStorageSync('sessionOpenId'),
             icon: userInfo.avatarUrl
           });
       }).then(res => {

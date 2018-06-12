@@ -1,5 +1,4 @@
-//app.js
-import {hashToInt} from 'utils/util';
+
 
 App({
     onLaunch: function () {
@@ -26,7 +25,7 @@ App({
         //         })
         //       } else {
         //         console.log('登录失败！' + res.errMsg)
-        //       }
+        //       }s
         //     }
         //   })
         //   // 获取用户信息

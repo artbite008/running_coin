@@ -95,7 +95,6 @@ public class FrontServices {
                 targetDistance = new TargetDistance();
                 targetDistance.setTargetDistance(0f);
 
-
                 //insert the default target, distance 0
                 userGroup = userGroupMapper.selectByGroupIdAndUserOpenId(userGroup.getGroupId(), userGroup.getUserOpenid());
                 targetDistance.setUserGroupId(userGroup.getUserGroupId());

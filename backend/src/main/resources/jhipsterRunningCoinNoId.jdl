@@ -4,7 +4,6 @@ entity Group {
 }
 
 entity RunningRecord {
-	UserGroupId Integer,
     Distance Float,
     CreationTime  ZonedDateTime,
 	LastVotedTime  ZonedDateTime,
@@ -17,7 +16,6 @@ entity RunningRecord {
 }
 
 entity VoteRecord{
-	VoteUserGroupId Integer,
 	RuningRecordId Integer,
 	VotedTime Integer,
 	Status Integer,
@@ -26,23 +24,25 @@ entity VoteRecord{
 }
 
 entity UserInfo {
-	UserId Integer,
     UserName String,
     Status String,
     Role String,
     Coins Double,
     Icon Blob,
     TotalDistance Float,
-    MetaData String
+    MetaData String,
+    OpenId String
 }
 
 entity UserGroup{
+
     UserId Integer,
     GroupId Integer
 }
 
 
 entity TargetDistance{
+
     UserGroupId Integer,
     CreationTime ZonedDateTime,
     TargetDistance Float

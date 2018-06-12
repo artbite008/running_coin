@@ -45,6 +45,7 @@ public class LoginController {
     @ApiImplicitParam(name = "onLogin", value = "", required = true, dataType = "onLogin")
     public ResponseMessage onLoginV2(@RequestBody UserLoginRequest userLoginRequestr) {
         ResponseMessage responseMessage = userLoginService.userLoginServiceV2(userLoginRequestr);
+
         return responseMessage;
     }
 

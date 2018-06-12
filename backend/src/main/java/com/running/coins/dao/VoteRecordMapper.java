@@ -1,16 +1,8 @@
 package com.running.coins.dao;
 
 import com.running.coins.model.VoteRecord;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
@@ -19,13 +11,13 @@ import java.util.List;
 @Repository
 public interface VoteRecordMapper {
     @Delete({
-        "delete from vote_record",
+        "delete from Vote_Record",
         "where VoteRecordId = #{voteRecordId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer voteRecordId);
 
     @Insert({
-        "insert into vote_record (VoteRecordId, VoteUserGroupId, ",
+        "insert into Vote_Record (VoteRecordId, VoteUserGroupId, ",
         "RuningRecordId, VotedTime, ",
         "UpdatedTime, Status, ",
         "Score, Comments)",
@@ -43,7 +35,7 @@ public interface VoteRecordMapper {
         "select",
         "VoteRecordId, VoteUserGroupId, RuningRecordId, VotedTime, UpdatedTime, Status, ",
         "Score, Comments",
-        "from vote_record",
+        "from Vote_Record",
         "where VoteRecordId = #{voteRecordId,jdbcType=INTEGER}"
     })
     @Results({
@@ -62,7 +54,7 @@ public interface VoteRecordMapper {
     int updateByPrimaryKeySelective(VoteRecord record);
 
     @Update({
-        "update vote_record",
+        "update Vote_Record",
         "set VoteUserGroupId = #{voteUserGroupId,jdbcType=INTEGER},",
           "RuningRecordId = #{runingRecordId,jdbcType=INTEGER},",
           "VotedTime = #{votedTime,jdbcType=TIMESTAMP},",

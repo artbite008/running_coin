@@ -67,7 +67,7 @@ public class VoteServices {
      * @param voteUserGroupId userGroupId
      * @return VoteStatusResponse
      */
-    public ResponseMessage queryVoteRecord(int runningRecordId, int voteUserGroupId) {
+    public ResponseMessage queryVoteRecord(Integer runningRecordId, Integer voteUserGroupId) {
         VoteRecord vr = voteRecordMapper.selectByVoteUserIdAndRuningRecordId(runningRecordId, voteUserGroupId);
         int voteStatus;
         if(vr == null) {
@@ -81,7 +81,6 @@ public class VoteServices {
     private void setVoteRecord(VoteRequest voteRequest, VoteRecord voteRecord) {
         if (voteRecord.getStatus() == null) {
             voteRecord.setRuningRecordId(voteRequest.getRunningRecordId());
-            voteRecord.setVoteOpenId(voteRecord.getVoteOpenId());
             voteRecord.setVoteUserGroupId(voteRequest.getVoteUserGroupId());
             setMutableField(voteRequest, voteRecord);
             voteRecord.setVotedTime(DateUtils.parse(new Date()));
@@ -91,7 +90,6 @@ public class VoteServices {
 
     private void setMutableField(VoteRequest voteRequest, VoteRecord voteRecord) {
         voteRecord.setStatus(voteRequest.getStatus());
-        voteRecord.setVoteOpenId(voteRequest.getVoteOpenId());
         if (VoteStatus.LIKE.getCode().equals(voteRequest.getStatus())) {
             voteRecord.setScore(1);
         } else if (VoteStatus.DISLIKE.getCode().equals(voteRequest.getStatus())) {

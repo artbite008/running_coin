@@ -2,8 +2,8 @@ import {HttpClient as hc} from '../../utils/httpClient';
 
 const envLocal = 'https://test.com';  // mapping in hosts file
 //const envQa = 'https://guxiangfly.cn';
-const envQa = 'https://localhost';
-//const envQa = 'https://guxiangfly.cn/dev';
+//const envQa = 'https://localhost';
+const envQa = 'https://guxiangfly.cn/dev';
 //const envQa = 'http://guxiangfly.nat300.top';
 
 /**
@@ -114,9 +114,9 @@ class RecordService {
     });
   }
 
-  submitRecord(userId, distance, groupId, evidence) {
+  submitRecord(userOpenId, distance, groupId, evidence) {
     return this.$http.post('/submit/sport/record', null, {
-      userId,
+      userOpenId,
       distance,
       groupId,
       evidence
@@ -129,9 +129,9 @@ class RecordService {
     });
   }
 
-  getWeeklyRecordByUserId(userId, groupId) {
+  getWeeklyRecordByUserId(userOpenId, groupId) {
     return this.$http.post('/front/user/weekly/report', null, {
-      userId,
+      userOpenId,
       groupId
     });
   }

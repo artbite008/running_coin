@@ -72,8 +72,8 @@ public class UserLoginService {
         if (tempUserInfoForOpenIds.size() == 0) {
             tempUserInfoForOpenIdMapper.insert(tempUserInfoForOpenId);
         }
-
-        return ResultUtils.success(openId);
+        UserInfo userInfo = userInfoMapper.selectByOpenId(openId);
+        return ResultUtils.success(userInfo);
     }
 
     public ResponseMessage userLoginServiceV2(UserLoginRequest userLoginRequest) {
