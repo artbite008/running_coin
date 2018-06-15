@@ -1,0 +1,27 @@
+
+{
+    "runningcoinCsApp": {
+        "voteRecord" : {
+            "home": {
+                "title": "Vote Records",
+                "createLabel": "Create a new Vote Record",
+                "createOrEditLabel": "Create or edit a Vote Record"
+            },
+            "created": "A new Vote Record is created with identifier {{ param }}",
+            "updated": "A Vote Record is updated with identifier {{ param }}",
+            "deleted": "A Vote Record is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Vote Record {{ id }}?"
+            },
+            "detail": {
+                "title": "Vote Record"
+            },
+            "voteUserGroupId": "Vote User Group Id",
+            "runingRecordId": "Runing Record Id",
+            "votedTime": "Voted Time",
+            "statusField": "Status Field",
+            "score": "Score",
+            "comments": "Comments"
+        }
+    }
+}

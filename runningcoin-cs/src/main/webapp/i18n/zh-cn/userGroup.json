@@ -1,0 +1,23 @@
+
+{
+    "runningcoinCsApp": {
+        "userGroup" : {
+            "home": {
+                "title": "User Groups",
+                "createLabel": "创建新 User Group",
+                "createOrEditLabel": "创建或编辑 User Group"
+            },
+            "created": "User Group {{ param }} 创建成功",
+            "updated": "User Group {{ param }} 更新成功",
+            "deleted": "User Group {{ param }} 删除成功",
+            "delete": {
+                "question": "你确定要删除 User Group {{ id }} 吗？"
+            },
+            "detail": {
+                "title": "User Group"
+            },
+            "userOpenid": "User Openid",
+            "groupId": "Group Id"
+        }
+    }
+}

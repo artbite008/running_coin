@@ -1,0 +1,31 @@
+
+{
+    "runningcoinCsApp": {
+        "runningRecord" : {
+            "home": {
+                "title": "Running Records",
+                "createLabel": "创建新 Running Record",
+                "createOrEditLabel": "创建或编辑 Running Record"
+            },
+            "created": "Running Record {{ param }} 创建成功",
+            "updated": "Running Record {{ param }} 更新成功",
+            "deleted": "Running Record {{ param }} 删除成功",
+            "delete": {
+                "question": "你确定要删除 Running Record {{ id }} 吗？"
+            },
+            "detail": {
+                "title": "Running Record"
+            },
+            "userGroupId": "User Group Id",
+            "distance": "Distance",
+            "creationTime": "Creation Time",
+            "lastVotedTime": "Last Voted Time",
+            "statusField": "Status Field",
+            "score": "Score",
+            "settledTime": "Settled Time",
+            "earnedCoins": "Earned Coins",
+            "comments": "Comments",
+            "evidence": "Evidence"
+        }
+    }
+}

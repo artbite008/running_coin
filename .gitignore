@@ -25,3 +25,4 @@ runningcoinCS/node_modules/
 runningcoinCS/npm-debug.log.*
 runningcoinCS/.awcache/*
 runningcoinCS/.cache-loader/*
+runningcoinCS/.git

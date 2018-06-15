@@ -1,0 +1,38 @@
+{
+    "fields": [
+        {
+            "fieldName": "voteUserGroupId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "runingRecordId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "votedTime",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "statusField",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "score",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "comments",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20180612091547",
+    "entityTableName": "vote_record",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

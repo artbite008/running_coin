@@ -1,0 +1,22 @@
+{
+    "fields": [
+        {
+            "fieldName": "userOpenid",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "groupId",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20180612091549",
+    "entityTableName": "user_group",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

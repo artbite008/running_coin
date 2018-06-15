@@ -1,0 +1,54 @@
+{
+    "fields": [
+        {
+            "fieldName": "userGroupId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "distance",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "creationTime",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "lastVotedTime",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "statusField",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "score",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "settledTime",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "earnedCoins",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "comments",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "evidence",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20180612091546",
+    "entityTableName": "running_record",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

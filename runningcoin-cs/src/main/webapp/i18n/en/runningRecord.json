@@ -1,0 +1,31 @@
+
+{
+    "runningcoinCsApp": {
+        "runningRecord" : {
+            "home": {
+                "title": "Running Records",
+                "createLabel": "Create a new Running Record",
+                "createOrEditLabel": "Create or edit a Running Record"
+            },
+            "created": "A new Running Record is created with identifier {{ param }}",
+            "updated": "A Running Record is updated with identifier {{ param }}",
+            "deleted": "A Running Record is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Running Record {{ id }}?"
+            },
+            "detail": {
+                "title": "Running Record"
+            },
+            "userGroupId": "User Group Id",
+            "distance": "Distance",
+            "creationTime": "Creation Time",
+            "lastVotedTime": "Last Voted Time",
+            "statusField": "Status Field",
+            "score": "Score",
+            "settledTime": "Settled Time",
+            "earnedCoins": "Earned Coins",
+            "comments": "Comments",
+            "evidence": "Evidence"
+        }
+    }
+}

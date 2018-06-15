@@ -1,0 +1,29 @@
+
+{
+    "runningcoinCsApp": {
+        "userInfo" : {
+            "home": {
+                "title": "User Infos",
+                "createLabel": "创建新 User Info",
+                "createOrEditLabel": "创建或编辑 User Info"
+            },
+            "created": "User Info {{ param }} 创建成功",
+            "updated": "User Info {{ param }} 更新成功",
+            "deleted": "User Info {{ param }} 删除成功",
+            "delete": {
+                "question": "你确定要删除 User Info {{ id }} 吗？"
+            },
+            "detail": {
+                "title": "User Info"
+            },
+            "userName": "User Name",
+            "statusField": "Status Field",
+            "role": "Role",
+            "coins": "Coins",
+            "icon": "Icon",
+            "totalDistance": "Total Distance",
+            "metaData": "Meta Data",
+            "openId": "Open Id"
+        }
+    }
+}

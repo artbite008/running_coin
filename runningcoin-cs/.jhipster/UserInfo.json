@@ -1,0 +1,46 @@
+{
+    "fields": [
+        {
+            "fieldName": "userName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "statusField",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "role",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "coins",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "icon",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "totalDistance",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "metaData",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "openId",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20180612091548",
+    "entityTableName": "user_info",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

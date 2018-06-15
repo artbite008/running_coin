@@ -1,0 +1,81 @@
+import { expect } from 'chai';
+import thunk from 'redux-thunk';
+import axios from 'axios';
+import * as sinon from 'sinon';
+import configureStore from 'redux-mock-store';
+import promiseMiddleware from 'redux-promise-middleware';
+
+import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
+import password, { ACTION_TYPES, savePassword } from 'app/modules/account/password/password.reducer';
+
+describe('Password reducer tests', () => {
+  describe('Common tests', () => {
+    it('should return the initial state', () => {
+      const toTest = password(undefined, {});
+      expect(toTest).to.contain({
+        loading: false,
+        errorMessage: null,
+        updateSuccess: false,
+        updateFailure: false
+      });
+    });
+  });
+
+  describe('Password update', () => {
+    it('should detect a request', () => {
+      const toTest = password(undefined, { type: REQUEST(ACTION_TYPES.UPDATE_PASSWORD) });
+      expect(toTest).to.contain({
+        updateSuccess: false,
+        updateFailure: false,
+        loading: true
+      });
+    });
+    it('should detect a success', () => {
+      const toTest = password(undefined, { type: SUCCESS(ACTION_TYPES.UPDATE_PASSWORD) });
+      expect(toTest).to.contain({
+        updateSuccess: true,
+        updateFailure: false,
+        loading: false
+      });
+    });
+    it('should detect a failure', () => {
+      const toTest = password(undefined, { type: FAILURE(ACTION_TYPES.UPDATE_PASSWORD) });
+      expect(toTest).to.contain({
+        updateSuccess: false,
+        updateFailure: true,
+        loading: false
+      });
+    });
+  });
+
+  describe('Actions', () => {
+    let store;
+
+    const resolvedObject = { value: 'whatever' };
+    beforeEach(() => {
+      const mockStore = configureStore([thunk, promiseMiddleware()]);
+      store = mockStore({});
+      axios.post = sinon.stub().returns(Promise.resolve(resolvedObject));
+    });
+
+    it('dispatches UPDATE_PASSWORD_PENDING and UPDATE_PASSWORD_FULFILLED actions', async () => {
+      const meta = {
+        errorMessage: 'translation-not-found[password.messages.error]',
+        successMessage: 'translation-not-found[password.messages.success]'
+      };
+
+      const expectedActions = [
+        {
+          type: REQUEST(ACTION_TYPES.UPDATE_PASSWORD),
+          meta
+        },
+        {
+          type: SUCCESS(ACTION_TYPES.UPDATE_PASSWORD),
+          payload: resolvedObject,
+          meta
+        }
+      ];
+      await store.dispatch(savePassword('', '')).then(() => expect(store.getActions()).to.eql(expectedActions));
+    });
+  });
+});

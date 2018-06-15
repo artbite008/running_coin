@@ -1,0 +1,24 @@
+
+{
+    "runningcoinCsApp": {
+        "targetDistance" : {
+            "home": {
+                "title": "Target Distances",
+                "createLabel": "Create a new Target Distance",
+                "createOrEditLabel": "Create or edit a Target Distance"
+            },
+            "created": "A new Target Distance is created with identifier {{ param }}",
+            "updated": "A Target Distance is updated with identifier {{ param }}",
+            "deleted": "A Target Distance is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Target Distance {{ id }}?"
+            },
+            "detail": {
+                "title": "Target Distance"
+            },
+            "userGroupId": "User Group Id",
+            "creationTime": "Creation Time",
+            "targetDistance": "Target Distance"
+        }
+    }
+}

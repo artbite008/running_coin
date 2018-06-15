@@ -1,0 +1,26 @@
+{
+    "fields": [
+        {
+            "fieldName": "userGroupId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "creationTime",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "targetDistance",
+            "fieldType": "Float"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20180612091550",
+    "entityTableName": "target_distance",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

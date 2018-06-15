@@ -1,0 +1,54 @@
+entity GroupTable {
+  	GroupName   String,
+    MetaData    String
+}
+
+entity RunningRecord {
+	UserGroupId Integer,
+    Distance        Float,
+    CreationTime    ZonedDateTime,
+	LastVotedTime   ZonedDateTime,
+	StatusField     Integer,
+	Score           Integer,
+	SettledTime     ZonedDateTime,
+	EarnedCoins     Double,
+	Comments        String,
+	Evidence        String
+}
+
+entity VoteRecord{
+	VoteUserGroupId Integer,
+	RuningRecordId  Integer,
+	VotedTime       ZonedDateTime,
+	StatusField     Integer,
+	Score           Integer,
+	Comments        String
+}
+
+entity UserInfo {
+
+    UserName    String,
+    StatusField String,
+    Role        String,
+    Coins       Double,
+    Icon        String,
+    TotalDistance Float,
+    MetaData String,
+    OpenId   String
+}
+
+entity UserGroup{
+    UserOpenid String,
+    GroupId Integer
+}
+
+
+entity TargetDistance{
+    UserGroupId Integer,
+    CreationTime ZonedDateTime,
+    TargetDistance Float
+}
+
+paginate * with pagination
+dto * with mapstruct
+service all with serviceImpl

@@ -1,0 +1,23 @@
+
+{
+    "runningcoinCsApp": {
+        "groupTable" : {
+            "home": {
+                "title": "Group Tables",
+                "createLabel": "创建新 Group Table",
+                "createOrEditLabel": "创建或编辑 Group Table"
+            },
+            "created": "Group Table {{ param }} 创建成功",
+            "updated": "Group Table {{ param }} 更新成功",
+            "deleted": "Group Table {{ param }} 删除成功",
+            "delete": {
+                "question": "你确定要删除 Group Table {{ id }} 吗？"
+            },
+            "detail": {
+                "title": "Group Table"
+            },
+            "groupName": "Group Name",
+            "metaData": "Meta Data"
+        }
+    }
+}

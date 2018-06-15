@@ -1,0 +1,24 @@
+
+{
+    "runningcoinCsApp": {
+        "targetDistance" : {
+            "home": {
+                "title": "Target Distances",
+                "createLabel": "创建新 Target Distance",
+                "createOrEditLabel": "创建或编辑 Target Distance"
+            },
+            "created": "Target Distance {{ param }} 创建成功",
+            "updated": "Target Distance {{ param }} 更新成功",
+            "deleted": "Target Distance {{ param }} 删除成功",
+            "delete": {
+                "question": "你确定要删除 Target Distance {{ id }} 吗？"
+            },
+            "detail": {
+                "title": "Target Distance"
+            },
+            "userGroupId": "User Group Id",
+            "creationTime": "Creation Time",
+            "targetDistance": "Target Distance"
+        }
+    }
+}
