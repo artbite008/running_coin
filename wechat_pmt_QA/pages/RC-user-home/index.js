@@ -219,7 +219,6 @@ Page({
                         }
                     )
                 }
-
                 var that = this;
 
                 setTimeout(function () {
@@ -258,6 +257,13 @@ Page({
         }
     },
 
+
+    singleTop:function(e){
+        const doubleTapAction = e.currentTarget.dataset.action || '';
+        this.lastTapTimeoutFunc = this[doubleTapAction];
+        this.lastTapTimeoutFunc(this.data.whoIsGonnaBeVote);
+    },
+
     // voteUserId,
     // groupId,
     // voteUserGroupId,
@@ -272,9 +278,14 @@ Page({
             .getInstance()
             .voteUser(app.globalData.sessionOpenId, 1, me.userGroupId, voteStatus, user.runningRecordId)
             .then(res => {
-                wx.showToast({title: 'submit !'});
                 const voteStatus = res.data.data.status;
+                if (voteStatus==1 || voteStatus==0 ){
+                    wx.showToast({title: 'Vote Success !'});
+                }
                 that.voteStatusChooser(voteStatus);
+                setTimeout(()=>{
+                    that.backdropMgt();
+                },1500)
             });
     },
 
@@ -287,9 +298,14 @@ Page({
             .getInstance()
             .voteUser(app.globalData.sessionOpenId, 1, me.userGroupId, voteStatus, user.runningRecordId)
             .then(res => {
-                wx.showToast({title: 'submit !'});
                 const voteStatus = res.data.data.status;
+                if (voteStatus==2 || voteStatus==3 ){
+                    wx.showToast({title: 'Vote Success !'});
+                }
                 that.voteStatusChooser(voteStatus);
+                setTimeout(()=>{
+                    that.backdropMgt();
+                },1000)
             });
     },
 

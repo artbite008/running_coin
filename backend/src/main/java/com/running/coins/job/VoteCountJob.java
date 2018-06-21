@@ -99,6 +99,7 @@ public class VoteCountJob {
         }
 
         System.err.println("发送结束");
+
     }
 
 }

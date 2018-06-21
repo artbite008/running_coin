@@ -13,6 +13,14 @@ public class CommonException extends RuntimeException {
         this.errMsg = resultEnum.getMsg();
     }
 
+    public String getErrMsg() {
+        return errMsg;
+    }
+
+    public void setErrMsg(String errMsg) {
+        this.errMsg = errMsg;
+    }
+
     public Integer getCode() {
         return code;
     }

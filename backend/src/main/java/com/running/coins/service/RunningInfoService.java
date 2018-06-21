@@ -1,5 +1,6 @@
 package com.running.coins.service;
 
+import com.running.coins.common.Exception.CommonException;
 import com.running.coins.common.enums.ResultEnum;
 import com.running.coins.common.enums.RunningCoins;
 import com.running.coins.common.enums.SportRecordStatus;
@@ -18,6 +19,7 @@ import com.running.coins.model.response.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -62,8 +64,14 @@ public class RunningInfoService {
             targetDistance.setTargetDistance(Float.valueOf(submitUserSportTargetRequest.getTargetDistance()));
             targetDistance.setCreationTime(DateUtils.parse(new Date()));
             targetDistance.setUserGroupId(userGroupId);
+
             targetDistanceMapper.insert(targetDistance);
         } else {
+            Calendar cal = Calendar.getInstance();
+            int weekdayNum = cal.get(Calendar.DAY_OF_WEEK);
+            if (weekdayNum==1 ||weekdayNum==7 ||weekdayNum==6  ){
+                throw new CommonException(ResultEnum.Target_ERROR);
+            }
             targetDistance.setCreationTime(DateUtils.parse(new Date()));
             targetDistance.setTargetDistance(Float.valueOf(submitUserSportTargetRequest.getTargetDistance()));
             targetDistanceMapper.updateByPrimaryKey(targetDistance);

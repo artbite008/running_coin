@@ -26,7 +26,7 @@ public class ThisLocalizedWeekTest {
         ThisLocalizedWeek thisLocalizedWeek = new ThisLocalizedWeek(Locale.CHINA);
         Date firstDay = thisLocalizedWeek.getFirstDay();
         Date firstday1 = DateUtils.parse(firstDay);
-        System.out.println(  DateUtils.parseForFrontEnd1(firstday1));
+        System.out.println(DateUtils.parseForFrontEnd1(firstday1));
 
         Date firstDay2 = thisLocalizedWeek.getLastDay();
         System.out.println(DateUtils.parseForFrontEnd1(firstDay2));

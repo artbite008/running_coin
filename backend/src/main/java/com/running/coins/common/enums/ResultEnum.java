@@ -5,6 +5,7 @@ public enum ResultEnum {
     UNKNOWN_ERROR(100, "Unknown Error"),
     SYSTEM_ERROR(200, "System Error"),
     INSERT_ERROR(300, "Insert Error"),
+    Target_ERROR(500,"you only can set target at Mon,Tues,Wed,Thurs"),
     SUCCESS(0, "success");
 
     private Integer code;

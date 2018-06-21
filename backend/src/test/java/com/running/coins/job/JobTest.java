@@ -4,6 +4,8 @@ import com.running.coins.dao.RunningRecordMapper;
 import com.running.coins.dao.VoteRecordMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Calendar;
+
 /**
  * JobTest
  *
@@ -48,4 +50,9 @@ public class JobTest {
 
 
     }*/
+    public static void main(String[] args) {
+        Calendar cal=Calendar.getInstance();
+        System.out.println(cal.getTime());
+        System.out.println(cal.get(Calendar.DAY_OF_WEEK));
+    }
 }
