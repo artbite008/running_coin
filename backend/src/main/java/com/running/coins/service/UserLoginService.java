@@ -2,21 +2,21 @@ package com.running.coins.service;
 
 import com.alibaba.fastjson.JSON;
 import com.running.coins.common.util.ResultUtils;
+import com.running.coins.dao.TargetDistanceMapper;
 import com.running.coins.dao.TempUserInfoForOpenIdMapper;
 import com.running.coins.dao.UserGroupMapper;
 import com.running.coins.dao.UserInfoMapper;
-import com.running.coins.model.TempUserInfoForOpenId;
-import com.running.coins.model.TempUserInfoForOpenIdExample;
-import com.running.coins.model.UserGroup;
-import com.running.coins.model.UserInfo;
+import com.running.coins.model.*;
 import com.running.coins.model.request.UserJoinRequest;
 import com.running.coins.model.request.UserLoginRequest;
 import com.running.coins.model.response.ResponseMessage;
 import com.running.coins.model.response.WeChatOpenIdResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import sun.rmi.runtime.Log;
 
 import java.util.List;
 
@@ -27,6 +27,7 @@ import java.util.List;
  * @date 2018/5/10
  */
 @Service
+@Slf4j
 public class UserLoginService {
 
 
@@ -44,10 +45,12 @@ public class UserLoginService {
 
     @Autowired
     private UserGroupMapper userGroupMapper;
+    @Autowired
+    private TargetDistanceMapper targetDistanceMapper;
 
 
     public ResponseMessage userLoginService(String code, int olduserId, String sessionOpenId) {
-
+        log.info("arrive userLoginServiceV1 "+ sessionOpenId);
         if (sessionOpenId != "0000" && sessionOpenId.length() >= 28) {
             return ResultUtils.success(sessionOpenId);
         }
@@ -55,9 +58,12 @@ public class UserLoginService {
         RestTemplate restTemplate = new RestTemplate();
         String url = String.format("https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code", appId, appSecret, code);
         String result = restTemplate.getForObject(url, String.class);
+        log.info(url);
+        log.info(result);
         WeChatOpenIdResponse weChatOpenIdResponse = JSON.parseObject(result, WeChatOpenIdResponse.class);
-        String openId = weChatOpenIdResponse.getOpenid();
+        log.info(weChatOpenIdResponse.toString());
 
+        String openId = weChatOpenIdResponse.getOpenid();
         TempUserInfoForOpenId tempUserInfoForOpenId = new TempUserInfoForOpenId();
         tempUserInfoForOpenId.setOldUserId(olduserId);
         tempUserInfoForOpenId.setOpenId(openId);
@@ -77,13 +83,13 @@ public class UserLoginService {
     }
 
     public ResponseMessage userLoginServiceV2(UserLoginRequest userLoginRequest) {
-
+        log.info("arrive userLoginServiceV2 "+ userLoginRequest.toString());
         RestTemplate restTemplate = new RestTemplate();
         String url = String.format("https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code", appId, appSecret, userLoginRequest.getJsCode());
         String result = restTemplate.getForObject(url, String.class);
         WeChatOpenIdResponse weChatOpenIdResponse = JSON.parseObject(result, WeChatOpenIdResponse.class);
+        log.info(weChatOpenIdResponse.toString());
         String openId = weChatOpenIdResponse.getOpenid();
-
         UserInfo userInfo1 = new UserInfo();
         userInfo1.setUserName(userLoginRequest.getUserName());
         userInfo1.setIcon(userLoginRequest.getIcon());
@@ -105,6 +111,18 @@ public class UserLoginService {
             userGroup.setGroupId(userLoginRequest.getGroupId());
             userGroup.setUserOpenid(openId);
             userGroupMapper.insert(userGroup);
+
+
+            // setup a default target
+            TargetDistance targetDistance = new TargetDistance();
+            targetDistance.setTargetDistance(0f);
+
+            //insert the default target, distance 0
+            userGroup = userGroupMapper.selectByGroupIdAndUserOpenId(userGroup.getGroupId(), userGroup.getUserOpenid());
+            targetDistance.setUserGroupId(userGroup.getUserGroupId());
+            targetDistanceMapper.insert(targetDistance);
+
+
         }else {
             userInfoMapper.updateByopenIdSelective(userInfo1);
         }

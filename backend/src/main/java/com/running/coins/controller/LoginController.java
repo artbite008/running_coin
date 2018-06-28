@@ -1,19 +1,17 @@
 package com.running.coins.controller;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.running.coins.common.util.ResultUtils;
-import com.running.coins.model.request.UserJoinRequest;
+
 import com.running.coins.model.request.UserLoginRequest;
 import com.running.coins.model.response.ResponseMessage;
-import com.running.coins.model.response.WeChatOpenIdResponse;
 import com.running.coins.service.UserLoginService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import sun.rmi.runtime.Log;
 
 /**
  * LoginController
@@ -23,6 +21,7 @@ import org.springframework.web.client.RestTemplate;
  */
 @RestController
 @RequestMapping("/login")
+@Slf4j
 public class LoginController {
 
 
@@ -40,12 +39,13 @@ public class LoginController {
         return responseMessage;
     }
 
-    @GetMapping("/onLoginV2")
+
     @ApiOperation(value = "user  onLogin by code", notes = "submit records")
     @ApiImplicitParam(name = "onLogin", value = "", required = true, dataType = "onLogin")
-    public ResponseMessage onLoginV2(@RequestBody UserLoginRequest userLoginRequestr) {
-        ResponseMessage responseMessage = userLoginService.userLoginServiceV2(userLoginRequestr);
+    @PostMapping("/onLoginV2")
+    public ResponseMessage onLoginV2(@RequestBody UserLoginRequest userLoginRequest) {
 
+        ResponseMessage responseMessage = userLoginService.userLoginServiceV2(userLoginRequest);
         return responseMessage;
     }
 

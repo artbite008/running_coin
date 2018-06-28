@@ -19,6 +19,7 @@ import com.running.coins.model.response.ResponseMessage;
 import com.running.coins.model.response.UserJoinResponse;
 import com.running.coins.model.response.WeeklyReportResponse;
 import com.running.coins.model.transition.UserRecord;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ import java.util.*;
 import static com.running.coins.common.util.DateUtils.parseForFrontEnd1;
 
 @Service
+@Slf4j
 public class FrontServices {
 
     private final static Logger logger = LoggerFactory.getLogger(FrontServices.class);
@@ -79,6 +81,7 @@ public class FrontServices {
     }
 
     public ResponseMessage userJoin(UserJoinRequest userJoinRequest) {
+        log.info(userJoinRequest.toString());
         UserJoinResponse userJoinResponse = new UserJoinResponse();
         ResponseMessage responseMessage = new ResponseMessage();
         UserInfo userInfo;
@@ -86,7 +89,8 @@ public class FrontServices {
         TargetDistance targetDistance;
         try {
             userInfo = userInfoMapper.selectByOpenId(userJoinRequest.getOpenId());
-            if (userInfo == null) {
+            userGroup = userGroupMapper.selectByGroupIdAndUserOpenId(userJoinRequest.getGroupId(), userJoinRequest.getOpenId());
+/*            if (userInfo == null || userGroup==null) {
                 userGroup = new UserGroup();
                 userInfo = new UserInfo();
                 setUserInfo(userJoinRequest, userInfo);
@@ -94,12 +98,12 @@ public class FrontServices {
                 // setup a default target
                 targetDistance = new TargetDistance();
                 targetDistance.setTargetDistance(0f);
-
+                log.info(userGroup.toString());
                 //insert the default target, distance 0
                 userGroup = userGroupMapper.selectByGroupIdAndUserOpenId(userGroup.getGroupId(), userGroup.getUserOpenid());
                 targetDistance.setUserGroupId(userGroup.getUserGroupId());
                 this.targetDistanceMapper.insert(targetDistance);
-            }
+            }*/
 
             setUserJoinResponse(userJoinRequest, userInfo, userJoinResponse);
 

@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 public class UserLoginRequest {
     private String userName;
-    private int groupId;
+    private Integer groupId;
     private String icon;
     private String jsCode;
 }

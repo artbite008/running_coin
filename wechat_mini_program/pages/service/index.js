@@ -3,14 +3,15 @@ import {HttpClient as hc} from '../../utils/httpClient';
 const envLocal = 'https://test.com';  // mapping in hosts file
 //const envQa = 'https://guxiangfly.cn';
 //const envQa = 'https://localhost';
-const envQa = 'https://www.runningcoin.club';
+//const envQa = 'https://guxiangfly.cn/dev';
 //const envQa = 'http://guxiangfly.nat300.top';
-
+//const envQa = 'https://www.runningcoin.club';
+const envQa = 'https://www.runningcoin.club/dev';
 /**
  * user services for
  * query user info by user Id
  * create user info
- * vote user 
+ * vote user
  */
 class UserService {
 
@@ -99,13 +100,14 @@ class RecordService {
     });
   }
 
-  serverDailyUserRecord(){
-    return this.$http.post('/login/onLogin', null, null);
-  }
-
-  getAllUserRecord(userId){
-    
-  }
+    serverUserLoginV2(jsCode,userName,icon) {
+        return this.$http.get('/login/onLogin', null, {
+            code: jsCode,
+            userName: userName,
+            icon: icon,
+            groupId: 1
+        });
+    }
 
   getUserRecord(userId) {
     return this.$http.get('/record', null, {
@@ -113,9 +115,9 @@ class RecordService {
     });
   }
 
-  submitRecord(userId, distance, groupId, evidence) {
+  submitRecord(userOpenId, distance, groupId, evidence) {
     return this.$http.post('/submit/sport/record', null, {
-      userId,
+      userOpenId,
       distance,
       groupId,
       evidence
@@ -128,9 +130,9 @@ class RecordService {
     });
   }
 
-  getWeeklyRecordByUserId(userId, groupId) {
+  getWeeklyRecordByUserId(userOpenId, groupId) {
     return this.$http.post('/front/user/weekly/report', null, {
-      userId,
+      userOpenId,
       groupId
     });
   }

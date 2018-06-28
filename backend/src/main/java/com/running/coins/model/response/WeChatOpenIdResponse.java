@@ -26,4 +26,12 @@ public class  WeChatOpenIdResponse {
     public void setOpenid(String openid) {
         this.openid = openid;
     }
+
+    @Override
+    public String toString() {
+        return "WeChatOpenIdResponse{" +
+                "session_key='" + session_key + '\'' +
+                ", openid='" + openid + '\'' +
+                '}';
+    }
 }

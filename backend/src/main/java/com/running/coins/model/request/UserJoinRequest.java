@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class UserJoinRequest {
     private String userName;
-    private int groupId;
+    private Integer groupId;
     private String icon;
     private String openId;
 }

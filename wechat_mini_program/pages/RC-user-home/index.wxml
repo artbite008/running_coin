@@ -2,8 +2,7 @@
 <view class="container">
   <view class="card userinfo user-card-decorator" bindtap='goToMyProfile'>
     <block wx:if="{{!hasUserInfo}}" open-type="getUserInfo">
-        <button type="primary" catchtap="primary" open-type='getUserInfo' bindgetuserinfo='getUserInfobywx'> Please  click it to allow 
-        get User Info </button>
+        <button type="primary" catchtap="primary" open-type='getUserInfo' bindgetuserinfo='getUserInfobywx'> allow to get User Info </button>
     </block>
     <block wx:else>
       <image class="userinfo-avatar" src="{{userInfo.icon}}" background-size="cover"></image>
@@ -89,10 +88,10 @@
       <text class='voting-slogan'>Double tap thumb up or thumb down to vote or change vote \n Gray icon is your current choice !</text>
       <icon type="cancel" size="40" color="red" bindtap='backdropMgt' />
       <view class="card voting-container bg-warning">
-        <button class='like-dislike-button' bindtap='doubleTap' data-action="like">
+        <button class='like-dislike-button' bindtap='singleTop' data-action="like">
           <image src='../imgs/like.svg' class='{{liked ? "gray" : "" }}'></image>
         </button>
-        <button class='like-dislike-button' bindtap='doubleTap' data-action="dislike">
+        <button class='like-dislike-button' bindtap='singleTop' data-action="dislike">
           <image src='../imgs/dislike.svg' class='{{disliked ? "gray" : "" }}'></image>
         </button>
       </view>

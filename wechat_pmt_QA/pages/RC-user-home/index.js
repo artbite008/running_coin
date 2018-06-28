@@ -94,7 +94,7 @@ Page({
             showBackdrop: !_showBackdrop
         });
     },
-    onShow: function () {
+    onLoad: function () {
         const registerFlagFromStorage = wx.getStorageSync('register');
         if (registerFlagFromStorage !== 'true') {
             this.goToGuard();
@@ -107,21 +107,20 @@ Page({
         this.loadData();
     },
 
-
     loadData: function () {
-        console.log("执行到 home/index.js 101")
         let tempsessionOpenId = wx.getStorageSync('sessionOpenId');
         if (tempsessionOpenId != null && tempsessionOpenId.length >= 28) {
             this.setData({
                 sessionOpenId: tempsessionOpenId,
                 hasUserInfo: true
             })
-           //this.loadData();
         } else {
             console.log("执行到 home/index.js 114")
+            let tempUserInfo = {};
             WX.userInfo(true)
                 .then(res => {
                     app.globalData.userInfo = res.userInfo;
+                    tempUserInfo = res.userInfo;
                     this.setData({
                         userInfo: res.userInfo,
                         hasUserInfo: true
@@ -130,18 +129,17 @@ Page({
                 })
                 .then(res => {
                     console.log("get jsCode to login" + res.code);
-                    console.dir(this.data.userInfo);
+                    console.dir(tempUserInfo);
                     return RecordService.getInstance().serverUserLoginV2(
                         res.code,
-                        this.data.userInfo.nickName,
-                        this.data.userInfo.icon
+                        tempUserInfo.nickName,
+                        tempUserInfo.avatarUrl
                     )
                 })
                 .then(res => {
                     console.dir(res);
-                    console.log("store the openid in app" + res.data.data.userInfo);
-                    app.globalData.userInfo = res.data.data;
-                    wx.setStorageSync('sessionOpenId', res.data.data.openId);
+                    console.log("store the userInfo in app" + res.data.data.userInfo);
+                    wx.setStorageSync('sessionOpenId', res.data.data);
                     this.loadData();
                 })
         }
