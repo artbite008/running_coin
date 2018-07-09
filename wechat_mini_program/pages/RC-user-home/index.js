@@ -154,7 +154,9 @@ Page({
                 that.setData({
                     hasUserInfo: true
                 });
-
+                if (wx.getStorageSync('sessionOpenId')==null || wx.getStorageSync('sessionOpenId').length<28){
+                  this.loadData();
+                }
                 console.log("openid  :" + wx.getStorageSync('sessionOpenId'))
                 // create or update user
                 return UserService
