@@ -39,7 +39,6 @@ public class LoginController {
         return responseMessage;
     }
 
-
     @ApiOperation(value = "user  onLogin by code", notes = "submit records")
     @ApiImplicitParam(name = "onLogin", value = "", required = true, dataType = "onLogin")
     @PostMapping("/onLoginV2")
@@ -48,6 +47,4 @@ public class LoginController {
         ResponseMessage responseMessage = userLoginService.userLoginServiceV2(userLoginRequest);
         return responseMessage;
     }
-
-
 }

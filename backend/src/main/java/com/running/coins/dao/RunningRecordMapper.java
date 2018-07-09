@@ -180,7 +180,7 @@ public interface RunningRecordMapper {
             "LEFT JOIN UserGroup",
             "   on UserGroup.UserGroupId = runningrecordResult.UserGroupId",
             "LEFT JOIN User_Info",
-            "  on User_Info.UserId= UserGroup.UserId;"
+            "  on User_Info.OpenId= UserGroup.UserOpenId;"
     })
     @Results({
             @Result(column="finalScore", property="finalScore", jdbcType=JdbcType.INTEGER),

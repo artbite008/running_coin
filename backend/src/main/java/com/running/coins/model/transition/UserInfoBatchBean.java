@@ -11,6 +11,6 @@ import lombok.Data;
 @Data
 public class UserInfoBatchBean {
     private Double totalCoins;
-    private Integer userId;
+    private String userOpenId;
     private Float totalDistance;
 }

@@ -86,7 +86,7 @@ public class VoteCountJob {
 
         List<UserInfoBatchBean> userInfoBatchBeans = userInfoMapper.selectUserTotalInfo();
         for (UserInfoBatchBean userInfoBatchBean : userInfoBatchBeans) {
-            UserInfo userInfo = userInfoMapper.selectByPrimaryKey(userInfoBatchBean.getUserId());
+            UserInfo userInfo = userInfoMapper.selectByOpenId(userInfoBatchBean.getUserOpenId());
             userInfo.setTotalDistance(userInfoBatchBean.getTotalDistance());
             userInfo.setCoins(userInfoBatchBean.getTotalCoins());
             userInfoMapper.updateByPrimaryKey(userInfo);

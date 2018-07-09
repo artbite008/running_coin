@@ -12,7 +12,7 @@ spring:
 #     url: jdbc:mysql://127.0.0.1:3306/runningcoin_local?useUnicode=yes&useSSL=false
 #     username: root
 #     password: root
-     url: jdbc:mysql://47.96.173.94:3306/runningcoinv2_qa?useUnicode=yes&useSSL=false
+     url: jdbc:mysql://47.96.173.94:3306/runningcoin?useUnicode=yes&useSSL=false
      username: root
      password: qwert6
      driver-class-name: com.mysql.jdbc.Driver

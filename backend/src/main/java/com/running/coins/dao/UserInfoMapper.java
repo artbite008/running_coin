@@ -116,8 +116,8 @@ public interface UserInfoMapper {
             "User_Info.OpenId as UserOpenId,",
             "sum(Distance)  as TotalDistance",
             "FROM Running_Record",
-            "LEFT JOIN UserGroup ON UserGroup.UserGroupId = Running_Record.UserGroupId",
-            "LEFT JOIN User_Info ON User_Info.OpenId = UserGroup.UserOpenid",
+            "inner JOIN UserGroup ON UserGroup.UserGroupId = Running_Record.UserGroupId",
+            "inner JOIN User_Info ON User_Info.OpenId = UserGroup.UserOpenid",
             "WHERE Running_Record.Status = 3 AND Score > 0",
             "GROUP BY User_Info.UserId"
     })
