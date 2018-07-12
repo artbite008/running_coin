@@ -42,15 +42,15 @@ public class FrontController {
     @ApiImplicitParam(name = "userJoinRequest", value = "Request body of user join", required = true, dataType = "UserJoinRequest")
     @PostMapping("/user/join")
     public ResponseMessage userJoin(@RequestBody UserJoinRequest userJoinRequest) {
-        ResponseMessage responseMessage = frontServices.userJoin(userJoinRequest);
+        ResponseMessage responseMessage = frontServices.userJoinv2(userJoinRequest);
         return responseMessage;
     }
 
     @ApiOperation(value = "This is a api invoked immediately when a user authorizes RunningCoins", notes = "Join the Running Club, will return an unique Id for this user")
     @ApiImplicitParam(name = "userJoinRequest", value = "Request body of user join", required = true, dataType = "UserJoinRequest")
     @PostMapping("/user/joinv2")
-    public ResponseMessage userJoinv2(@RequestBody UserJoinRequest userJoinRequest) {
-        ResponseMessage responseMessage = frontServices.userJoinv2(userJoinRequest);
+    public ResponseMessage userJoinold(@RequestBody UserJoinRequest userJoinRequest) {
+        ResponseMessage responseMessage = frontServices.userJoin(userJoinRequest);
         return responseMessage;
     }
 
