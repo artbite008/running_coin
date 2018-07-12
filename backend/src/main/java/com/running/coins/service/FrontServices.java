@@ -19,13 +19,16 @@ import com.running.coins.model.response.ResponseMessage;
 import com.running.coins.model.response.UserJoinResponse;
 import com.running.coins.model.response.WeeklyReportResponse;
 import com.running.coins.model.transition.UserRecord;
+import jdk.nashorn.internal.ir.IfNode;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.running.coins.common.util.DateUtils.parseForFrontEnd1;
 
@@ -375,4 +378,57 @@ public class FrontServices {
     }
 
 
+    public ResponseMessage userJoinv2(UserJoinRequest userJoinRequest) {
+        ThisLocalizedWeek thisLocalizedWeek = new ThisLocalizedWeek(Locale.CHINA);
+        List<UserRecord> userRecords = runningRecordMapper.selectDailyUserRecord(thisLocalizedWeek.getFirstDay(), thisLocalizedWeek.getLastDay());
+
+        /** 主要是为了手机没有传入openid的问题*/
+        if (userJoinRequest.getOpenId() == null || "".equals(userJoinRequest.getOpenId())) {
+            return ResultUtils.success(userRecords);
+        }
+
+        /** 对 null 值处理 */
+        userRecords = userRecords.stream()
+                .map(e -> {
+                    if (e.getDislikes() == null) {
+                        e.setDislikes(0);
+                    }
+                    if (e.getLikes() == null) {
+                        e.setLikes(0);
+                    }
+                    return e;
+                }).collect(Collectors.toList());
+
+        UserJoinResponse userJoinResponse = new UserJoinResponse();
+
+        List<UserRecord> collectUserRecord = userRecords.stream().filter(e -> e.getUserOpenId().equals(userJoinRequest.getOpenId())).collect(Collectors.toList());
+
+
+        if (collectUserRecord.size() > 0) {
+            userJoinResponse.setUserRecord(collectUserRecord.get(0));
+        } else {
+            /** sql查询出没『我』的信息的时候 拼凑出0*/
+            UserInfo userInfo = userInfoMapper.selectByOpenId(userJoinRequest.getOpenId());
+            UserGroup userGroup = userGroupMapper.selectByGroupIdAndUserOpenId(1, userJoinRequest.getOpenId());
+            TargetDistance targetDistance = targetDistanceMapper.selectByUserGroupIdAndTimeRange(userGroup.getUserGroupId(), thisLocalizedWeek.getFirstDay(), thisLocalizedWeek.getLastDay());
+
+            UserRecord userRecord = new UserRecord();
+            userRecord.setDislikes(0);
+            userRecord.setLikes(0);
+            userRecord.setCurrent((float) 0);
+            userRecord.setDistanceValided((float) 0);
+            userRecord.setTarget(targetDistance.getTargetDistance());
+            userRecord.setUserGroupId(userGroup.getUserGroupId());
+            userRecord.setIcon(userInfo.getIcon());
+            userRecord.setNickName(userInfo.getUserName());
+            userRecord.setUserOpenId(userInfo.getOpenId());
+
+            userJoinResponse.setUserRecord(userRecord);
+        }
+
+        List<UserRecord> collectOtherUserRecord = userRecords.stream().filter(e -> !e.getUserOpenId().equals(userJoinRequest.getOpenId())).collect(Collectors.toList());
+        userJoinResponse.setOtherUsersRecord(collectOtherUserRecord);
+
+        return ResultUtils.success(userJoinResponse);
+    }
 }
