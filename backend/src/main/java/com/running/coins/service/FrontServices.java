@@ -382,9 +382,11 @@ public class FrontServices {
         ThisLocalizedWeek thisLocalizedWeek = new ThisLocalizedWeek(Locale.CHINA);
         List<UserRecord> userRecords = runningRecordMapper.selectDailyUserRecord(thisLocalizedWeek.getFirstDay(), thisLocalizedWeek.getLastDay());
 
+        UserJoinResponse userJoinResponse = new UserJoinResponse();
         /** 主要是为了手机没有传入openid的问题*/
         if (userJoinRequest.getOpenId() == null || "".equals(userJoinRequest.getOpenId())) {
-            return ResultUtils.success(userRecords);
+            userJoinResponse.setOtherUsersRecord(userRecords);
+            return ResultUtils.success(userJoinResponse);
         }
 
         /** 对 null 值处理 */
@@ -399,7 +401,7 @@ public class FrontServices {
                     return e;
                 }).collect(Collectors.toList());
 
-        UserJoinResponse userJoinResponse = new UserJoinResponse();
+
 
         List<UserRecord> collectUserRecord = userRecords.stream().filter(e -> e.getUserOpenId().equals(userJoinRequest.getOpenId())).collect(Collectors.toList());
 
