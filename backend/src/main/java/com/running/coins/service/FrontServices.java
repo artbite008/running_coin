@@ -92,23 +92,32 @@ public class FrontServices {
         TargetDistance targetDistance;
         try {
             userInfo = userInfoMapper.selectByOpenId(userJoinRequest.getOpenId());
-            userGroup = userGroupMapper.selectByGroupIdAndUserOpenId(userJoinRequest.getGroupId(), userJoinRequest.getOpenId());
-/*            if (userInfo == null || userGroup==null) {
-                userGroup = new UserGroup();
-                userInfo = new UserInfo();
-                setUserInfo(userJoinRequest, userInfo);
-                setUserGroup(userJoinRequest, userGroup);
-                // setup a default target
-                targetDistance = new TargetDistance();
-                targetDistance.setTargetDistance(0f);
-                log.info(userGroup.toString());
-                //insert the default target, distance 0
-                userGroup = userGroupMapper.selectByGroupIdAndUserOpenId(userGroup.getGroupId(), userGroup.getUserOpenid());
-                targetDistance.setUserGroupId(userGroup.getUserGroupId());
-                this.targetDistanceMapper.insert(targetDistance);
-            }*/
 
             setUserJoinResponse(userJoinRequest, userInfo, userJoinResponse);
+
+            responseMessage.setMsg(ResultEnum.SUCCESS.getMsg());
+            responseMessage.setCode(ResultEnum.SUCCESS.getCode());
+            responseMessage.setData(userJoinResponse);
+        } catch (Throwable e) {
+            logger.error(e.getMessage(), e);
+            responseMessage.setMsg("Error occurs in inserting into DB" + e.getMessage() + " or " + e);
+            responseMessage.setCode(ResultEnum.INSERT_ERROR.getCode());
+            responseMessage.setData(userJoinResponse);
+        }
+        return responseMessage;
+    }
+
+    public ResponseMessage userJoinv3(UserJoinRequest userJoinRequest) {
+        log.info(userJoinRequest.toString());
+        UserJoinResponse userJoinResponse = new UserJoinResponse();
+        ResponseMessage responseMessage = new ResponseMessage();
+        UserInfo userInfo;
+        UserGroup userGroup;
+        TargetDistance targetDistance;
+        try {
+            userInfo = userInfoMapper.selectByOpenId(userJoinRequest.getOpenId());
+
+            setUserJoinResponseV2(userJoinRequest, userInfo, userJoinResponse);
 
             responseMessage.setMsg(ResultEnum.SUCCESS.getMsg());
             responseMessage.setCode(ResultEnum.SUCCESS.getCode());
@@ -168,65 +177,86 @@ public class FrontServices {
         String rangeOfTime = parseForFrontEnd1(start) + " to " + parseForFrontEnd1(end);
 
         for (UserGroup userGroup : userGroups) {
-            List<Integer> achievements = new ArrayList<>(Collections.nCopies(7, 0));
-            UserInfo userInfo = userInfoMapper.selectByOpenId(userGroup.getUserOpenid());
-            TargetDistance targetDistance = targetDistanceMapper.selectByUserGroupIdAndTimeRange(userGroup.getUserGroupId(), start, end);
-            Float allAchievements = 0f;
-            int allLikes = 0;
-            int allDislikes = 0;
-            Map<Integer, Float> dayAchievementMap = Maps.newHashMap();
-            UserRecord userRecord = new UserRecord();
-            List<RunningRecord> runningRecords = runningRecordMapper.selectByUserGroupIdAndTimeRange(
-                    userGroup.getUserGroupId(),
-                    DateUtils.parse(start),
-                    DateUtils.parse(end));
-            for (RunningRecord runningRecord : runningRecords) {
-                if (runningRecord.getStatus() == 3) {
-                    allAchievements += runningRecord.getDistance();
-                }
-
-                List<VoteRecord> voteRecords = voteRecordMapper.selectByRuningRecordId(runningRecord.getRuningRecordId());
-                for (VoteRecord voteRecord : voteRecords) {
-                    if (voteRecord.getStatus().equals(VoteStatus.LIKE.getCode())) {
-                        allLikes++;
-                    } else if (voteRecord.getStatus().equals(VoteStatus.DISLIKE.getCode())) {
-                        allDislikes++;
-                    }
-                }
-                String createDate = parseForFrontEnd1(runningRecord.getCreationTime()).toUpperCase();
-                Integer whichDay = immutableDaysMap.get(createDate.substring(11));
-                if (dayAchievementMap.containsKey(whichDay)) {
-                    float temp = dayAchievementMap.get(whichDay);
-                    if (runningRecord.getStatus() == 3) {
-                        dayAchievementMap.put(whichDay, temp + runningRecord.getDistance());
-                    }
-                } else {
-                    if (runningRecord.getStatus() == 3) {
-                        dayAchievementMap.put(whichDay, runningRecord.getDistance());
-                    }
-                }
-                if (dayAchievementMap.get(whichDay) != null) {
-                    achievements.set(whichDay, dayAchievementMap.get(whichDay).intValue());
-                } else {
-                    achievements.set(whichDay, 0);
-                }
-
-            }
-            userRecord.setUserGroupId(userGroup.getUserGroupId());
-            userRecord.setUserOpenId(userGroup.getUserOpenid());
-            userRecord.setGroupId(userGroup.getGroupId());
-            userRecord.setLikes(allLikes);
-            userRecord.setDislikes(allDislikes);
-            userRecord.setAchievements(achievements);
-            userRecord.setAllAchievements(allAchievements.intValue());
-            userRecord.setNickName(userInfo.getUserName());
-            userRecord.setIcon(userInfo.getIcon());
-            userRecord.setTarget(targetDistance == null ? 0 : targetDistance.getTargetDistance());
-            userRecords.add(userRecord);
+            handleWeeklyUserInGroup(userRecords, start, end, userGroup);
         }
         weeklyReportResponse.setTimeRange(rangeOfTime);
         weeklyReportResponse.setAllWeeklyRecords(userRecords);
         return ResultUtils.success(weeklyReportResponse);
+    }
+
+    public ResponseMessage everyOneWeekly2(WeeklyReportRequest weeklyReportRequest) {
+        WeeklyReportResponse weeklyReportResponse = new WeeklyReportResponse();
+        List<UserRecord> userRecords = Lists.newLinkedList();
+        List<UserGroup> userGroups = userGroupMapper.selectByGroupId(weeklyReportRequest.getGroupId());
+        ThisLocalizedWeek thisLocalizedWeek = new ThisLocalizedWeek(Locale.CHINA);
+        Date start = thisLocalizedWeek.getFirstDay();
+        Date end = thisLocalizedWeek.getLastDay();
+        String rangeOfTime = parseForFrontEnd1(start) + " to " + parseForFrontEnd1(end);
+
+        userGroups.stream().parallel().forEach(userGroup -> {
+            handleWeeklyUserInGroup(userRecords, start, end, userGroup);
+        });
+        weeklyReportResponse.setTimeRange(rangeOfTime);
+        weeklyReportResponse.setAllWeeklyRecords(userRecords);
+        return ResultUtils.success(weeklyReportResponse);
+    }
+
+    private void handleWeeklyUserInGroup(List<UserRecord> userRecords, Date start, Date end, UserGroup userGroup) {
+        List<Integer> achievements = new ArrayList<>(Collections.nCopies(7, 0));
+        UserInfo userInfo = userInfoMapper.selectByOpenId(userGroup.getUserOpenid());
+        TargetDistance targetDistance = targetDistanceMapper.selectByUserGroupIdAndTimeRange(userGroup.getUserGroupId(), start, end);
+        Float allAchievements = 0f;
+        int allLikes = 0;
+        int allDislikes = 0;
+        Map<Integer, Float> dayAchievementMap = Maps.newHashMap();
+        UserRecord userRecord = new UserRecord();
+        List<RunningRecord> runningRecords = runningRecordMapper.selectByUserGroupIdAndTimeRange(
+                userGroup.getUserGroupId(),
+                DateUtils.parse(start),
+                DateUtils.parse(end));
+        for (RunningRecord runningRecord : runningRecords) {
+            if (runningRecord.getStatus() == 3) {
+                allAchievements += runningRecord.getDistance();
+            }
+
+            List<VoteRecord> voteRecords = voteRecordMapper.selectByRuningRecordId(runningRecord.getRuningRecordId());
+            for (VoteRecord voteRecord : voteRecords) {
+                if (voteRecord.getStatus().equals(VoteStatus.LIKE.getCode())) {
+                    allLikes++;
+                } else if (voteRecord.getStatus().equals(VoteStatus.DISLIKE.getCode())) {
+                    allDislikes++;
+                }
+            }
+            String createDate = parseForFrontEnd1(runningRecord.getCreationTime()).toUpperCase();
+            Integer whichDay = immutableDaysMap.get(createDate.substring(11));
+            if (dayAchievementMap.containsKey(whichDay)) {
+                float temp = dayAchievementMap.get(whichDay);
+                if (runningRecord.getStatus() == 3) {
+                    dayAchievementMap.put(whichDay, temp + runningRecord.getDistance());
+                }
+            } else {
+                if (runningRecord.getStatus() == 3) {
+                    dayAchievementMap.put(whichDay, runningRecord.getDistance());
+                }
+            }
+            if (dayAchievementMap.get(whichDay) != null) {
+                achievements.set(whichDay, dayAchievementMap.get(whichDay).intValue());
+            } else {
+                achievements.set(whichDay, 0);
+            }
+
+        }
+        userRecord.setUserGroupId(userGroup.getUserGroupId());
+        userRecord.setUserOpenId(userGroup.getUserOpenid());
+        userRecord.setGroupId(userGroup.getGroupId());
+        userRecord.setLikes(allLikes);
+        userRecord.setDislikes(allDislikes);
+        userRecord.setAchievements(achievements);
+        userRecord.setAllAchievements(allAchievements.intValue());
+        userRecord.setNickName(userInfo.getUserName());
+        userRecord.setIcon(userInfo.getIcon());
+        userRecord.setTarget(targetDistance == null ? 0 : targetDistance.getTargetDistance());
+        userRecords.add(userRecord);
     }
 
     private void setUserJoinResponse(UserJoinRequest userJoinRequest, UserInfo userInfo, UserJoinResponse userJoinResponse) {
@@ -402,7 +432,6 @@ public class FrontServices {
                 }).collect(Collectors.toList());
 
 
-
         List<UserRecord> collectUserRecord = userRecords.stream().filter(e -> e.getUserOpenId().equals(userJoinRequest.getOpenId())).collect(Collectors.toList());
 
 
@@ -432,5 +461,98 @@ public class FrontServices {
         userJoinResponse.setOtherUsersRecord(collectOtherUserRecord);
 
         return ResultUtils.success(userJoinResponse);
+    }
+
+
+    private void setUserJoinResponseV2(UserJoinRequest userJoinRequest, UserInfo userInfo, UserJoinResponse userJoinResponse) {
+        List<UserRecord> userRecords = new LinkedList<>();
+        List<UserGroup> usersInGroup = userGroupMapper.selectByGroupId(userJoinRequest.getGroupId());
+        usersInGroup.stream().parallel().forEach(userInGroup -> {
+            handleUserRecord(userInfo, userJoinResponse, userRecords, userInGroup);
+        });
+        userJoinResponse.setOtherUsersRecord(userRecords);
+    }
+
+    private void handleUserRecord(UserInfo userInfo, UserJoinResponse userJoinResponse, List<UserRecord> userRecords, UserGroup userInGroup) {
+        float current;
+        float distanceValided = 0f;
+        float distanceWaitValided = 0f;
+        float distanceRejected = 0f;
+        float overallDoneDistance = 0f;
+        final ThisLocalizedWeek chinaWeek = new ThisLocalizedWeek(Locale.CHINA);
+        int likes = 0;
+        int dislikes = 0;
+        float lastRecord = 0f;
+        int status = 0;
+        UserRecord userRecord = null;
+
+        UserInfo userInformation = userInfoMapper.selectByOpenId(userInGroup.getUserOpenid());
+        List<RunningRecord> runningRecords = runningRecordMapper.selectByUserGroupIdAndTimeRange(userInGroup.getUserGroupId(), chinaWeek.getFirstDay(), chinaWeek.getLastDay());
+        TargetDistance targetDistance = targetDistanceMapper.selectByUserGroupIdAndTimeRange(userInGroup.getUserGroupId(), chinaWeek.getFirstDay(), chinaWeek.getLastDay());
+        if (runningRecords != null && runningRecords.size() > 0) {
+            lastRecord = runningRecords.get(runningRecords.size() - 1).getDistance();
+        }
+
+        List<UserRecord> tempRecords = Lists.newLinkedList();
+        for (int i = 0; i < runningRecords.size(); i++) {
+            userRecord = new UserRecord();
+
+            List<VoteRecord> voteRecords = voteRecordMapper.selectByRuningRecordId(runningRecords.get(i).getRuningRecordId());
+            for (int j = 0; j < voteRecords.size(); j++) {
+                if (voteRecords.get(j).getStatus().equals(VoteStatus.LIKE.getCode())) {
+                    likes++;
+                } else if (voteRecords.get(j).getStatus().equals(VoteStatus.DISLIKE.getCode())) {
+                    dislikes++;
+                }
+            }
+            if (i == 0) {
+                for (int k = 0; k < runningRecords.size(); k++) {
+
+                    overallDoneDistance += runningRecords.get(k).getDistance();
+
+                    if (runningRecords.get(k).getStatus() == 3) {
+                        distanceValided += runningRecords.get(k).getDistance();
+                    } else if (runningRecords.get(k).getStatus() == 0) {
+                        distanceWaitValided += runningRecords.get(k).getDistance();
+                    } else if (runningRecords.get(k).getStatus() == 2) {
+                        distanceRejected += runningRecords.get(k).getDistance();
+                    }
+                }
+            }
+
+            status = runningRecords.get(i).getStatus();
+            current = runningRecords.get(i).getDistance();
+            userRecord.setRunningRecordId(runningRecords.get(i).getRuningRecordId());
+            userRecord.setCurrent(current);
+            userRecord = setUserRecords(userInGroup, userRecord, overallDoneDistance, distanceValided, distanceWaitValided, distanceRejected, userInformation, targetDistance, lastRecord, likes, dislikes, status);
+            if (!userInfo.getOpenId().equals(userInGroup.getUserOpenid()) && userRecord.getStatus() == 0) {
+                tempRecords.add(userRecord);
+            }
+        }
+
+        // if no userRecord, enrich userRecord using placeholder info
+        if (null == userRecord) {
+            userRecord = new UserRecord();
+            userRecord = setUserRecords(userInGroup,
+                    userRecord,
+                    overallDoneDistance,
+                    distanceValided,
+                    distanceWaitValided,
+                    distanceRejected,
+                    userInformation,
+                    targetDistance,
+                    lastRecord,
+                    likes,
+                    dislikes,
+                    status);
+        }
+        if (userInfo.getOpenId().equals(userInGroup.getUserOpenid())) {
+            if (null != targetDistance) { // add null check
+                userRecord.setTarget(targetDistance.getTargetDistance());
+            }
+            userJoinResponse.setUserRecord(userRecord);
+        } else {
+            userRecords.addAll(tempRecords);
+        }
     }
 }
