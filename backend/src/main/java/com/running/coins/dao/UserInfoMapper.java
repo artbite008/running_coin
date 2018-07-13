@@ -76,6 +76,26 @@ public interface UserInfoMapper {
     })
     UserInfo selectByOpenId(String openId);
 
+
+    @Select({
+            "select",
+            "UserId, UserName, Status, Role, Coins, TotalDistance, MetaData, OpenId, Icon",
+            "from User_Info",
+            "where Icon = #{icon,jdbcType=VARCHAR}"
+    })
+    @Results({
+            @Result(column="UserId", property="userId", jdbcType=JdbcType.INTEGER, id=true),
+            @Result(column="UserName", property="userName", jdbcType=JdbcType.VARCHAR),
+            @Result(column="Status", property="status", jdbcType=JdbcType.VARCHAR),
+            @Result(column="Role", property="role", jdbcType=JdbcType.VARCHAR),
+            @Result(column="Coins", property="coins", jdbcType=JdbcType.DOUBLE),
+            @Result(column="TotalDistance", property="totalDistance", jdbcType=JdbcType.REAL),
+            @Result(column="MetaData", property="metaData", jdbcType=JdbcType.VARCHAR),
+            @Result(column="OpenId", property="openId", jdbcType=JdbcType.VARCHAR),
+            @Result(column="Icon", property="icon", jdbcType=JdbcType.LONGVARBINARY)
+    })
+    UserInfo selectByIcon(String icon);
+
     @UpdateProvider(type=UserInfoSqlProvider.class, method="updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(UserInfo record);
 

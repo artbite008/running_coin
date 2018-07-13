@@ -8,6 +8,4 @@ public class SubmitUserSportRecordRequest {
     private Float distance;
     private Integer groupId;
     private String evidence;
-
-
 }

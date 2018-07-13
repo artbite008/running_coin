@@ -27,6 +27,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -108,6 +109,7 @@ public class FrontServices {
     }
 
     public ResponseMessage userJoinv3(UserJoinRequest userJoinRequest) {
+
         log.info(userJoinRequest.toString());
         UserJoinResponse userJoinResponse = new UserJoinResponse();
         ResponseMessage responseMessage = new ResponseMessage();
@@ -409,14 +411,19 @@ public class FrontServices {
 
 
     public ResponseMessage userJoinv2(UserJoinRequest userJoinRequest) {
+
+        log.info(userJoinRequest.toString());
+
         ThisLocalizedWeek thisLocalizedWeek = new ThisLocalizedWeek(Locale.CHINA);
         List<UserRecord> userRecords = runningRecordMapper.selectDailyUserRecord(thisLocalizedWeek.getFirstDay(), thisLocalizedWeek.getLastDay());
 
         UserJoinResponse userJoinResponse = new UserJoinResponse();
-        /** 主要是为了手机没有传入openid的问题*/
+
+
+        /** 为了晶姐啊！！！！  */
         if (userJoinRequest.getOpenId() == null || "".equals(userJoinRequest.getOpenId())) {
-            userJoinResponse.setOtherUsersRecord(userRecords);
-            return ResultUtils.success(userJoinResponse);
+            UserInfo userInfo = userInfoMapper.selectByIcon(userJoinRequest.getIcon());
+            userJoinRequest.setOpenId(userInfo.getOpenId());
         }
 
         /** 对 null 值处理 */

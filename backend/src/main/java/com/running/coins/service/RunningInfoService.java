@@ -10,9 +10,11 @@ import com.running.coins.common.util.ThisLocalizedWeek;
 import com.running.coins.dao.RunningRecordMapper;
 import com.running.coins.dao.TargetDistanceMapper;
 import com.running.coins.dao.UserGroupMapper;
+import com.running.coins.dao.UserInfoMapper;
 import com.running.coins.model.RunningRecord;
 import com.running.coins.model.TargetDistance;
 import com.running.coins.model.UserGroup;
+import com.running.coins.model.UserInfo;
 import com.running.coins.model.request.SubmitUserSportRecordRequest;
 import com.running.coins.model.request.SubmitUserSportTargetRequest;
 import com.running.coins.model.response.ResponseMessage;
@@ -33,6 +35,9 @@ public class RunningInfoService {
     RunningRecordMapper recordMapper;
     private final
     UserGroupMapper userGroupMapper;
+
+    @Autowired
+    private UserInfoMapper userInfoMapper;
 
     @Autowired
     public RunningInfoService(TargetDistanceMapper targetDistanceMapper,
@@ -80,6 +85,12 @@ public class RunningInfoService {
     }
 
     public ResponseMessage submitSportRecord(SubmitUserSportRecordRequest submitUserSportRecordRequest) {
+
+        /** 为了晶姐啊！！！！  */
+        if (submitUserSportRecordRequest.getUserOpenId() == null || "".equals(submitUserSportRecordRequest.getUserOpenId())) {
+            submitUserSportRecordRequest.setUserOpenId("otvlM5Qw9YG3uyTWr5pGdkgD9cdk");
+        }
+
         RunningRecord runningRecord = new RunningRecord();
         runningRecord.setCreationTime(DateUtils.parse(new Date()));
         runningRecord.setDistance(Float.valueOf(submitUserSportRecordRequest.getDistance()));
