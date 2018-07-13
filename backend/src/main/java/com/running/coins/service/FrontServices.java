@@ -438,23 +438,36 @@ public class FrontServices {
         if (collectUserRecord.size() > 0) {
             userJoinResponse.setUserRecord(collectUserRecord.get(0));
         } else {
-            /** sql查询出没『我』的信息的时候 拼凑出0*/
-            UserInfo userInfo = userInfoMapper.selectByOpenId(userJoinRequest.getOpenId());
-            UserGroup userGroup = userGroupMapper.selectByGroupIdAndUserOpenId(1, userJoinRequest.getOpenId());
-            TargetDistance targetDistance = targetDistanceMapper.selectByUserGroupIdAndTimeRange(userGroup.getUserGroupId(), thisLocalizedWeek.getFirstDay(), thisLocalizedWeek.getLastDay());
 
-            UserRecord userRecord = new UserRecord();
-            userRecord.setDislikes(0);
-            userRecord.setLikes(0);
-            userRecord.setCurrent((float) 0);
-            userRecord.setDistanceValided((float) 0);
-            userRecord.setTarget(targetDistance.getTargetDistance());
-            userRecord.setUserGroupId(userGroup.getUserGroupId());
-            userRecord.setIcon(userInfo.getIcon());
-            userRecord.setNickName(userInfo.getUserName());
-            userRecord.setUserOpenId(userInfo.getOpenId());
+            /** 如果我这周有打卡，那么就拿这个这周打开的数据*/
+            UserRecord userRecord1 = runningRecordMapper.selectDailyUserRecordWithOpenId(thisLocalizedWeek.getFirstDay(), thisLocalizedWeek.getLastDay(), userJoinRequest.getOpenId());
 
-            userJoinResponse.setUserRecord(userRecord);
+            if (userRecord1 != null) {
+                if (userRecord1.getDislikes() == null) {
+                    userRecord1.setDislikes(0);
+                }
+                if (userRecord1.getLikes() == null) {
+                    userRecord1.setLikes(0);
+                }
+                userJoinResponse.setUserRecord(userRecord1);
+            } else {
+                /** sql查询出没『我』的信息的时候 拼凑出0*/
+                UserInfo userInfo = userInfoMapper.selectByOpenId(userJoinRequest.getOpenId());
+                UserGroup userGroup = userGroupMapper.selectByGroupIdAndUserOpenId(1, userJoinRequest.getOpenId());
+                TargetDistance targetDistance = targetDistanceMapper.selectByUserGroupIdAndTimeRange(userGroup.getUserGroupId(), thisLocalizedWeek.getFirstDay(), thisLocalizedWeek.getLastDay());
+                UserRecord userRecord = new UserRecord();
+                userRecord.setDislikes(0);
+                userRecord.setLikes(0);
+                userRecord.setCurrent((float) 0);
+                userRecord.setDistanceValided((float) 0);
+                userRecord.setTarget(targetDistance.getTargetDistance());
+                userRecord.setUserGroupId(userGroup.getUserGroupId());
+                userRecord.setIcon(userInfo.getIcon());
+                userRecord.setNickName(userInfo.getUserName());
+                userRecord.setUserOpenId(userInfo.getOpenId());
+                userJoinResponse.setUserRecord(userRecord);
+            }
+
         }
 
         List<UserRecord> collectOtherUserRecord = userRecords.stream().filter(e -> !e.getUserOpenId().equals(userJoinRequest.getOpenId())).collect(Collectors.toList());
