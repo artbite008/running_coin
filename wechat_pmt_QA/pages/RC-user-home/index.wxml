@@ -85,7 +85,7 @@
   <view class='backdrop'></view>
   <view class='backdrop-front-content'>
     <block wx:if="{{dialogEvent === 'vote'}}">
-      <text class='voting-slogan'>Double tap thumb up or thumb down to vote or change vote \n Gray icon is your current choice !</text>
+      <text class='voting-slogan'>Single tap thumb up or thumb down to vote or change vote \n Gray icon is your current choice !</text>
       <icon type="cancel" size="40" color="red" bindtap='backdropMgt' />
       <view class="card voting-container bg-warning">
         <button class='like-dislike-button' bindtap='singleTop' data-action="like">

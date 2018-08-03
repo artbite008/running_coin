@@ -30,7 +30,6 @@ Page({
     getUserInfobywx: function () {
         this
             .loadData()
-            .then(() => wx.stopPullDownRefresh());
     },
     goToGuard: function () { // do not use navigateTo
         wx.redirectTo({
@@ -104,7 +103,72 @@ Page({
                 register: registerFlagFromStorage
             });
         }
-        this.loadData();
+        this.loadTheData();
+    },
+
+    loadTheData: function () {
+        /** search the backend  */
+        let tempsessionOpenId = wx.getStorageSync('sessionOpenId');
+        if (tempsessionOpenId === null || tempsessionOpenId.length < 28) {
+            this.loadTheOpenId();
+        } else {
+            this.loadTheUserInfoByOpenId();
+        }
+    },
+
+    loadTheUserInfoByOpenId: function () {
+        let sessionOpenId = wx.getStorageSync('sessionOpenId')
+
+        /** 双重判断*/
+        if (sessionOpenId == null|| sessionOpenId.length < 28) {
+            this.loadTheData();
+        } else {
+            this.setData({hasUserInfo:true});
+            UserService
+                .getInstance()
+                .createAndUpdateUser({
+                    userName: null,
+                    groupId: 1,
+                    openId: sessionOpenId,
+                    icon: null
+                })
+                .then(res => {
+                    const homePageModel = res.data.data;
+                    this.setData({
+                        userInfo: homePageModel.userRecord || {},
+                        users: homePageModel.otherUsersRecord || []
+                    });
+                    app.globalData.userInfo = homePageModel.userRecord;
+                });
+        }
+    },
+
+    loadTheOpenId: function () {
+        let tempUserInfo = {};
+        WX.userInfo(true)
+            .then(res => {
+                app.globalData.userInfo = res.userInfo;
+                tempUserInfo = res.userInfo;
+                this.setData({
+                    userInfo: res.userInfo,
+                    hasUserInfo: true
+                });
+                return WX.login()
+            })
+            .then(res => {
+                console.log("get jsCode to login" + res.code);
+                return RecordService.getInstance().serverUserLoginV2(
+                    res.code,
+                    tempUserInfo.nickName,
+                    tempUserInfo.avatarUrl
+                )
+            })
+            .then(res => {
+                console.dir(res);
+                console.log("store the userInfo in app" + res.data.data.userInfo);
+                wx.setStorageSync('sessionOpenId', res.data.data);
+                this.loadTheData();
+            })
     },
 
     loadData: function () {
@@ -143,39 +207,39 @@ Page({
                     this.loadData();
                 })
         }
-        let that = this;
-        return WX
-        // get user Info
-            .userInfo(false)
-            .then(res => {
-                const userInfo = res.userInfo;
-                app.globalData.userInfo = userInfo;
 
-                that.setData({
-                    hasUserInfo: true
-                });
-
-                console.log("openid  :" + wx.getStorageSync('sessionOpenId'))
-                // create or update user
-                return UserService
-                    .getInstance()
-                    .createAndUpdateUser({
-                        userName: userInfo.nickName,
-                        groupId: 1,
-                        openId: wx.getStorageSync('sessionOpenId'),
-                        icon: userInfo.avatarUrl
+        if (wx.getStorageSync('sessionOpenId') != null || tempsessionOpenId.length >= 28) {
+            let that = this;
+            WX
+                .userInfo(false)
+                .then(res => {
+                    const userInfo = res.userInfo;
+                    app.globalData.userInfo = userInfo;
+                    that.setData({
+                        hasUserInfo: true
                     });
-            })
-            .then(res => {
-                const homePageModel = res.data.data;
-                that.setData({
-                    userInfo: homePageModel.userRecord || {},
-                    users: homePageModel.otherUsersRecord || []
+                    console.log("openid  :" + wx.getStorageSync('sessionOpenId'))
+                    // create or update user
+                    return UserService
+                        .getInstance()
+                        .createAndUpdateUser({
+                            userName: userInfo.nickName,
+                            groupId: 1,
+                            openId: wx.getStorageSync('sessionOpenId'),
+                            icon: userInfo.avatarUrl
+                        });
+                })
+                .then(res => {
+                    const homePageModel = res.data.data;
+                    that.setData({
+                        userInfo: homePageModel.userRecord || {},
+                        users: homePageModel.otherUsersRecord || []
+                    });
+                    app.globalData.userInfo = homePageModel.userRecord;
                 });
-                app.globalData.userInfo = homePageModel.userRecord;
-                // Object.assign(app.globalData.userInfo, homePageModel.userRecord);
-                return new Promise((resolve) => resolve());
-            });
+        }
+
+
     },
     getUserInfo: function (e) {
         app.globalData.userInfo = e.detail.userInfo
@@ -256,7 +320,7 @@ Page({
     },
 
 
-    singleTop:function(e){
+    singleTop: function (e) {
         const doubleTapAction = e.currentTarget.dataset.action || '';
         this.lastTapTimeoutFunc = this[doubleTapAction];
         this.lastTapTimeoutFunc(this.data.whoIsGonnaBeVote);
@@ -277,13 +341,13 @@ Page({
             .voteUser(app.globalData.sessionOpenId, 1, me.userGroupId, voteStatus, user.runningRecordId)
             .then(res => {
                 const voteStatus = res.data.data.status;
-                if (voteStatus==1 || voteStatus==0 ){
+                if (voteStatus == 1 || voteStatus == 0) {
                     wx.showToast({title: 'Vote Success !'});
                 }
                 that.voteStatusChooser(voteStatus);
-                setTimeout(()=>{
+                setTimeout(() => {
                     that.backdropMgt();
-                },1500)
+                }, 1500)
             });
     },
 
@@ -297,20 +361,19 @@ Page({
             .voteUser(app.globalData.sessionOpenId, 1, me.userGroupId, voteStatus, user.runningRecordId)
             .then(res => {
                 const voteStatus = res.data.data.status;
-                if (voteStatus==2 || voteStatus==3 ){
+                if (voteStatus == 2 || voteStatus == 3) {
                     wx.showToast({title: 'Vote Success !'});
                 }
                 that.voteStatusChooser(voteStatus);
-                setTimeout(()=>{
+                setTimeout(() => {
                     that.backdropMgt();
-                },1000)
+                }, 1000)
             });
     },
 
     /////////////////////////////////////////// double tap event ////////////////////////////////////
     onPullDownRefresh: function () {
         this
-            .loadData()
-            .then(() => wx.stopPullDownRefresh());
+            .loadData();
     },
 });

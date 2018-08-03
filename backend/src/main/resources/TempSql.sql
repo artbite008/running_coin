@@ -59,3 +59,21 @@ FROM Running_Record
 WHERE Running_Record.CreationTime >= '2018-07-09 00:00:00' AND Running_Record.CreationTime <= '2018-07-15 23:59:59'
        AND Running_Record.Status = 0;
 
+
+
+
+select
+  Icon,
+  UserGroup.UserGroupId as userGroupId,
+  OpenId as userOpenId,
+  CreationTime as createTime,
+  Distance as distance
+FROM  UserGroup
+LEFT JOIN (
+    SELECT Icon,OpenId from User_Info
+    ) as WeeklyUserInfo ON UserOpenId=OpenId
+LEFT JOIN (
+    SELECT UserGroupId,Distance,CreationTime FROM Running_Record
+    WHERE   CreationTime>= '2018-07-09 00:00:00' AND CreationTime <= '2018-07-15 23:59:59'
+    and Status=3
+    ) as WeeklyRunningRecord on WeeklyRunningRecord.UserGroupId = UserGroup.UserGroupId
