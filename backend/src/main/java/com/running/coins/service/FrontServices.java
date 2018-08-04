@@ -420,11 +420,6 @@ public class FrontServices {
         UserJoinResponse userJoinResponse = new UserJoinResponse();
 
 
-        /** 为了晶姐啊！！！！  */
-        if (userJoinRequest.getOpenId() == null || "".equals(userJoinRequest.getOpenId())) {
-            UserInfo userInfo = userInfoMapper.selectByIcon(userJoinRequest.getIcon());
-            userJoinRequest.setOpenId(userInfo.getOpenId());
-        }
 
         /** 对 null 值处理 */
         userRecords = userRecords.stream()
