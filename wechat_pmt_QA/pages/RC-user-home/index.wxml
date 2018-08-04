@@ -5,7 +5,7 @@
         <button type="primary" catchtap="primary" open-type='getUserInfo' bindgetuserinfo='getUserInfobywx'> allow to get User Info </button>
     </block>
     <block wx:else>
-      <image class="userinfo-avatar" src="{{userInfo.icon}}" background-size="cover"></image>
+      <image class="userinfo-avatar"  src="{{userInfo.icon}}" background-size="cover"></image>
       <view class="userinfo-nickname-block">
         <text class="userinfo-nickname decorator">{{userInfo.nickName}}</text>
         <view class="userinfo-nickname">
