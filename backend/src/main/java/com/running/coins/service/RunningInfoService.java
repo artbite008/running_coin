@@ -86,11 +86,6 @@ public class RunningInfoService {
 
     public ResponseMessage submitSportRecord(SubmitUserSportRecordRequest submitUserSportRecordRequest) {
 
-        /** 为了晶姐啊！！！！  */
-        if (submitUserSportRecordRequest.getUserOpenId() == null || "".equals(submitUserSportRecordRequest.getUserOpenId())) {
-            submitUserSportRecordRequest.setUserOpenId("otvlM5Qw9YG3uyTWr5pGdkgD9cdk");
-        }
-
         RunningRecord runningRecord = new RunningRecord();
         runningRecord.setCreationTime(DateUtils.parse(new Date()));
         runningRecord.setDistance(Float.valueOf(submitUserSportRecordRequest.getDistance()));

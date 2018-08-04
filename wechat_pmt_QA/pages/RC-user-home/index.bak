@@ -103,12 +103,12 @@ Page({
                 register: registerFlagFromStorage
             });
         }
-        this.loadTheData();
+        this.loadTheData2();
     },
 
 
-    loadTheData: function() {
-        this.getTheHomePageModel()
+    loadTheData2: function() {
+        this.getTheUserInfo()
             .then(homePageModel=>{
                 this.setData({
                     userInfo: homePageModel.userRecord || {},
@@ -117,7 +117,7 @@ Page({
             })
     },
 
-    getTheHomePageModel: function () {
+    getTheUserInfo: function () {
         const sessionOpenId = wx.getStorageSync('sessionOpenId');
         if (sessionOpenId == null || sessionOpenId.length < 28) {
             return this.queryOpenId()
@@ -178,6 +178,141 @@ Page({
     },
 
 
+    loadTheData: function () {
+        /** search the backend  */
+        let tempsessionOpenId = wx.getStorageSync('sessionOpenId');
+        if (tempsessionOpenId === null || tempsessionOpenId.length < 28) {
+            this.loadTheOpenId();
+        } else {
+            this.loadTheUserInfoByOpenId();
+        }
+    },
+
+    loadTheUserInfoByOpenId: function () {
+        let sessionOpenId = wx.getStorageSync('sessionOpenId')
+
+        /** 双重判断*/
+        if (sessionOpenId == null || sessionOpenId.length < 28) {
+            this.loadTheData();
+        } else {
+            this.setData({hasUserInfo: true});
+            UserService
+                .getInstance()
+                .createAndUpdateUser({
+                    userName: null,
+                    groupId: 1,
+                    openId: sessionOpenId,
+                    icon: null
+                })
+                .then(res => {
+                    const homePageModel = res.data.data;
+                    this.setData({
+                        userInfo: homePageModel.userRecord || {},
+                        users: homePageModel.otherUsersRecord || []
+                    });
+                    app.globalData.userInfo = homePageModel.userRecord;
+                });
+        }
+    },
+
+    loadTheOpenId: function () {
+        let tempUserInfo = {};
+        WX.userInfo(true)
+            .then(res => {
+                app.globalData.userInfo = res.userInfo;
+                tempUserInfo = res.userInfo;
+                this.setData({
+                    userInfo: res.userInfo,
+                    hasUserInfo: true
+                });
+                return WX.login()
+            })
+            .then(res => {
+                console.log("get jsCode to login" + res.code);
+                return RecordService.getInstance().serverUserLoginV2(
+                    res.code,
+                    tempUserInfo.nickName,
+                    tempUserInfo.avatarUrl
+                )
+            })
+            .then(res => {
+                console.dir(res);
+                console.log("store the userInfo in app" + res.data.data.userInfo);
+                wx.setStorageSync('sessionOpenId', res.data.data);
+                this.loadTheData();
+            })
+    },
+
+    loadData: function () {
+        let tempsessionOpenId = wx.getStorageSync('sessionOpenId');
+        if (tempsessionOpenId != null && tempsessionOpenId.length >= 28) {
+            this.setData({
+                sessionOpenId: tempsessionOpenId,
+                hasUserInfo: true
+            })
+        } else {
+            console.log("执行到 home/index.js 114")
+            let tempUserInfo = {};
+            WX.userInfo(true)
+                .then(res => {
+                    app.globalData.userInfo = res.userInfo;
+                    tempUserInfo = res.userInfo;
+                    this.setData({
+                        userInfo: res.userInfo,
+                        hasUserInfo: true
+                    });
+                    return WX.login()
+                })
+                .then(res => {
+                    console.log("get jsCode to login" + res.code);
+                    console.dir(tempUserInfo);
+                    return RecordService.getInstance().serverUserLoginV2(
+                        res.code,
+                        tempUserInfo.nickName,
+                        tempUserInfo.avatarUrl
+                    )
+                })
+                .then(res => {
+                    console.dir(res);
+                    console.log("store the userInfo in app" + res.data.data.userInfo);
+                    wx.setStorageSync('sessionOpenId', res.data.data);
+                    this.loadData();
+                })
+        }
+
+        if (wx.getStorageSync('sessionOpenId') != null || tempsessionOpenId.length >= 28) {
+            let that = this;
+            WX
+                .userInfo(false)
+                .then(res => {
+                    const userInfo = res.userInfo;
+                    app.globalData.userInfo = userInfo;
+                    that.setData({
+                        hasUserInfo: true
+                    });
+                    console.log("openid  :" + wx.getStorageSync('sessionOpenId'))
+                    // create or update user
+                    return UserService
+                        .getInstance()
+                        .createAndUpdateUser({
+                            userName: userInfo.nickName,
+                            groupId: 1,
+                            openId: wx.getStorageSync('sessionOpenId'),
+                            icon: userInfo.avatarUrl
+                        });
+                })
+                .then(res => {
+                    const homePageModel = res.data.data;
+                    that.setData({
+                        userInfo: homePageModel.userRecord || {},
+                        users: homePageModel.otherUsersRecord || []
+                    });
+                    app.globalData.userInfo = homePageModel.userRecord;
+                });
+        }
+
+
+    },
     getUserInfo: function (e) {
         app.globalData.userInfo = e.detail.userInfo
         this.setData({
@@ -308,8 +443,9 @@ Page({
             });
     },
 
+    /////////////////////////////////////////// double tap event ////////////////////////////////////
     onPullDownRefresh: function () {
         this
-            .loadTheData();
+            .loadData();
     },
 });
