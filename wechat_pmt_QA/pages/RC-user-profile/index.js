@@ -45,7 +45,10 @@ Page({
                 }
             })
         }
-        this.loadData();
+        this.loadData()
+            .then(()=>this.refreshUserInfo())
+            .then(()=> this.loadData())
+            .then(() => wx.stopPullDownRefresh());
     },
     onReady: function () {
 
@@ -154,15 +157,13 @@ Page({
                 } else {
                     wx.showToast({title: 'submit Success!'})
                 }
-            });
 
-        setTimeout(() => {
-            this.backdropMgt();
-            this.refreshUserInfo();
-            this
-                .loadData()
-                .then(() => wx.stopPullDownRefresh());
-        }, 1500)
+                this.backdropMgt();
+                return this.refreshUserInfo();
+            })
+            .then(()=> this.loadData())
+            .then(() => wx.stopPullDownRefresh());
+
     },
     onPullDownRefresh: function () {
         this.refreshUserInfo();

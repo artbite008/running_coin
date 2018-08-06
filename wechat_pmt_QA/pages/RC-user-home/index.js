@@ -29,7 +29,7 @@ Page({
     },
     getUserInfobywx: function () {
         this
-            .loadData()
+            .loadTheData()
     },
     goToGuard: function () { // do not use navigateTo
         wx.redirectTo({
@@ -221,9 +221,7 @@ Page({
                 var that = this;
 
                 setTimeout(function () {
-                    that
-                        .loadData()
-                        .then(() => wx.stopPullDownRefresh());
+                    that.loadTheData();
                     that.backdropMgt();
                 }, 1500)
 
@@ -269,7 +267,7 @@ Page({
     // status,
     // runningRecordId
     like: function (user) {
-        const me = app.globalData.userInfo;
+        const me =this.data.userInfo;
         const liked = this.data.liked;
         const voteStatus = liked ? 1 : 0;
         let that = this;
@@ -289,7 +287,7 @@ Page({
     },
 
     dislike: function (user) {
-        const me = app.globalData.userInfo;
+        const me =this.data.userInfo;
         const disliked = this.data.disliked;
         const voteStatus = disliked ? 3 : 2;
         let that = this;

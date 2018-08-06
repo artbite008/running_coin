@@ -31,7 +31,7 @@
           </view>
           
           <view 
-            style='width: {{((userInfo.distanceWaitValided || 0) / ((userInfo.distanceWaitValided || 0) + (userInfo.distanceValided || 0))) > 1 ? 100 : (((userInfo.distanceWaitValided || 0) / ((userInfo.distanceWaitValided || 0) + (userInfo.distanceValided || 0))) * 100)}}%;' 
+            style='width: {{((userInfo.distanceWaitValided || 0) / ((userInfo.distanceWaitValided || 0) + (userInfo.distanceValided || 0))) > 1 ? 100 : (((userInfo.distanceWaitValided || 0) / ((userInfo.distanceWaitValided || 0) + (userInfo.distanceValided || 0))) * 100)}}%;'
             class="bg-warning progress">
         </view>
       
