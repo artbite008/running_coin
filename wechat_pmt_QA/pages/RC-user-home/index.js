@@ -107,9 +107,9 @@ Page({
     },
 
 
-    loadTheData: function() {
+    loadTheData: function () {
         this.getTheHomePageModel()
-            .then(homePageModel=>{
+            .then(homePageModel => {
                 this.setData({
                     userInfo: homePageModel.userRecord || {},
                     users: homePageModel.otherUsersRecord || []
@@ -267,7 +267,7 @@ Page({
     // status,
     // runningRecordId
     like: function (user) {
-        const me =this.data.userInfo;
+        const me = this.data.userInfo;
         const liked = this.data.liked;
         const voteStatus = liked ? 1 : 0;
         let that = this;
@@ -287,7 +287,7 @@ Page({
     },
 
     dislike: function (user) {
-        const me =this.data.userInfo;
+        const me = this.data.userInfo;
         const disliked = this.data.disliked;
         const voteStatus = disliked ? 3 : 2;
         let that = this;
@@ -308,6 +308,13 @@ Page({
 
     onPullDownRefresh: function () {
         this
-            .loadTheData();
+            .getTheHomePageModel()
+            .then(homePageModel => {
+                this.setData({
+                    userInfo: homePageModel.userRecord || {},
+                    users: homePageModel.otherUsersRecord || []
+                });
+                wx.stopPullDownRefresh();
+            })
     },
 });
