@@ -5,7 +5,7 @@ const envLocal = 'https://test.com';  // mapping in hosts file
 //const envQa = 'https://localhost';
 //const envQa = 'https://guxiangfly.cn/dev';
 //const envQa = 'http://guxiangfly.nat300.top';
-const envQa = 'https://www.runningcoin.club';
+const envQa = 'https://www.runningcoin.club/dev';
 /**
  * user services for
  * query user info by user Id
