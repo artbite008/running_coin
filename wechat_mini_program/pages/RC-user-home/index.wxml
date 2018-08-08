@@ -1,8 +1,8 @@
 <view hidden="{{showBackdrop}}">
 <view class="container">
   <view class="card userinfo user-card-decorator" bindtap='goToMyProfile'>
-    <block wx:if="{{!hasUserInfo}}" open-type="getUserInfo">
-        <button type="primary" catchtap="primary" open-type='getUserInfo' bindgetuserinfo='getUserInfobywx'> allow to get User Info </button>
+    <block wx:if="{{!hasUserInfo}}">
+        <button type="primary" catchtap='primaryinit' open-type='getUserInfo' bindgetuserinfo='getUserInfobywx'> allow to get User Info </button>
     </block>
     <block wx:else>
       <image class="userinfo-avatar"  src="{{userInfo.icon}}" background-size="cover"></image>
@@ -86,12 +86,12 @@
   <view class='backdrop-front-content'>
     <block wx:if="{{dialogEvent === 'vote'}}">
       <text class='voting-slogan'>Single tap thumb up or thumb down to vote or change vote \n Gray icon is your current choice !</text>
-      <icon type="cancel" size="40" color="red" bindtap='backdropMgt' />
+      <icon type="cancel" size="40" color="red" catchtap='backdropMgt' />
       <view class="card voting-container bg-warning">
-        <button class='like-dislike-button' bindtap='singleTop' data-action="like">
+        <button class='like-dislike-button' catchtap='singleTop' data-action="like">
           <image src='../imgs/like.svg' class='{{liked ? "gray" : "" }}'></image>
         </button>
-        <button class='like-dislike-button' bindtap='singleTop' data-action="dislike">
+        <button class='like-dislike-button' catchtap='singleTop' data-action="dislike">
           <image src='../imgs/dislike.svg' class='{{disliked ? "gray" : "" }}'></image>
         </button>
       </view>
@@ -100,7 +100,7 @@
       <text class='voting-slogan'>
      You can only record once in an hour ! \n
        \t The latest one will be accepted if you save twice or more</text>
-      <icon type="cancel" size="40" color="red" bindtap='backdropMgt' />
+      <icon type="cancel" size="40" color="red" catchtap='backdropMgt' />
       <view class="card marking-container bg-light">
         <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px; border-radius: 10px; font-weight: 600;" value="{{value}}" bindchange="bindChange">
           <picker-view-column>

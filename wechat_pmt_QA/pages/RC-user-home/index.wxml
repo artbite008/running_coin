@@ -1,8 +1,8 @@
 <view hidden="{{showBackdrop}}">
 <view class="container">
   <view class="card userinfo user-card-decorator" bindtap='goToMyProfile'>
-    <block wx:if="{{!hasUserInfo}}" open-type="getUserInfo">
-        <button type="primary" catchtap="primary" open-type='getUserInfo' bindgetuserinfo='getUserInfobywx'> allow to get User Info </button>
+    <block wx:if="{{!hasUserInfo}}">
+        <button type="primary" catchtap='primaryinit' open-type='getUserInfo' bindgetuserinfo='getUserInfobywx'> allow to get User Info </button>
     </block>
     <block wx:else>
       <image class="userinfo-avatar"  src="{{userInfo.icon}}" background-size="cover"></image>

@@ -74,7 +74,7 @@ public class RunningInfoService {
         } else {
             Calendar cal = Calendar.getInstance();
             int weekdayNum = cal.get(Calendar.DAY_OF_WEEK);
-            if (weekdayNum==1 ||weekdayNum==7 ||weekdayNum==6  ){
+            if (weekdayNum == 1 || weekdayNum == 7 || weekdayNum == 6) {
                 throw new CommonException(ResultEnum.Target_ERROR);
             }
             targetDistance.setCreationTime(DateUtils.parse(new Date()));
@@ -99,7 +99,7 @@ public class RunningInfoService {
          * 如果用户在1小时内保存了两次，则以最新的一次为准，用户可用以修改distance
          */
         List<RunningRecord> runningRecordsInOneHour = recordMapper.selectRunningRecordLatestHourByUserGroupId(runningRecord.getUserGroupId());
-        if (runningRecordsInOneHour.size()!=0){
+        if (runningRecordsInOneHour.size() != 0) {
             RunningRecord runningRecordChange = runningRecordsInOneHour.get(0);
             Float oldDistance = runningRecordChange.getDistance();
             Float newDistance = Float.valueOf(submitUserSportRecordRequest.getDistance());
@@ -107,7 +107,7 @@ public class RunningInfoService {
             runningRecordChange.setDistance(newDistance);
             int i = recordMapper.updateByPrimaryKey(runningRecordChange);
 
-            return ResultUtils.error(400,"Change Distance From "+oldDistance+" to "+newDistance);
+            return ResultUtils.error(400, "Change Distance From " + oldDistance + " to " + newDistance);
         }
 
         recordMapper.insert(runningRecord);

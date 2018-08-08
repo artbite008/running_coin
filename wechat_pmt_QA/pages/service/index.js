@@ -3,6 +3,7 @@ import {HttpClient as hc} from '../../utils/httpClient';
 const envLocal = 'https://test.com';  // mapping in hosts file
 //const envQa = 'https://guxiangfly.cn';
 //const envQa = 'https://localhost';
+//const envQa = 'https://localhost:3443/dev';
 //const envQa = 'https://guxiangfly.cn/dev';
 //const envQa = 'http://guxiangfly.nat300.top';
 const envQa = 'https://www.runningcoin.club/dev';
@@ -151,7 +152,7 @@ class WxService {
       wx.getUserInfo({
         withCredentials: withCredentials || false,
         success: res => resolve(res),
-        fail: reject
+        fail: reject("get wx userInfo fail")
       })
     });
   }

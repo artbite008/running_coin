@@ -2,6 +2,7 @@ import {progressBarColorSets as _progressBarColorSets} from '../mock/RC-progress
 import {plans} from '../mock/RC-user.mock';
 import {UserService, WxService as WX, RecordService} from '../service/index';
 import {hashToInt} from '../../utils/util';
+import {getTheHomePageModel} from "../../utils/CommonUtils";
 
 const app = getApp();
 
@@ -19,6 +20,15 @@ Page({
         plans: plans
     },
 
+    onShow: function(){
+        if (app.globalData.userInfo) {
+            this.setData({
+                userInfo: app.globalData.userInfo,
+                hasUserInfo: true
+            })
+        }
+    },
+
     onLoad: function (options) {
         if (app.globalData.userInfo) {
             this.setData({
@@ -32,22 +42,9 @@ Page({
                     hasUserInfo: true
                 })
             }
-        } else {
-            // 在没有 open-type=getUserInfo 版本的兼容处理
-            wx.getUserInfo({
-                success: res => {
-                    app.globalData.userInfo = res.userInfo;
-                    console.debug(res.userInfo);
-                    this.setData({
-                        userInfo: res.userInfo,
-                        hasUserInfo: true
-                    })
-                }
-            })
         }
         this.loadData()
-            .then(()=>this.refreshUserInfo())
-            .then(()=> this.loadData())
+            .then(() => this.loadData())
             .then(() => wx.stopPullDownRefresh());
     },
     onReady: function () {
@@ -84,36 +81,22 @@ Page({
             });
     },
     refreshUserInfo: function () {
-        let that = this;
-        return WX
-        // get user Info
-            .userInfo(false)
-            .then(res => {
-                const userInfo = res.userInfo;
-                app.globalData.userInfo = userInfo;
-
-                // create or update user
-                return UserService
-                    .getInstance()
-                    .createAndUpdateUser({
-                        userName: userInfo.nickName,
-                        groupId: 1,
-                        openId: wx.getStorageSync('sessionOpenId'),
-                        icon: userInfo.avatarUrl
+        return new Promise((resolve, reject) => {
+            getTheHomePageModel()
+                .then(homePageModel => {
+                    app.globalData.userInfo =homePageModel.userRecord;
+                    this.setData({
+                        userInfo: homePageModel.userRecord || {},
                     });
-            }).then(res => {
-                const homePageModel = res.data.data;
-                that.setData({
-                    userInfo: homePageModel.userRecord || {},
-                });
-                Object.assign(app.globalData.userInfo, homePageModel.userRecord);
-                return new Promise((resolve) => resolve());
-            });
+                    resolve("success");
+                })
+        })
     },
+
+
     getUserInfo: function (e) {
-        app.globalData.userInfo = e.detail.userInfo
         this.setData({
-            userInfo: e.detail.userInfo,
+            userInfo: app.globalData.userInfo,
             hasUserInfo: true
         })
     },
@@ -161,7 +144,7 @@ Page({
                 this.backdropMgt();
                 return this.refreshUserInfo();
             })
-            .then(()=> this.loadData())
+            .then(() => this.loadData())
             .then(() => wx.stopPullDownRefresh());
 
     },

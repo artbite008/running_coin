@@ -2,7 +2,7 @@ import {progressBarColorSets as _progressBarColorSets} from '../mock/RC-progress
 import {achievements} from '../mock/RC-user.mock';
 import {UserService, WxService as WX, RecordService} from '../service/index';
 import {hashToInt} from '../../utils/util';
-
+import {getTheHomePageModel} from "../../utils/CommonUtils";
 
 const iconPlaceholder = '../imgs/avatar-placeholder.jpg';
 
@@ -27,9 +27,12 @@ Page({
         disliked: false,
         sessionOpenId: null
     },
-    getUserInfobywx: function () {
-        this
-            .loadTheData()
+
+    getUserInfobywx: function (e) {
+        console.log(e.detail.userInfo);
+        wx.setStorageSync("avatarUrl", e.detail.userInfo.avatarUrl);
+        wx.setStorageSync("nickName", e.detail.userInfo.nickName);
+        this.loadTheData();
     },
     goToGuard: function () { // do not use navigateTo
         wx.redirectTo({
@@ -93,6 +96,15 @@ Page({
             showBackdrop: !_showBackdrop
         });
     },
+
+    onShow: function(){
+        if (app.globalData.userInfo) {
+            this.setData({
+                userInfo: app.globalData.userInfo,
+                hasUserInfo: true
+            })
+        }
+    },
     onLoad: function () {
         const registerFlagFromStorage = wx.getStorageSync('register');
         if (registerFlagFromStorage !== 'true') {
@@ -103,80 +115,30 @@ Page({
                 register: registerFlagFromStorage
             });
         }
-        this.loadTheData();
+        if (wx.getStorageSync('avatarUrl') == "" || wx.getStorageSync('avatarUrl') == null || wx.getStorageSync("nickName") == "" || wx.getStorageSync('nickName') == null) {
+            console.log("avatarUrl == null")
+            return;
+        } else {
+            this.loadTheData();
+        }
+    },
+
+    /** not do any thing */
+    primaryinit: function(){
     },
 
 
     loadTheData: function () {
-        this.getTheHomePageModel()
+        getTheHomePageModel()
             .then(homePageModel => {
+                app.globalData.userInfo = homePageModel.userRecord;
                 this.setData({
+                    hasUserInfo: true,
                     userInfo: homePageModel.userRecord || {},
                     users: homePageModel.otherUsersRecord || []
                 });
             })
     },
-
-    getTheHomePageModel: function () {
-        const sessionOpenId = wx.getStorageSync('sessionOpenId');
-        if (sessionOpenId == null || sessionOpenId.length < 28) {
-            return this.queryOpenId()
-                .then(openId => this.queryUserInfo(openId))
-        } else {
-            return this.queryUserInfo(sessionOpenId)
-        }
-    },
-
-    queryOpenId: function () {
-        return new Promise((resolve, reject) => {
-            let tempUserInfo = {};
-            WX.userInfo(true)
-                .then(res => {
-                    app.globalData.userInfo = res.userInfo;
-                    tempUserInfo = res.userInfo;
-                    this.setData({
-                        userInfo: res.userInfo,
-                        hasUserInfo: true
-                    });
-                    return WX.login()
-                })
-                .then(res => {
-                    console.log("get jsCode to login" + res.code);
-                    return RecordService.getInstance().serverUserLoginV2(
-                        res.code,
-                        tempUserInfo.nickName,
-                        tempUserInfo.avatarUrl
-                    )
-                })
-                .then(res => {
-                    console.dir(res);
-                    console.log("store the userInfo in app" + res.data.data.userInfo);
-                    wx.setStorageSync('sessionOpenId', res.data.data);
-                    resolve(res.data.data);
-                })
-        });
-
-    },
-
-    queryUserInfo: function (openId) {
-        return new Promise((resolve, reject) => {
-            this.setData({hasUserInfo: true});
-            UserService
-                .getInstance()
-                .createAndUpdateUser({
-                    userName: null,
-                    groupId: 1,
-                    openId: openId,
-                    icon: null
-                })
-                .then(res => {
-                    const homePageModel = res.data.data;
-                    resolve(homePageModel)
-                });
-        });
-
-    },
-
 
     getUserInfo: function (e) {
         app.globalData.userInfo = e.detail.userInfo
@@ -280,10 +242,8 @@ Page({
                     wx.showToast({title: 'Vote Success !'});
                 }
                 that.voteStatusChooser(voteStatus);
-                setTimeout(() => {
-                    that.backdropMgt();
-                }, 1500)
             });
+        that.backdropMgt();
     },
 
     dislike: function (user) {
@@ -307,8 +267,7 @@ Page({
     },
 
     onPullDownRefresh: function () {
-        this
-            .getTheHomePageModel()
+        getTheHomePageModel()
             .then(homePageModel => {
                 this.setData({
                     userInfo: homePageModel.userRecord || {},
