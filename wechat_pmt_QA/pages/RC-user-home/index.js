@@ -260,10 +260,8 @@ Page({
                     wx.showToast({title: 'Vote Success !'});
                 }
                 that.voteStatusChooser(voteStatus);
-                setTimeout(() => {
-                    that.backdropMgt();
-                }, 1000)
             });
+        that.backdropMgt();
     },
 
     onPullDownRefresh: function () {

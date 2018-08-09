@@ -246,25 +246,23 @@ Page({
         that.backdropMgt();
     },
 
-    dislike: function (user) {
-        const me = this.data.userInfo;
-        const disliked = this.data.disliked;
-        const voteStatus = disliked ? 3 : 2;
-        let that = this;
-        UserService
-            .getInstance()
-            .voteUser(app.globalData.sessionOpenId, 1, me.userGroupId, voteStatus, user.runningRecordId)
-            .then(res => {
-                const voteStatus = res.data.data.status;
-                if (voteStatus == 2 || voteStatus == 3) {
-                    wx.showToast({title: 'Vote Success !'});
-                }
-                that.voteStatusChooser(voteStatus);
-                setTimeout(() => {
-                    that.backdropMgt();
-                }, 1000)
-            });
-    },
+  dislike: function (user) {
+    const me = this.data.userInfo;
+    const disliked = this.data.disliked;
+    const voteStatus = disliked ? 3 : 2;
+    let that = this;
+    UserService
+      .getInstance()
+      .voteUser(app.globalData.sessionOpenId, 1, me.userGroupId, voteStatus, user.runningRecordId)
+      .then(res => {
+        const voteStatus = res.data.data.status;
+        if (voteStatus == 2 || voteStatus == 3) {
+          wx.showToast({ title: 'Vote Success !' });
+        }
+        that.voteStatusChooser(voteStatus);
+      });
+    that.backdropMgt();
+  },
 
     onPullDownRefresh: function () {
         getTheHomePageModel()
