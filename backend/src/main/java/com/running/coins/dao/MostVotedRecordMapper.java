@@ -6,6 +6,7 @@ import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
+import java.util.List;
 
 @Repository
 public interface MostVotedRecordMapper {
@@ -74,4 +75,31 @@ public interface MostVotedRecordMapper {
             @Result(column="GroupId", property="groupId", jdbcType=JdbcType.INTEGER)
     })
     MostVotedRecord selectByVotedDateAndUserGroupId(@Param("votedDate")Date votedDate, @Param("userGroupId")Integer UserGroupId);
+
+    @Select({
+            "SELECT *",
+            "FROM MostVoted_Record",
+            "WHERE VotedDate < #{endDate,jdbcType=TIMESTAMP} AND VotedDate >= #{startDate,jdbcType=TIMESTAMP}",
+            "      AND VotedCount != 0 AND VotedCount =",
+            "          (",
+            "            SELECT max(VotedCount)",
+            "            FROM MostVoted_Record",
+            "            WHERE UserGroupId NOT IN",
+            "                  (",
+            "                    SELECT MostVotedUserGroupId",
+            "                    FROM DailyMostVoted_Record",
+            "                    WHERE awardDate < #{endDate,jdbcType=TIMESTAMP} AND awardDate >= #{startDate,jdbcType=TIMESTAMP}",
+            "                  )",
+            "            and VotedDate < #{endDate,jdbcType=TIMESTAMP} AND VotedDate >= #{startDate,jdbcType=TIMESTAMP}",
+            "          )"
+    })
+    @Results({
+            @Result(column="MostVotedId", property="mostVotedId", jdbcType=JdbcType.INTEGER, id=true),
+            @Result(column="UserGroupId", property="userGroupId", jdbcType=JdbcType.INTEGER),
+            @Result(column="VotedCount", property="votedCount", jdbcType=JdbcType.INTEGER),
+            @Result(column="VotedDate", property="votedDate", jdbcType=JdbcType.DATE),
+            @Result(column="CoinGiveStatus", property="coinGiveStatus", jdbcType=JdbcType.INTEGER),
+            @Result(column="GroupId", property="groupId", jdbcType=JdbcType.INTEGER)
+    })
+    List<MostVotedRecord> selectThePersonShouldBeAward(@Param("startDate")Date startDate, @Param("endDate") Date endDate);
 }

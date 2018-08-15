@@ -35,6 +35,13 @@ public class FrontController {
     @ApiOperation(value = "", notes = "")
     @ApiImplicitParam(name = "weeklyReportRequest", required = true, dataType = "WeeklyReportRequest")
     public ResponseMessage getEveryoneWeeklyReport(@RequestBody WeeklyReportRequest weeklyReportRequest) {
+        return frontServices.everyOneWeekly2(weeklyReportRequest);
+    }
+
+    @PostMapping("/everyone/weekly/report/Old")
+    @ApiOperation(value = "", notes = "")
+    @ApiImplicitParam(name = "weeklyReportRequest", required = true, dataType = "WeeklyReportRequest")
+    public ResponseMessage getEveryoneWeeklyReportOld(@RequestBody WeeklyReportRequest weeklyReportRequest) {
         return frontServices.everyOneWeekly(weeklyReportRequest);
     }
 

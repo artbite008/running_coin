@@ -458,6 +458,7 @@ public class FrontServices {
                 UserGroup userGroup = userGroupMapper.selectByGroupIdAndUserOpenId(1, userJoinRequest.getOpenId());
                 TargetDistance targetDistance = targetDistanceMapper.selectByUserGroupIdAndTimeRange(userGroup.getUserGroupId(), thisLocalizedWeek.getFirstDay(), thisLocalizedWeek.getLastDay());
                 UserRecord userRecord = new UserRecord();
+                userRecord.setCoins(userInfo.getCoins());
                 userRecord.setDislikes(0);
                 userRecord.setLikes(0);
                 userRecord.setCurrent((float) 0);

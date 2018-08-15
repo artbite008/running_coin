@@ -23,6 +23,6 @@ public class MostVotedJobTest {
 
     @Test
     public void insertDailyVotedCount() {
-        //mostVotedJob.insertDailyVotedCount();
+        mostVotedJob.insertDailyVotedCount();
     }
 }

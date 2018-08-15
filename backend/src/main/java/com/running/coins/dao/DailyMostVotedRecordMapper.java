@@ -10,9 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface DailyMostVotedRecordMapper {
     @Delete({
         "delete from DailyMostVoted_Record",
@@ -22,9 +20,11 @@ public interface DailyMostVotedRecordMapper {
 
     @Insert({
         "insert into DailyMostVoted_Record (DailyMostRecordId, MostVotedUserGroupId, ",
-        "EarnCoin, WeekilyStatus)",
+        "EarnCoin, WeeklyStatus, ",
+        "awardDate)",
         "values (#{dailyMostRecordId,jdbcType=INTEGER}, #{mostVotedUserGroupId,jdbcType=INTEGER}, ",
-        "#{earnCoin,jdbcType=INTEGER}, #{weekilyStatus,jdbcType=INTEGER})"
+        "#{earnCoin,jdbcType=INTEGER}, #{weeklyStatus,jdbcType=INTEGER}, ",
+        "#{awardDate,jdbcType=DATE})"
     })
     int insert(DailyMostVotedRecord record);
 
@@ -33,7 +33,7 @@ public interface DailyMostVotedRecordMapper {
 
     @Select({
         "select",
-        "DailyMostRecordId, MostVotedUserGroupId, EarnCoin, WeekilyStatus",
+        "DailyMostRecordId, MostVotedUserGroupId, EarnCoin, WeeklyStatus, awardDate",
         "from DailyMostVoted_Record",
         "where DailyMostRecordId = #{dailyMostRecordId,jdbcType=INTEGER}"
     })
@@ -41,7 +41,8 @@ public interface DailyMostVotedRecordMapper {
         @Result(column="DailyMostRecordId", property="dailyMostRecordId", jdbcType=JdbcType.INTEGER, id=true),
         @Result(column="MostVotedUserGroupId", property="mostVotedUserGroupId", jdbcType=JdbcType.INTEGER),
         @Result(column="EarnCoin", property="earnCoin", jdbcType=JdbcType.INTEGER),
-        @Result(column="WeekilyStatus", property="weekilyStatus", jdbcType=JdbcType.INTEGER)
+        @Result(column="WeeklyStatus", property="weeklyStatus", jdbcType=JdbcType.INTEGER),
+        @Result(column="awardDate", property="awardDate", jdbcType=JdbcType.DATE)
     })
     DailyMostVotedRecord selectByPrimaryKey(Integer dailyMostRecordId);
 
@@ -52,7 +53,8 @@ public interface DailyMostVotedRecordMapper {
         "update DailyMostVoted_Record",
         "set MostVotedUserGroupId = #{mostVotedUserGroupId,jdbcType=INTEGER},",
           "EarnCoin = #{earnCoin,jdbcType=INTEGER},",
-          "WeekilyStatus = #{weekilyStatus,jdbcType=INTEGER}",
+          "WeeklyStatus = #{weeklyStatus,jdbcType=INTEGER},",
+          "awardDate = #{awardDate,jdbcType=DATE}",
         "where DailyMostRecordId = #{dailyMostRecordId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(DailyMostVotedRecord record);

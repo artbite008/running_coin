@@ -1,5 +1,7 @@
 package com.running.coins.model;
 
+import java.util.Date;
+
 public class DailyMostVotedRecord {
     private Integer dailyMostRecordId;
 
@@ -7,7 +9,9 @@ public class DailyMostVotedRecord {
 
     private Integer earnCoin;
 
-    private Integer weekilyStatus;
+    private Integer weeklyStatus;
+
+    private Date awardDate;
 
     public Integer getDailyMostRecordId() {
         return dailyMostRecordId;
@@ -33,11 +37,19 @@ public class DailyMostVotedRecord {
         this.earnCoin = earnCoin;
     }
 
-    public Integer getWeekilyStatus() {
-        return weekilyStatus;
+    public Integer getWeeklyStatus() {
+        return weeklyStatus;
     }
 
-    public void setWeekilyStatus(Integer weekilyStatus) {
-        this.weekilyStatus = weekilyStatus;
+    public void setWeeklyStatus(Integer weeklyStatus) {
+        this.weeklyStatus = weeklyStatus;
+    }
+
+    public Date getAwardDate() {
+        return awardDate;
+    }
+
+    public void setAwardDate(Date awardDate) {
+        this.awardDate = awardDate;
     }
 }

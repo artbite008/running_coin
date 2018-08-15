@@ -21,8 +21,12 @@ public class DailyMostVotedRecordSqlProvider {
             sql.VALUES("EarnCoin", "#{earnCoin,jdbcType=INTEGER}");
         }
         
-        if (record.getWeekilyStatus() != null) {
-            sql.VALUES("WeekilyStatus", "#{weekilyStatus,jdbcType=INTEGER}");
+        if (record.getWeeklyStatus() != null) {
+            sql.VALUES("WeeklyStatus", "#{weeklyStatus,jdbcType=INTEGER}");
+        }
+        
+        if (record.getAwardDate() != null) {
+            sql.VALUES("awardDate", "#{awardDate,jdbcType=DATE}");
         }
         
         return sql.toString();
@@ -40,8 +44,12 @@ public class DailyMostVotedRecordSqlProvider {
             sql.SET("EarnCoin = #{earnCoin,jdbcType=INTEGER}");
         }
         
-        if (record.getWeekilyStatus() != null) {
-            sql.SET("WeekilyStatus = #{weekilyStatus,jdbcType=INTEGER}");
+        if (record.getWeeklyStatus() != null) {
+            sql.SET("WeeklyStatus = #{weeklyStatus,jdbcType=INTEGER}");
+        }
+        
+        if (record.getAwardDate() != null) {
+            sql.SET("awardDate = #{awardDate,jdbcType=DATE}");
         }
         
         sql.WHERE("DailyMostRecordId = #{dailyMostRecordId,jdbcType=INTEGER}");

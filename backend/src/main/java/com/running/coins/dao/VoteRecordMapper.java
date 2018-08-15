@@ -139,11 +139,12 @@ public interface VoteRecordMapper {
             "select",
             "count(*) as VotedCount",
             "from Vote_Record",
-            "where date(VotedTime) = curdate()",
+            "where  VotedTime > date_sub(#{limitedTime,jdbcType=TIMESTAMP},INTERVAL 24 HOUR)",
+            "And VotedTime < #{limitedTime,jdbcType=TIMESTAMP}",
             "and VoteUserGroupId = #{userGroupId,jdbcType=INTEGER};"
     })
     @Results(
             @Result(column = "VotedCount", property = "VotedCount", jdbcType = JdbcType.INTEGER)
     )
-    Integer selectDailyVotedCountByGroupUserId(@Param("userGroupId") Integer userGroupId);
+    Integer selectDailyVotedCountByGroupUserId(@Param("userGroupId") Integer userGroupId, @Param("limitedTime") Date limitedTime);
 }
