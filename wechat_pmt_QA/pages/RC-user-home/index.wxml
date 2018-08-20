@@ -21,7 +21,7 @@
           <image src="../imgs/dislike.svg" class='small-icon'></image>
           <text>{{userInfo.likes || 0}}/{{userInfo.dislikes  || 0}}</text>
         </view>
-        <view 
+        <view
           style='width: {{(((userInfo.distanceWaitValided || 0) + (userInfo.distanceValided || 0)) / (userInfo.target)) > 1 ? 100 : (((userInfo.distanceWaitValided || 0) + (userInfo.distanceValided || 0)) / (userInfo.target) * 100)}}%;'
           class='progress-container' >
           

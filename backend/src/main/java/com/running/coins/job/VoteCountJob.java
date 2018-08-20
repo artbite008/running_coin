@@ -60,7 +60,7 @@ public class VoteCountJob {
     @Scheduled(cron = "00 00 23 * * ?")
     public void executeVoteCount() {
 
-        System.err.println("开始执行任务");
+        System.err.println("begin to start Job");
         List<RunningRecordWithInfo> runningRecordWithInfos = runningRecordMapper.selectRunningRecordWithInfoScoreIn24hours();
 
         List<MailBean> mailBeanList = new ArrayList();
@@ -112,7 +112,7 @@ public class VoteCountJob {
         }catch (Exception e){
             e.printStackTrace();
         }
-        System.err.println("发送结束");
+        System.err.println("send email finished");
     }
 
 }

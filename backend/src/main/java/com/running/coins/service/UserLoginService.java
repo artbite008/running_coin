@@ -50,7 +50,7 @@ public class UserLoginService {
 
 
     public ResponseMessage userLoginService(String code, int olduserId, String sessionOpenId) {
-        log.info("arrive userLoginServiceV1 "+ sessionOpenId);
+        log.info("arrive userLoginServiceV1 " + sessionOpenId);
         if (sessionOpenId != "0000" && sessionOpenId.length() >= 28) {
             return ResultUtils.success(sessionOpenId);
         }
@@ -83,7 +83,7 @@ public class UserLoginService {
     }
 
     public ResponseMessage userLoginServiceV2(UserLoginRequest userLoginRequest) {
-        log.info("arrive userLoginServiceV2 "+ userLoginRequest.toString());
+        log.info("arrive userLoginServiceV2 " + userLoginRequest.toString());
         RestTemplate restTemplate = new RestTemplate();
         String url = String.format("https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code", appId, appSecret, userLoginRequest.getJsCode());
         String result = restTemplate.getForObject(url, String.class);
@@ -91,8 +91,12 @@ public class UserLoginService {
         log.info(weChatOpenIdResponse.toString());
         String openId = weChatOpenIdResponse.getOpenid();
         UserInfo userInfo1 = new UserInfo();
-        userInfo1.setUserName(userLoginRequest.getUserName());
-        userInfo1.setIcon(userLoginRequest.getIcon());
+
+        if (userLoginRequest.getUserName() != null || userLoginRequest.getUserName() != "")
+            userInfo1.setUserName(userLoginRequest.getUserName());
+        if (userLoginRequest.getIcon() != null || userLoginRequest.getIcon() != "")
+            userInfo1.setIcon(userLoginRequest.getIcon());
+
         userInfo1.setOpenId(openId);
 
         System.out.println(openId);
@@ -123,7 +127,7 @@ public class UserLoginService {
             targetDistanceMapper.insert(targetDistance);
 
 
-        }else {
+        } else {
             userInfoMapper.updateByopenIdSelective(userInfo1);
         }
 
