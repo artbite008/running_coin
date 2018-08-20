@@ -29,6 +29,6 @@ public class VoteCountjobTest {
      */
     @Test
     public void executeVoteCount() {
-       //voteCountjob.executeVoteCount();
+       voteCountjob.executeVoteCount();
     }
 }

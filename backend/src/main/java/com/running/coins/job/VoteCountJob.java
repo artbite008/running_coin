@@ -1,12 +1,9 @@
 package com.running.coins.job;
 
 import com.running.coins.common.util.DateUtils;
-import com.running.coins.dao.RunningRecordMapper;
-import com.running.coins.dao.UserInfoMapper;
-import com.running.coins.dao.VoteRecordMapper;
-import com.running.coins.model.RunningRecord;
-import com.running.coins.model.RunningRecordWithInfo;
-import com.running.coins.model.UserInfo;
+import com.running.coins.common.util.ThisLocalizedWeek;
+import com.running.coins.dao.*;
+import com.running.coins.model.*;
 import com.running.coins.model.transition.MailBean;
 import com.running.coins.model.transition.UserInfoBatchBean;
 import com.running.coins.service.MailService;
@@ -20,7 +17,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * VoteCountjob
@@ -44,6 +43,15 @@ public class VoteCountJob {
 
     @Autowired
     private UserInfoMapper userInfoMapper;
+
+    @Autowired
+    private MostVotedJob mostVotedJob;
+    @Autowired
+    private DailyMostVotedRecordMapper dailyMostVotedRecordMapper;
+
+    @Autowired
+    private MostVotedRecordMapper mostVotedRecordMapper;
+
 
 
     /**
@@ -83,6 +91,13 @@ public class VoteCountJob {
             runningRecordMapper.updateByPrimaryKey(runningRecord);
         }
 
+        mostVotedJob.insertDailyVotedCount();
+
+
+        List<DailyVotedCountVo> dailyVotedCountVos = mostVotedRecordMapper.selectByVotedDate(new Date());
+
+        ThisLocalizedWeek thisLocalizedWeek = new ThisLocalizedWeek(Locale.CHINA);
+        List<WeeklyAwardedReportVo> weeklyAwardedReportVos = dailyMostVotedRecordMapper.selectWeeklyAwardedRecord(thisLocalizedWeek.getFirstDay(), thisLocalizedWeek.getLastDay());
 
         List<UserInfoBatchBean> userInfoBatchBeans = userInfoMapper.selectUserTotalInfo();
         for (UserInfoBatchBean userInfoBatchBean : userInfoBatchBeans) {
@@ -93,13 +108,11 @@ public class VoteCountJob {
         }
         List<UserInfo> userInfos = userInfoMapper.selectAllUser();
         try {
-            mailService.sendMessageMail(mailBeanList,userInfos, "RunningClub Report", "message.ftl");
+            mailService.sendMessageMail(mailBeanList,userInfos,dailyVotedCountVos,weeklyAwardedReportVos, "RunningClub Report", "message.ftl");
         }catch (Exception e){
             e.printStackTrace();
         }
-
         System.err.println("发送结束");
-
     }
 
 }

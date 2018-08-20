@@ -10,10 +10,12 @@ import com.running.coins.model.DailyMostVotedRecord;
 import com.running.coins.model.MostVotedRecord;
 import com.running.coins.model.UserGroup;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
@@ -39,7 +41,6 @@ public class MostVotedJob {
     @Autowired
     private DailyMostVotedRecordMapper dailyMostVotedRecordMapper;
 
-    @Scheduled(cron = "00 00 23 * * ?")
     public void insertDailyVotedCount() {
         List<UserGroup> userGroups = userGroupMapper.selectByGroupId(1);
         /**
@@ -71,10 +72,18 @@ public class MostVotedJob {
         final ThisLocalizedWeek chinaWeek = new ThisLocalizedWeek(Locale.CHINA);
         List<MostVotedRecord> mostVotedRecords = mostVotedRecordMapper.selectThePersonShouldBeAward(chinaWeek.getFirstDay(), chinaWeek.getLastDay());
         for (MostVotedRecord mostVotedRecord : mostVotedRecords) {
-            DailyMostVotedRecord dailyMostVotedRecord = new DailyMostVotedRecord();
-            dailyMostVotedRecord.setMostVotedUserGroupId(mostVotedRecord.getUserGroupId());
-            dailyMostVotedRecord.setEarnCoin(1);
-            dailyMostVotedRecordMapper.insertSelective(dailyMostVotedRecord);
+            DailyMostVotedRecord dailyMostVotedRecord = dailyMostVotedRecordMapper.selectByawardDateAndMostVotedUserGroupId(new Date(), mostVotedRecord.getUserGroupId());
+            if (dailyMostVotedRecord == null) {
+                dailyMostVotedRecord = new DailyMostVotedRecord();
+                dailyMostVotedRecord.setMostVotedUserGroupId(mostVotedRecord.getUserGroupId());
+                dailyMostVotedRecord.setEarnCoin(1);
+                dailyMostVotedRecord.setAwardDate(new Date());
+                dailyMostVotedRecordMapper.insertSelective(dailyMostVotedRecord);
+            }else {
+                /** 感觉这句不要也可以诶  不过强迫症就加一下吧(#^.^#)*/
+                dailyMostVotedRecord.setEarnCoin(1);
+                dailyMostVotedRecordMapper.updateByPrimaryKey(dailyMostVotedRecord);
+            }
         }
 
     }

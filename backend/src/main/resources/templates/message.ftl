@@ -52,6 +52,42 @@
     <br/>
     <br/>
 
+    <h2>Today Voted Report</h2>
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>votedDate</th>
+            <th>votedCount</th>
+        </tr>
+        <#list dailyVotedRecordList as dailyVotedRecord >
+        <tr>
+            <td>${(dailyVotedRecord.userName)!""}</td>
+            <td>${(dailyVotedRecord.votedDate)?string('yyyy-MM-dd')}</td>
+            <td>${(dailyVotedRecord.votedCount)!""}</td>
+        </tr>
+        </#list>
+    </table>
+
+    <h2>Weekly Awarded Report</h2>
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>AwardDate</th>
+            <th>EarnCoin</th>
+        </tr>
+        <#list weeklyAwardedList as weeklyAwarded >
+        <tr>
+            <td>${(weeklyAwarded.userName)!""}</td>
+            <td>${(weeklyAwarded.awardDate)?string('yyyy-MM-dd')}</td>
+            <td>${(weeklyAwarded.earnCoin)!""}</td>
+        </tr>
+        </#list>
+    </table>
+
+
+    <br/>
+    <br/>
+
     <h2>User Info</h2>
     <table>
         <tr>

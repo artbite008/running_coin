@@ -43,7 +43,7 @@ public class MailService {
     private FreeMarkerConfigurer configurer;
 
 
-    public void sendMessageMail(Object params,Object userInfos, String title, String templateName) {
+    public void sendMessageMail(Object params,Object userInfos,Object dailyVotedCountVos, Object weeklyAwardedReportVos, String title, String templateName) {
 
         try {
 
@@ -64,6 +64,8 @@ public class MailService {
             model.put("MailBeanList", params);
             log.info("---8");
             model.put("UserInfoList", userInfos);
+            model.put("dailyVotedRecordList",dailyVotedCountVos);
+            model.put("weeklyAwardedList",weeklyAwardedReportVos);
             log.info("---9");
             try {
                 Template template = configurer.getConfiguration().getTemplate(templateName);

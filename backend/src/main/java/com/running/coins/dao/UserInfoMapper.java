@@ -132,14 +132,25 @@ public interface UserInfoMapper {
 
     @Select({
             "SELECT",
-            "sum(EarnedCoins) as TotalCoins,",
-            "User_Info.OpenId as UserOpenId,",
-            "sum(Distance)  as TotalDistance",
-            "FROM Running_Record",
-            "inner JOIN UserGroup ON UserGroup.UserGroupId = Running_Record.UserGroupId",
-            "inner JOIN User_Info ON User_Info.OpenId = UserGroup.UserOpenid",
-            "WHERE Running_Record.Status = 3 AND Score > 0",
-            "GROUP BY User_Info.UserId"
+            "  TotalCoins + ifnull(0, sum(EarnCoin)) AS TotalCoins,",
+            "  tempWithoutVotedCoinResult.UserOpenId AS UserOpenId,",
+            "  TotalDistance",
+            "FROM",
+            "  (",
+            "    SELECT",
+            "      sum(EarnedCoins) AS TotalCoins,",
+            "      User_Info.OpenId AS UserOpenId,",
+            "      sum(Distance)    AS TotalDistance",
+            "    FROM Running_Record",
+            "      INNER JOIN UserGroup ON UserGroup.UserGroupId = Running_Record.UserGroupId",
+            "      INNER JOIN User_Info ON User_Info.OpenId = UserGroup.UserOpenid",
+            "    WHERE Running_Record.Status = 3 AND Score > 0",
+            "    GROUP BY User_Info.OpenId",
+            "  )",
+            "    AS tempWithoutVotedCoinResult",
+            "  LEFT JOIN UserGroup ON UserGroup.UserOpenId = tempWithoutVotedCoinResult.UserOpenId",
+            "  LEFT JOIN DailyMostVoted_Record ON DailyMostVoted_Record.MostVotedUserGroupId = UserGroup.UserGroupId",
+            "GROUP BY tempWithoutVotedCoinResult.UserOpenId"
     })
     @Results({
             @Result(column="TotalCoins", property="totalCoins", jdbcType=JdbcType.DOUBLE),

@@ -1,5 +1,6 @@
 package com.running.coins.dao;
 
+import com.running.coins.model.DailyVotedCountVo;
 import com.running.coins.model.MostVotedRecord;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
@@ -44,6 +45,21 @@ public interface MostVotedRecordMapper {
         @Result(column="GroupId", property="groupId", jdbcType=JdbcType.INTEGER)
     })
     MostVotedRecord selectByPrimaryKey(Integer mostVotedId);
+
+    @Select({
+            "select",
+            "UserName, VotedCount, VotedDate",
+            "from MostVoted_Record",
+            "  LEFT JOIN UserGroup on UserGroup.UserGroupId = MostVoted_Record.UserGroupId",
+            "  LEFT JOIN User_Info on User_Info.OpenId = UserGroup.UserOpenid",
+            "where VotedDate = #{votedDate,jdbcType=DATE}"
+    })
+    @Results({
+            @Result(column="UserName", property="userName", jdbcType=JdbcType.VARCHAR),
+            @Result(column="VotedCount", property="votedCount", jdbcType=JdbcType.INTEGER),
+            @Result(column="VotedDate", property="votedDate", jdbcType=JdbcType.DATE),
+    })
+    List<DailyVotedCountVo> selectByVotedDate(@Param("votedDate")Date votedDate);
 
     @UpdateProvider(type=MostVotedRecordSqlProvider.class, method="updateByPrimaryKeySelective")
     int updateByPrimaryKeySelective(MostVotedRecord record);

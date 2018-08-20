@@ -1,16 +1,17 @@
 package com.running.coins.dao;
 
 import com.running.coins.model.DailyMostVotedRecord;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.annotations.UpdateProvider;
+import com.running.coins.model.MostVotedRecord;
+import com.running.coins.model.WeeklyAwardedReportVo;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+import java.util.Date;
+import java.util.List;
+
+@Repository
 public interface DailyMostVotedRecordMapper {
     @Delete({
         "delete from DailyMostVoted_Record",
@@ -58,4 +59,36 @@ public interface DailyMostVotedRecordMapper {
         "where DailyMostRecordId = #{dailyMostRecordId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(DailyMostVotedRecord record);
+
+
+    @Select({
+            "select",
+            "DailyMostRecordId, MostVotedUserGroupId, EarnCoin, WeeklyStatus, awardDate",
+            "from DailyMostVoted_Record",
+            "where awardDate = #{awardDate,jdbcType=DATE}",
+            "and  MostVotedUserGroupId = #{mostVotedUserGroupId,jdbcType=INTEGER}"
+    })
+    @Results({
+            @Result(column="DailyMostRecordId", property="dailyMostRecordId", jdbcType=JdbcType.INTEGER, id=true),
+            @Result(column="MostVotedUserGroupId", property="mostVotedUserGroupId", jdbcType=JdbcType.INTEGER),
+            @Result(column="EarnCoin", property="earnCoin", jdbcType=JdbcType.INTEGER),
+            @Result(column="WeeklyStatus", property="weeklyStatus", jdbcType=JdbcType.INTEGER),
+            @Result(column="awardDate", property="awardDate", jdbcType=JdbcType.DATE)
+    })
+    DailyMostVotedRecord selectByawardDateAndMostVotedUserGroupId(@Param("awardDate")Date awardDate, @Param("mostVotedUserGroupId")Integer UserGroupId);
+
+
+
+    @Select({
+            "select EarnCoin,awardDate,UserName from DailyMostVoted_Record",
+            "  LEFT JOIN UserGroup on UserGroup.UserGroupId = MostVotedUserGroupId",
+            "  LEFT JOIN User_Info on User_Info.OpenId = UserGroup.UserOpenid",
+            "WHERE awardDate >=#{weeklyBeginDate,jdbcType=INTEGER}  and awardDate <=#{weeklyEndDate,jdbcType=INTEGER}"
+    })
+    @Results({
+            @Result(column="EarnCoin", property="earnCoin", jdbcType=JdbcType.INTEGER),
+            @Result(column="UserName", property="userName", jdbcType=JdbcType.VARCHAR),
+            @Result(column="awardDate", property="awardDate", jdbcType=JdbcType.DATE)
+    })
+    List<WeeklyAwardedReportVo> selectWeeklyAwardedRecord(@Param("weeklyBeginDate")Date weeklyBeginDate, @Param("weeklyEndDate")Date weeklyEndDate);
 }
