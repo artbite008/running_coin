@@ -48,21 +48,25 @@ public class VoteServices {
         } else {
             userGroupId = voteRequest.getVoteUserGroupId();
         }
-        VoteRecord voteRecord = voteRecordMapper.
-                selectByVoteUserIdAndRuningRecordId(voteRequest.getRunningRecordId(), userGroupId);
-        if (voteRecord == null) {
-            voteRecord = new VoteRecord();
-            setVoteRecord(voteRequest, voteRecord);
-        } else {
-            setMutableField(voteRequest, voteRecord);
-            voteRecord.setUpdatedTime(DateUtils.parse(new Date()));
-            voteRecordMapper.updateByPrimaryKey(voteRecord);
+        /** add synchronize code to make sure select and voted*/
+        synchronized (this) {
+            VoteRecord voteRecord = voteRecordMapper.
+                    selectByVoteUserIdAndRuningRecordId(voteRequest.getRunningRecordId(), userGroupId);
+            if (voteRecord == null) {
+                voteRecord = new VoteRecord();
+                setVoteRecord(voteRequest, voteRecord);
+            } else {
+                setMutableField(voteRequest, voteRecord);
+                voteRecord.setUpdatedTime(DateUtils.parse(new Date()));
+                voteRecordMapper.updateByPrimaryKey(voteRecord);
+            }
+            return ResultUtils.success(voteRecord);
         }
-        return ResultUtils.success(voteRecord);
     }
 
     /**
      * query for vote record using running Record Id and user group Id
+     *
      * @param runningRecordId runningRecordId
      * @param voteUserGroupId userGroupId
      * @return VoteStatusResponse
@@ -70,7 +74,7 @@ public class VoteServices {
     public ResponseMessage queryVoteRecord(Integer runningRecordId, Integer voteUserGroupId) {
         VoteRecord vr = voteRecordMapper.selectByVoteUserIdAndRuningRecordId(runningRecordId, voteUserGroupId);
         int voteStatus;
-        if(vr == null) {
+        if (vr == null) {
             voteStatus = VoteStatus.NOTYET.getCode();
         } else {
             voteStatus = vr.getStatus();

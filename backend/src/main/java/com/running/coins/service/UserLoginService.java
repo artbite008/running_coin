@@ -92,9 +92,9 @@ public class UserLoginService {
         String openId = weChatOpenIdResponse.getOpenid();
         UserInfo userInfo1 = new UserInfo();
 
-        if (userLoginRequest.getUserName() != null || userLoginRequest.getUserName() != "")
+        if (userLoginRequest.getUserName() != null && userLoginRequest.getUserName() != "")
             userInfo1.setUserName(userLoginRequest.getUserName());
-        if (userLoginRequest.getIcon() != null || userLoginRequest.getIcon() != "")
+        if (userLoginRequest.getIcon() != null && userLoginRequest.getIcon() != "")
             userInfo1.setIcon(userLoginRequest.getIcon());
 
         userInfo1.setOpenId(openId);
@@ -115,7 +115,6 @@ public class UserLoginService {
             userGroup.setGroupId(userLoginRequest.getGroupId());
             userGroup.setUserOpenid(openId);
             userGroupMapper.insert(userGroup);
-
 
             // setup a default target
             TargetDistance targetDistance = new TargetDistance();
