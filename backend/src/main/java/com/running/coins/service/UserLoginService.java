@@ -125,8 +125,6 @@ public class UserLoginService {
             userGroup = userGroupMapper.selectByGroupIdAndUserOpenId(userGroup.getGroupId(), userGroup.getUserOpenid());
             targetDistance.setUserGroupId(userGroup.getUserGroupId());
             targetDistanceMapper.insert(targetDistance);
-
-
         } else {
             userInfoMapper.updateByopenIdSelective(userInfo1);
         }

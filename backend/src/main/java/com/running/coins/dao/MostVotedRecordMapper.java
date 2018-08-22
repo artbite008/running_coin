@@ -95,19 +95,19 @@ public interface MostVotedRecordMapper {
     @Select({
             "SELECT *",
             "FROM MostVoted_Record",
-            "WHERE VotedDate < #{endDate,jdbcType=TIMESTAMP} AND VotedDate >= #{startDate,jdbcType=TIMESTAMP}",
+            "WHERE VotedDate  = '2018-08-22'",
             "      AND VotedCount != 0 AND VotedCount =",
-            "          (",
-            "            SELECT max(VotedCount)",
-            "            FROM MostVoted_Record",
-            "            WHERE UserGroupId NOT IN",
-            "                  (",
-            "                    SELECT MostVotedUserGroupId",
-            "                    FROM DailyMostVoted_Record",
-            "                    WHERE awardDate < #{endDate,jdbcType=TIMESTAMP} AND awardDate >= #{startDate,jdbcType=TIMESTAMP}",
-            "                  )",
-            "            and VotedDate < #{endDate,jdbcType=TIMESTAMP} AND VotedDate >= #{startDate,jdbcType=TIMESTAMP}",
-            "          )"
+            "                              (",
+            "                                SELECT max(VotedCount)",
+            "                                FROM MostVoted_Record",
+            "                                WHERE UserGroupId NOT IN",
+            "                                      (",
+            "                                        SELECT MostVotedUserGroupId",
+            "                                        FROM DailyMostVoted_Record",
+            "                                        WHERE awardDate <= '2018-08-26' AND awardDate >= '2018-08-20'",
+            "                                      )",
+            "                                      AND VotedDate = '2018-08-22'",
+            "                              )"
     })
     @Results({
             @Result(column="MostVotedId", property="mostVotedId", jdbcType=JdbcType.INTEGER, id=true),
@@ -117,5 +117,5 @@ public interface MostVotedRecordMapper {
             @Result(column="CoinGiveStatus", property="coinGiveStatus", jdbcType=JdbcType.INTEGER),
             @Result(column="GroupId", property="groupId", jdbcType=JdbcType.INTEGER)
     })
-    List<MostVotedRecord> selectThePersonShouldBeAward(@Param("startDate")Date startDate, @Param("endDate") Date endDate);
+    List<MostVotedRecord> selectThePersonShouldBeAward(@Param("startDate")Date startDate, @Param("endDate") Date endDate,@Param("todayDate") Date todayDate);
 }

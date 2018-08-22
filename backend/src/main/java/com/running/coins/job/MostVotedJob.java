@@ -70,7 +70,7 @@ public class MostVotedJob {
      */
     public void calculateThePersonToGetCoin(){
         final ThisLocalizedWeek chinaWeek = new ThisLocalizedWeek(Locale.CHINA);
-        List<MostVotedRecord> mostVotedRecords = mostVotedRecordMapper.selectThePersonShouldBeAward(chinaWeek.getFirstDay(), chinaWeek.getLastDay());
+        List<MostVotedRecord> mostVotedRecords = mostVotedRecordMapper.selectThePersonShouldBeAward(chinaWeek.getFirstDay(), chinaWeek.getLastDay(), new Date());
         for (MostVotedRecord mostVotedRecord : mostVotedRecords) {
             DailyMostVotedRecord dailyMostVotedRecord = dailyMostVotedRecordMapper.selectByawardDateAndMostVotedUserGroupId(new Date(), mostVotedRecord.getUserGroupId());
             if (dailyMostVotedRecord == null) {
