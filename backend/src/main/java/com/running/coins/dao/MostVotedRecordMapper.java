@@ -95,7 +95,7 @@ public interface MostVotedRecordMapper {
     @Select({
             "SELECT *",
             "FROM MostVoted_Record",
-            "WHERE VotedDate  = '2018-08-22'",
+            "WHERE VotedDate  = #{todayDate,jdbcType=DATE}",
             "      AND VotedCount != 0 AND VotedCount =",
             "                              (",
             "                                SELECT max(VotedCount)",
@@ -104,9 +104,9 @@ public interface MostVotedRecordMapper {
             "                                      (",
             "                                        SELECT MostVotedUserGroupId",
             "                                        FROM DailyMostVoted_Record",
-            "                                        WHERE awardDate <= '2018-08-26' AND awardDate >= '2018-08-20'",
+            "                                        WHERE awardDate <= #{endDate,jdbcType=DATE} AND awardDate >= #{startDate,jdbcType=DATE}",
             "                                      )",
-            "                                      AND VotedDate = '2018-08-22'",
+            "                                      AND VotedDate = #{todayDate,jdbcType=DATE}",
             "                              )"
     })
     @Results({

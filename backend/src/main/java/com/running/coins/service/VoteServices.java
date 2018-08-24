@@ -63,7 +63,7 @@ public class VoteServices {
             return ResultUtils.success(voteRecord);
         }
     }
-
+ 
     /**
      * query for vote record using running Record Id and user group Id
      *

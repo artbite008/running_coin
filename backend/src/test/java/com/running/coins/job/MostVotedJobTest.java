@@ -25,4 +25,9 @@ public class MostVotedJobTest {
     public void insertDailyVotedCount() {
         mostVotedJob.insertDailyVotedCount();
     }
+
+    @Test
+    public void calculateThePersonToGetCoin() {
+        mostVotedJob.calculateThePersonToGetCoin();
+    }
 }
