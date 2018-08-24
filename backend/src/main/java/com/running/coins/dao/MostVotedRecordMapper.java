@@ -113,7 +113,7 @@ public interface MostVotedRecordMapper {
             "            SELECT MostVotedUserGroupId",
             "            FROM DailyMostVoted_Record",
             "            WHERE awardDate <= #{endDate,jdbcType=DATE} AND awardDate >= #{startDate,jdbcType=DATE}",
-            "          );",
+            "          );"
     })
     @Results({
             @Result(column="MostVotedId", property="mostVotedId", jdbcType=JdbcType.INTEGER, id=true),
