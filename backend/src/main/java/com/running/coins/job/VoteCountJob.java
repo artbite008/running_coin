@@ -91,6 +91,7 @@ public class VoteCountJob {
             runningRecordMapper.updateByPrimaryKey(runningRecord);
         }
 
+
         mostVotedJob.insertDailyVotedCount();
 
 

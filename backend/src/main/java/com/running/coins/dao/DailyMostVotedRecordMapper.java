@@ -19,6 +19,12 @@ public interface DailyMostVotedRecordMapper {
     })
     int deleteByPrimaryKey(Integer dailyMostRecordId);
 
+    @Delete({
+            "delete from DailyMostVoted_Record",
+            "where  awardDate = #{awardDate,jdbcType=DATE}"
+    })
+    int deleteByDate(@Param("awardDate")Date awardDate);
+
     @Insert({
         "insert into DailyMostVoted_Record (DailyMostRecordId, MostVotedUserGroupId, ",
         "EarnCoin, WeeklyStatus, ",

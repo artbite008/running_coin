@@ -69,6 +69,9 @@ public class MostVotedJob {
      * 统计应该是谁获取coin
      */
     public void calculateThePersonToGetCoin(){
+        /** delete before insert*/
+        dailyMostVotedRecordMapper.deleteByDate(new Date());
+
         final ThisLocalizedWeek chinaWeek = new ThisLocalizedWeek(Locale.CHINA);
         List<MostVotedRecord> mostVotedRecords = mostVotedRecordMapper.selectThePersonShouldBeAward(chinaWeek.getFirstDay(), chinaWeek.getLastDay(), new Date());
         for (MostVotedRecord mostVotedRecord : mostVotedRecords) {

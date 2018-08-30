@@ -1,14 +1,10 @@
 package com.running.coins.job;
 
-import com.running.coins.dao.RunningRecordMapper;
-import com.running.coins.service.MailService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import static org.junit.Assert.*;
 
 /**
  * VoteCountjobTest
