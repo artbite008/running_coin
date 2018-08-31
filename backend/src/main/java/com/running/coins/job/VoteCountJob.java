@@ -16,10 +16,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 /**
  * VoteCountjob
@@ -96,6 +93,8 @@ public class VoteCountJob {
 
 
         List<DailyVotedCountVo> dailyVotedCountVos = mostVotedRecordMapper.selectByVotedDate(new Date());
+
+        dailyVotedCountVos.stream().sorted((Comparator.comparing(DailyVotedCountVo::getVotedDate)));
 
         ThisLocalizedWeek thisLocalizedWeek = new ThisLocalizedWeek(Locale.CHINA);
         List<WeeklyAwardedReportVo> weeklyAwardedReportVos = dailyMostVotedRecordMapper.selectWeeklyAwardedRecord(thisLocalizedWeek.getFirstDay(), thisLocalizedWeek.getLastDay());

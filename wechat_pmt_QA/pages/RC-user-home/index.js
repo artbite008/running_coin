@@ -123,6 +123,10 @@ Page({
         }
     },
 
+  scrollDailyRecordView: function(e){
+      console.log(e);
+  },
+
     /** not do any thing */
     primaryinit: function(){
     },
@@ -192,7 +196,6 @@ Page({
 
 
     /////////////////////////////////////////// double tap event ////////////////////////////////////
-
     touchStartTime: 0,
     touchEndTime: 0,
     lastTapTime: 0,

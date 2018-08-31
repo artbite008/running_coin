@@ -18,8 +18,8 @@ spring:
     host: smtp.qq.com
     username: 964999133@qq.com
     password: plmksuixpkdmbcag
-  # addressesEmail: xianggu@ebay.com,bshen@ebay.com
-    addressesEmail: xianggu@ebay.com
+    addressesEmail: xianggu@ebay.com,bshen@ebay.com
+    #addressesEmail: xianggu@ebay.com
     properties.mail.smtp.auth: true
     properties.mail.smtp.starttls.enable: true
     properties.mail.smtp.starttls.required: true

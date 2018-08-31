@@ -1,6 +1,7 @@
 <view hidden="{{showBackdrop}}">
+<scroll-view  bindscroll="scrollDailyRecordView"  scroll-top="{{DailyRecordViewscrollTop}}">
 <view class="container">
-  <view class="card userinfo user-card-decorator" bindtap='goToMyProfile'>
+  <view class="card userinfo user-card-decorator" bindtap='goToMyProfile'  >
     <block wx:if="{{!hasUserInfo}}">
         <button type="primary" catchtap='primaryinit' open-type='getUserInfo' bindgetuserinfo='getUserInfobywx'> allow to get User Info </button>
     </block>
@@ -39,7 +40,7 @@
       </view>
     </block>
   </view>
-  <view class="people-list card bg-light">
+  <scroll-view class="people-list card bg-light"  >
     <view class="people-list-item divider"
       wx:for="{{users}}" 
       wx:for-item="user" 
@@ -69,11 +70,12 @@
         </view>
       </block>
     </view>
-  </view>
+  </scroll-view>
   <view class='click-to-see-everybody'>
     <button class='link' bindtap='goToReport'>See Weekly</button>
   </view>
 </view>
+</scroll-view>
 
 
 
