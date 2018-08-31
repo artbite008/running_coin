@@ -132,7 +132,7 @@ public interface UserInfoMapper {
 
     @Select({
             "SELECT",
-            "  TotalCoins + ifnull(sum(EarnCoin),0) AS TotalCoins,",
+            "  TotalCoins +  ifnull(sum(EarnCoin),0) AS TotalCoins,",
             "  tempWithoutVotedCoinResult.UserOpenId AS UserOpenId,",
             "  TotalDistance",
             "FROM",
